@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -60,11 +60,7 @@ export default function App() {
         return Boolean(tarefa && responsavel && repetir && prioridade && setor);
     }, [novaTarefa]);
 
-    useEffect(() => {
-        carregarDados();
-    }, [carregarDados]);
-
-    async function carregarDados() {
+    const carregarDados = useCallback(async () => {
         setCarregando(true);
         try {
             const [tRes, aRes, cRes] = await Promise.all([
@@ -92,7 +88,11 @@ export default function App() {
         } finally {
             setCarregando(false);
         }
-    }
+    }, []);
+
+    useEffect(() => {
+        carregarDados();
+    }, [carregarDados]);
 
     function mostrarMsg(txt, tipo = 'success') {
         setMensagem(txt);
