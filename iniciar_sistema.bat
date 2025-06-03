@@ -1,7 +1,7 @@
 @echo off
 echo ===================================================
 echo    SISTEMA DE CONTROLE DE TAREFAS - INICIALIZACAO
-echo    SERVIDOR UNIFICADO (React + Node.js)
+echo    SERVIDOR UNIFICADO (React + Node.js + Supabase)
 echo ===================================================
 echo.
 
@@ -37,15 +37,15 @@ if not exist "%PROJETO_DIR%build" (
     exit /b
 )
 
-echo [3/4] Verificando arquivo de senha do banco...
-if not exist "%PROJETO_DIR%server\SENHA POSTGREE.txt" (
-    echo [AVISO] Arquivo SENHA POSTGREE.txt nao encontrado na pasta server/
-    echo Certifique-se de que o arquivo existe com a senha do PostgreSQL
+echo [3/4] Verificando configuracao do Supabase...
+if not exist "%PROJETO_DIR%.env" (
+    echo [AVISO] Arquivo .env nao encontrado!
+    echo Certifique-se de que as variaveis REACT_APP_SUPABASE_URL e REACT_APP_SUPABASE_ANON_KEY estao configuradas
     echo.
 )
 
 :: Inicia o servidor unificado
-echo [4/4] Iniciando servidor unificado...
+echo [4/4] Iniciando servidor unificado com Supabase...
 echo.
 echo ===================================================
 echo    SERVIDOR INICIADO! 
@@ -57,6 +57,8 @@ for /f "tokens=4" %%a in ('route print ^| findstr 0.0.0.0 ^| findstr 255.255.255
 )
 echo.
 echo    API disponivel em: http://localhost:3001/api/
+echo    Banco de dados: Supabase Cloud
+echo    MCP configurado em: .cursor/mcp.json
 echo    Pressione CTRL+C para encerrar o servidor
 echo ===================================================
 echo.

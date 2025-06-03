@@ -3,10 +3,11 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
-const { Pool } = require('pg');
+const { createClient } = require('@supabase/supabase-js');
+require('dotenv').config();
 
 // 🔥 Confirmação de arquivo correto
-console.log('🚀 Iniciando SERVIDOR UNIFICADO em', __filename);
+console.log('🚀 Iniciando SERVIDOR UNIFICADO com SUPABASE em', __filename);
 
 const app  = express();
 const PORT = process.env.PORT || 3001;
@@ -30,27 +31,19 @@ if (fs.existsSync(buildPath)) {
 }
 
 // ───────────────────────────────────────────────────────────────
-// Configuração do PostgreSQL
+// Configuração do Supabase
 // ───────────────────────────────────────────────────────────────
-let dbPassword = 'postgres';
-const senhaFile = path.join(__dirname, 'SENHA POSTGREE.txt');
-if (fs.existsSync(senhaFile)) {
-  dbPassword = fs.readFileSync(senhaFile, 'latin1').trim();
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!supabaseUrl || !supabaseServiceKey) {
+  console.error('❌ Variáveis de ambiente do Supabase não encontradas!');
+  console.error('Certifique-se de que REACT_APP_SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY estão definidas no arquivo .env');
+  process.exit(1);
 }
 
-const pool = new Pool({
-  user:     'postgres',
-  host:     'localhost',
-  database: 'controle_tarefas',
-  password: dbPassword,
-  port:     5432,
-});
-
-pool.on('connect', () => console.log('✅ Conectado ao PostgreSQL!'));
-pool.on('error', err => {
-  console.error('❌ Pool error:', err);
-  process.exit(-1);
-});
+const supabase = createClient(supabaseUrl, supabaseServiceKey);
+console.log('✅ Cliente Supabase configurado!');
 
 // ───────────────────────────────────────────────────────────────
 // Rotas da API
@@ -59,8 +52,17 @@ pool.on('error', err => {
 // 0) Teste de conexão
 app.get('/api/test-db', async (_, res) => {
   try {
-    const { rows } = await pool.query('SELECT now()');
-    return res.json(rows[0]);
+    const { data, error } = await supabase
+      .from('tarefas')
+      .select('count', { count: 'exact', head: true });
+    
+    if (error) throw error;
+    
+    return res.json({ 
+      status: 'success',
+      message: 'Conectado ao Supabase!',
+      timestamp: new Date().toISOString()
+    });
   } catch (err) {
     console.error('Erro /api/test-db:', err);
     return res.status(500).json({ error: err.message });
@@ -70,10 +72,15 @@ app.get('/api/test-db', async (_, res) => {
 // 1) Listar "A REALIZAR"
 app.get('/api/tarefas', async (_, res) => {
   try {
-    const { rows } = await pool.query(
-      "SELECT * FROM tarefas WHERE status = 'A REALIZAR' ORDER BY id_tarefa"
-    );
-    const data = rows.map(r => ({
+    const { data, error } = await supabase
+      .from('tarefas')
+      .select('*')
+      .eq('status', 'A REALIZAR')
+      .order('id_tarefa');
+
+    if (error) throw error;
+
+    const formattedData = data.map(r => ({
       id_tarefa:    r.id_tarefa,
       data_criacao: r.data_criacao,
       tarefa:       r.tarefa,
@@ -86,7 +93,8 @@ app.get('/api/tarefas', async (_, res) => {
       setor:        r.setor,
       reabrir:      'REABRIR'
     }));
-    return res.json(data);
+
+    return res.json(formattedData);
   } catch (err) {
     console.error('Erro /api/tarefas:', err);
     return res.status(500).json({ error: err.message });
@@ -96,14 +104,18 @@ app.get('/api/tarefas', async (_, res) => {
 // 2) Listar "EM ANDAMENTO"
 app.get('/api/em-andamento', async (_, res) => {
   try {
-    const { rows } = await pool.query(`
-      SELECT t.*, e.observacoes
-        FROM tarefas t
-        LEFT JOIN em_andamento e USING (id_tarefa)
-       WHERE t.status = 'EM ANDAMENTO'
-       ORDER BY t.id_tarefa
-    `);
-    const data = rows.map(r => ({
+    const { data, error } = await supabase
+      .from('tarefas')
+      .select(`
+        *,
+        em_andamento!left(observacoes)
+      `)
+      .eq('status', 'EM ANDAMENTO')
+      .order('id_tarefa');
+
+    if (error) throw error;
+
+    const formattedData = data.map(r => ({
       id_tarefa:    r.id_tarefa,
       data_criacao: r.data_criacao,
       tarefa:       r.tarefa,
@@ -114,10 +126,11 @@ app.get('/api/em-andamento', async (_, res) => {
       prioridade:   r.prioridade,
       mes:          r.mes,
       setor:        r.setor,
-      observacoes:  r.observacoes,
+      observacoes:  r.em_andamento?.[0]?.observacoes || '',
       acao:         'CONCLUIR'
     }));
-    return res.json(data);
+
+    return res.json(formattedData);
   } catch (err) {
     console.error('Erro /api/em-andamento:', err);
     return res.status(500).json({ error: err.message });
@@ -135,35 +148,39 @@ app.post('/api/tarefas', async (req, res) => {
   try {
     if (id_tarefa_para_atualizar) {
       // UPDATE
-      await pool.query(`
-        UPDATE tarefas
-           SET tarefa      = $2,
-               descricao   = $3,
-               responsavel = $4,
-               repetir     = $5,
-               prioridade  = $6,
-               mes         = $7,
-               setor       = $8
-         WHERE id_tarefa   = $1
-      `, [
-        id_tarefa_para_atualizar,
-        tarefa, descricao, responsavel,
-        repetir, prioridade, mes, setor
-      ]);
+      const { error } = await supabase
+        .from('tarefas')
+        .update({
+          tarefa,
+          descricao,
+          responsavel,
+          repetir,
+          prioridade,
+          mes,
+          setor
+        })
+        .eq('id_tarefa', id_tarefa_para_atualizar);
+
+      if (error) throw error;
     } else {
       // INSERT
-      await pool.query(`
-        INSERT INTO tarefas
-          (data_criacao, tarefa, descricao, status,
-           responsavel, repetir, prioridade, mes, setor)
-        VALUES
-          (now(), $1, $2, 'A REALIZAR', $3, $4, $5, $6, $7)
-      `, [
-        tarefa, descricao,
-        responsavel, repetir,
-        prioridade, mes, setor
-      ]);
+      const { error } = await supabase
+        .from('tarefas')
+        .insert({
+          data_criacao: new Date().toISOString(),
+          tarefa,
+          descricao,
+          status: 'A REALIZAR',
+          responsavel,
+          repetir,
+          prioridade,
+          mes,
+          setor
+        });
+
+      if (error) throw error;
     }
+
     return res.json({ ok: true });
   } catch (err) {
     console.error('Erro POST /api/tarefas:', err);
@@ -174,18 +191,22 @@ app.post('/api/tarefas', async (req, res) => {
 // 4) Mover para "EM ANDAMENTO"
 app.post('/api/tarefas/mover-para-andamento', async (req, res) => {
   const { id_tarefa } = req.body;
+  
   try {
-    await pool.query(`
-      UPDATE tarefas
-         SET status = 'EM ANDAMENTO'
-       WHERE id_tarefa = $1
-    `, [id_tarefa]);
+    // Atualizar status da tarefa
+    const { error: updateError } = await supabase
+      .from('tarefas')
+      .update({ status: 'EM ANDAMENTO' })
+      .eq('id_tarefa', id_tarefa);
 
-    await pool.query(`
-      INSERT INTO em_andamento (id_tarefa)
-      VALUES ($1)
-      ON CONFLICT (id_tarefa) DO NOTHING
-    `, [id_tarefa]);
+    if (updateError) throw updateError;
+
+    // Inserir na tabela em_andamento
+    const { error: insertError } = await supabase
+      .from('em_andamento')
+      .upsert({ id_tarefa }, { onConflict: 'id_tarefa' });
+
+    if (insertError) throw insertError;
 
     return res.json({ ok: true });
   } catch (err) {
@@ -197,17 +218,18 @@ app.post('/api/tarefas/mover-para-andamento', async (req, res) => {
 // 5) Listar "CONCLUÍDAS"
 app.get('/api/concluidas', async (_, res) => {
   try {
-    const { rows } = await pool.query(`
-      SELECT t.*,
-             c.observacoes,
-             c.data_conclusao,
-             c.dias_para_conclusao
-        FROM tarefas t
-        LEFT JOIN concluidas c USING (id_tarefa)
-       WHERE t.status = 'CONCLUIDA'
-       ORDER BY t.id_tarefa
-    `);
-    const data = rows.map(r => ({
+    const { data, error } = await supabase
+      .from('tarefas')
+      .select(`
+        *,
+        concluidas!left(observacoes, data_conclusao, dias_para_conclusao)
+      `)
+      .eq('status', 'CONCLUIDA')
+      .order('id_tarefa');
+
+    if (error) throw error;
+
+    const formattedData = data.map(r => ({
       id_tarefa:           r.id_tarefa,
       data_criacao:        r.data_criacao,
       tarefa:              r.tarefa,
@@ -218,11 +240,12 @@ app.get('/api/concluidas', async (_, res) => {
       prioridade:          r.prioridade,
       mes:                 r.mes,
       setor:               r.setor,
-      observacoes:         r.observacoes,
-      data_conclusao:      r.data_conclusao,
-      dias_para_conclusao: r.dias_para_conclusao
+      observacoes:         r.concluidas?.[0]?.observacoes || '',
+      data_conclusao:      r.concluidas?.[0]?.data_conclusao || '',
+      dias_para_conclusao: r.concluidas?.[0]?.dias_para_conclusao || 0
     }));
-    return res.json(data);
+
+    return res.json(formattedData);
   } catch (err) {
     console.error('Erro /api/concluidas:', err);
     return res.status(500).json({ error: err.message });
@@ -232,36 +255,49 @@ app.get('/api/concluidas', async (_, res) => {
 // 6) Mover para "CONCLUÍDAS"
 app.post('/api/tarefas/mover-para-concluidas', async (req, res) => {
   const { id_tarefa, observacoes = '' } = req.body;
+  
   try {
-    // Atualiza status
-    await pool.query(`
-      UPDATE tarefas
-         SET status = 'CONCLUIDA'
-       WHERE id_tarefa = $1
-    `, [id_tarefa]);
+    // Buscar data de criação da tarefa
+    const { data: tarefaData, error: selectError } = await supabase
+      .from('tarefas')
+      .select('data_criacao')
+      .eq('id_tarefa', id_tarefa)
+      .single();
 
-    // Insere/atualiza registro de conclusão
-    await pool.query(`
-      INSERT INTO concluidas
-        (id_tarefa, observacoes, data_conclusao, dias_para_conclusao)
-      SELECT
-        t.id_tarefa,
-        $2::text,
-        now(),
-        (now()::date - t.data_criacao::date)
-      FROM tarefas t
-     WHERE t.id_tarefa = $1
-      ON CONFLICT (id_tarefa) DO UPDATE
-        SET observacoes         = EXCLUDED.observacoes,
-            data_conclusao      = EXCLUDED.data_conclusao,
-            dias_para_conclusao = EXCLUDED.dias_para_conclusao
-    `, [id_tarefa, observacoes]);
+    if (selectError) throw selectError;
 
-    // Remove da tabela em_andamento
-    await pool.query(`
-      DELETE FROM em_andamento
-       WHERE id_tarefa = $1
-    `, [id_tarefa]);
+    // Calcular dias para conclusão
+    const dataCriacao = new Date(tarefaData.data_criacao);
+    const dataAtual = new Date();
+    const diasParaConclusao = Math.floor((dataAtual - dataCriacao) / (1000 * 60 * 60 * 24));
+
+    // Atualizar status da tarefa
+    const { error: updateError } = await supabase
+      .from('tarefas')
+      .update({ status: 'CONCLUIDA' })
+      .eq('id_tarefa', id_tarefa);
+
+    if (updateError) throw updateError;
+
+    // Inserir na tabela concluidas
+    const { error: insertError } = await supabase
+      .from('concluidas')
+      .upsert({
+        id_tarefa,
+        observacoes,
+        data_conclusao: new Date().toISOString(),
+        dias_para_conclusao: diasParaConclusao
+      }, { onConflict: 'id_tarefa' });
+
+    if (insertError) throw insertError;
+
+    // Remover da tabela em_andamento
+    const { error: deleteError } = await supabase
+      .from('em_andamento')
+      .delete()
+      .eq('id_tarefa', id_tarefa);
+
+    if (deleteError) throw deleteError;
 
     return res.json({ ok: true });
   } catch (err) {
@@ -274,12 +310,17 @@ app.post('/api/tarefas/mover-para-concluidas', async (req, res) => {
 app.put('/api/em-andamento/:id/observacoes', async (req, res) => {
   const { id } = req.params;
   const { observacoes } = req.body;
+  
   try {
-    await pool.query(`
-      UPDATE em_andamento
-         SET observacoes = $2
-       WHERE id_tarefa   = $1
-    `, [id, observacoes]);
+    const { error } = await supabase
+      .from('em_andamento')
+      .upsert({
+        id_tarefa: parseInt(id),
+        observacoes
+      }, { onConflict: 'id_tarefa' });
+
+    if (error) throw error;
+
     return res.json({ ok: true });
   } catch (err) {
     console.error('Erro PUT /api/em-andamento/:id/observacoes:', err);
@@ -306,7 +347,8 @@ app.get('*', (req, res) => {
 // Inicia o servidor
 // ───────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`🌐 Servidor unificado rodando na porta ${PORT}`);
+  console.log(`🌐 Servidor unificado com Supabase rodando na porta ${PORT}`);
   console.log(`📱 Acesse: http://localhost:${PORT}`);
   console.log(`🔗 API disponível em: http://localhost:${PORT}/api/`);
+  console.log(`🗄️  Banco de dados: Supabase Cloud`);
 });
