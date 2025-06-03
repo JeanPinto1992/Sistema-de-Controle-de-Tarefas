@@ -2,6 +2,7 @@
 
 echo "==================================================="
 echo "   SISTEMA DE CONTROLE DE TAREFAS - INICIALIZACAO"
+echo "   SERVIDOR UNIFICADO (React + Node.js)"
 echo "==================================================="
 echo ""
 
@@ -18,42 +19,33 @@ fi
 PROJETO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$PROJETO_DIR"
 
-echo "[1/5] Instalando dependências do projeto principal..."
+echo "[1/4] Instalando dependências do projeto..."
 npm install
 
-# Verifica se a pasta node_modules do backend existe
-if [ ! -d "$PROJETO_DIR/backend/node_modules" ]; then
-    echo "[2/5] Instalando dependências do backend..."
-    cd "$PROJETO_DIR/backend"
-    npm install
+# Verifica se a pasta build existe
+if [ ! -d "$PROJETO_DIR/build" ]; then
+    echo "[2/4] Construindo aplicação React..."
+    npm run build
 else
-    echo "[2/5] Dependências do backend já instaladas."
+    echo "[2/4] Build React já existe."
 fi
-
-# Verifica se a pasta node_modules do frontend existe
-if [ ! -d "$PROJETO_DIR/frontend/node_modules" ]; then
-    echo "[3/5] Instalando dependências do frontend..."
-    cd "$PROJETO_DIR/frontend"
-    npm install
-else
-    echo "[3/5] Dependências do frontend já instaladas."
-fi
-
-# Constroi a versão de produção do frontend
-echo "[4/5] Construindo versão de produção do frontend..."
-cd "$PROJETO_DIR/frontend"
-npm run build
 
 # Verifica se o build foi criado corretamente
-if [ ! -d "$PROJETO_DIR/frontend/build" ]; then
-    echo "[ERRO] Falha ao construir o frontend!"
+if [ ! -d "$PROJETO_DIR/build" ]; then
+    echo "[ERRO] Falha ao construir a aplicação React!"
     read -p "Pressione Enter para sair..."
     exit 1
 fi
 
-# Inicia o servidor backend
-echo "[5/5] Iniciando o servidor..."
-cd "$PROJETO_DIR/backend"
+echo "[3/4] Verificando arquivo de senha do banco..."
+if [ ! -f "$PROJETO_DIR/server/SENHA POSTGREE.txt" ]; then
+    echo "[AVISO] Arquivo SENHA POSTGREE.txt não encontrado na pasta server/"
+    echo "Certifique-se de que o arquivo existe com a senha do PostgreSQL"
+    echo ""
+fi
+
+# Inicia o servidor unificado
+echo "[4/4] Iniciando servidor unificado..."
 echo ""
 echo "==================================================="
 echo "   SERVIDOR INICIADO!"
@@ -70,9 +62,11 @@ else
 fi
 
 echo ""
+echo "   API disponível em: http://localhost:3001/api/"
 echo "   Pressione CTRL+C para encerrar o servidor"
 echo "==================================================="
 echo ""
 
-# Inicia o servidor backend
-node server.js 
+# Inicia o servidor unificado
+cd "$PROJETO_DIR"
+node server/server.js 
