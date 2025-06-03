@@ -304,3 +304,101 @@ Para contribuir com o projeto:
 - ✅ Sistema completo de controle de tarefas
 - ✅ Interface React moderna e responsiva
 - ✅ API Node.js robusta e integrada 
+
+## ✅ STATUS ATUAL
+- **✅ Conexão Supabase**: FUNCIONANDO
+- **✅ Servidor local**: Porta 3002
+- **✅ Build React**: Criado com sucesso
+- **✅ Segurança**: .env removido do Git
+- **✅ Deploy**: Pronto para Vercel
+
+## 🔧 CONFIGURAÇÃO NECESSÁRIA PARA VERCEL
+
+### ⚠️ IMPORTANTE: CONFIGURAR VARIÁVEIS DE AMBIENTE
+
+**O arquivo `.env` foi removido do Git por segurança.** Você precisa configurar manualmente no Vercel:
+
+1. **Acesse**: https://vercel.com/dashboard
+2. **Selecione seu projeto**
+3. **Vá em**: Settings > Environment Variables
+4. **Adicione estas 4 variáveis**:
+
+```
+Nome: REACT_APP_SUPABASE_URL
+Valor: https://xdwypvfgaatcfxpjygub.supabase.co
+Environments: Production, Preview, Development
+
+Nome: REACT_APP_SUPABASE_ANON_KEY
+Valor: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhkd3lwdmZnYWF0Y2Z4cGp5Z3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg5ODA2ODUsImV4cCI6MjA2NDU1NjY4NX0.FN8h5tT77tOPyPtjs1hVysj3HXT9Q6P5qqnmM1aAPxM
+Environments: Production, Preview, Development
+
+Nome: SUPABASE_SERVICE_ROLE_KEY
+Valor: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhkd3lwdmZnYWF0Y2Z4cGp5Z3ViIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0ODk4MDY4NSwiZXhwIjoyMDY0NTU2Njg1fQ.HLgEJGRjUwU_pONu1GNGjHtaZh7rj7urcjXWDpVPdmE
+Environments: Production, Preview, Development
+
+Nome: NODE_ENV
+Valor: production
+Environments: Production, Preview, Development
+```
+
+5. **Após configurar, faça um redeploy** (Deploy > Redeploy)
+
+## 🚀 COMO USAR LOCALMENTE
+
+### 1. Clonar e Instalar
+```bash
+git clone https://github.com/JeanPinto1992/Sistema-de-Controle-de-Tarefas.git
+cd Sistema-de-Controle-de-Tarefas
+npm install
+```
+
+### 2. Configurar .env (LOCAL)
+Crie um arquivo `.env` na raiz com:
+```
+REACT_APP_SUPABASE_URL=https://xdwypvfgaatcfxpjygub.supabase.co
+REACT_APP_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhkd3lwdmZnYWF0Y2Z4cGp5Z3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg5ODA2ODUsImV4cCI6MjA2NDU1NjY4NX0.FN8h5tT77tOPyPtjs1hVysj3HXT9Q6P5qqnmM1aAPxM
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhkd3lwdmZnYWF0Y2Z4cGp5Z3ViIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0ODk4MDY4NSwiZXhwIjoyMDY0NTU2Njg1fQ.HLgEJGRjUwU_pONu1GNGjHtaZh7rj7urcjXWDpVPdmE
+NODE_ENV=development
+```
+
+### 3. Executar
+```bash
+# Build e servidor em paralelo
+npm run dev
+
+# Apenas build
+npm run build
+
+# Apenas servidor
+npm start
+```
+
+**Acesse**: http://localhost:3002
+
+## 🗄️ BANCO DE DADOS
+
+- **Tipo**: Supabase Cloud
+- **Status**: ✅ FUNCIONANDO
+- **Tabelas**: tarefas, em_andamento, concluidas
+- **Dashboard**: https://supabase.com/dashboard/project/xdwypvfgaatcfxpjygub
+
+## 📋 FUNCIONALIDADES
+
+- ✅ Interface Kanban (A REALIZAR, EM ANDAMENTO, CONCLUÍDA)
+- ✅ Grid AG-Grid para listagem avançada
+- ✅ Criar, editar e excluir tarefas
+- ✅ Sistema de prioridades
+- ✅ Controle de responsáveis
+- ✅ Histórico de conclusões
+- ✅ Observações em tarefas
+
+## 🔗 LINKS IMPORTANTES
+
+- **Aplicação**: https://seu-projeto.vercel.app
+- **Vercel Dashboard**: https://vercel.com/dashboard
+- **Supabase Dashboard**: https://supabase.com/dashboard/project/xdwypvfgaatcfxpjygub
+- **Repository**: https://github.com/JeanPinto1992/Sistema-de-Controle-de-Tarefas
+
+---
+
+**🎉 PRONTO! Sistema funcionando local e na nuvem!** 
