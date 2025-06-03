@@ -3,7 +3,7 @@
   "name": "sistema-controle-tarefas",
   "builds": [
     {
-      "src": "package.json",
+      "src": "server/server.js",
       "use": "@vercel/node"
     }
   ],
@@ -14,10 +14,15 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/build/$1"
+      "dest": "/server/server.js"
     }
   ],
   "env": {
     "NODE_ENV": "production"
+  },
+  "functions": {
+    "server/server.js": {
+      "maxDuration": 30
+    }
   }
 } 
