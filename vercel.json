@@ -1,7 +1,15 @@
 {
   "version": 2,
   "name": "sistema-controle-tarefas",
+  "buildCommand": "npm run build",
   "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    },
     {
       "src": "server/server.js",
       "use": "@vercel/node"
