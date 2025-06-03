@@ -5,11 +5,14 @@ const fs = require('fs');
 const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
 
-// Carregar .env da raiz do projeto
-require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+// Carregar .env apenas se estiver em ambiente local
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+}
 
 // 🔥 Confirmação de arquivo correto
 console.log('🚀 Iniciando SERVIDOR UNIFICADO com SUPABASE em', __filename);
+console.log('🔧 Ambiente:', process.env.NODE_ENV || 'development');
 
 const app  = express();
 const PORT = process.env.PORT || 3002;
@@ -23,13 +26,19 @@ app.use(express.json());
 const buildPath = path.join(__dirname, '..', 'build');
 const publicPath = path.join(__dirname, '..', 'public');
 
-// Verificar se o build existe, senão usar public para desenvolvimento
-if (fs.existsSync(buildPath)) {
-  console.log('📁 Servindo arquivos do build React:', buildPath);
+// No Vercel, sempre servir do build se estiver em produção
+if (process.env.NODE_ENV === 'production') {
+  console.log('📁 PRODUÇÃO: Servindo arquivos do build React');
   app.use(express.static(buildPath));
 } else {
-  console.log('📁 Build não encontrado, servindo arquivos públicos:', publicPath);
-  app.use(express.static(publicPath));
+  // Em desenvolvimento local, verificar se build existe
+  if (fs.existsSync(buildPath)) {
+    console.log('📁 Servindo arquivos do build React:', buildPath);
+    app.use(express.static(buildPath));
+  } else {
+    console.log('📁 Build não encontrado, servindo arquivos públicos:', publicPath);
+    app.use(express.static(publicPath));
+  }
 }
 
 // ───────────────────────────────────────────────────────────────
@@ -339,14 +348,21 @@ app.put('/api/em-andamento/:id/observacoes', async (req, res) => {
 // Catch-all handler: envia de volta o React app
 // ───────────────────────────────────────────────────────────────
 app.get('*', (req, res) => {
-  const indexPath = fs.existsSync(buildPath) 
-    ? path.join(buildPath, 'index.html')
-    : path.join(publicPath, 'index.html');
-    
-  if (fs.existsSync(indexPath)) {
+  if (process.env.NODE_ENV === 'production') {
+    // No Vercel, sempre servir do build
+    const indexPath = path.join(buildPath, 'index.html');
     res.sendFile(indexPath);
   } else {
-    res.status(404).send('Arquivo index.html não encontrado. Execute npm run build primeiro.');
+    // Em desenvolvimento, verificar se existe
+    const indexPath = fs.existsSync(buildPath) 
+      ? path.join(buildPath, 'index.html')
+      : path.join(publicPath, 'index.html');
+      
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      res.status(404).send('Arquivo index.html não encontrado. Execute npm run build primeiro.');
+    }
   }
 });
 
