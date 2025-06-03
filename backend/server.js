@@ -13,7 +13,6 @@ const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '..\/frontend\/build')));
 
 // ───────────────────────────────────────────────────────────────
 // Configuração do PostgreSQL
@@ -53,7 +52,7 @@ app.get('/api/test-db', async (_, res) => {
   }
 });
 
-// 1) Listar "A REALIZAR"
+// 1) Listar “A REALIZAR”
 app.get('/api/tarefas', async (_, res) => {
   try {
     const { rows } = await pool.query(
@@ -79,7 +78,7 @@ app.get('/api/tarefas', async (_, res) => {
   }
 });
 
-// 2) Listar "EM ANDAMENTO"
+// 2) Listar “EM ANDAMENTO”
 app.get('/api/em-andamento', async (_, res) => {
   try {
     const { rows } = await pool.query(`
@@ -157,7 +156,7 @@ app.post('/api/tarefas', async (req, res) => {
   }
 });
 
-// 4) Mover para "EM ANDAMENTO"
+// 4) Mover para “EM ANDAMENTO”
 app.post('/api/tarefas/mover-para-andamento', async (req, res) => {
   const { id_tarefa } = req.body;
   try {
@@ -180,7 +179,7 @@ app.post('/api/tarefas/mover-para-andamento', async (req, res) => {
   }
 });
 
-// 5) Listar "CONCLUÍDAS"
+// 5) Listar “CONCLUÍDAS”
 app.get('/api/concluidas', async (_, res) => {
   try {
     const { rows } = await pool.query(`
@@ -215,7 +214,7 @@ app.get('/api/concluidas', async (_, res) => {
   }
 });
 
-// 6) Mover para "CONCLUÍDAS"
+// 6) Mover para “CONCLUÍDAS”
 app.post('/api/tarefas/mover-para-concluidas', async (req, res) => {
   const { id_tarefa, observacoes = '' } = req.body;
   try {
@@ -256,7 +255,7 @@ app.post('/api/tarefas/mover-para-concluidas', async (req, res) => {
   }
 });
 
-// 7) Atualizar observações em "EM ANDAMENTO"
+// 7) Atualizar observações em “EM ANDAMENTO”
 app.put('/api/em-andamento/:id/observacoes', async (req, res) => {
   const { id } = req.params;
   const { observacoes } = req.body;
@@ -271,10 +270,6 @@ app.put('/api/em-andamento/:id/observacoes', async (req, res) => {
     console.error('Erro PUT /api/em-andamento/:id/observacoes:', err);
     return res.status(500).json({ error: err.message });
   }
-});
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..\/frontend\/build\/index.html'));
 });
 
 // ───────────────────────────────────────────────────────────────

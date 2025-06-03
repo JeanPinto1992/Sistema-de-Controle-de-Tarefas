@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -24,6 +24,14 @@ function formatDate(value) {
         return '';
     }
     return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+}
+
+function formatMonth(value) {
+    const d = new Date(value);
+    if (isNaN(d.getTime())) {
+        console.warn("Data de criação inválida detectada para mês:", value);
+    }
+    return MESES[d.getMonth()].substring(0, 3).toUpperCase();
 }
 
 const API_BASE_URL = process.env.NODE_ENV === 'production' ? window.location.origin : 'http://localhost:3001';
@@ -60,7 +68,11 @@ export default function App() {
         return Boolean(tarefa && responsavel && repetir && prioridade && setor);
     }, [novaTarefa]);
 
-    const carregarDados = useCallback(async () => {
+    useEffect(() => {
+        carregarDados();
+    }, []);
+
+    async function carregarDados() {
         setCarregando(true);
         try {
             const [tRes, aRes, cRes] = await Promise.all([
@@ -88,11 +100,7 @@ export default function App() {
         } finally {
             setCarregando(false);
         }
-    }, []);
-
-    useEffect(() => {
-        carregarDados();
-    }, [carregarDados]);
+    }
 
     function mostrarMsg(txt, tipo = 'success') {
         setMensagem(txt);
