@@ -1,0 +1,1259 @@
+{
+  "metadata": {
+    "dataExtracao": "2025-06-03T21:47:55.153Z",
+    "totalTarefas": 125,
+    "fonte": "CONTROLADORIA.xlsm"
+  },
+  "tarefas": [
+    {
+      "tarefa": "1",
+      "descricao": "COBRAR APÓLICE DAS PLACAS SOLARES COM O CÉSAR",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "2",
+      "descricao": "COBRAR O FERNANDO SOBRE O AUMENTO DOS VALORES DA APÓLICE DA IANCO (PRESTAMISTA)",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "3",
+      "descricao": "COBRAR APÓLICE DA RUMO (LUCAS)",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "4",
+      "descricao": "LEVANTAMENTO DE CUSTOS DE MANUTENÇÃO DAS MÁQUINAS 2024/2025",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "5",
+      "descricao": "LEVANTAR CUSTOS DO SESI 2024/2025 (ASO, CONSULTAS, EXAMES AVULSOS)",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "6",
+      "descricao": "FAZER COTAÇÕES PARA SUBSTITUIR SESI (IMTEP, INTEGRAL, INOVAMED)",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "7",
+      "descricao": "FAZER COTAÇÕES PARA SUBSTITUIR ECCOSALVA (VERIFICAR OCORRÊNCIAS, LOGIN, SENHA)",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "8",
+      "descricao": "CONFIRMAR SE O JOVANO RECEBEU O VALOR DO RESGATE DA PREVIDÊNCIA BRADESCO",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "9",
+      "descricao": "TENTAR SE CADASTRAR NO BNDES (IANCO)",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "10",
+      "descricao": "CONFIRMAR COM FERNANDO E MICHELLE A CONTRATAÇÃO DE CONSULTORIA (BERRY)",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "11",
+      "descricao": "CADASTRO IBGE",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "12",
+      "descricao": "ELABORAR APLICATIVO DO RH",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "13",
+      "descricao": "CONFIRMAR COM ALICE E FERNANDA SOBRE A CARTA DE OPOSIÇÃO DO DESCONTO SINDICAL",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "16",
+      "descricao": "CONFIRMAR ATIVIDADES REALIZADAS PELA COLABORADORA TAYNÁ",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "17",
+      "descricao": "CONFIRMAR ATIVIDADES REALIZADAS PELA COLABORADORA ALICE",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "18",
+      "descricao": "SOLICITAR ATUALIZAÇÃO DAS FOTOS DOS COLABORADORES PARA A ALICE",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "19",
+      "descricao": "ACOMPANHAR JUNTO Á ALICE SOBRE A CAMPANHA DE VACINAÇÃO",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "20",
+      "descricao": "CONVERSAR COM PESSOAL INTERESSADO SOBRE CURSO DE LEITURA DE NOTA FISCAL",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "21",
+      "descricao": "CONFIRMAR ATIVIDADES REALIZADAS PELA COLABORADORA VERÔNICA",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "22",
+      "descricao": "VER TODA A PASSAGEM E HOSPEDAGEM DA VIAGEM DO GUGA PARA FOZ DO IGUAÇU",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "23",
+      "descricao": "TRATAR COM O GILBERTO SOBRE OS ASSUNTOS REFERENTES AO MEIO AMBIENTE",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "24",
+      "descricao": "TRATAR COM O GILBERTO SOBRE OS ASSUNTOS REFERENTES AO CORPO DE BOMBEIROS",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "25",
+      "descricao": "TRATAR COM O GILBERTO SOBRE A ORGANIZAÇÃO DA SALA DE JOGOS",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "26",
+      "descricao": "FAZER PROJETO COM DADOS (TAMANHO, CUBAGEM) E ARQUIVAR NA PASTA DE MEIO AMBIENTE",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "27",
+      "descricao": "VERIFICAR COM O VICTOR (TI) SOBRE ALTERAR O CONTRATO DA SERCOMTEL PARA O CNPJ DA USIFIX MATRIZ",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "28",
+      "descricao": "VERIFICAR CADASTRO DE FORNECEDOR SOLICITADO PELO RONNÃ NO E-MAIL",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "29",
+      "descricao": "REUNIÃO COM CARLA (VERUS) E FERNANDO",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "33",
+      "descricao": "REUNIÃO MENSAL DO SETOR PARA APRESENTAR NA REUNIÃO DO ADMINISTRATIVO",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "34",
+      "descricao": "TERMINAR O STORYTELING DOS RELATÓRIOS DO ANO DE 2024",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "35",
+      "descricao": "MONTAR O STORYTELING REFERENTE AO ANO DE 2025",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "36",
+      "descricao": "IMPRIMIR DOCUMENTOS E FAZER UMA PASTA FÍSICA REFERENTE AOS DOCUMENTOS DA RUMO",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "37",
+      "descricao": "CARREGAMENTO DE DOCUMENTOS OP 73860",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "38",
+      "descricao": "COMPRAR AZEITE, SAL, PIMENTA E VINAGRE PARA DISPONIBILIZAR NO REFEITÓRIO",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "BAIXA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "39",
+      "descricao": "VERIFICAR COM ELLEN SOBRE O KIT DO DIA DAS MÃES (VELAS E BOMBONS)",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "41",
+      "descricao": "VERIFICAR COM O VICTOR SOBRE OS RAMAIS DA EMPRESA",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "42",
+      "descricao": "RENOVAR CERTIFICADO DIGITAL DA EMPRESA SANTA ROSA E ENVIAR PARA A CONTABILIDADE",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "43",
+      "descricao": "COTAR E COMPRAR TOALHAS DE MESA PARA AS MESAS DO REFEITÓRIO",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "BAIXA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "46",
+      "descricao": "VERIFICAR COMO SERÁ FEITO COM AS MARCAS DA VITI, RUMO E IANCO",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "47",
+      "descricao": "TRANSFERIR A CONTA DE ENERGIA ELÉTRICA PARA O PROFESSOR DE JUDÔ",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "61",
+      "descricao": "AGUARDAR LANÇAMENTOS DO RH E CONFERIR HOLERITES ANTES DE FECHAR AS FOLHAS",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "RH",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "64",
+      "descricao": "AGUARDAR ENVIO DAS INFORMAÇÕES PARA ATUALIZAR O RELATÓRIO MENSALMENTE",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "65",
+      "descricao": "AGUARDAR ENVIO DAS INFORMAÇÕES PARA ATUALIZAR O RELATÓRIO MENSALMENTE",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "FINANCEIRO",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "73",
+      "descricao": "PEGAR VALORES DA CONTABILIDADE E PREENCHER RELATÓRIO MENSAL DO RH",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "RH",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "74",
+      "descricao": "VERIFICAR VALOR DAS GUIAS DOS PARCELAMENTOS DE IMPOSTOS DAS EMPRESAS",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "DIRETORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "79",
+      "descricao": "ATUALIZAR AS CERTIDÕES NEGATIVAS E VERIFICAR PENDÊNCIAS",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "BAIXA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "80",
+      "descricao": "CONSULTAR RELATÓRIOS FISCAIS DO E-CAC E, CASO PRECISAR, VERIFICAR A RESOLUÇÃO DAS PENDÊNCIAS COM AS CONTABILIDADES",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "81",
+      "descricao": "REUNIÃO MENSAL COM A DIRETORIA REFERENTE ASSUNTOS DE RH E SEGURANÇA",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "DIRETORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "82",
+      "descricao": "REUNIÃO MENSAL COM O ADMINISTRATIVO E DIRETORIA",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "DIRETORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "83",
+      "descricao": "CADASTRO IBGE",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "85",
+      "descricao": "ATUALIZAR HORA/HOMEM NO SISTEMA IANCO APÓS O FECHAMENTO DO RELATÓRIO DO RH",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "RH",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "86",
+      "descricao": "GERAR RELATÓRIOS DO SISTEMA DOMÍNIO E SALVAR NAS PASTAS DAS EMPRESAS",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "88",
+      "descricao": "PEGAR VALORES DO SISTEMA E ATUALZIAR O RELATÓRIO MENSALMENTE",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "89",
+      "descricao": "AGUARDAR CONTABILIDADES ENVIAREM AS GUIAS DOS IMPOSTOS, CONFERIR VALORES E ENVIAR PARA O SETOR FINANCEIRO",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "84",
+      "descricao": "ATÉ DIA",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "85",
+      "descricao": "LIANA CORRETORA",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "86",
+      "descricao": "PRORROGAÇÃO DE DATA P OBRIGATORIO 05/2025",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "87",
+      "descricao": "",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "88",
+      "descricao": "",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "89",
+      "descricao": "ENTENDER OS RELATORIOS ENVIADOS MENSALMENTE",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "90",
+      "descricao": "ENTENDER ORÇAMENTO",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "91",
+      "descricao": "TERMINAR O CADASTRO",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "92",
+      "descricao": "ENTENDER O QUE TEMOS DE SERVIÇOS CONTRATADOS E O QUE ESTA VIGENTE",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "93",
+      "descricao": "",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "94",
+      "descricao": "EDUARDO CONTADOR",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "95",
+      "descricao": "PREENCHER A DEVEC ATE DIA 12 DE CADA MES",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "96",
+      "descricao": "ANCO PARA USIFIX - VICTOR",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "97",
+      "descricao": "TROCAR COLABORADORES DA USIFIX FILIAL P USIFIX MATRIZ",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "98",
+      "descricao": "RESPODENDO DUVIDAS , E INFOMAÇOES REF. CERTICADOS",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "99",
+      "descricao": "PEGAR VALORES DO SISTEMA E ATUALZIAR O RELATÓRIO MENSALMENTE",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "100",
+      "descricao": "AGUARDAR CONTABILIDADES ENVIAREM AS GUIAS DOS IMPOSTOS, CONFERIR VALORES E ENVIAR PARA O SETOR FINANCEIRO",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "40",
+      "descricao": "VER SOBRE A SIPAT",
+      "responsavel": "IVANA",
+      "status": "EM ANDAMENTO",
+      "prioridade": "NORMAL",
+      "setor": "RH",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "60",
+      "descricao": "ESTUDAR SOBRE AS MUDANÇAS E OS IMPACTOS GERADOS PELA REFORMA TRIBUTÁRIA",
+      "responsavel": "JEAN",
+      "status": "EM ANDAMENTO",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "72",
+      "descricao": "TRANSFERIR COLABORADORES DA FILIAL PARA A MATRIZ MENSALMENTE (PREFERENCIALMENTE A´TE O MÊS DE NOVEMBRO)",
+      "responsavel": "JEAN",
+      "status": "EM ANDAMENTO",
+      "prioridade": "NORMAL",
+      "setor": "RH",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "71",
+      "descricao": "SOLICITAR DECLARAÇÃO DE FATURAMENTO DAS EMPRESAS ASSINADAS PELAS CONTABILIDIADES",
+      "responsavel": "JEAN",
+      "status": "EM ANDAMENTO",
+      "prioridade": "BAIXA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "1",
+      "descricao": "COBRAR APÓLICE DAS PLACAS SOLARES COM O CÉSAR",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "2",
+      "descricao": "COBRAR O FERNANDO SOBRE O AUMENTO DOS VALORES DA APÓLICE DA IANCO (PRESTAMISTA)",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "3",
+      "descricao": "COBRAR APÓLICE DA RUMO (LUCAS)",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "4",
+      "descricao": "LEVANTAMENTO DE CUSTOS DE MANUTENÇÃO DAS MÁQUINAS 2024/2025",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "5",
+      "descricao": "LEVANTAR CUSTOS DO SESI 2024/2025 (ASO, CONSULTAS, EXAMES AVULSOS)",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "6",
+      "descricao": "FAZER COTAÇÕES PARA SUBSTITUIR SESI (IMTEP, INTEGRAL, INOVAMED)",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "7",
+      "descricao": "FAZER COTAÇÕES PARA SUBSTITUIR ECCOSALVA (VERIFICAR OCORRÊNCIAS, LOGIN, SENHA)",
+      "responsavel": "IVANA",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "87",
+      "descricao": "ENVIAR DIARIAMENTE RELATÓRIOS FINANCEIROS PARA A DIRETORIA",
+      "responsavel": "JEAN",
+      "status": "EM ANDAMENTO",
+      "prioridade": "ALTA",
+      "setor": "DIRETORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "68",
+      "descricao": "ATUALIZAR PLANILHA DE CONTRATOS DE CONSIGNADOS E ENVIAR INFORMAÇÕES PARA AS CONTABILIDADES",
+      "responsavel": "JEAN",
+      "status": "EM ANDAMENTO",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "63",
+      "descricao": "AGUARDAR ENVIO DAS INFORMAÇÕES PARA ATUALIZAR O RELATÓRIO MENSALMENTE",
+      "responsavel": "JEAN",
+      "status": "EM ANDAMENTO",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "57",
+      "descricao": "AGUARDAR LANÇAMENTOS DO RH E CONFERIR HOLERITES ANTES DE FECHAR AS FOLHAS",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "RH",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "44",
+      "descricao": "COTAR E FECHAR HOTEL PARA VIAGEM DO FERNANDO E EDUARDO (LOBO) PARA O ESTADO DE SP",
+      "responsavel": "IVANA",
+      "status": "CONCLUIDA",
+      "prioridade": "ALTA",
+      "setor": "DIRETORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "45",
+      "descricao": "CONFIRMAR DATA DA VIAGEM PARA VISITA NA RUMO E FECHAR CARRO E HOTEL",
+      "responsavel": "IVANA",
+      "status": "CONCLUIDA",
+      "prioridade": "ALTA",
+      "setor": "DIRETORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "59",
+      "descricao": "COTAR PLANEJAMENTO JUNTO Á OUTRAS CONTABILIDADES PARA VIABILIZAR A MUDANÇA NO PLANO TRIBUÁRIO DA IANCO",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "ALTA",
+      "setor": "DIRETORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "62",
+      "descricao": "ARQUIVAR ATESTADOS NAS PASTAS DOS COLABORADORES",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "RH",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "52",
+      "descricao": "AGUARDAR ENVIO DAS INFORMAÇÕES PARA ATUALIZAR O RELATÓRIO MENSALMENTE",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "53",
+      "descricao": "AGUARDAR ENVIO DAS INFORMAÇÕES PARA ATUALIZAR O RELATÓRIO MENSALMENTE",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "54",
+      "descricao": "AGUARDAR ENVIO DAS INFORMAÇÕES PARA ATUALIZAR O RELATÓRIO MENSALMENTE",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "FINANCEIRO",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "55",
+      "descricao": "AGUARDAR CONTABILIDADES ENVIAREM AS GUIAS DOS IMPOSTOS, CONFERIR VALORES E ENVIAR PARA O SETOR FINANCEIRO",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "56",
+      "descricao": "AGUARDAR CONTABILIDADES ENVIAREM AS GUIAS DOS IMPOSTOS, CONFERIR VALORES E ENVIAR PARA O SETOR FINANCEIRO",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "58",
+      "descricao": "ATUALIZAR PLANILHA DE CONTRATOS DE CONSIGNADOS E ENVIAR INFORMAÇÕES PARA AS CONTABILIDADES",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "14",
+      "descricao": "ATUALIZAR AS CERTIDÕES NEGATIVAS E VERIFICAR PENDÊNCIAS",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "BAIXA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "15",
+      "descricao": "SOLICITAR DECLARAÇÃO DE FATURAMENTO DAS EMPRESAS ASSINADAS PELAS CONTABILIDIADES",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "BAIXA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "30",
+      "descricao": "REUNIÃO COM O EDUARDO PARA ESCLARECIMENTOS SOBRE O BALANÇA PATRIMONIAL E DRE DA IANCO",
+      "responsavel": "IVANA",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "49",
+      "descricao": "PEGAR VALORES DA CONTABILIDADE E PREENCHER RELATÓRIO MENSAL DO RH",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "ALTA",
+      "setor": "RH",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "69",
+      "descricao": "VERIFICAR VALOR DAS GUIAS DOS PARCELAMENTOS DE IMPOSTOS DAS EMPRESAS",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "DIRETORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "50",
+      "descricao": "PEGAR VALORES DO SISTEMA E ATUALZIAR O RELATÓRIO MENSALMENTE",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "51",
+      "descricao": "PEGAR VALORES DO SISTEMA E ATUALZIAR O RELATÓRIO MENSALMENTE",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "70",
+      "descricao": "ATUALIZAR AS CERTIDÕES NEGATIVAS E VERIFICAR PENDÊNCIAS",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "BAIXA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "77",
+      "descricao": "CONSULTAR RELATÓRIOS FISCAIS DO E-CAC E, CASO PRECISAR, VERIFICAR A RESOLUÇÃO DAS PENDÊNCIAS COM AS CONTABILIDADES",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "32",
+      "descricao": "REUNIÃO MENSAL COM A DIRETORIA REFERENTE ASSUNTOS DE RH E SEGURANÇA",
+      "responsavel": "IVANA",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "DIRETORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "31",
+      "descricao": "REUNIÃO MENSAL COM O ADMINISTRATIVO E DIRETORIA",
+      "responsavel": "IVANA",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "DIRETORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "84",
+      "descricao": "ATUALIZAR HORA/HOMEM NO SISTEMA IANCO APÓS O FECHAMENTO DO RELATÓRIO DO RH",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "RH",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "78",
+      "descricao": "GERAR RELATÓRIOS DO SISTEMA DOMÍNIO E SALVAR NAS PASTAS DAS EMPRESAS",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "48",
+      "descricao": "ENVIAR DIARIAMENTE RELATÓRIOS FINANCEIROS PARA A DIRETORIA",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "ALTA",
+      "setor": "DIRETORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "76",
+      "descricao": "PEGAR VALORES DO SISTEMA E ATUALZIAR O RELATÓRIO MENSALMENTE",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "66",
+      "descricao": "AGUARDAR CONTABILIDADES ENVIAREM AS GUIAS DOS IMPOSTOS, CONFERIR VALORES E ENVIAR PARA O SETOR FINANCEIRO",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "75",
+      "descricao": "PEGAR VALORES DO SISTEMA E ATUALZIAR O RELATÓRIO MENSALMENTE",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "ALTA",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "67",
+      "descricao": "AGUARDAR CONTABILIDADES ENVIAREM AS GUIAS DOS IMPOSTOS, CONFERIR VALORES E ENVIAR PARA O SETOR FINANCEIRO",
+      "responsavel": "JEAN",
+      "status": "CONCLUIDA",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "0",
+      "descricao": "",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "0",
+      "descricao": "",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "0",
+      "descricao": "",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "65",
+      "descricao": "",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "36",
+      "descricao": "",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "12",
+      "descricao": "",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "0",
+      "descricao": "",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "0",
+      "descricao": "",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "0",
+      "descricao": "",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "0",
+      "descricao": "",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "0",
+      "descricao": "",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    },
+    {
+      "tarefa": "0",
+      "descricao": "",
+      "responsavel": "JEAN",
+      "status": "A REALIZAR",
+      "prioridade": "NORMAL",
+      "setor": "CONTROLADORIA",
+      "mes": "JUNHO",
+      "repetir": "NÃO"
+    }
+  ]
+}
