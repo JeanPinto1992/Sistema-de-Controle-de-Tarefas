@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "buildCommand": "npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend",
+  "outputDirectory": "backend",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/backend/server.js" }
+  ]
+} 
