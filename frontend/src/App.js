@@ -26,14 +26,6 @@ function formatDate(value) {
     return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
 }
 
-function formatMonth(value) {
-    const d = new Date(value);
-    if (isNaN(d.getTime())) {
-        console.warn("Data de criação inválida detectada para mês:", value);
-    }
-    return MESES[d.getMonth()].substring(0, 3).toUpperCase();
-}
-
 const API_BASE_URL = process.env.NODE_ENV === 'production' ? window.location.origin : 'http://localhost:3001';
 
 export default function App() {
@@ -70,7 +62,7 @@ export default function App() {
 
     useEffect(() => {
         carregarDados();
-    }, []);
+    }, [carregarDados]);
 
     async function carregarDados() {
         setCarregando(true);
