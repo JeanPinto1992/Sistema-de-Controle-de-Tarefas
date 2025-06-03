@@ -1,6 +1,7 @@
 @echo off
 echo ===================================================
 echo    SISTEMA DE CONTROLE DE TAREFAS - INICIALIZACAO
+echo    SERVIDOR UNIFICADO (React + Node.js)
 echo ===================================================
 echo.
 
@@ -18,42 +19,33 @@ if %ERRORLEVEL% NEQ 0 (
 set PROJETO_DIR=%~dp0
 cd %PROJETO_DIR%
 
-echo [1/5] Instalando dependencias do projeto principal...
+echo [1/4] Instalando dependencias do projeto...
 call npm install
 
-:: Verifica se a pasta node_modules do backend existe
-if not exist "%PROJETO_DIR%backend\node_modules" (
-    echo [2/5] Instalando dependencias do backend...
-    cd "%PROJETO_DIR%backend"
-    call npm install
+:: Verifica se a pasta build existe
+if not exist "%PROJETO_DIR%build" (
+    echo [2/4] Construindo aplicacao React...
+    call npm run build
 ) else (
-    echo [2/5] Dependencias do backend ja instaladas.
+    echo [2/4] Build React ja existe.
 )
-
-:: Verifica se a pasta node_modules do frontend existe
-if not exist "%PROJETO_DIR%frontend\node_modules" (
-    echo [3/5] Instalando dependencias do frontend...
-    cd "%PROJETO_DIR%frontend"
-    call npm install
-) else (
-    echo [3/5] Dependencias do frontend ja instaladas.
-)
-
-:: Constroi a versão de produção do frontend
-echo [4/5] Construindo versao de producao do frontend...
-cd "%PROJETO_DIR%frontend"
-call npm run build
 
 :: Verifica se o build foi criado corretamente
-if not exist "%PROJETO_DIR%frontend\build" (
-    echo [ERRO] Falha ao construir o frontend!
+if not exist "%PROJETO_DIR%build" (
+    echo [ERRO] Falha ao construir a aplicacao React!
     pause
     exit /b
 )
 
-:: Inicia o servidor backend
-echo [5/5] Iniciando o servidor...
-cd "%PROJETO_DIR%backend"
+echo [3/4] Verificando arquivo de senha do banco...
+if not exist "%PROJETO_DIR%server\SENHA POSTGREE.txt" (
+    echo [AVISO] Arquivo SENHA POSTGREE.txt nao encontrado na pasta server/
+    echo Certifique-se de que o arquivo existe com a senha do PostgreSQL
+    echo.
+)
+
+:: Inicia o servidor unificado
+echo [4/4] Iniciando servidor unificado...
 echo.
 echo ===================================================
 echo    SERVIDOR INICIADO! 
@@ -64,11 +56,13 @@ for /f "tokens=4" %%a in ('route print ^| findstr 0.0.0.0 ^| findstr 255.255.255
     echo    - Outros computadores na rede: http://%%a:3001
 )
 echo.
+echo    API disponivel em: http://localhost:3001/api/
 echo    Pressione CTRL+C para encerrar o servidor
 echo ===================================================
 echo.
 
-:: Inicia o servidor backend
-node server.js
+:: Inicia o servidor unificado
+cd "%PROJETO_DIR%"
+node server/server.js
 
 pause 
