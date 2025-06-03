@@ -1,6 +1,6 @@
 // src/App.js
-import React, { useState, useEffect, useMemo, useRef } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useMemo } from 'react';
+import { createClient } from '@supabase/supabase-js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     Container, Tabs, Tab, Button,
@@ -34,7 +34,16 @@ function formatMonth(value) {
     return MESES[d.getMonth()].substring(0, 3).toUpperCase();
 }
 
-const API_BASE_URL = ''; // Servidor unificado - mesmo domínio e porta
+// Configuração do Supabase
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('❌ Variáveis de ambiente do Supabase não encontradas!');
+  console.error('Certifique-se de que REACT_APP_SUPABASE_URL e REACT_APP_SUPABASE_ANON_KEY estão definidas');
+}
+
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function App() {
     const [tarefas, setTarefas] = useState([]);
@@ -55,7 +64,7 @@ export default function App() {
     // ESTADOS PARA O MODAL DE DESCRIÇÃO
     const [showDescriptionModal, setShowDescriptionModal] = useState(false);
     const [currentDescription, setCurrentDescription] = useState('');
-    const [currentTaskTitle, setCurrentTaskTitle] = useState(''); // Mantido para referência, mas não renderizado
+    const [currentTaskTitle, setCurrentTaskTitle] = useState('');
     const [currentObservations, setCurrentObservations] = useState('');
 
     // NOVOS ESTADOS PARA O MODAL DE EDIÇÃO DE OBSERVAÇÕES
@@ -75,28 +84,57 @@ export default function App() {
     async function carregarDados() {
         setCarregando(true);
         try {
-            const [tRes, aRes, cRes] = await Promise.all([
-                axios.get(`${API_BASE_URL}/api/tarefas`),
-                axios.get(`${API_BASE_URL}/api/em-andamento`),
-                axios.get(`${API_BASE_URL}/api/concluidas`)
-            ]);
+            // Carregar tarefas A REALIZAR
+            const { data: tarefasData, error: tarefasError } = await supabase
+                .from('tarefas')
+                .select('*')
+                .eq('status', 'A REALIZAR')
+                .order('id_tarefa');
+
+            if (tarefasError) throw tarefasError;
+
+            // Carregar tarefas EM ANDAMENTO com observações
+            const { data: andamentoData, error: andamentoError } = await supabase
+                .from('tarefas')
+                .select(`
+                    *,
+                    em_andamento!left(observacoes)
+                `)
+                .eq('status', 'EM ANDAMENTO')
+                .order('id_tarefa');
+
+            if (andamentoError) throw andamentoError;
+
+            // Carregar tarefas CONCLUÍDAS
+            const { data: concluidasData, error: concluidasError } = await supabase
+                .from('tarefas')
+                .select(`
+                    *,
+                    concluidas!left(observacoes, data_conclusao, dias_para_conclusao)
+                `)
+                .eq('status', 'CONCLUIDA')
+                .order('id_tarefa');
+
+            if (concluidasError) throw concluidasError;
 
             const formatar = arr => arr.map(x => ({
                 ...x,
                 data_criacao: formatDate(x.data_criacao),
                 data_criacao_para_ordenacao: x.data_criacao,
-                mes: MESES[new Date(x.data_criacao).getMonth()].substring(0, 3).toUpperCase()
+                mes: MESES[new Date(x.data_criacao).getMonth()].substring(0, 3).toUpperCase(),
+                // Processar observações das tabelas relacionadas
+                observacoes: x.em_andamento?.[0]?.observacoes || x.concluidas?.[0]?.observacoes || '',
+                data_conclusao: x.concluidas?.[0]?.data_conclusao ? formatDate(x.concluidas?.[0]?.data_conclusao) : '',
+                dias_para_conclusao: x.concluidas?.[0]?.dias_para_conclusao || 0
             }));
 
-            setTarefas(formatar(tRes.data));
-            setEmAndamento(formatar(aRes.data));
-            setConcluidas(formatar(cRes.data.map(x => ({
-                ...x,
-                data_conclusao: formatDate(x.data_conclusao)
-            }))));
+            setTarefas(formatar(tarefasData));
+            setEmAndamento(formatar(andamentoData));
+            setConcluidas(formatar(concluidasData));
+
         } catch (e) {
             console.error(e);
-            mostrarMsg('Erro ao carregar dados.', 'danger');
+            mostrarMsg('Erro ao carregar dados: ' + e.message, 'danger');
         } finally {
             setCarregando(false);
         }
@@ -111,66 +149,153 @@ export default function App() {
     async function salvarTarefa() {
         try {
             console.log("Salvando tarefa com dados:", novaTarefa);
-            await axios.post(`${API_BASE_URL}/api/tarefas`, {
-                ...novaTarefa,
-                id_tarefa_para_atualizar: editId
-            });
+            
+            if (editId) {
+                // UPDATE
+                const { error } = await supabase
+                    .from('tarefas')
+                    .update({
+                        tarefa: novaTarefa.tarefa,
+                        descricao: novaTarefa.descricao,
+                        responsavel: novaTarefa.responsavel,
+                        repetir: novaTarefa.repetir,
+                        prioridade: novaTarefa.prioridade,
+                        mes: novaTarefa.mes,
+                        setor: novaTarefa.setor
+                    })
+                    .eq('id_tarefa', editId);
+
+                if (error) throw error;
+            } else {
+                // INSERT
+                const { error } = await supabase
+                    .from('tarefas')
+                    .insert({
+                        data_criacao: new Date().toISOString(),
+                        tarefa: novaTarefa.tarefa,
+                        descricao: novaTarefa.descricao,
+                        status: 'A REALIZAR',
+                        responsavel: novaTarefa.responsavel,
+                        repetir: novaTarefa.repetir,
+                        prioridade: novaTarefa.prioridade,
+                        mes: MESES[new Date().getMonth()].substring(0, 3).toUpperCase(),
+                        setor: novaTarefa.setor
+                    });
+
+                if (error) throw error;
+            }
+
             mostrarMsg(editId ? 'Tarefa atualizada!' : 'Tarefa criada!');
             setShowModal(false);
             setEditId(null);
             carregarDados();
         } catch (e) {
             console.error(e);
-            mostrarMsg('Erro ao salvar tarefa.', 'danger');
+            mostrarMsg('Erro ao salvar tarefa: ' + e.message, 'danger');
         }
     }
 
     async function moverParaAndamento(id) {
         try {
-            await axios.post(`${API_BASE_URL}/api/tarefas/mover-para-andamento`, { id_tarefa: id });
+            // Atualizar status da tarefa
+            const { error: updateError } = await supabase
+                .from('tarefas')
+                .update({ status: 'EM ANDAMENTO' })
+                .eq('id_tarefa', id);
+
+            if (updateError) throw updateError;
+
+            // Inserir na tabela em_andamento
+            const { error: insertError } = await supabase
+                .from('em_andamento')
+                .upsert({ id_tarefa: id }, { onConflict: 'id_tarefa' });
+
+            if (insertError) throw insertError;
+
             mostrarMsg('Tarefa movida para Em Andamento.');
             carregarDados();
         } catch (e) {
             console.error(e);
-            mostrarMsg('Erro ao mover.', 'danger');
+            mostrarMsg('Erro ao mover: ' + e.message, 'danger');
         }
     }
 
     async function concluir(id, obs = '') {
         try {
-            // 1. Marcar a tarefa como concluída no backend
-            await axios.post(`${API_BASE_URL}/api/tarefas/mover-para-concluidas`, { id_tarefa: id, observacoes: obs });
+            // Buscar a tarefa para verificar se deve repetir
+            const { data: tarefaData, error: selectError } = await supabase
+                .from('tarefas')
+                .select('*')
+                .eq('id_tarefa', id)
+                .single();
+
+            if (selectError) throw selectError;
+
+            // Calcular dias para conclusão
+            const dataCriacao = new Date(tarefaData.data_criacao);
+            const dataAtual = new Date();
+            const diasParaConclusao = Math.floor((dataAtual - dataCriacao) / (1000 * 60 * 60 * 24));
+
+            // Atualizar status da tarefa
+            const { error: updateError } = await supabase
+                .from('tarefas')
+                .update({ status: 'CONCLUIDA' })
+                .eq('id_tarefa', id);
+
+            if (updateError) throw updateError;
+
+            // Inserir na tabela concluidas
+            const { error: insertError } = await supabase
+                .from('concluidas')
+                .upsert({
+                    id_tarefa: id,
+                    observacoes: obs,
+                    data_conclusao: new Date().toISOString(),
+                    dias_para_conclusao: diasParaConclusao
+                }, { onConflict: 'id_tarefa' });
+
+            if (insertError) throw insertError;
+
+            // Remover da tabela em_andamento
+            const { error: deleteError } = await supabase
+                .from('em_andamento')
+                .delete()
+                .eq('id_tarefa', id);
+
+            if (deleteError) throw deleteError;
+
             mostrarMsg(`Tarefa ${id} concluída!`);
 
-            // 2. Encontrar a tarefa que foi concluída localmente
-            const tarefaConcluida = emAndamento.find(t => t.id_tarefa === id);
-
-            // 3. Verificar se a tarefa concluída deve ser repetida
-            if (tarefaConcluida && tarefaConcluida.repetir === 'SIM') {
+            // Verificar se a tarefa deve ser repetida
+            if (tarefaData.repetir === 'SIM') {
                 console.log("Tarefa é repetível. Criando nova instância...");
-                const novaTarefaParaRepetir = {
-                    ...tarefaConcluida,
-                    id_tarefa: undefined, // Remova o ID existente para que o banco de dados gere um novo
-                    data_criacao: new Date().toISOString(), // Nova data de criação (hoje)
-                    completed: false, // Garante que a nova tarefa não esteja concluída
-                    observacoes: '' // Opcional: Limpar observações da nova tarefa
-                };
+                
+                const { error: repeatError } = await supabase
+                    .from('tarefas')
+                    .insert({
+                        data_criacao: new Date().toISOString(),
+                        tarefa: tarefaData.tarefa,
+                        descricao: tarefaData.descricao,
+                        status: 'A REALIZAR',
+                        responsavel: tarefaData.responsavel,
+                        repetir: tarefaData.repetir,
+                        prioridade: tarefaData.prioridade,
+                        mes: MESES[new Date().getMonth()].substring(0, 3).toUpperCase(),
+                        setor: tarefaData.setor
+                    });
 
-                // 4. Enviar a nova tarefa para o backend como uma nova criação
-                try {
-                    await axios.post(`${API_BASE_URL}/api/tarefas`, novaTarefaParaRepetir);
-                    mostrarMsg('Nova tarefa repetível criada automaticamente!', 'info');
-                } catch (e) {
-                    console.error('Erro ao criar tarefa repetível:', e);
+                if (repeatError) {
+                    console.error('Erro ao criar tarefa repetível:', repeatError);
                     mostrarMsg('Erro ao criar nova tarefa repetível.', 'warning');
+                } else {
+                    mostrarMsg('Nova tarefa repetível criada automaticamente!', 'info');
                 }
             }
 
-            // 5. Recarregar todos os dados para refletir as alterações
             carregarDados();
         } catch (e) {
             console.error('Erro ao concluir tarefa:', e);
-            mostrarMsg('Erro ao concluir tarefa.', 'danger');
+            mostrarMsg('Erro ao concluir tarefa: ' + e.message, 'danger');
         }
     }
 
@@ -183,22 +308,22 @@ export default function App() {
         try {
             setCarregando(true);
             console.log(`Salvando observação para tarefa ${editingObsId} (Texto: ${editingObsText})`);
-            const response = await axios.put(`${API_BASE_URL}/api/em-andamento/${editingObsId}/observacoes`, {
-                observacoes: editingObsText,
-            });
+            
+            const { error } = await supabase
+                .from('em_andamento')
+                .upsert({
+                    id_tarefa: parseInt(editingObsId),
+                    observacoes: editingObsText
+                }, { onConflict: 'id_tarefa' });
 
-            if (response.status === 200) {
-                mostrarMsg('Observação salva com sucesso!', 'success');
-                carregarDados();
-                handleCloseEditObsModal();
-            } else {
-                mostrarMsg('Erro inesperado ao salvar observação. Status: ' + response.status, 'danger');
-                console.error('Resposta inesperada do backend:', response.data);
-            }
+            if (error) throw error;
+
+            mostrarMsg('Observação salva com sucesso!', 'success');
+            carregarDados();
+            handleCloseEditObsModal();
         } catch (error) {
             console.error('Erro ao salvar observação:', error);
-            const errorMessage = error.response?.data?.error || error.message || 'Verifique o console para mais detalhes.';
-            mostrarMsg(`Erro ao salvar observação: ${errorMessage}`, 'danger');
+            mostrarMsg(`Erro ao salvar observação: ${error.message}`, 'danger');
         } finally {
             setCarregando(false);
         }
@@ -335,13 +460,6 @@ export default function App() {
         console.log("Modal de descrição SET para visível pelo clique no ícone.");
     };
 
-    useEffect(() => {
-        // A lógica de listeners para cards inteiros (como dblclick) foi removida ou simplificada.
-        // Agora, o modal é acionado pelo clique direto no ícone '+'.
-        // O `currentTaskTitle` e `currentObservations` são setados no `handleOpenDescriptionModal`.
-    }, [activeTab]);
-
-
     const handleDescriptionModalClose = (event) => {
         if (event.target.id === 'task-description-modal-overlay') {
             setShowDescriptionModal(false);
@@ -350,7 +468,6 @@ export default function App() {
             setCurrentObservations('');
         }
     };
-
 
     return (
         <Container fluid className="mt-3 d-flex flex-column" style={{ minHeight: '100vh' }}>
