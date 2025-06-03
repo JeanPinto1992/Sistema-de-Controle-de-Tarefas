@@ -2,7 +2,7 @@ const { createClient } = require('@supabase/supabase-js');
 
 // Configurações do Supabase
 const supabaseUrl = 'https://xdwypvfgaatcfxpjygub.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhkd3lwdmZnYWF0Y2Z4cGp5Z3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkzMDU1MTAsImV4cCI6MjA1NDg4MTUxMH0.iuEiQwZfePRdXPUFBjqojV-WbnwGjL8gg_i7DqSz45c';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhkd3lwdmZnYWF0Y2Z4cGp5Z3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg5ODA2ODUsImV4cCI6MjA2NDU1NjY4NX0.FN8h5tT77tOPyPtjs1hVysj3HXT9Q6P5qqnmM1aAPxM';
 
 console.log('🔗 Testando conexão com Supabase...');
 console.log('URL:', supabaseUrl);
