@@ -1,0 +1,17 @@
+{
+  "name": "analise-dados-react",
+  "version": "1.0.0",
+  "description": "Sistema de Controle de Tarefas com React e Node.js",
+  "main": "index.js",
+  "scripts": {
+    "install-backend": "cd backend && npm install",
+    "install-frontend": "cd frontend && npm install",
+    "install-all": "npm run install-backend && npm run install-frontend",
+    "start-backend": "cd backend && npm start",
+    "start-frontend": "cd frontend && npm start",
+    "dev": "concurrently \"npm run start-backend\" \"npm run start-frontend\""
+  },
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+} 
