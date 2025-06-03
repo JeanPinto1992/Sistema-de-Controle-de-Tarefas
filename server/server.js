@@ -4,7 +4,9 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config();
+
+// Carregar .env da raiz do projeto
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
 // 🔥 Confirmação de arquivo correto
 console.log('🚀 Iniciando SERVIDOR UNIFICADO com SUPABASE em', __filename);
@@ -36,9 +38,14 @@ if (fs.existsSync(buildPath)) {
 const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
+console.log('🔧 Verificando variáveis de ambiente...');
+console.log('URL existe:', !!supabaseUrl);
+console.log('Service Key existe:', !!supabaseServiceKey);
+
 if (!supabaseUrl || !supabaseServiceKey) {
   console.error('❌ Variáveis de ambiente do Supabase não encontradas!');
   console.error('Certifique-se de que REACT_APP_SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY estão definidas no arquivo .env');
+  console.error('Arquivo .env esperado em:', path.join(__dirname, '..', '.env'));
   process.exit(1);
 }
 
