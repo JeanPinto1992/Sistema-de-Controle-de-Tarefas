@@ -244,9 +244,10 @@ filter: saturate(1.1);
 }
 
 .cards-grid-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px; /* Aumentado o gap para dar mais espaço e permitir as sombras/rotações */
+  display: flex; /* Altera para flexbox para organizar as duas colunas principais */
+  flex-wrap: wrap; /* Permite que as colunas quebrem se a tela for pequena */
+  justify-content: center; /* Centraliza as duas colunas principais no mural */
+  gap: 20px; /* Espaçamento entre as duas colunas principais */
   width: 100%;
   height: fit-content;
   overflow-y: auto;
@@ -256,19 +257,20 @@ filter: saturate(1.1);
 
 .jean-column-container,
 .ivana-column-container {
-  grid-column: span 2; /* Cada container ocupa 2 das 4 colunas principais */
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Cada container tem 2 colunas internas para os cards */
-  gap: inherit; /* Mantém o gap do container pai */
-  grid-auto-rows: min-content;
-  align-items: start;
+  width: 300px; /* Largura fixa para as colunas, para garantir uniformidade */
+  display: flex; /* Torna o container da coluna flexbox */
+  flex-direction: column; /* Empilha os cards verticalmente */
+  align-items: center; /* Centraliza os cards individualmente dentro da sua coluna */
+  gap: 20px; /* Espaçamento entre os cards na vertical */
 }
 
 /* Estilo base para todos os Post-its */
 .card-postit {
-  width: auto;
+  width: 280px; /* Largura fixa para todos os cards */
   height: 159px;
-  margin: 0;
+  margin-bottom: 20px; /* Espaçamento vertical entre os cards */
+  margin-left: 0;
+  margin-right: 0;
   position: relative;
   border: none;
   font-weight: bold;
