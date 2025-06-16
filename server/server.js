@@ -5,14 +5,19 @@ const fs = require('fs');
 const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
 
-// Carregar .env apenas se estiver em ambiente local
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
-}
+// Carregar .env sempre em desenvolvimento, no Vercel as variáveis são definidas no painel
+const envPath = path.join(__dirname, '..', '.env');
+console.log('🔧 Tentando carregar .env de:', envPath);
+console.log('🔧 Arquivo .env existe?', require('fs').existsSync(envPath));
+
+const dotenvResult = require('dotenv').config({ path: envPath });
+console.log('🔧 Resultado do dotenv:', dotenvResult.error ? `ERRO: ${dotenvResult.error}` : 'SUCESSO');
+console.log('🔧 Variáveis carregadas:', dotenvResult.parsed ? Object.keys(dotenvResult.parsed) : 'NENHUMA');
 
 // 🔥 Confirmação de arquivo correto
 console.log('🚀 Iniciando SERVIDOR UNIFICADO com SUPABASE em', __filename);
 console.log('🔧 Ambiente:', process.env.NODE_ENV || 'development');
+console.log('🔧 Diretório atual:', __dirname);
 
 const app  = express();
 const PORT = process.env.PORT || 3002;
@@ -46,20 +51,36 @@ if (process.env.NODE_ENV === 'production') {
 // ───────────────────────────────────────────────────────────────
 const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
 
 console.log('🔧 Verificando variáveis de ambiente...');
-console.log('URL existe:', !!supabaseUrl);
-console.log('Service Key existe:', !!supabaseServiceKey);
+console.log('URL:', process.env.REACT_APP_SUPABASE_URL ? 'DEFINIDA' : 'NÃO DEFINIDA');
+console.log('Service Key:', process.env.SUPABASE_SERVICE_ROLE_KEY ? 'DEFINIDA' : 'NÃO DEFINIDA');
+console.log('Anon Key:', process.env.REACT_APP_SUPABASE_ANON_KEY ? 'DEFINIDA' : 'NÃO DEFINIDA');
+console.log('Todas as env keys:', Object.keys(process.env).filter(k => k.includes('SUPABASE')));
 
-if (!supabaseUrl || !supabaseServiceKey) {
-  console.error('❌ Variáveis de ambiente do Supabase não encontradas!');
-  console.error('Certifique-se de que REACT_APP_SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY estão definidas no arquivo .env');
-  console.error('Arquivo .env esperado em:', path.join(__dirname, '..', '.env'));
+if (!supabaseUrl) {
+  console.error('❌ REACT_APP_SUPABASE_URL não encontrada!');
   process.exit(1);
 }
 
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
-console.log('✅ Cliente Supabase configurado!');
+// Usar Service Key se disponível, senão usar Anon Key
+const supabaseKey = supabaseServiceKey || supabaseAnonKey;
+const keyType = supabaseServiceKey ? 'SERVICE_ROLE' : 'ANON';
+
+if (!supabaseKey) {
+  console.error('❌ Nenhuma chave do Supabase encontrada!');
+  console.error('Certifique-se de que SUPABASE_SERVICE_ROLE_KEY ou REACT_APP_SUPABASE_ANON_KEY estão definidas no arquivo .env');
+  process.exit(1);
+}
+
+const supabase = createClient(supabaseUrl, supabaseKey);
+console.log(`✅ Cliente Supabase configurado com ${keyType} key!`);
+
+if (keyType === 'ANON') {
+  console.log('⚠️  Usando ANON key - algumas operações podem ter permissões limitadas');
+  console.log('💡 Para funcionalidade completa, adicione SUPABASE_SERVICE_ROLE_KEY ao .env');
+}
 
 // ───────────────────────────────────────────────────────────────
 // Rotas da API
