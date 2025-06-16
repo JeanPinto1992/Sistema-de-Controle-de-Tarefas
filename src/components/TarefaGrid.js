@@ -6,7 +6,7 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 import { FaEdit, FaCheck, FaSpinner } from 'react-icons/fa'; // Mantenha as importações
 
-export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMoverParaAndamento, carregando, onEditObservationClick }) {
+export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMoverParaAndamento, carregando, onEditObservationClick, forceUpdate }) {
     const gridRef = useRef();
 
     // Estilo de célula centralizado e com quebra de linha
@@ -31,22 +31,28 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         };
 
         // Renderiza o texto e adiciona um evento de clique
+        const observacaoText = params.value || '';
+        const displayText = observacaoText.trim() === '' ? 'Clique para adicionar observação' : observacaoText;
+        
         return (
             <div style={{
-                cursor: 'pointer', // Adiciona um cursor de "ponteiro" para indicar que é clicável
+                cursor: 'pointer',
                 height: '100%',
-                width: '100%', // Ocupa toda a largura da célula
+                width: '100%',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'flex-start', // Alinhamento à esquerda para melhor leitura
+                padding: '0 8px', // Adicionar padding
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
-                textOverflow: 'ellipsis'
+                textOverflow: 'ellipsis',
+                fontSize: '14px',
+                color: observacaoText.trim() === '' ? '#999' : '#000' // Cor diferente para placeholder
             }}
             onClick={handleClick}
-            title={params.value || 'Clique para adicionar/editar observação'} // Dica ao passar o mouse
+            title={observacaoText || 'Clique para adicionar/editar observação'}
             >
-                {params.value || ''} {/* Exibe o valor ou vazio */}
+                {displayText}
             </div>
         );
     }, [onEditObservationClick]);
@@ -148,8 +154,7 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                     headerName: 'OBSERVAÇÕES',
                     field: 'observacoes',
                     flex: 1.2,
-                    cellStyle: centerAndNowrap,
-                    cellRenderer: ObservationCellRenderer, // <<< Usando o novo cellRenderer
+                    cellRenderer: ObservationCellRenderer, // <<< Usando o novo cellRenderer sem cellStyle
                 },
                 editarBtn,
                 concluirBtn
@@ -195,6 +200,15 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             }
         }
     }, [carregando]);
+
+    // Forçar atualização da tabela quando os dados mudarem
+    useEffect(() => {
+        if (gridRef.current && gridRef.current.api && dados) {
+            // Força a atualização dos dados na tabela
+            gridRef.current.api.setRowData(dados);
+            gridRef.current.api.refreshCells();
+        }
+    }, [dados, forceUpdate]);
 
     const customLoadingOverlay = useMemo(() => {
         return (

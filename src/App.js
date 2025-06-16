@@ -26,13 +26,7 @@ function formatDate(value) {
     return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
 }
 
-function formatMonth(value) {
-    const d = new Date(value);
-    if (isNaN(d.getTime())) {
-        console.warn("Data de criação inválida detectada para mês:", value);
-    }
-    return MESES[d.getMonth()].substring(0, 3).toUpperCase();
-}
+// Removido formatMonth já que não está sendo usado
 
 // Configuração do Supabase
 const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
@@ -60,11 +54,11 @@ export default function App() {
         repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
     });
     const [editId, setEditId] = useState(null);
+    const [forceUpdate, setForceUpdate] = useState(0); // Para forçar atualização da tabela
 
     // ESTADOS PARA O MODAL DE DESCRIÇÃO
     const [showDescriptionModal, setShowDescriptionModal] = useState(false);
     const [currentDescription, setCurrentDescription] = useState('');
-    const [currentTaskTitle, setCurrentTaskTitle] = useState('');
     const [currentObservations, setCurrentObservations] = useState('');
 
     // NOVOS ESTADOS PARA O MODAL DE EDIÇÃO DE OBSERVAÇÕES
@@ -79,6 +73,7 @@ export default function App() {
 
     useEffect(() => {
         carregarDados();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     async function carregarDados() {
@@ -122,10 +117,10 @@ export default function App() {
                 data_criacao: formatDate(x.data_criacao),
                 data_criacao_para_ordenacao: x.data_criacao,
                 mes: MESES[new Date(x.data_criacao).getMonth()].substring(0, 3).toUpperCase(),
-                // Processar observações das tabelas relacionadas
-                observacoes: x.em_andamento?.[0]?.observacoes || x.concluidas?.[0]?.observacoes || '',
-                data_conclusao: x.concluidas?.[0]?.data_conclusao ? formatDate(x.concluidas?.[0]?.data_conclusao) : '',
-                dias_para_conclusao: x.concluidas?.[0]?.dias_para_conclusao || 0
+                // Processar observações das tabelas relacionadas - CORRIGIDO
+                observacoes: x.em_andamento?.observacoes || x.concluidas?.observacoes || '',
+                data_conclusao: x.concluidas?.data_conclusao ? formatDate(x.concluidas?.data_conclusao) : '',
+                dias_para_conclusao: x.concluidas?.dias_para_conclusao || 0
             }));
 
             setTarefas(formatar(tarefasData));
@@ -330,9 +325,65 @@ export default function App() {
 
             if (error) throw error;
 
+            // Atualizar diretamente o estado em memória IMEDIATAMENTE
+            setEmAndamento(prevAndamento => 
+                prevAndamento.map(tarefa => 
+                    tarefa.id_tarefa === parseInt(editingObsId) 
+                        ? { ...tarefa, observacoes: editingObsText }
+                        : tarefa
+                )
+            );
+
+            // Forçar re-render da tabela
+            setForceUpdate(prev => prev + 1);
+
             mostrarMsg('Observação salva com sucesso!', 'success');
-            carregarDados();
             handleCloseEditObsModal();
+            
+            // CORREÇÃO: Carregar dados atualizados de forma mais robusta
+            setTimeout(async () => {
+                try {
+                    // Carregar dados específicos da tarefa editada para garantir sincronização
+                    const { data: tarefaAtualizada, error: errorTarefa } = await supabase
+                        .from('tarefas')
+                        .select(`
+                            *,
+                            em_andamento!left(observacoes)
+                        `)
+                        .eq('status', 'EM ANDAMENTO')
+                        .eq('id_tarefa', parseInt(editingObsId))
+                        .single();
+
+                    if (!errorTarefa && tarefaAtualizada) {
+                        const tarefaFormatada = {
+                            ...tarefaAtualizada,
+                            data_criacao: formatDate(tarefaAtualizada.data_criacao),
+                            data_criacao_para_ordenacao: tarefaAtualizada.data_criacao,
+                            mes: MESES[new Date(tarefaAtualizada.data_criacao).getMonth()].substring(0, 3).toUpperCase(),
+                            observacoes: tarefaAtualizada.em_andamento?.observacoes || ''
+                        };
+
+                        // Atualizar apenas a tarefa específica no estado
+                        setEmAndamento(prevAndamento => 
+                            prevAndamento.map(tarefa => 
+                                tarefa.id_tarefa === parseInt(editingObsId) 
+                                    ? tarefaFormatada
+                                    : tarefa
+                            )
+                        );
+
+                        // Forçar mais uma atualização
+                        setForceUpdate(prev => prev + 1);
+                        
+                        console.log('✅ Dados sincronizados com sucesso!');
+                    }
+                } catch (syncError) {
+                    console.error('Erro na sincronização:', syncError);
+                    // Fallback: recarregar todos os dados
+                    carregarDados();
+                }
+            }, 200);
+            
         } catch (error) {
             console.error('Erro ao salvar observação:', error);
             mostrarMsg(`Erro ao salvar observação: ${error.message}`, 'danger');
@@ -467,7 +518,6 @@ export default function App() {
 
         setCurrentDescription(tarefa.descricao || 'Sem descrição.');
         setCurrentObservations(tarefa.observacoes || '');
-        setCurrentTaskTitle(tarefa.tarefa);
         setShowDescriptionModal(true);
         console.log("Modal de descrição SET para visível pelo clique no ícone.");
     };
@@ -476,7 +526,6 @@ export default function App() {
         if (event.target.id === 'task-description-modal-overlay') {
             setShowDescriptionModal(false);
             setCurrentDescription('');
-            setCurrentTaskTitle('');
             setCurrentObservations('');
         }
     };
@@ -665,6 +714,7 @@ export default function App() {
                             onReabrir={reabrir}
                             carregando={carregando}
                             onEditObservationClick={handleEditObservationClick}
+                            forceUpdate={forceUpdate}
                         />
                     </div>
                 )}
