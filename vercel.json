@@ -2,16 +2,14 @@
   "version": 2,
   "name": "sistema-controle-tarefas",
   "buildCommand": "npm run build",
-  "builds": [
+  "rewrites": [
     {
-      "src": "server/server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
+      "source": "/api/(.*)",
+      "destination": "/server/server.js"
+    },
     {
-      "src": "/(.*)",
-      "dest": "/server/server.js"
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
     }
   ],
   "env": {

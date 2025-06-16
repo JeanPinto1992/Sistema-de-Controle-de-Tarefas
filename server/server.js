@@ -367,11 +367,18 @@ app.get('*', (req, res) => {
 });
 
 // ───────────────────────────────────────────────────────────────
-// Inicia o servidor
+// Inicia o servidor (apenas em desenvolvimento local)
 // ───────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`🌐 Servidor unificado com Supabase rodando na porta ${PORT}`);
-  console.log(`📱 Acesse: http://localhost:${PORT}`);
-  console.log(`🔗 API disponível em: http://localhost:${PORT}/api/`);
-  console.log(`🗄️  Banco de dados: Supabase Cloud`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🌐 Servidor unificado com Supabase rodando na porta ${PORT}`);
+    console.log(`📱 Acesse: http://localhost:${PORT}`);
+    console.log(`🔗 API disponível em: http://localhost:${PORT}/api/`);
+    console.log(`🗄️  Banco de dados: Supabase Cloud`);
+  });
+}
+
+// ───────────────────────────────────────────────────────────────
+// Exportar para Vercel (produção)
+// ───────────────────────────────────────────────────────────────
+module.exports = app;
