@@ -57,7 +57,7 @@ export default function App() {
     const [showModal, setShowModal] = useState(false);
     const [novaTarefa, setNovaTarefa] = useState({
         tarefa: '', descricao: '', responsavel: 'JEAN',
-        repetir: 'NÃO', prioridade: 'NORMAL', setor: '', observacoes: ''
+        repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
     });
     const [editId, setEditId] = useState(null);
 
@@ -266,21 +266,33 @@ export default function App() {
 
             mostrarMsg(`Tarefa ${id} concluída!`);
 
+            // --- CÓDIGO CORRIGIDO ---
             // Verificar se a tarefa deve ser repetida
             if (tarefaData.repetir === 'SIM') {
                 console.log("Tarefa é repetível. Criando nova instância...");
                 
+                // 1. Use a data de criação original retornada pelo Supabase
+                const dataCriacaoOriginal = new Date(tarefaData.data_criacao);
+
+                // 2. Crie a nova data de criação para a tarefa repetida
+                const novaDataCriacao = new Date(dataCriacaoOriginal);
+                novaDataCriacao.setMonth(novaDataCriacao.getMonth() + 1);
+
+                // 3. Calcule o 'mes' com base na nova data para garantir consistência
+                const proximoMesNome = MESES[novaDataCriacao.getMonth()].substring(0, 3).toUpperCase();
+                
                 const { error: repeatError } = await supabase
                     .from('tarefas')
                     .insert({
-                        data_criacao: new Date().toISOString(),
+                        // 4. Use a NOVA data de criação
+                        data_criacao: novaDataCriacao.toISOString(),
                         tarefa: tarefaData.tarefa,
                         descricao: tarefaData.descricao,
                         status: 'A REALIZAR',
                         responsavel: tarefaData.responsavel,
                         repetir: tarefaData.repetir,
                         prioridade: tarefaData.prioridade,
-                        mes: MESES[new Date().getMonth()].substring(0, 3).toUpperCase(),
+                        mes: proximoMesNome,
                         setor: tarefaData.setor
                     });
 
@@ -517,7 +529,7 @@ export default function App() {
                             onClick={() => {
                                 setEditId(null);
                                 setNovaTarefa({
-                                    tarefa: '', descricao: '', responsavel: 'JEAN', repetir: 'NÃO', prioridade: 'NORMAL', setor: '', observacoes: ''
+                                    tarefa: '', descricao: '', responsavel: 'JEAN', repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
                                 });
                                 setShowModal(true);
                             }}
@@ -687,18 +699,6 @@ export default function App() {
                                 onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
                             />
                         </Form.Group>
-                        {activeTab !== 'concluidas' && (
-                            <Form.Group className="mb-2">
-                                <Form.Label>Observações</Form.Label>
-                                <Form.Control
-                                    as="textarea"
-                                    rows={3}
-                                    name="observacoes"
-                                    value={novaTarefa.observacoes || ''}
-                                    onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
-                                />
-                            </Form.Group>
-                        )}
                         <Row>
                             <Col>
                                 <Form.Group className="mb-2">
