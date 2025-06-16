@@ -1,7 +1,8 @@
 # 🚀 DEPLOY VERCEL - SISTEMA DE CONTROLE DE TAREFAS
 
 ## ✅ STATUS ATUAL
-- **Configuração corrigida**: vercel.json atualizado para React + Node.js
+- **Configuração corrigida**: vercel.json atualizado para seguir convenções do Vercel
+- **Estrutura atualizada**: Servidor movido para `api/index.js`
 - **Build funcionando**: React build criado com sucesso
 - **Banco de dados**: Supabase Cloud funcionando
 
@@ -42,14 +43,15 @@ vercel env add NODE_ENV production
 2. Configure as variáveis de ambiente no Dashboard
 3. Faça push para a branch main
 
-### 3. ESTRUTURA DE DEPLOY CORRIGIDA
+### 3. ESTRUTURA DE DEPLOY ATUALIZADA
 
 ```
 vercel.json ✅ CORRIGIDO
-├── server/server.js (backend)
+├── api/index.js (backend - Vercel)
+├── server/server.js (backend - desenvolvimento local)
 ├── build/ (React otimizado)
-├── Todas as rotas → server/server.js
-└── API /api/* → server/server.js
+├── /api/* → api/index.js
+└── /* → index.html (React)
 ```
 
 ### 4. VERIFICAÇÃO DE FUNCIONAMENTO
@@ -64,10 +66,10 @@ https://seu-projeto.vercel.app/api/tarefas → Lista de tarefas
 
 ## 🐛 RESOLVENDO ERROS COMUNS
 
-### Erro 404: NOT_FOUND
-- ✅ **CORRIGIDO**: vercel.json atualizado
-- Causa: Configuração incorreta de rotas
-- Solução: Todas as rotas agora apontam para server/server.js
+### ❌ Erro: "pattern doesn't match any Serverless Functions inside the api directory"
+- **CORRIGIDO**: Arquivo movido para `api/index.js`
+- Causa: Vercel espera funções no diretório `api/`
+- Solução: Estrutura atualizada seguindo convenções
 
 ### Erro de Variáveis de Ambiente
 ```
@@ -88,7 +90,8 @@ Error: Command "build" not found
 - [x] Build local funcionando (`npm run build`)
 - [x] Servidor local funcionando (`npm start`)
 - [x] Arquivo `.env` configurado localmente
-- [x] vercel.json corrigido
+- [x] vercel.json corrigido com nova estrutura
+- [x] Arquivo `api/index.js` criado
 - [ ] Variáveis de ambiente configuradas no Vercel
 - [ ] Deploy realizado
 
@@ -100,4 +103,4 @@ Error: Command "build" not found
 
 ---
 
-**STATUS**: ✅ **CONFIGURAÇÃO CORRIGIDA - PRONTO PARA DEPLOY** 
+**STATUS**: ✅ **ESTRUTURA CORRIGIDA - PRONTO PARA DEPLOY** 
