@@ -614,3 +614,32 @@ filter: saturate(1.1);
   margin-top: 0; /* Removido o margin-top para que fique logo abaixo do título */
   margin-bottom: 0;
 }
+
+/* Grid de 4 colunas para mural */
+.cards-grid-4col-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+  height: fit-content;
+  overflow-y: auto;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.mural-4col-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .cards-grid-4col-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .cards-grid-4col-container {
+    grid-template-columns: 1fr;
+  }
+}

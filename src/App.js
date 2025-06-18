@@ -612,97 +612,68 @@ export default function App() {
                         <div className="mural-container">
                             <div className="mural-section">
                                 <h5 className="mural-title">TAREFAS A REALIZAR</h5>
-                                <div className="cards-grid-container">
-                                    {tarefasJeanCols.map((col, idx) => (
-                                        <div key={`jean-realizar-${idx}`} className="jean-column-container">
-                                            {col.map(tarefa => (
-                                                <div
-                                                    key={tarefa.id_tarefa}
-                                                    className={getCardClasses(tarefa)}
-                                                    data-description={tarefa.descricao || 'Sem descrição.'}
-                                                    data-observations={tarefa.observacoes || ''}
-                                                >
-                                                    <span
-                                                        className="card-open-modal-icon"
-                                                        onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
-                                                        title="Ver detalhes"
+                                <div className="cards-grid-4col-container">
+                                    {(() => {
+                                        const tarefas = [...tarefasJeanCols, ...tarefasIvanaCols];
+                                        const colunas = Array.from({ length: 4 }, () => []);
+                                        tarefas.forEach((tarefa, idx) => {
+                                            colunas[idx % 4].push(tarefa);
+                                        });
+                                        return colunas.map((col, colIdx) => (
+                                            <div key={colIdx} className="mural-4col-column">
+                                                {col.map(tarefa => (
+                                                    <div
+                                                        key={tarefa.id_tarefa}
+                                                        className={getCardClasses(tarefa)}
+                                                        data-description={tarefa.descricao || 'Sem descrição.'}
+                                                        data-observations={tarefa.observacoes || ''}
                                                     >
-                                                        +
-                                                    </span>
-                                                    {tarefa.tarefa}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ))}
-                                    {tarefasIvanaCols.map((col, idx) => (
-                                        <div key={`ivana-realizar-${idx}`} className="ivana-column-container">
-                                            {col.map(tarefa => (
-                                                <div
-                                                    key={tarefa.id_tarefa}
-                                                    className={getCardClasses(tarefa)}
-                                                    data-description={tarefa.descricao || 'Sem descrição.'}
-                                                    data-observations={tarefa.observacoes || ''}
-                                                >
-                                                    <span
-                                                        className="card-open-modal-icon"
-                                                        onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
-                                                        title="Ver detalhes"
-                                                    >
-                                                        +
-                                                    </span>
-                                                    {tarefa.tarefa}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ))}
+                                                        <span
+                                                            className="card-open-modal-icon"
+                                                            onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
+                                                            title="Ver detalhes"
+                                                        >
+                                                            +
+                                                        </span>
+                                                        {tarefa.tarefa}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ));
+                                    })()}
                                 </div>
                             </div>
-
                             <div className="mural-section">
                                 <h5 className="mural-title">TAREFAS EM ANDAMENTO</h5>
-                                <div className="cards-grid-container">
-                                    {andamentoJeanCols.map((col, idx) => (
-                                        <div key={`jean-and-${idx}`} className="jean-column-container">
-                                            {col.map(tarefa => (
-                                                <div
-                                                    key={tarefa.id_tarefa}
-                                                    className={getCardClasses(tarefa)}
-                                                    data-description={tarefa.descricao || 'Sem descrição.'}
-                                                    data-observations={tarefa.observacoes || ''}
-                                                >
-                                                    <span
-                                                        className="card-open-modal-icon"
-                                                        onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
-                                                        title="Ver detalhes"
+                                <div className="cards-grid-4col-container">
+                                    {(() => {
+                                        const tarefas = [...andamentoJeanCols, ...andamentoIvanaCols];
+                                        const colunas = Array.from({ length: 4 }, () => []);
+                                        tarefas.forEach((tarefa, idx) => {
+                                            colunas[idx % 4].push(tarefa);
+                                        });
+                                        return colunas.map((col, colIdx) => (
+                                            <div key={colIdx} className="mural-4col-column">
+                                                {col.map(tarefa => (
+                                                    <div
+                                                        key={tarefa.id_tarefa}
+                                                        className={getCardClasses(tarefa)}
+                                                        data-description={tarefa.descricao || 'Sem descrição.'}
+                                                        data-observations={tarefa.observacoes || ''}
                                                     >
-                                                        +
-                                                    </span>
-                                                    {tarefa.tarefa}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ))}
-                                    {andamentoIvanaCols.map((col, idx) => (
-                                        <div key={`ivana-and-${idx}`} className="ivana-column-container">
-                                            {col.map(tarefa => (
-                                                <div
-                                                    key={tarefa.id_tarefa}
-                                                    className={getCardClasses(tarefa)}
-                                                    data-description={tarefa.descricao || 'Sem descrição.'}
-                                                    data-observations={tarefa.observacoes || ''}
-                                                >
-                                                    <span
-                                                        className="card-open-modal-icon"
-                                                        onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
-                                                        title="Ver detalhes"
-                                                    >
-                                                        +
-                                                    </span>
-                                                    {tarefa.tarefa}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ))}
+                                                        <span
+                                                            className="card-open-modal-icon"
+                                                            onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
+                                                            title="Ver detalhes"
+                                                        >
+                                                            +
+                                                        </span>
+                                                        {tarefa.tarefa}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ));
+                                    })()}
                                 </div>
                             </div>
                         </div>
