@@ -460,69 +460,20 @@ export default function App() {
         return classes;
     };
 
-    const splitIntoColumns = (arr) => {
-        if (!arr || arr.length === 0) return [[], []];
-        const col1 = [];
-        const col2 = [];
+    // Função para dividir as tarefas igualmente entre as colunas
+    const distribuirEmColunas = (arr, numColunas = 4) => {
+        const colunas = Array.from({ length: numColunas }, () => []);
         arr.forEach((item, idx) => {
-            if (idx % 2 === 0) col1.push(item); else col2.push(item);
+            colunas[idx % numColunas].push(item);
         });
-        return [col1, col2];
+        return colunas;
     };
 
-    const { tarefasJeanCols, tarefasIvanaCols,
-        andamentoJeanCols, andamentoIvanaCols } = useMemo(() => {
-            const groupAndSortByResponsible = (data) => {
-                const filtered = data.filter(t => t.mes === mesAtualNomeCurto);
-
-                const grouped = {
-                    jean: [],
-                    ivana: []
-                };
-
-                filtered.forEach(tarefa => {
-                    const responsavel = tarefa.responsavel ? tarefa.responsavel.toLowerCase() : '';
-                    if (responsavel === 'jean') {
-                        grouped.jean.push(tarefa);
-                    } else if (responsavel === 'ivana') {
-                        grouped.ivana.push(tarefa);
-                    }
-                });
-
-                const sortGroup = (arr) => arr.sort((a, b) => {
-                    const prioridadeA = getPrioridadeValor(a.prioridade);
-                    const prioridadeB = getPrioridadeValor(b.prioridade);
-
-                    if (prioridadeB !== prioridadeA) {
-                        return prioridadeB - prioridadeA;
-                    }
-
-                    const dataA = new Date(a.data_criacao_para_ordenacao);
-                    const dataB = new Date(b.data_criacao_para_ordenacao);
-
-                    if (isNaN(dataA.getTime()) && isNaN(dataB.getTime())) return 0;
-                    if (isNaN(dataA.getTime())) return 1;
-                    if (isNaN(dataB.getTime())) return -1;
-
-                    return dataA.getTime() - dataB.getTime();
-                });
-
-                return {
-                    jean: sortGroup(grouped.jean),
-                    ivana: sortGroup(grouped.ivana)
-                };
-            };
-
-            const groupedTarefas = groupAndSortByResponsible(tarefas);
-            const groupedAndamento = groupAndSortByResponsible(emAndamento);
-
-            return {
-                tarefasJeanCols: splitIntoColumns(groupedTarefas.jean),
-                tarefasIvanaCols: splitIntoColumns(groupedTarefas.ivana),
-                andamentoJeanCols: splitIntoColumns(groupedAndamento.jean),
-                andamentoIvanaCols: splitIntoColumns(groupedAndamento.ivana)
-            };
-        }, [tarefas, emAndamento, mesAtualNomeCurto]);
+    // Filtrar tarefas pelo mês selecionado
+    const tarefasDoMes = tarefas.filter(t => t.mes === mesAtualNomeCurto);
+    const andamentoDoMes = emAndamento.filter(t => t.mes === mesAtualNomeCurto);
+    const tarefasColunas = distribuirEmColunas(tarefasDoMes);
+    const andamentoColunas = distribuirEmColunas(andamentoDoMes);
 
     const handleOpenDescriptionModal = (event, tarefa) => {
         event.stopPropagation();
@@ -615,67 +566,53 @@ export default function App() {
                         <div className="mural-section">
                             <h5 className="mural-title">TAREFAS A REALIZAR</h5>
                             <div className="cards-grid-4col-container">
-                                {(() => {
-                                    const tarefas = [...tarefasJeanCols, ...tarefasIvanaCols];
-                                    const colunas = Array.from({ length: 4 }, () => []);
-                                    tarefas.forEach((tarefa, idx) => {
-                                        colunas[idx % 4].push(tarefa);
-                                    });
-                                    return colunas.map((col, colIdx) => (
-                                        <div key={colIdx} className="mural-4col-column">
-                                            {col.map(tarefa => (
-                                                <div
-                                                    key={tarefa.id_tarefa}
-                                                    className={getCardClasses(tarefa)}
-                                                    data-description={tarefa.descricao || 'Sem descrição.'}
-                                                    data-observations={tarefa.observacoes || ''}
+                                {tarefasColunas.map((col, colIdx) => (
+                                    <div key={colIdx} className="mural-4col-column">
+                                        {col.map(tarefa => (
+                                            <div
+                                                key={tarefa.id_tarefa}
+                                                className={getCardClasses(tarefa)}
+                                                data-description={tarefa.descricao || 'Sem descrição.'}
+                                                data-observations={tarefa.observacoes || ''}
+                                            >
+                                                <span
+                                                    className="card-open-modal-icon"
+                                                    onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
+                                                    title="Ver detalhes"
                                                 >
-                                                    <span
-                                                        className="card-open-modal-icon"
-                                                        onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
-                                                        title="Ver detalhes"
-                                                    >
-                                                        +
-                                                    </span>
-                                                    {tarefa.tarefa}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ));
-                                })()}
+                                                    +
+                                                </span>
+                                                {tarefa.tarefa}
+                                            </div>
+                                        ))}
+                                    </div>
+                                ))}
                             </div>
                         </div>
                         <div className="mural-section">
                             <h5 className="mural-title">TAREFAS EM ANDAMENTO</h5>
                             <div className="cards-grid-4col-container">
-                                {(() => {
-                                    const tarefas = [...andamentoJeanCols, ...andamentoIvanaCols];
-                                    const colunas = Array.from({ length: 4 }, () => []);
-                                    tarefas.forEach((tarefa, idx) => {
-                                        colunas[idx % 4].push(tarefa);
-                                    });
-                                    return colunas.map((col, colIdx) => (
-                                        <div key={colIdx} className="mural-4col-column">
-                                            {col.map(tarefa => (
-                                                <div
-                                                    key={tarefa.id_tarefa}
-                                                    className={getCardClasses(tarefa)}
-                                                    data-description={tarefa.descricao || 'Sem descrição.'}
-                                                    data-observations={tarefa.observacoes || ''}
+                                {andamentoColunas.map((col, colIdx) => (
+                                    <div key={colIdx} className="mural-4col-column">
+                                        {col.map(tarefa => (
+                                            <div
+                                                key={tarefa.id_tarefa}
+                                                className={getCardClasses(tarefa)}
+                                                data-description={tarefa.descricao || 'Sem descrição.'}
+                                                data-observations={tarefa.observacoes || ''}
+                                            >
+                                                <span
+                                                    className="card-open-modal-icon"
+                                                    onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
+                                                    title="Ver detalhes"
                                                 >
-                                                    <span
-                                                        className="card-open-modal-icon"
-                                                        onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
-                                                        title="Ver detalhes"
-                                                    >
-                                                        +
-                                                    </span>
-                                                    {tarefa.tarefa}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ));
-                                })()}
+                                                    +
+                                                </span>
+                                                {tarefa.tarefa}
+                                            </div>
+                                        ))}
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
