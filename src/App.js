@@ -458,8 +458,17 @@ export default function App() {
         return classes;
     };
 
-    const { tarefasAgrupadasJean, tarefasAgrupadasIvana,
-        andamentoAgrupadasJean, andamentoAgrupadasIvana } = useMemo(() => {
+    const splitIntoColumns = (arr) => {
+        const col1 = [];
+        const col2 = [];
+        arr.forEach((item, idx) => {
+            if (idx % 2 === 0) col1.push(item); else col2.push(item);
+        });
+        return [col1, col2];
+    };
+
+    const { tarefasJeanCols, tarefasIvanaCols,
+        andamentoJeanCols, andamentoIvanaCols } = useMemo(() => {
             const groupAndSortByResponsible = (data) => {
                 const filtered = data.filter(t => t.mes === mesAtualNomeCurto);
 
@@ -505,10 +514,10 @@ export default function App() {
             const groupedAndamento = groupAndSortByResponsible(emAndamento);
 
             return {
-                tarefasAgrupadasJean: groupedTarefas.jean,
-                tarefasAgrupadasIvana: groupedTarefas.ivana,
-                andamentoAgrupadasJean: groupedAndamento.jean,
-                andamentoAgrupadasIvana: groupedAndamento.ivana
+                tarefasJeanCols: splitIntoColumns(groupedTarefas.jean),
+                tarefasIvanaCols: splitIntoColumns(groupedTarefas.ivana),
+                andamentoJeanCols: splitIntoColumns(groupedAndamento.jean),
+                andamentoIvanaCols: splitIntoColumns(groupedAndamento.ivana)
             };
         }, [tarefas, emAndamento, mesAtualNomeCurto]);
 
@@ -604,88 +613,96 @@ export default function App() {
                             <div className="mural-section">
                                 <h5 className="mural-title">TAREFAS A REALIZAR</h5>
                                 <div className="cards-grid-container">
-                                    <div className="jean-column-container">
-                                        {tarefasAgrupadasJean.map(tarefa => (
-                                            <div
-                                                key={tarefa.id_tarefa}
-                                                className={getCardClasses(tarefa)}
-                                                data-description={tarefa.descricao || 'Sem descrição.'}
-                                                data-observations={tarefa.observacoes || ''}
-                                            >
-                                                <span
-                                                    className="card-open-modal-icon"
-                                                    onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
-                                                    title="Ver detalhes"
+                                    {tarefasJeanCols.map((col, idx) => (
+                                        <div key={`jean-realizar-${idx}`} className="jean-column-container">
+                                            {col.map(tarefa => (
+                                                <div
+                                                    key={tarefa.id_tarefa}
+                                                    className={getCardClasses(tarefa)}
+                                                    data-description={tarefa.descricao || 'Sem descrição.'}
+                                                    data-observations={tarefa.observacoes || ''}
                                                 >
-                                                    +
-                                                </span>
-                                                {tarefa.tarefa}
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div className="ivana-column-container">
-                                        {tarefasAgrupadasIvana.map(tarefa => (
-                                            <div
-                                                key={tarefa.id_tarefa}
-                                                className={getCardClasses(tarefa)}
-                                                data-description={tarefa.descricao || 'Sem descrição.'}
-                                                data-observations={tarefa.observacoes || ''}
-                                            >
-                                                <span
-                                                    className="card-open-modal-icon"
-                                                    onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
-                                                    title="Ver detalhes"
+                                                    <span
+                                                        className="card-open-modal-icon"
+                                                        onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
+                                                        title="Ver detalhes"
+                                                    >
+                                                        +
+                                                    </span>
+                                                    {tarefa.tarefa}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ))}
+                                    {tarefasIvanaCols.map((col, idx) => (
+                                        <div key={`ivana-realizar-${idx}`} className="ivana-column-container">
+                                            {col.map(tarefa => (
+                                                <div
+                                                    key={tarefa.id_tarefa}
+                                                    className={getCardClasses(tarefa)}
+                                                    data-description={tarefa.descricao || 'Sem descrição.'}
+                                                    data-observations={tarefa.observacoes || ''}
                                                 >
-                                                    +
-                                                </span>
-                                                {tarefa.tarefa}
-                                            </div>
-                                        ))}
-                                    </div>
+                                                    <span
+                                                        className="card-open-modal-icon"
+                                                        onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
+                                                        title="Ver detalhes"
+                                                    >
+                                                        +
+                                                    </span>
+                                                    {tarefa.tarefa}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
 
                             <div className="mural-section">
                                 <h5 className="mural-title">TAREFAS EM ANDAMENTO</h5>
                                 <div className="cards-grid-container">
-                                    <div className="jean-column-container">
-                                        {andamentoAgrupadasJean.map(tarefa => (
-                                            <div
-                                                key={tarefa.id_tarefa}
-                                                className={getCardClasses(tarefa)}
-                                                data-description={tarefa.descricao || 'Sem descrição.'}
-                                                data-observations={tarefa.observacoes || ''}
-                                            >
-                                                <span
-                                                    className="card-open-modal-icon"
-                                                    onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
-                                                    title="Ver detalhes"
+                                    {andamentoJeanCols.map((col, idx) => (
+                                        <div key={`jean-and-${idx}`} className="jean-column-container">
+                                            {col.map(tarefa => (
+                                                <div
+                                                    key={tarefa.id_tarefa}
+                                                    className={getCardClasses(tarefa)}
+                                                    data-description={tarefa.descricao || 'Sem descrição.'}
+                                                    data-observations={tarefa.observacoes || ''}
                                                 >
-                                                    +
-                                                </span>
-                                                {tarefa.tarefa}
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div className="ivana-column-container">
-                                        {andamentoAgrupadasIvana.map(tarefa => (
-                                            <div
-                                                key={tarefa.id_tarefa}
-                                                className={getCardClasses(tarefa)}
-                                                data-description={tarefa.descricao || 'Sem descrição.'}
-                                                data-observations={tarefa.observacoes || ''}
-                                            >
-                                                <span
-                                                    className="card-open-modal-icon"
-                                                    onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
-                                                    title="Ver detalhes"
+                                                    <span
+                                                        className="card-open-modal-icon"
+                                                        onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
+                                                        title="Ver detalhes"
+                                                    >
+                                                        +
+                                                    </span>
+                                                    {tarefa.tarefa}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ))}
+                                    {andamentoIvanaCols.map((col, idx) => (
+                                        <div key={`ivana-and-${idx}`} className="ivana-column-container">
+                                            {col.map(tarefa => (
+                                                <div
+                                                    key={tarefa.id_tarefa}
+                                                    className={getCardClasses(tarefa)}
+                                                    data-description={tarefa.descricao || 'Sem descrição.'}
+                                                    data-observations={tarefa.observacoes || ''}
                                                 >
-                                                    +
-                                                </span>
-                                                {tarefa.tarefa}
-                                            </div>
-                                        ))}
-                                    </div>
+                                                    <span
+                                                        className="card-open-modal-icon"
+                                                        onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
+                                                        title="Ver detalhes"
+                                                    >
+                                                        +
+                                                    </span>
+                                                    {tarefa.tarefa}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
