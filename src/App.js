@@ -112,23 +112,25 @@ export default function App() {
 
             if (concluidasError) throw concluidasError;
 
-            const formatar = arr => arr.map(x => ({
-                ...x,
-                data_criacao: formatDate(x.data_criacao),
-                data_criacao_para_ordenacao: x.data_criacao,
-                mes: MESES[new Date(x.data_criacao).getMonth()].substring(0, 3).toUpperCase(),
-                // Processar observações somente da tabela em_andamento
-                observacoes: x.em_andamento?.observacoes || '',
-                data_conclusao: x.concluidas?.data_conclusao ? formatDate(x.concluidas?.data_conclusao) : '',
-                dias_para_conclusao: x.concluidas?.dias_para_conclusao || 0
-            }));
+            const formatar = arr => {
+                if (!arr) return [];
+                return arr.map(x => ({
+                    ...x,
+                    data_criacao: formatDate(x.data_criacao),
+                    data_criacao_para_ordenacao: x.data_criacao,
+                    mes: MESES[new Date(x.data_criacao).getMonth()].substring(0, 3).toUpperCase(),
+                    observacoes: x.em_andamento?.observacoes || '',
+                    data_conclusao: x.concluidas?.data_conclusao ? formatDate(x.concluidas?.data_conclusao) : '',
+                    dias_para_conclusao: x.concluidas?.dias_para_conclusao || 0
+                }));
+            };
 
             setTarefas(formatar(tarefasData));
             setEmAndamento(formatar(andamentoData));
             setConcluidas(formatar(concluidasData));
 
         } catch (e) {
-            console.error(e);
+            console.error('Erro ao carregar dados:', e);
             mostrarMsg('Erro ao carregar dados: ' + e.message, 'danger');
         } finally {
             setCarregando(false);
@@ -459,6 +461,7 @@ export default function App() {
     };
 
     const splitIntoColumns = (arr) => {
+        if (!arr || arr.length === 0) return [[], []];
         const col1 = [];
         const col2 = [];
         arr.forEach((item, idx) => {
@@ -608,76 +611,74 @@ export default function App() {
 
             <div className="flex-grow-1">
                 {activeTab === 'mural' && (
-                    <>
-                        <div className="mural-container">
-                            <div className="mural-section">
-                                <h5 className="mural-title">TAREFAS A REALIZAR</h5>
-                                <div className="cards-grid-4col-container">
-                                    {(() => {
-                                        const tarefas = [...tarefasJeanCols, ...tarefasIvanaCols];
-                                        const colunas = Array.from({ length: 4 }, () => []);
-                                        tarefas.forEach((tarefa, idx) => {
-                                            colunas[idx % 4].push(tarefa);
-                                        });
-                                        return colunas.map((col, colIdx) => (
-                                            <div key={colIdx} className="mural-4col-column">
-                                                {col.map(tarefa => (
-                                                    <div
-                                                        key={tarefa.id_tarefa}
-                                                        className={getCardClasses(tarefa)}
-                                                        data-description={tarefa.descricao || 'Sem descrição.'}
-                                                        data-observations={tarefa.observacoes || ''}
+                    <div className="mural-container">
+                        <div className="mural-section">
+                            <h5 className="mural-title">TAREFAS A REALIZAR</h5>
+                            <div className="cards-grid-4col-container">
+                                {(() => {
+                                    const tarefas = [...tarefasJeanCols, ...tarefasIvanaCols];
+                                    const colunas = Array.from({ length: 4 }, () => []);
+                                    tarefas.forEach((tarefa, idx) => {
+                                        colunas[idx % 4].push(tarefa);
+                                    });
+                                    return colunas.map((col, colIdx) => (
+                                        <div key={colIdx} className="mural-4col-column">
+                                            {col.map(tarefa => (
+                                                <div
+                                                    key={tarefa.id_tarefa}
+                                                    className={getCardClasses(tarefa)}
+                                                    data-description={tarefa.descricao || 'Sem descrição.'}
+                                                    data-observations={tarefa.observacoes || ''}
+                                                >
+                                                    <span
+                                                        className="card-open-modal-icon"
+                                                        onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
+                                                        title="Ver detalhes"
                                                     >
-                                                        <span
-                                                            className="card-open-modal-icon"
-                                                            onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
-                                                            title="Ver detalhes"
-                                                        >
-                                                            +
-                                                        </span>
-                                                        {tarefa.tarefa}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        ));
-                                    })()}
-                                </div>
-                            </div>
-                            <div className="mural-section">
-                                <h5 className="mural-title">TAREFAS EM ANDAMENTO</h5>
-                                <div className="cards-grid-4col-container">
-                                    {(() => {
-                                        const tarefas = [...andamentoJeanCols, ...andamentoIvanaCols];
-                                        const colunas = Array.from({ length: 4 }, () => []);
-                                        tarefas.forEach((tarefa, idx) => {
-                                            colunas[idx % 4].push(tarefa);
-                                        });
-                                        return colunas.map((col, colIdx) => (
-                                            <div key={colIdx} className="mural-4col-column">
-                                                {col.map(tarefa => (
-                                                    <div
-                                                        key={tarefa.id_tarefa}
-                                                        className={getCardClasses(tarefa)}
-                                                        data-description={tarefa.descricao || 'Sem descrição.'}
-                                                        data-observations={tarefa.observacoes || ''}
-                                                    >
-                                                        <span
-                                                            className="card-open-modal-icon"
-                                                            onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
-                                                            title="Ver detalhes"
-                                                        >
-                                                            +
-                                                        </span>
-                                                        {tarefa.tarefa}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        ));
-                                    })()}
-                                </div>
+                                                        +
+                                                    </span>
+                                                    {tarefa.tarefa}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ));
+                                })()}
                             </div>
                         </div>
-                    </>
+                        <div className="mural-section">
+                            <h5 className="mural-title">TAREFAS EM ANDAMENTO</h5>
+                            <div className="cards-grid-4col-container">
+                                {(() => {
+                                    const tarefas = [...andamentoJeanCols, ...andamentoIvanaCols];
+                                    const colunas = Array.from({ length: 4 }, () => []);
+                                    tarefas.forEach((tarefa, idx) => {
+                                        colunas[idx % 4].push(tarefa);
+                                    });
+                                    return colunas.map((col, colIdx) => (
+                                        <div key={colIdx} className="mural-4col-column">
+                                            {col.map(tarefa => (
+                                                <div
+                                                    key={tarefa.id_tarefa}
+                                                    className={getCardClasses(tarefa)}
+                                                    data-description={tarefa.descricao || 'Sem descrição.'}
+                                                    data-observations={tarefa.observacoes || ''}
+                                                >
+                                                    <span
+                                                        className="card-open-modal-icon"
+                                                        onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
+                                                        title="Ver detalhes"
+                                                    >
+                                                        +
+                                                    </span>
+                                                    {tarefa.tarefa}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ));
+                                })()}
+                            </div>
+                        </div>
+                    </div>
                 )}
 
                 {activeTab === 'tarefas' && (

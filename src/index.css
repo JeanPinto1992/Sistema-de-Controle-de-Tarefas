@@ -173,6 +173,7 @@ h2.text-center.text-primary {
   --mural-background-color: #c6e0b4;
   height: fit-content;
   min-height: 81vh;
+  overflow-y: auto;
 }
 
 /* Quadro "TAREFAS A REALIZAR" (Quadro Verde Escuro) */
@@ -266,9 +267,9 @@ filter: saturate(1.1);
 
 /* Estilo base para todos os Post-its */
 .card-postit {
-  width: 280px; /* Largura fixa para todos os cards */
+  width: 280px;
   height: 159px;
-  margin-bottom: 20px; /* Espaçamento vertical entre os cards */
+  margin-bottom: 20px;
   margin-left: 0;
   margin-right: 0;
   position: relative;
@@ -280,26 +281,11 @@ filter: saturate(1.1);
   text-align: center;
   padding: 15px;
   font-size: 1rem;
-  
-  /* Borda arredondada uniforme para todos os cantos */
-  border-radius: 3px; 
-  /* Removido border-bottom-left-radius para que todos os cantos sejam iguais */
-  
-  overflow: visible; /* IMPORTANTE: Permite que a sombra apareça fora dos limites do card */
-  
-  /* Apenas a cor base do post-it */
+  border-radius: 3px;
+  overflow: visible;
   background-color: var(--card-base-color);
-
-  /* Sombra mais pronunciada para dar a sensação de que o card está flutuando */
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4); /* Offset x, y, blur, cor e opacidade */
-
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
   transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
-
-  /* Variáveis de cor */
-  --card-base-color: #fff9c4; /* Amarelo claro, base */
-  --card-backside-color: #d1c98e; /* Cor do verso do papel (ainda pode ser útil para outras coisas) */
-  --card-text-color: #333; /* Cor do texto padrão */
-
   cursor: default;
 }
 
@@ -625,12 +611,15 @@ filter: saturate(1.1);
   overflow-y: auto;
   padding: 5px;
   box-sizing: border-box;
+  min-height: 200px;
 }
+
 .mural-4col-column {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  min-height: 100px;
 }
 
 @media (max-width: 900px) {
