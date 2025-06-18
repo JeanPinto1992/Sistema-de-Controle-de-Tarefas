@@ -469,10 +469,10 @@ export default function App() {
         return colunas;
     };
 
-    // Filtrar tarefas pelo mês selecionado
-    const tarefasDoMes = tarefas.filter(t => t.mes === mesAtualNomeCurto);
+    // Filtrar tarefas pelo mês selecionado e status correto
+    const tarefasARealizarDoMes = tarefas.filter(t => t.status === 'A REALIZAR' && t.mes === mesAtualNomeCurto);
     const andamentoDoMes = emAndamento.filter(t => t.mes === mesAtualNomeCurto);
-    const tarefasColunas = distribuirEmColunas(tarefasDoMes);
+    const tarefasColunas = distribuirEmColunas(tarefasARealizarDoMes);
     const andamentoColunas = distribuirEmColunas(andamentoDoMes);
 
     const handleOpenDescriptionModal = (event, tarefa) => {

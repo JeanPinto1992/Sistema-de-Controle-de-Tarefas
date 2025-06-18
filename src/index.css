@@ -604,11 +604,12 @@ filter: saturate(1.1);
 /* Grid de 4 colunas para mural */
 .cards-grid-4col-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
   width: 100%;
   height: fit-content;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 5px;
   box-sizing: border-box;
   min-height: 200px;
