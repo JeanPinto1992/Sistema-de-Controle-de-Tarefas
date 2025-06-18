@@ -162,7 +162,6 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         } else if (tipo === 'concluidas') {
             currentColumns = currentColumns.filter(col => col.field !== 'status_tarefa');
             currentColumns.push(
-                { headerName: 'OBSERVAÇÕES', field: 'observacoes', flex: 1.2, cellStyle: centerAndNowrap },
                 { headerName: 'CONCLUSÃO', field: 'data_conclusao', flex: 1, cellStyle: centerAndNowrap },
                 { headerName: 'DIAS', field: 'dias_para_conclusao', flex: 0.8, cellStyle: centerAndNowrap }
             );
