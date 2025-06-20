@@ -28,13 +28,13 @@ html, body, #root {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-left: 20px;
-  gap: 15px;
+  padding-left: 5px;
+  gap: 12px;
   margin-bottom: 10px;
 }
 
 .logo-synnova {
-  height: 60px;
+  height: 45px;
   width: auto;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
   transition: transform 0.2s ease;
@@ -661,14 +661,14 @@ filter: saturate(1.1);
   
   /* Ajustes responsivos para o cabeçalho com logo */
   .header-logo-title {
-    padding-left: 10px;
-    gap: 10px;
+    padding-left: 5px;
+    gap: 8px;
     flex-direction: column;
     align-items: flex-start;
   }
   
   .logo-synnova {
-    height: 45px;
+    height: 35px;
   }
   
   h2.text-center.text-primary {
