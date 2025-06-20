@@ -29,8 +29,8 @@ html, body, #root {
   align-items: center;
   justify-content: flex-start;
   padding-left: 0px;
-  margin-left: 30px;
-  gap: 2px;
+  margin-left: 15px;
+  gap: 0px;
   margin-bottom: 5px;
 }
 
