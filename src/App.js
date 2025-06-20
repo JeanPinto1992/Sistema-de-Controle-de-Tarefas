@@ -556,7 +556,7 @@ export default function App() {
             <div className="header-content-container">
                 <div className="header-logo-title">
                     <img 
-                        src="/Logo-SynNova.svg" 
+                        src="/synnova-logo.svg" 
                         alt="SynNova Logo" 
                         className="logo-synnova"
                     />
