@@ -30,9 +30,9 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             }
         };
 
-        // Renderiza o texto e adiciona um evento de clique
+        // Renderiza o texto - vazio quando não há observações
         const observacaoText = params.value || '';
-        const displayText = observacaoText.trim() === '' ? 'Clique para adicionar observação' : observacaoText;
+        const displayText = observacaoText.trim(); // Mostra vazio quando não há observação
         
         return (
             <div style={{
@@ -47,10 +47,10 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 fontSize: '14px',
-                color: observacaoText.trim() === '' ? '#999' : '#000' // Cor diferente para placeholder
+                color: '#000' // Cor preta sempre
             }}
             onClick={handleClick}
-            title={observacaoText || 'Clique para adicionar/editar observação'}
+            title={observacaoText.trim() === '' ? 'Clique para adicionar observação' : observacaoText}
             >
                 {displayText}
             </div>
