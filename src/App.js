@@ -473,12 +473,14 @@ export default function App() {
             });
         };
         
-        // Separar tarefas por responsável
+        // Separar tarefas por responsável (só tarefas válidas)
         const tarefasJean = arr.filter(tarefa => 
-            tarefa.responsavel && tarefa.responsavel.toLowerCase() === 'jean'
+            tarefa && tarefa.responsavel && tarefa.responsavel.toLowerCase() === 'jean' && 
+            tarefa.tarefa && tarefa.tarefa.trim() !== ''
         );
         const tarefasIvana = arr.filter(tarefa => 
-            tarefa.responsavel && tarefa.responsavel.toLowerCase() === 'ivana'
+            tarefa && tarefa.responsavel && tarefa.responsavel.toLowerCase() === 'ivana' && 
+            tarefa.tarefa && tarefa.tarefa.trim() !== ''
         );
         
         // Ordenar por prioridade
@@ -501,8 +503,12 @@ export default function App() {
     };
 
     // Filtrar tarefas pelo mês selecionado e status correto
-    const tarefasARealizarDoMes = tarefas.filter(t => t.status === 'A REALIZAR' && t.mes === mesAtualNomeCurto);
-    const andamentoDoMes = emAndamento.filter(t => t.mes === mesAtualNomeCurto);
+    const tarefasARealizarDoMes = tarefas.filter(t => 
+        t && t.status === 'A REALIZAR' && t.mes === mesAtualNomeCurto && t.tarefa && t.tarefa.trim() !== ''
+    );
+    const andamentoDoMes = emAndamento.filter(t => 
+        t && t.mes === mesAtualNomeCurto && t.tarefa && t.tarefa.trim() !== ''
+    );
     const tarefasColunas = distribuirEmColunasPorResponsavel(tarefasARealizarDoMes);
     const andamentoColunas = distribuirEmColunasPorResponsavel(andamentoDoMes);
 
@@ -598,10 +604,10 @@ export default function App() {
                             <h5 className="mural-title">TAREFAS A REALIZAR</h5>
                             <div className="cards-grid-4col-container">
                                 {tarefasColunas.map((col, colIdx) => (
-                                    <div key={colIdx} className="mural-4col-column">
-                                        {col.map(tarefa => (
+                                    <div key={`tarefas-col-${colIdx}`} className="mural-4col-column">
+                                        {col.filter(tarefa => tarefa && tarefa.tarefa && tarefa.tarefa.trim() !== '').map(tarefa => (
                                             <div
-                                                key={tarefa.id_tarefa}
+                                                key={`tarefa-${tarefa.id_tarefa}`}
                                                 className={getCardClasses(tarefa)}
                                                 data-description={tarefa.descricao || 'Sem descrição.'}
                                                 data-observations={tarefa.observacoes || ''}
@@ -624,10 +630,10 @@ export default function App() {
                             <h5 className="mural-title">TAREFAS EM ANDAMENTO</h5>
                             <div className="cards-grid-4col-container">
                                 {andamentoColunas.map((col, colIdx) => (
-                                    <div key={colIdx} className="mural-4col-column">
-                                        {col.map(tarefa => (
+                                    <div key={`andamento-col-${colIdx}`} className="mural-4col-column">
+                                        {col.filter(tarefa => tarefa && tarefa.tarefa && tarefa.tarefa.trim() !== '').map(tarefa => (
                                             <div
-                                                key={tarefa.id_tarefa}
+                                                key={`andamento-${tarefa.id_tarefa}`}
                                                 className={getCardClasses(tarefa)}
                                                 data-description={tarefa.descricao || 'Sem descrição.'}
                                                 data-observations={tarefa.observacoes || ''}

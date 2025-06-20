@@ -271,9 +271,7 @@ filter: saturate(1.1);
   width: 100%; /* Largura responsiva para se adaptar à coluna */
   max-width: 180px; /* Largura máxima reduzida */
   height: 100px; /* Altura reduzida para economizar espaço */
-  margin-bottom: 8px; /* Reduzido de 15px para 8px */
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto 8px auto; /* Centralizado horizontalmente, sem margem superior, com margem inferior */
   position: relative;
   border: none;
   font-weight: bold;
@@ -328,71 +326,37 @@ filter: saturate(1.1);
 /* Variações de LAYOUT dos Post-its (Rotação e Z-index) */
 /* ---------------------------------------------------- */
 
-/* Variações para os cards na coluna do Jean */
-.jean-column-container > .card-postit:nth-child(4n+1) { /* 1º, 5º, 9º... card na coluna Jean */
+/* Variações de rotação para o sistema de 4 colunas */
+.mural-4col-column > .card-postit:nth-child(4n+1) { /* 1º, 5º, 9º... card */
   transform: rotate(1.5deg);
-  z-index: 4; /* Para sobreposição */
+  z-index: 4;
 }
-.jean-column-container > .card-postit:nth-child(4n+1)::before { /* Aplica a rotação do card também no alfinete */
+.mural-4col-column > .card-postit:nth-child(4n+1)::before {
   transform: translateX(-50%) rotate(5deg);
 }
 
-.jean-column-container > .card-postit:nth-child(4n+2) { /* 2º, 6º, 10º... card na coluna Jean */
+.mural-4col-column > .card-postit:nth-child(4n+2) { /* 2º, 6º, 10º... card */
   transform: rotate(-0.8deg);
   z-index: 3;
 }
-.jean-column-container > .card-postit:nth-child(4n+2)::before {
+.mural-4col-column > .card-postit:nth-child(4n+2)::before {
   transform: translateX(-50%) rotate(-3deg);
 }
 
-.jean-column-container > .card-postit:nth-child(4n+3) { /* 3º, 7º, 11º... card na coluna Jean */
+.mural-4col-column > .card-postit:nth-child(4n+3) { /* 3º, 7º, 11º... card */
   transform: rotate(0.5deg);
   z-index: 2;
 }
-.jean-column-container > .card-postit:nth-child(4n+3)::before {
+.mural-4col-column > .card-postit:nth-child(4n+3)::before {
   transform: translateX(-50%) rotate(2deg);
 }
 
-.jean-column-container > .card-postit:nth-child(4n+4) { /* 4º, 8º, 12º... card na coluna Jean */
+.mural-4col-column > .card-postit:nth-child(4n+4) { /* 4º, 8º, 12º... card */
   transform: rotate(-1.0deg);
   z-index: 1;
 }
-.jean-column-container > .card-postit:nth-child(4n+4)::before {
+.mural-4col-column > .card-postit:nth-child(4n+4)::before {
   transform: translateX(-50%) rotate(-7deg);
-}
-
-
-/* Variações para os cards na coluna da Ivana (com rotações e z-index ligeiramente diferentes) */
-.ivana-column-container > .card-postit:nth-child(4n+1) {
-  transform: rotate(0.5deg);
-  z-index: 3;
-}
-.ivana-column-container > .card-postit:nth-child(4n+1)::before {
-  transform: translateX(-50%) rotate(4deg);
-}
-
-.ivana-column-container > .card-postit:nth-child(4n+2) {
-  transform: rotate(-1.2deg);
-  z-index: 4;
-}
-.ivana-column-container > .card-postit:nth-child(4n+2)::before {
-  transform: translateX(-50%) rotate(-6deg);
-}
-
-.ivana-column-container > .card-postit:nth-child(4n+3) {
-  transform: rotate(1.0deg);
-  z-index: 1;
-}
-.ivana-column-container > .card-postit:nth-child(4n+3)::before {
-  transform: translateX(-50%) rotate(1deg);
-}
-
-.ivana-column-container > .card-postit:nth-child(4n+4) {
-  transform: rotate(-0.3deg);
-  z-index: 2;
-}
-.ivana-column-container > .card-postit:nth-child(4n+4)::before {
-  transform: translateX(-50%) rotate(8deg);
 }
 
 /* Estilos para o ícone de abrir modal nos cards (canto superior direito) */
@@ -615,9 +579,10 @@ filter: saturate(1.1);
   height: fit-content;
   overflow-y: auto;
   overflow-x: hidden; /* Remove scroll horizontal */
-  padding: 4px; /* Reduzido de 8px para 4px */
+  padding: 4px 4px 4px 4px; /* Padding uniforme, sem padding extra no topo */
   box-sizing: border-box;
-  min-height: 200px;
+  min-height: 0; /* Remove altura mínima desnecessária */
+  margin: 0; /* Remove qualquer margem externa */
 }
 
 .mural-4col-column {
@@ -625,24 +590,13 @@ filter: saturate(1.1);
   flex-direction: column;
   align-items: center;
   gap: 8px; /* Reduzido de 15px para 8px para economizar espaço */
-  min-height: 100px;
+  min-height: 0; /* Reduzido de 100px para 0 para eliminar altura mínima desnecessária */
   position: relative;
+  padding: 0; /* Garantir que não há padding extra */
+  margin: 0; /* Garantir que não há margin extra */
 }
 
-/* Indicadores visuais para as colunas por responsável */
-.mural-4col-column:nth-child(1),
-.mural-4col-column:nth-child(2) {
-  /* Colunas do Jean (1 e 2) - Borda sutil azul */
-  border-top: 3px solid rgba(142, 169, 219, 0.6);
-  padding-top: 8px;
-}
-
-.mural-4col-column:nth-child(3),
-.mural-4col-column:nth-child(4) {
-  /* Colunas da Ivana (3 e 4) - Borda sutil rosa */
-  border-top: 3px solid rgba(255, 179, 179, 0.6);
-  padding-top: 8px;
-}
+/* Indicadores visuais removidos para eliminar espaço extra acima dos cards */
 
 /* Responsividade para telas grandes */
 @media (min-width: 1400px) {
