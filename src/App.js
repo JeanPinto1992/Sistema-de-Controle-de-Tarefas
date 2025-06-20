@@ -460,20 +460,38 @@ export default function App() {
         return classes;
     };
 
-    // Função para dividir as tarefas igualmente entre as colunas
-    const distribuirEmColunas = (arr, numColunas = 4) => {
+    // Função para dividir as tarefas por responsável nas colunas específicas
+    const distribuirEmColunasPorResponsavel = (arr, numColunas = 4) => {
         const colunas = Array.from({ length: numColunas }, () => []);
-        arr.forEach((item, idx) => {
-            colunas[idx % numColunas].push(item);
+        
+        // Separar tarefas por responsável
+        const tarefasJean = arr.filter(tarefa => 
+            tarefa.responsavel && tarefa.responsavel.toLowerCase() === 'jean'
+        );
+        const tarefasIvana = arr.filter(tarefa => 
+            tarefa.responsavel && tarefa.responsavel.toLowerCase() === 'ivana'
+        );
+        
+        // Distribuir tarefas do Jean nas colunas 1 e 2 (índices 0 e 1)
+        tarefasJean.forEach((tarefa, idx) => {
+            const colunaIndex = idx % 2; // Alterna entre coluna 0 e 1
+            colunas[colunaIndex].push(tarefa);
         });
+        
+        // Distribuir tarefas da Ivana nas colunas 3 e 4 (índices 2 e 3)
+        tarefasIvana.forEach((tarefa, idx) => {
+            const colunaIndex = 2 + (idx % 2); // Alterna entre coluna 2 e 3
+            colunas[colunaIndex].push(tarefa);
+        });
+        
         return colunas;
     };
 
     // Filtrar tarefas pelo mês selecionado e status correto
     const tarefasARealizarDoMes = tarefas.filter(t => t.status === 'A REALIZAR' && t.mes === mesAtualNomeCurto);
     const andamentoDoMes = emAndamento.filter(t => t.mes === mesAtualNomeCurto);
-    const tarefasColunas = distribuirEmColunas(tarefasARealizarDoMes);
-    const andamentoColunas = distribuirEmColunas(andamentoDoMes);
+    const tarefasColunas = distribuirEmColunasPorResponsavel(tarefasARealizarDoMes);
+    const andamentoColunas = distribuirEmColunasPorResponsavel(andamentoDoMes);
 
     const handleOpenDescriptionModal = (event, tarefa) => {
         event.stopPropagation();

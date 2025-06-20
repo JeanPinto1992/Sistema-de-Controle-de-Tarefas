@@ -268,8 +268,10 @@ filter: saturate(1.1);
 
 /* Estilo base para todos os Post-its */
 .card-postit {
-  width: 200px; /* Reduzido de 280px para 200px para caber melhor em 4 colunas */
-  height: 120px; /* Reduzido de 159px para 120px para melhor proporção */
+  width: 200px !important; /* Largura fixa e forçada */
+  height: 120px !important; /* Altura fixa e forçada */
+  min-width: 200px; /* Largura mínima garantida */
+  max-width: 200px; /* Largura máxima garantida */
   margin-bottom: 15px; /* Reduzido de 20px para 15px */
   margin-left: 0;
   margin-right: 0;
@@ -288,6 +290,8 @@ filter: saturate(1.1);
   box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.4); /* Ajustado proporcionalmente */
   transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
   cursor: default;
+  word-wrap: break-word; /* Quebra palavras muito longas */
+  hyphens: auto; /* Hifenização automática */
 }
 
 .card-postit:hover {
@@ -605,12 +609,12 @@ filter: saturate(1.1);
 /* Grid de 4 colunas para mural */
 .cards-grid-4col-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(220px, 1fr)); /* Largura mínima fixa para evitar cortes */
   gap: 15px; /* Reduzido de 20px para 15px para otimizar o espaço */
   width: 100%;
   height: fit-content;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto; /* Permite scroll horizontal se necessário */
   padding: 8px; /* Aumentado de 5px para 8px para melhor espaçamento */
   box-sizing: border-box;
   min-height: 200px;
@@ -622,34 +626,53 @@ filter: saturate(1.1);
   align-items: center;
   gap: 15px; /* Reduzido de 20px para 15px para otimizar o espaço */
   min-height: 100px;
+  position: relative;
+}
+
+/* Indicadores visuais para as colunas por responsável */
+.mural-4col-column:nth-child(1),
+.mural-4col-column:nth-child(2) {
+  /* Colunas do Jean (1 e 2) - Borda sutil azul */
+  border-top: 3px solid rgba(142, 169, 219, 0.6);
+  padding-top: 8px;
+}
+
+.mural-4col-column:nth-child(3),
+.mural-4col-column:nth-child(4) {
+  /* Colunas da Ivana (3 e 4) - Borda sutil rosa */
+  border-top: 3px solid rgba(255, 179, 179, 0.6);
+  padding-top: 8px;
 }
 
 /* Responsividade para telas grandes */
 @media (min-width: 1400px) {
   .card-postit {
-    width: 220px; /* Aumenta ligeiramente em telas maiores */
-    height: 130px;
+    width: 200px !important; /* Mantém largura fixa mesmo em telas maiores */
+    height: 120px !important; /* Mantém altura fixa */
+  }
+  .cards-grid-4col-container {
+    grid-template-columns: repeat(4, minmax(220px, 1fr)); /* Mais espaço em telas grandes */
   }
 }
 
 @media (max-width: 900px) {
   .cards-grid-4col-container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(220px, 1fr)); /* 2 colunas em telas médias */
   }
   .card-postit {
-    width: 240px; /* Aumenta o tamanho quando há apenas 2 colunas */
-    height: 140px;
+    width: 200px !important; /* Mantém largura fixa */
+    height: 120px !important; /* Mantém altura fixa */
   }
 }
 
 @media (max-width: 600px) {
   .cards-grid-4col-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(220px, 1fr); /* 1 coluna em telas pequenas */
   }
   .card-postit {
-    width: 280px; /* Volta ao tamanho original quando há apenas 1 coluna */
-    height: 159px;
-    font-size: 1rem;
-    padding: 15px;
+    width: 200px !important; /* Mantém largura fixa mesmo em telas pequenas */
+    height: 120px !important; /* Mantém altura fixa */
+    font-size: 0.9rem; /* Mantém fonte menor */
+    padding: 10px; /* Mantém padding menor */
   }
 }
