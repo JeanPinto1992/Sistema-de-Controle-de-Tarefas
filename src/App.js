@@ -554,7 +554,14 @@ export default function App() {
             )}
 
             <div className="header-content-container">
-                <h2 className="text-center text-primary">Sistema de Controle de Tarefas</h2>
+                <div className="header-logo-title">
+                    <img 
+                        src="/Logo-SynNova.svg" 
+                        alt="SynNova Logo" 
+                        className="logo-synnova"
+                    />
+                    <h2 className="text-center text-primary">Sistema de Controle de Tarefas</h2>
+                </div>
 
                 {activeTab === 'mural' && (
                     <div className="meses-grid-container">
