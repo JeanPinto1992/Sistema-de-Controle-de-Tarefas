@@ -244,6 +244,7 @@ filter: saturate(1.1);
   font-weight: bold;
 }
 
+/* LEGADO: Classes antigas para 2 colunas - Mantidas para compatibilidade, mas não usadas */
 .cards-grid-container {
   display: flex; /* Altera para flexbox para organizar as duas colunas principais */
   flex-wrap: wrap; /* Permite que as colunas quebrem se a tela for pequena */
@@ -267,9 +268,9 @@ filter: saturate(1.1);
 
 /* Estilo base para todos os Post-its */
 .card-postit {
-  width: 280px;
-  height: 159px;
-  margin-bottom: 20px;
+  width: 200px; /* Reduzido de 280px para 200px para caber melhor em 4 colunas */
+  height: 120px; /* Reduzido de 159px para 120px para melhor proporção */
+  margin-bottom: 15px; /* Reduzido de 20px para 15px */
   margin-left: 0;
   margin-right: 0;
   position: relative;
@@ -279,19 +280,19 @@ filter: saturate(1.1);
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 15px;
-  font-size: 1rem;
+  padding: 10px; /* Reduzido de 15px para 10px */
+  font-size: 0.9rem; /* Reduzido de 1rem para 0.9rem */
   border-radius: 3px;
   overflow: visible;
   background-color: var(--card-base-color);
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.4); /* Ajustado proporcionalmente */
   transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
   cursor: default;
 }
 
 .card-postit:hover {
   /* Sombra ainda mais pronunciada no hover para um efeito sutil de "levantar mais" */
-  box-shadow: 12px 12px 25px rgba(0, 0, 0, 0.5); 
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5); /* Ajustado proporcionalmente */
 }
 
 /* ---------------------------------------------------- */
@@ -604,13 +605,13 @@ filter: saturate(1.1);
 /* Grid de 4 colunas para mural */
 .cards-grid-4col-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px; /* Reduzido de 20px para 15px para otimizar o espaço */
   width: 100%;
   height: fit-content;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 5px;
+  padding: 8px; /* Aumentado de 5px para 8px para melhor espaçamento */
   box-sizing: border-box;
   min-height: 200px;
 }
@@ -619,17 +620,36 @@ filter: saturate(1.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 15px; /* Reduzido de 20px para 15px para otimizar o espaço */
   min-height: 100px;
+}
+
+/* Responsividade para telas grandes */
+@media (min-width: 1400px) {
+  .card-postit {
+    width: 220px; /* Aumenta ligeiramente em telas maiores */
+    height: 130px;
+  }
 }
 
 @media (max-width: 900px) {
   .cards-grid-4col-container {
     grid-template-columns: repeat(2, 1fr);
   }
+  .card-postit {
+    width: 240px; /* Aumenta o tamanho quando há apenas 2 colunas */
+    height: 140px;
+  }
 }
+
 @media (max-width: 600px) {
   .cards-grid-4col-container {
     grid-template-columns: 1fr;
+  }
+  .card-postit {
+    width: 280px; /* Volta ao tamanho original quando há apenas 1 coluna */
+    height: 159px;
+    font-size: 1rem;
+    padding: 15px;
   }
 }
