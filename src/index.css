@@ -29,8 +29,8 @@ html, body, #root {
   align-items: center;
   justify-content: flex-start;
   padding-left: -30px;
-  gap: 12px;
-  margin-bottom: 10px;
+  gap: 2px;
+  margin-bottom: 5px;
 }
 
 .logo-synnova {
