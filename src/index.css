@@ -266,7 +266,7 @@ filter: saturate(1.1);
   gap: 20px; /* Espaçamento entre os cards na vertical */
 }
 
-/* Estilo base para todos os Post-its */
+/* Estilo base para todos os Post-its - DESIGN REALISTA */
 .card-postit {
   width: 100%; /* Largura responsiva para se adaptar à coluna */
   max-width: 180px; /* Largura máxima reduzida */
@@ -281,44 +281,124 @@ filter: saturate(1.1);
   text-align: center;
   padding: 8px; /* Reduzido de 10px para 8px */
   font-size: 0.8rem; /* Reduzido de 0.9rem para 0.8rem */
-  border-radius: 3px;
+  border-radius: 2px; /* Bordas mais sutis */
   overflow: visible;
-  background-color: var(--card-base-color);
-  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.4); /* Sombra mais compacta */
-  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  background: linear-gradient(135deg, var(--card-base-color) 0%, 
+              var(--card-backside-color, var(--card-base-color)) 100%); /* Gradiente sutil */
+  
+  /* Sombra elaborada multicamadas para realismo */
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.12),           /* Sombra próxima sutil */
+    0 1px 2px rgba(0, 0, 0, 0.24),           /* Sombra próxima mais definida */
+    0 3px 8px rgba(0, 0, 0, 0.15),           /* Sombra média */
+    0 8px 16px rgba(0, 0, 0, 0.1),           /* Sombra distante */
+    inset 0 1px 0 rgba(255, 255, 255, 0.4); /* Brilho interno superior */
+  
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: default;
-  word-wrap: break-word; /* Quebra palavras muito longas */
-  hyphens: auto; /* Hifenização automática */
-  line-height: 1.2; /* Altura da linha mais compacta */
+  word-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.2;
+  
+  /* Textura sutil do papel */
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0),
+    radial-gradient(circle at 2px 2px, rgba(0,0,0,0.02) 1px, transparent 0);
+  background-size: 20px 20px, 15px 15px;
 }
 
+/* Efeito hover realista - levita e brilha */
 .card-postit:hover {
-  /* Sombra ainda mais pronunciada no hover para um efeito sutil de "levantar mais" */
-  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5); /* Sombra compacta no hover */
+  transform: translateY(-2px) scale(1.02); /* Levita ligeiramente e aumenta */
+  
+  /* Sombra mais dramática no hover */
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.15),           /* Sombra próxima */
+    0 3px 8px rgba(0, 0, 0, 0.25),           /* Sombra próxima mais definida */
+    0 8px 20px rgba(0, 0, 0, 0.2),           /* Sombra média */
+    0 15px 30px rgba(0, 0, 0, 0.15),         /* Sombra distante */
+    inset 0 1px 0 rgba(255, 255, 255, 0.6); /* Brilho interno mais forte */
+  
+  /* Brilho sutil na borda */
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* ---------------------------------------------------- */
-/* ESTILO DO ALFINETE (CABEÇA CIRCULAR SIMPLES) */
+/* ALFINETE REALISTA COM EFEITO 3D */
 /* ---------------------------------------------------- */
 .card-postit::before {
   content: '';
   position: absolute;
-  width: 10px; /* Tamanho da cabeça do alfinete */
-  height: 10px;
-  background-color: #760000; /* Cor vermelha do alfinete */
-  border-radius: 50%; /* Formato circular */
-  z-index: 10; /* Fica acima de tudo */
-  top: 5px; /* Posição do alfinete */
+  width: 12px; /* Tamanho ligeiramente maior */
+  height: 12px;
+  background: radial-gradient(
+    circle at 30% 30%, 
+    #ff4444 0%, 
+    #cc0000 40%, 
+    #990000 80%, 
+    #660000 100%
+  ); /* Gradiente 3D vermelho */
+  border-radius: 50%;
+  z-index: 20; /* Bem acima de tudo */
+  top: 4px;
   left: 50%;
-  transform: translateX(-50%) rotate(0deg); /* Rotação padrão, será sobrescrita dinamicamente */
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3); /* Sombra simples para um pouco de profundidade */
+  transform: translateX(-50%) rotate(0deg);
+  
+  /* Sombra multicamadas para realismo */
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.3),           /* Sombra principal */
+    0 2px 4px rgba(0, 0, 0, 0.2),           /* Sombra média */
+    0 0 0 1px rgba(0, 0, 0, 0.1),           /* Contorno sutil */
+    inset 0 1px 0 rgba(255, 255, 255, 0.4), /* Brilho superior */
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);      /* Sombra inferior interna */
+  
+  transition: all 0.2s ease;
+}
+
+/* Efeito no alfinete durante hover */
+.card-postit:hover::before {
+  transform: translateX(-50%) rotate(0deg) scale(1.1);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    0 3px 6px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 
 /* ---------------------------------------------------- */
-/* REMOÇÃO TOTAL DA DOBRA: Pseudo-elemento ::after não tem conteúdo */
+/* DOBRA REALISTA NO CANTO INFERIOR DIREITO */
 /* ---------------------------------------------------- */
 .card-postit::after {
-  content: none; /* Remove completamente o conteúdo do pseudo-elemento */
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(
+    -45deg, 
+    transparent 40%, 
+    rgba(0, 0, 0, 0.1) 42%, 
+    rgba(0, 0, 0, 0.15) 45%, 
+    transparent 47%
+  );
+  border-radius: 0 0 2px 0;
+  z-index: 1;
+  transition: all 0.2s ease;
+}
+
+/* Dobra maior no hover */
+.card-postit:hover::after {
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(
+    -45deg, 
+    transparent 35%, 
+    rgba(0, 0, 0, 0.15) 37%, 
+    rgba(0, 0, 0, 0.25) 40%, 
+    transparent 42%
+  );
 }
 
 
@@ -326,64 +406,112 @@ filter: saturate(1.1);
 /* Variações de LAYOUT dos Post-its (Rotação e Z-index) */
 /* ---------------------------------------------------- */
 
-/* Variações de rotação para o sistema de 4 colunas */
+/* Variações de rotação para o sistema de 4 colunas - ESTILO REALISTA */
 .mural-4col-column > .card-postit:nth-child(4n+1) { /* 1º, 5º, 9º... card */
   transform: rotate(1.5deg);
   z-index: 4;
 }
+.mural-4col-column > .card-postit:nth-child(4n+1):hover {
+  transform: rotate(1.5deg) translateY(-2px) scale(1.02);
+}
 .mural-4col-column > .card-postit:nth-child(4n+1)::before {
   transform: translateX(-50%) rotate(5deg);
+}
+.mural-4col-column > .card-postit:nth-child(4n+1):hover::before {
+  transform: translateX(-50%) rotate(5deg) scale(1.1);
 }
 
 .mural-4col-column > .card-postit:nth-child(4n+2) { /* 2º, 6º, 10º... card */
   transform: rotate(-0.8deg);
   z-index: 3;
 }
+.mural-4col-column > .card-postit:nth-child(4n+2):hover {
+  transform: rotate(-0.8deg) translateY(-2px) scale(1.02);
+}
 .mural-4col-column > .card-postit:nth-child(4n+2)::before {
   transform: translateX(-50%) rotate(-3deg);
+}
+.mural-4col-column > .card-postit:nth-child(4n+2):hover::before {
+  transform: translateX(-50%) rotate(-3deg) scale(1.1);
 }
 
 .mural-4col-column > .card-postit:nth-child(4n+3) { /* 3º, 7º, 11º... card */
   transform: rotate(0.5deg);
   z-index: 2;
 }
+.mural-4col-column > .card-postit:nth-child(4n+3):hover {
+  transform: rotate(0.5deg) translateY(-2px) scale(1.02);
+}
 .mural-4col-column > .card-postit:nth-child(4n+3)::before {
   transform: translateX(-50%) rotate(2deg);
+}
+.mural-4col-column > .card-postit:nth-child(4n+3):hover::before {
+  transform: translateX(-50%) rotate(2deg) scale(1.1);
 }
 
 .mural-4col-column > .card-postit:nth-child(4n+4) { /* 4º, 8º, 12º... card */
   transform: rotate(-1.0deg);
   z-index: 1;
 }
+.mural-4col-column > .card-postit:nth-child(4n+4):hover {
+  transform: rotate(-1.0deg) translateY(-2px) scale(1.02);
+}
 .mural-4col-column > .card-postit:nth-child(4n+4)::before {
   transform: translateX(-50%) rotate(-7deg);
 }
+.mural-4col-column > .card-postit:nth-child(4n+4):hover::before {
+  transform: translateX(-50%) rotate(-7deg) scale(1.1);
+}
 
-/* Estilos para o ícone de abrir modal nos cards (canto superior direito) */
+/* Ícone de abrir modal com design realista */
 .card-open-modal-icon {
   position: absolute;
-  top: 3px;
-  right: 3px;
+  top: 5px;
+  right: 5px;
   cursor: pointer;
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: bold;
-  color: #4CAF50;
-  background-color: rgba(255, 255, 255, 0.7);
+  color: #2e7d32;
+  background: radial-gradient(
+    circle at 30% 30%, 
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(255, 255, 255, 0.8) 50%, 
+    rgba(240, 240, 240, 0.7) 100%
+  );
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  z-index: 1; /* Z-index para estar sobre o card, mas abaixo do alfinete */
-  transition: background-color 0.2s ease, color 0.2s ease;
+  
+  /* Sombra realista */
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 1px 1px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  
+  z-index: 15; /* Entre o card e o alfinete */
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .card-open-modal-icon:hover {
-  background-color: #4CAF50;
+  background: radial-gradient(
+    circle at 30% 30%, 
+    #4CAF50 0%, 
+    #2e7d32 50%, 
+    #1b5e20 100%
+  );
   color: #fff;
+  transform: scale(1.1);
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
 
