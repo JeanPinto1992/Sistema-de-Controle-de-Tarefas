@@ -460,9 +460,18 @@ export default function App() {
         return classes;
     };
 
-    // Função para dividir as tarefas por responsável nas colunas específicas
+    // Função para dividir as tarefas por responsável nas colunas específicas com ordenação por prioridade
     const distribuirEmColunasPorResponsavel = (arr, numColunas = 4) => {
         const colunas = Array.from({ length: numColunas }, () => []);
+        
+        // Função para ordenar por prioridade: ALTA -> NORMAL -> BAIXA
+        const ordenarPorPrioridade = (tarefas) => {
+            return tarefas.sort((a, b) => {
+                const prioridadeA = getPrioridadeValor(a.prioridade);
+                const prioridadeB = getPrioridadeValor(b.prioridade);
+                return prioridadeB - prioridadeA; // Ordem decrescente (ALTA primeiro)
+            });
+        };
         
         // Separar tarefas por responsável
         const tarefasJean = arr.filter(tarefa => 
@@ -472,14 +481,18 @@ export default function App() {
             tarefa.responsavel && tarefa.responsavel.toLowerCase() === 'ivana'
         );
         
+        // Ordenar por prioridade
+        const tarefasJeanOrdenadas = ordenarPorPrioridade(tarefasJean);
+        const tarefasIvanaOrdenadas = ordenarPorPrioridade(tarefasIvana);
+        
         // Distribuir tarefas do Jean nas colunas 1 e 2 (índices 0 e 1)
-        tarefasJean.forEach((tarefa, idx) => {
+        tarefasJeanOrdenadas.forEach((tarefa, idx) => {
             const colunaIndex = idx % 2; // Alterna entre coluna 0 e 1
             colunas[colunaIndex].push(tarefa);
         });
         
         // Distribuir tarefas da Ivana nas colunas 3 e 4 (índices 2 e 3)
-        tarefasIvana.forEach((tarefa, idx) => {
+        tarefasIvanaOrdenadas.forEach((tarefa, idx) => {
             const colunaIndex = 2 + (idx % 2); // Alterna entre coluna 2 e 3
             colunas[colunaIndex].push(tarefa);
         });

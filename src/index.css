@@ -268,13 +268,12 @@ filter: saturate(1.1);
 
 /* Estilo base para todos os Post-its */
 .card-postit {
-  width: 200px !important; /* Largura fixa e forçada */
-  height: 120px !important; /* Altura fixa e forçada */
-  min-width: 200px; /* Largura mínima garantida */
-  max-width: 200px; /* Largura máxima garantida */
-  margin-bottom: 15px; /* Reduzido de 20px para 15px */
-  margin-left: 0;
-  margin-right: 0;
+  width: 100%; /* Largura responsiva para se adaptar à coluna */
+  max-width: 180px; /* Largura máxima reduzida */
+  height: 100px; /* Altura reduzida para economizar espaço */
+  margin-bottom: 8px; /* Reduzido de 15px para 8px */
+  margin-left: auto;
+  margin-right: auto;
   position: relative;
   border: none;
   font-weight: bold;
@@ -282,21 +281,22 @@ filter: saturate(1.1);
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 10px; /* Reduzido de 15px para 10px */
-  font-size: 0.9rem; /* Reduzido de 1rem para 0.9rem */
+  padding: 8px; /* Reduzido de 10px para 8px */
+  font-size: 0.8rem; /* Reduzido de 0.9rem para 0.8rem */
   border-radius: 3px;
   overflow: visible;
   background-color: var(--card-base-color);
-  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.4); /* Ajustado proporcionalmente */
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.4); /* Sombra mais compacta */
   transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
   cursor: default;
   word-wrap: break-word; /* Quebra palavras muito longas */
   hyphens: auto; /* Hifenização automática */
+  line-height: 1.2; /* Altura da linha mais compacta */
 }
 
 .card-postit:hover {
   /* Sombra ainda mais pronunciada no hover para um efeito sutil de "levantar mais" */
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5); /* Ajustado proporcionalmente */
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5); /* Sombra compacta no hover */
 }
 
 /* ---------------------------------------------------- */
@@ -609,13 +609,13 @@ filter: saturate(1.1);
 /* Grid de 4 colunas para mural */
 .cards-grid-4col-container {
   display: grid;
-  grid-template-columns: repeat(4, minmax(220px, 1fr)); /* Largura mínima fixa para evitar cortes */
-  gap: 15px; /* Reduzido de 20px para 15px para otimizar o espaço */
+  grid-template-columns: repeat(4, 1fr); /* 4 colunas iguais sem largura mínima fixa */
+  gap: 8px; /* Reduzido de 15px para 8px para economizar espaço */
   width: 100%;
   height: fit-content;
   overflow-y: auto;
-  overflow-x: auto; /* Permite scroll horizontal se necessário */
-  padding: 8px; /* Aumentado de 5px para 8px para melhor espaçamento */
+  overflow-x: hidden; /* Remove scroll horizontal */
+  padding: 4px; /* Reduzido de 8px para 4px */
   box-sizing: border-box;
   min-height: 200px;
 }
@@ -624,7 +624,7 @@ filter: saturate(1.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px; /* Reduzido de 20px para 15px para otimizar o espaço */
+  gap: 8px; /* Reduzido de 15px para 8px para economizar espaço */
   min-height: 100px;
   position: relative;
 }
@@ -647,32 +647,36 @@ filter: saturate(1.1);
 /* Responsividade para telas grandes */
 @media (min-width: 1400px) {
   .card-postit {
-    width: 200px !important; /* Mantém largura fixa mesmo em telas maiores */
-    height: 120px !important; /* Mantém altura fixa */
+    max-width: 200px; /* Largura ligeiramente maior em telas grandes */
+    height: 110px; /* Altura ligeiramente maior */
+    font-size: 0.85rem; /* Fonte ligeiramente maior */
   }
   .cards-grid-4col-container {
-    grid-template-columns: repeat(4, minmax(220px, 1fr)); /* Mais espaço em telas grandes */
+    gap: 12px; /* Mais espaço em telas grandes */
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .cards-grid-4col-container {
-    grid-template-columns: repeat(2, minmax(220px, 1fr)); /* 2 colunas em telas médias */
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas médias */
+    gap: 10px;
   }
   .card-postit {
-    width: 200px !important; /* Mantém largura fixa */
-    height: 120px !important; /* Mantém altura fixa */
+    max-width: 220px; /* Largura maior com 2 colunas */
+    height: 110px;
+    font-size: 0.85rem;
   }
 }
 
 @media (max-width: 600px) {
   .cards-grid-4col-container {
-    grid-template-columns: minmax(220px, 1fr); /* 1 coluna em telas pequenas */
+    grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
+    gap: 12px;
   }
   .card-postit {
-    width: 200px !important; /* Mantém largura fixa mesmo em telas pequenas */
-    height: 120px !important; /* Mantém altura fixa */
-    font-size: 0.9rem; /* Mantém fonte menor */
-    padding: 10px; /* Mantém padding menor */
+    max-width: 280px; /* Largura máxima em tela pequena */
+    height: 120px;
+    font-size: 0.9rem;
+    padding: 10px;
   }
 }
