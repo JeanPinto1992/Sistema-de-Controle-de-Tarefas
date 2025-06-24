@@ -580,32 +580,33 @@ export default function App() {
 
 
 
-                <div className="d-flex justify-content-between align-items-center mb-2 tabs-container">
+                <div className="d-flex align-items-center mb-2 tabs-container" style={{ position: 'relative' }}>
                     <Tabs activeKey={activeTab} onSelect={setActiveTab}>
                         <Tab eventKey="mural" title="Mural"></Tab>
                         <Tab eventKey="tarefas" title="Tarefas"></Tab>
                         <Tab eventKey="em_andamento" title="Em Andamento"></Tab>
                         <Tab eventKey="concluidas" title="Concluídas"></Tab>
                     </Tabs>
-                    <div className="ms-auto">
-                        {activeTab === 'tarefas' && (
-                            <Button
-                                className="btn-criar-nova-tarefa-azul"
-                                style={{ 
-                                    marginLeft: '20px'
-                                }}
-                                onClick={() => {
-                                    setEditId(null);
-                                    setNovaTarefa({
-                                        tarefa: '', descricao: '', responsavel: 'JEAN', repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
-                                    });
-                                    setShowModal(true);
-                                }}
-                            >
-                                Criar Nova Tarefa
-                            </Button>
-                        )}
-                    </div>
+                    {activeTab === 'tarefas' && (
+                        <Button
+                            className="btn-criar-nova-tarefa-azul"
+                            style={{ 
+                                position: 'absolute',
+                                right: '0px',
+                                top: '50%',
+                                transform: 'translateY(-50%)'
+                            }}
+                            onClick={() => {
+                                setEditId(null);
+                                setNovaTarefa({
+                                    tarefa: '', descricao: '', responsavel: 'JEAN', repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
+                                });
+                                setShowModal(true);
+                            }}
+                        >
+                            Criar Nova Tarefa
+                        </Button>
+                    )}
                 </div>
             </div>
 
