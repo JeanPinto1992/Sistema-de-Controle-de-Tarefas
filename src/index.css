@@ -159,6 +159,20 @@ h2.text-center.text-primary {
   box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.6);
 }
 
+/* Botão "Criar Nova Tarefa" AZUL na linha das abas */
+.btn-criar-nova-tarefa-azul {
+  background-color: #007bff !important;
+  border-color: #007bff !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.btn-criar-nova-tarefa-azul:hover {
+  background-color: #0056b3 !important;
+  border-color: #0056b3 !important;
+  color: white !important;
+}
+
 .btn-criar-tarefa-container {
   position: absolute;
   top: 90px;

@@ -581,27 +581,31 @@ export default function App() {
 
 
                 <div className="d-flex justify-content-between align-items-center mb-2 tabs-container">
-                    <Tabs activeKey={activeTab} onSelect={setActiveTab} className="flex-grow-1">
+                    <Tabs activeKey={activeTab} onSelect={setActiveTab}>
                         <Tab eventKey="mural" title="Mural"></Tab>
                         <Tab eventKey="tarefas" title="Tarefas"></Tab>
                         <Tab eventKey="em_andamento" title="Em Andamento"></Tab>
                         <Tab eventKey="concluidas" title="Concluídas"></Tab>
                     </Tabs>
-                    {activeTab === 'tarefas' && (
-                        <Button
-                            variant="primary"
-                            style={{ backgroundColor: '#007bff', borderColor: '#007bff', color: 'white' }}
-                            onClick={() => {
-                                setEditId(null);
-                                setNovaTarefa({
-                                    tarefa: '', descricao: '', responsavel: 'JEAN', repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
-                                });
-                                setShowModal(true);
-                            }}
-                        >
-                            Criar Nova Tarefa
-                        </Button>
-                    )}
+                    <div className="ms-auto">
+                        {activeTab === 'tarefas' && (
+                            <Button
+                                className="btn-criar-nova-tarefa-azul"
+                                style={{ 
+                                    marginLeft: '20px'
+                                }}
+                                onClick={() => {
+                                    setEditId(null);
+                                    setNovaTarefa({
+                                        tarefa: '', descricao: '', responsavel: 'JEAN', repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
+                                    });
+                                    setShowModal(true);
+                                }}
+                            >
+                                Criar Nova Tarefa
+                            </Button>
+                        )}
+                    </div>
                 </div>
             </div>
 
