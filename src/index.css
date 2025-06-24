@@ -178,7 +178,6 @@ h2.text-center.text-primary {
   background-color: #4472C4 !important;
   border-color: #4472C4 !important;
   color: #C00000 !important; /* Letras vermelhas no hover */
-  transform: translateY(-2px) !important; /* Leve elevação no hover */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
 }
 
