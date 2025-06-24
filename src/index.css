@@ -161,11 +161,11 @@ h2.text-center.text-primary {
 
 /* Botão "Criar Nova Tarefa" AZUL na linha das abas */
 .btn-criar-nova-tarefa-azul {
-  background-color: #007bff !important;
-  border-color: #007bff !important;
+  background-color: #4472C4 !important;
+  border-color: #4472C4 !important;
   color: white !important;
   font-weight: bold;
-  height: 44px !important;
+  height: 70px !important;
   padding: 10px 18px !important;
   display: flex !important;
   align-items: center !important;
@@ -174,8 +174,8 @@ h2.text-center.text-primary {
 }
 
 .btn-criar-nova-tarefa-azul:hover {
-  background-color: #0056b3 !important;
-  border-color: #0056b3 !important;
+  background-color: #4472C4 !important;
+  border-color: #4472C4 !important;
   color: white !important;
 }
 
