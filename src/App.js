@@ -650,9 +650,10 @@ export default function App() {
 
                 {activeTab === 'tarefas' && (
                     <div>
-                        <div className="mb-3">
+                        <div className="mb-3 d-flex justify-content-end">
                             <Button
                                 variant="primary"
+                                style={{ backgroundColor: '#007bff', borderColor: '#007bff' }}
                                 onClick={() => {
                                     setEditId(null);
                                     setNovaTarefa({
