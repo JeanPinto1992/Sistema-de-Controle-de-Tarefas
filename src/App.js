@@ -578,21 +578,7 @@ export default function App() {
                     </div>
                 )}
 
-                {activeTab === 'tarefas' && (
-                    <div className="btn-criar-tarefa-container">
-                        <Button
-                            onClick={() => {
-                                setEditId(null);
-                                setNovaTarefa({
-                                    tarefa: '', descricao: '', responsavel: 'JEAN', repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
-                                });
-                                setShowModal(true);
-                            }}
-                        >
-                            Criar Nova Tarefa
-                        </Button>
-                    </div>
-                )}
+
 
                 <div className="d-flex justify-content-between align-items-center mb-2 tabs-container">
                     <Tabs activeKey={activeTab} onSelect={setActiveTab} className="flex-grow-1">
@@ -663,14 +649,30 @@ export default function App() {
                 )}
 
                 {activeTab === 'tarefas' && (
-                    <div style={{ height: '14.8cm', width: '100%' }} className="ag-theme-alpine">
-                        <TarefaGrid
-                            dados={tarefas}
-                            tipo="tarefas"
-                            onReabrir={reabrir}
-                            onMoverParaAndamento={moverParaAndamento}
-                            carregando={carregando}
-                        />
+                    <div>
+                        <div className="mb-3">
+                            <Button
+                                variant="primary"
+                                onClick={() => {
+                                    setEditId(null);
+                                    setNovaTarefa({
+                                        tarefa: '', descricao: '', responsavel: 'JEAN', repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
+                                    });
+                                    setShowModal(true);
+                                }}
+                            >
+                                Criar Nova Tarefa
+                            </Button>
+                        </div>
+                        <div style={{ height: '14.8cm', width: '100%' }} className="ag-theme-alpine">
+                            <TarefaGrid
+                                dados={tarefas}
+                                tipo="tarefas"
+                                onReabrir={reabrir}
+                                onMoverParaAndamento={moverParaAndamento}
+                                carregando={carregando}
+                            />
+                        </div>
                     </div>
                 )}
 
