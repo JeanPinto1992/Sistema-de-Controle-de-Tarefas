@@ -587,6 +587,21 @@ export default function App() {
                         <Tab eventKey="em_andamento" title="Em Andamento"></Tab>
                         <Tab eventKey="concluidas" title="Concluídas"></Tab>
                     </Tabs>
+                    {activeTab === 'tarefas' && (
+                        <Button
+                            variant="primary"
+                            style={{ backgroundColor: '#007bff', borderColor: '#007bff', color: 'white' }}
+                            onClick={() => {
+                                setEditId(null);
+                                setNovaTarefa({
+                                    tarefa: '', descricao: '', responsavel: 'JEAN', repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
+                                });
+                                setShowModal(true);
+                            }}
+                        >
+                            Criar Nova Tarefa
+                        </Button>
+                    )}
                 </div>
             </div>
 
@@ -649,31 +664,14 @@ export default function App() {
                 )}
 
                 {activeTab === 'tarefas' && (
-                    <div>
-                        <div className="mb-3 d-flex justify-content-end">
-                            <Button
-                                variant="primary"
-                                style={{ backgroundColor: '#007bff', borderColor: '#007bff' }}
-                                onClick={() => {
-                                    setEditId(null);
-                                    setNovaTarefa({
-                                        tarefa: '', descricao: '', responsavel: 'JEAN', repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
-                                    });
-                                    setShowModal(true);
-                                }}
-                            >
-                                Criar Nova Tarefa
-                            </Button>
-                        </div>
-                        <div style={{ height: '14.8cm', width: '100%' }} className="ag-theme-alpine">
-                            <TarefaGrid
-                                dados={tarefas}
-                                tipo="tarefas"
-                                onReabrir={reabrir}
-                                onMoverParaAndamento={moverParaAndamento}
-                                carregando={carregando}
-                            />
-                        </div>
+                    <div style={{ height: '14.8cm', width: '100%' }} className="ag-theme-alpine">
+                        <TarefaGrid
+                            dados={tarefas}
+                            tipo="tarefas"
+                            onReabrir={reabrir}
+                            onMoverParaAndamento={moverParaAndamento}
+                            carregando={carregando}
+                        />
                     </div>
                 )}
 
