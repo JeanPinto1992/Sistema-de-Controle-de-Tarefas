@@ -580,6 +580,10 @@ export default function App() {
 
 
 
+
+            </div>
+
+            <div className="flex-grow-1">
                 <div className="d-flex align-items-center mb-2 tabs-container" style={{ position: 'relative' }}>
                     <Tabs activeKey={activeTab} onSelect={setActiveTab}>
                         <Tab eventKey="mural" title="Mural"></Tab>
@@ -608,9 +612,7 @@ export default function App() {
                         </Button>
                     )}
                 </div>
-            </div>
 
-            <div className="flex-grow-1">
                 {activeTab === 'mural' && (
                     <div className="mural-container">
                         <div className="mural-section">
