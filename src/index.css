@@ -171,12 +171,21 @@ h2.text-center.text-primary {
   align-items: center !important;
   justify-content: center !important;
   font-size: 1rem !important;
+  transition: all 0.2s ease !important;
 }
 
 .btn-criar-nova-tarefa-azul:hover {
   background-color: #4472C4 !important;
   border-color: #4472C4 !important;
-  color: white !important;
+  color: #C00000 !important; /* Letras vermelhas no hover */
+  transform: translateY(-2px) !important; /* Leve elevação no hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.btn-criar-nova-tarefa-azul:active {
+  transform: translateY(0px) scale(0.95) !important; /* Animação de click */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.1s ease !important;
 }
 
 .btn-criar-tarefa-container {
