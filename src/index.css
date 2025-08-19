@@ -129,7 +129,10 @@ h2.text-center.text-primary {
 .relatorio-totais {
   display: flex;
   gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
+  margin: 0 auto var(--spacing-md);
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
 }
 
 .meses-grid-container button {
