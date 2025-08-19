@@ -2,8 +2,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { Container, Tabs, Tab, Modal, Row, Col, Alert } from 'react-bootstrap';
-import { Button, Card, Input, Title, Form, FormGroup } from '../styles';
-import { TabbedOverlay, useTabbedOverlay } from '../styles/components/overlays';
+import { Button, Card, Input, Title, Form, FormGroup } from './styles';
+import { TabbedOverlay, useTabbedOverlay } from './styles/components/overlays';
 import TarefaGrid from './components/TarefaGrid';
 // Certifique-se de que seu arquivo CSS principal está importado aqui, ex:
 // import './App.css'; // Ou index.css, dependendo da sua estrutura
