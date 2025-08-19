@@ -104,12 +104,12 @@ h2.text-center.text-primary {
 /* Grid de meses */
 .meses-grid-container {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 4px;
+  gap: var(--spacing-xs);
   width: 200px;
   border-radius: 8px;
   padding: 0;
@@ -751,4 +751,8 @@ h2.text-center.text-primary {
   .relatorio-row span {
     text-align: left;
   }
+}
+
+.relatorios-grid {
+  margin-bottom: var(--spacing-md);
 }
