@@ -3,6 +3,11 @@
   --tab-inactive-text: #FFFFFF;
   --tab-active-bg: #FFFF99;
   --tab-active-text: #C00000;
+
+  /* Spacing scale */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
 }
 
 html, body, #root {
@@ -104,8 +109,8 @@ h2.text-center.text-primary {
 /* Grid de meses */
 .meses-grid-container {
   position: absolute;
-  top: var(--spacing-sm);
   right: var(--spacing-sm);
+  top: var(--spacing-sm);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
