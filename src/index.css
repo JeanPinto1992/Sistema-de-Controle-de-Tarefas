@@ -3,6 +3,9 @@
   --tab-inactive-text: #FFFFFF;
   --tab-active-bg: #FFFF99;
   --tab-active-text: #C00000;
+  --chart-height-desktop: 400px;
+  --chart-height-tablet: 300px;
+  --chart-height-mobile: 250px;
 }
 
 html, body, #root {
@@ -760,4 +763,22 @@ h2.text-center.text-primary {
 
 .relatorios-grid {
   margin-bottom: var(--spacing-md);
+}
+
+.relatorio-chart {
+  width: 100%;
+  height: var(--chart-height-desktop);
+  margin-top: var(--spacing-md);
+}
+
+@media (max-width: 900px) {
+  .relatorio-chart {
+    height: var(--chart-height-tablet);
+  }
+}
+
+@media (max-width: 768px) {
+  .relatorio-chart {
+    height: var(--chart-height-mobile);
+  }
 }
