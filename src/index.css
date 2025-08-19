@@ -1,3 +1,10 @@
+:root {
+  --tab-inactive-bg: #003300;
+  --tab-inactive-text: #FFFFFF;
+  --tab-active-bg: #FFFF99;
+  --tab-active-text: #C00000;
+}
+
 html, body, #root {
   height: 100%;
   margin: 0;
@@ -112,9 +119,9 @@ h2.text-center.text-primary {
 .meses-grid-container .btn {
   font-size: 0.8rem;
   font-weight: bold;
-  border: 1px solid #003300;
-  background-color: #e0e0e0;
-  color: #003300;
+  border: 1px solid var(--tab-inactive-bg);
+  background-color: var(--tab-inactive-bg);
+  color: var(--tab-inactive-text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,15 +131,15 @@ h2.text-center.text-primary {
   border-radius: 4px;
 }
 .meses-grid-container .btn:hover {
-  background-color: #003300 !important;
-  color: #C00000 !important;
+  background-color: var(--tab-inactive-bg);
+  color: var(--tab-active-text);
 }
 .meses-grid-container .btn.active,
 .meses-grid-container .btn:focus,
 .meses-grid-container .btn:active {
-  background-color: #FFFF99 !important;
-  color: #C00000 !important;
-  border-color: #FFFF99 !important;
+  background-color: var(--tab-active-bg);
+  color: var(--tab-active-text);
+  border-color: var(--tab-active-bg);
   outline: none;
   box-shadow: none;
 }
