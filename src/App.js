@@ -5,6 +5,15 @@ import { Container, Tabs, Tab, Modal, Row, Col, Alert } from 'react-bootstrap';
 import { Button, Card, Input, Title, Form, FormGroup } from './styles';
 import { TabbedOverlay, useTabbedOverlay } from './styles/components/overlays';
 import TarefaGrid from './components/TarefaGrid';
+import {
+    ResponsiveContainer,
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    Tooltip,
+    Legend
+} from 'recharts';
 // Certifique-se de que seu arquivo CSS principal está importado aqui, ex:
 // import './App.css'; // Ou index.css, dependendo da sua estrutura
 
@@ -75,6 +84,19 @@ export default function App() {
             naoIniciadas: acc.naoIniciadas + (setor.naoIniciadas || 0)
         }), { solicitadas: 0, andamento: 0, concluidas: 0, naoIniciadas: 0 });
     }, [relatorio, mesRelatorio]);
+    const dadosRelatorio = useMemo(
+        () =>
+            Object.entries(relatorio[mesRelatorio] || {})
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([setor, dados]) => ({
+                    setor,
+                    solicitadas: dados.solicitadas,
+                    andamento: dados.andamento,
+                    concluidas: dados.concluidas,
+                    naoIniciadas: dados.naoIniciadas
+                })),
+        [relatorio, mesRelatorio]
+    );
 
     const isFormValid = useMemo(() => {
         const { tarefa, responsavel, repetir, prioridade, setor } = novaTarefa;
@@ -780,16 +802,28 @@ export default function App() {
                                     <span>Concluídas</span>
                                     <span>Não Iniciadas</span>
                                 </div>
-                                {Object.entries(relatorio[mesRelatorio] || {}).sort(([a],[b]) => a.localeCompare(b)).map(([setor, dados]) => (
+                                {dadosRelatorio.map(({ setor, solicitadas, andamento, concluidas, naoIniciadas }) => (
                                     <div key={setor} className="relatorio-row">
                                         <span>{setor}</span>
-                                        <span>{dados.solicitadas}</span>
-                                        <span>{dados.andamento}</span>
-                                        <span>{dados.concluidas}</span>
-                                        <span>{dados.naoIniciadas}</span>
+                                        <span>{solicitadas}</span>
+                                        <span>{andamento}</span>
+                                        <span>{concluidas}</span>
+                                        <span>{naoIniciadas}</span>
                                     </div>
                                 ))}
                             </div>
+                            <ResponsiveContainer className="relatorio-chart">
+                                <BarChart data={dadosRelatorio}>
+                                    <XAxis dataKey="setor" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Bar dataKey="solicitadas" fill="var(--tab-inactive-bg)" />
+                                    <Bar dataKey="andamento" fill="var(--tab-active-bg)" />
+                                    <Bar dataKey="concluidas" fill="var(--tab-active-text)" />
+                                    <Bar dataKey="naoIniciadas" fill="var(--tab-inactive-text)" />
+                                </BarChart>
+                            </ResponsiveContainer>
                         </Card>
                     </div>
                 )}
