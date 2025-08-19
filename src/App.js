@@ -594,33 +594,33 @@ export default function App() {
                     <h2 className="text-center text-primary">Sistema de Controle de Tarefas</h2>
                 </div>
 
-                {activeTab === 'mural' && (
+                {(activeTab === 'mural' || activeTab === 'relatorios') && (
                     <div className="meses-grid-container">
-                        {MESES.map((nome, idx) => (
-                            <Button
-                                key={idx}
-                                size="sm"
-                                className={mesSelecionado === idx ? 'active' : ''}
-                                onClick={() => setMesSelecionado(idx)}
-                            >
-                                {nome.substring(0, 3).toUpperCase()}
-                            </Button>
-                        ))}
-                    </div>
-                )}
+                        {MESES.map((nome, idx) => {
+                            const isActive =
+                                activeTab === 'mural'
+                                    ? mesSelecionado === idx
+                                    : mesRelatorio === idx;
 
-                {activeTab === 'relatorios' && (
-                    <div className="meses-grid-container">
-                        {MESES.map((nome, idx) => (
-                            <Button
-                                key={idx}
-                                size="sm"
-                                className={mesRelatorio === idx ? 'active' : ''}
-                                onClick={() => setMesRelatorio(idx)}
-                            >
-                                {nome.substring(0, 3).toUpperCase()}
-                            </Button>
-                        ))}
+                            const handleClick = () => {
+                                if (activeTab === 'mural') {
+                                    setMesSelecionado(idx);
+                                } else {
+                                    setMesRelatorio(idx);
+                                }
+                            };
+
+                            return (
+                                <Button
+                                    key={idx}
+                                    size="sm"
+                                    className={isActive ? 'active' : ''}
+                                    onClick={handleClick}
+                                >
+                                    {nome.substring(0, 3).toUpperCase()}
+                                </Button>
+                            );
+                        })}
                     </div>
                 )}
 
