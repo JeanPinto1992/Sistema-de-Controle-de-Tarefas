@@ -609,6 +609,21 @@ export default function App() {
                     </div>
                 )}
 
+                {activeTab === 'relatorios' && (
+                    <div className="meses-grid-container">
+                        {MESES.map((nome, idx) => (
+                            <Button
+                                key={idx}
+                                size="sm"
+                                className={mesRelatorio === idx ? 'active' : ''}
+                                onClick={() => setMesRelatorio(idx)}
+                            >
+                                {nome.substring(0, 3).toUpperCase()}
+                            </Button>
+                        ))}
+                    </div>
+                )}
+
 
 
 
@@ -736,19 +751,6 @@ export default function App() {
 
                 {activeTab === 'relatorios' && (
                     <div className="relatorios-container">
-                        <div className="meses-grid-container relatorios-grid">
-                            {MESES.map((nome, idx) => (
-                                <Button
-                                    key={idx}
-                                    size="sm"
-                                    className={mesRelatorio === idx ? 'active' : ''}
-                                    onClick={() => setMesRelatorio(idx)}
-                                >
-                                    {nome.substring(0, 3).toUpperCase()}
-                                </Button>
-                            ))}
-                        </div>
-
                         <div className="relatorio-totais">
                             <Card>
                                 <Title level={5}>Solicitadas</Title>
