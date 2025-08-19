@@ -116,6 +116,11 @@ h2.text-center.text-primary {
   z-index: 10;
 }
 
+/* Contêiner para relatórios, mantendo o grid de meses ancorado */
+.relatorios-container {
+  position: relative;
+}
+
 .meses-grid-container .btn {
     background-color: var(--tab-inactive-bg);
     color: var(--tab-inactive-text);
