@@ -701,9 +701,47 @@ filter: saturate(1.1);
     height: 35px;
   }
   
-  h2.text-center.text-primary {
+h2.text-center.text-primary {
     font-size: 1.4rem;
     text-align: center;
     width: 100%;
+  }
+}
+
+.relatorio-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--spacing-sm);
+  color: var(--text-primary);
+}
+
+.relatorio-header,
+.relatorio-row {
+  display: contents;
+}
+
+.relatorio-header span,
+.relatorio-row span {
+  padding: var(--spacing-sm);
+  text-align: center;
+}
+
+.relatorio-header span {
+  font-weight: bold;
+}
+
+@media (max-width: 900px) {
+  .relatorio-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .relatorio-grid {
+    grid-template-columns: 1fr;
+  }
+  .relatorio-header span,
+  .relatorio-row span {
+    text-align: left;
   }
 }

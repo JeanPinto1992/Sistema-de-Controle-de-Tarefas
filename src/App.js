@@ -1,11 +1,9 @@
 // src/App.js
 import React, { useState, useEffect, useMemo } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-    Container, Tabs, Tab, Button,
-    Modal, Form, Row, Col, Alert
-} from 'react-bootstrap';
+import { Container, Tabs, Tab, Modal, Row, Col, Alert } from 'react-bootstrap';
+import { Button, Card, Input, Title, Form, FormGroup } from '../styles';
+import { TabbedOverlay, useTabbedOverlay } from '../styles/components/overlays';
 import TarefaGrid from './components/TarefaGrid';
 // Certifique-se de que seu arquivo CSS principal está importado aqui, ex:
 // import './App.css'; // Ou index.css, dependendo da sua estrutura
@@ -65,6 +63,9 @@ export default function App() {
     const [showEditObsModal, setShowEditObsModal] = useState(false);
     const [editingObsId, setEditingObsId] = useState(null);
     const [editingObsText, setEditingObsText] = useState('');
+
+    const [mesRelatorio, setMesRelatorio] = useState(new Date().getMonth());
+    const [relatorio, setRelatorio] = useState({});
 
     const isFormValid = useMemo(() => {
         const { tarefa, responsavel, repetir, prioridade, setor } = novaTarefa;
@@ -128,6 +129,27 @@ export default function App() {
             setTarefas(formatar(tarefasData));
             setEmAndamento(formatar(andamentoData));
             setConcluidas(formatar(concluidasData));
+
+            const { data: todasTarefas, error: relatorioError } = await supabase
+                .from('tarefas')
+                .select('status, setor, data_criacao');
+
+            if (relatorioError) throw relatorioError;
+
+            const agrupados = todasTarefas.reduce((acc, t) => {
+                const mes = new Date(t.data_criacao).getMonth();
+                const setor = t.setor || 'SEM SETOR';
+                acc[mes] ??= {};
+                acc[mes][setor] ??= { solicitadas: 0, andamento: 0, concluidas: 0, naoIniciadas: 0 };
+
+                acc[mes][setor].solicitadas++;
+                if (t.status === 'CONCLUIDA') acc[mes][setor].concluidas++;
+                else if (t.status === 'EM ANDAMENTO') acc[mes][setor].andamento++;
+                else acc[mes][setor].naoIniciadas++;
+
+                return acc;
+            }, {});
+            setRelatorio(agrupados);
 
         } catch (e) {
             console.error('Erro ao carregar dados:', e);
@@ -590,6 +612,7 @@ export default function App() {
                         <Tab eventKey="tarefas" title="Tarefas"></Tab>
                         <Tab eventKey="em_andamento" title="Em Andamento"></Tab>
                         <Tab eventKey="concluidas" title="Concluídas"></Tab>
+                        <Tab eventKey="relatorios" title="Relatórios" />
                     </Tabs>
                     {activeTab === 'tarefas' && (
                         <Button
@@ -701,6 +724,40 @@ export default function App() {
                         <TarefaGrid dados={concluidas} tipo="concluidas" carregando={carregando} />
                     </div>
                 )}
+
+                {activeTab === 'relatorios' && (
+                    <>
+                        <div className="meses-grid-container" style={{ gap: 'var(--spacing-sm)', marginBottom: 'var(--spacing-md)' }}>
+                            {MESES.map((nome, idx) => (
+                                <Button key={idx} size="sm" className={mesRelatorio === idx ? 'active' : ''} onClick={() => setMesRelatorio(idx)}>
+                                    {nome.substring(0, 3).toUpperCase()}
+                                </Button>
+                            ))}
+                        </div>
+
+                        <Card>
+                            <Title level={4}>Resumo por Setor</Title>
+                            <div className="relatorio-grid">
+                                <div className="relatorio-header">
+                                    <span>Setor</span>
+                                    <span>Solicitadas</span>
+                                    <span>Em Andamento</span>
+                                    <span>Concluídas</span>
+                                    <span>Não Iniciadas</span>
+                                </div>
+                                {Object.entries(relatorio[mesRelatorio] || {}).map(([setor, dados]) => (
+                                    <div key={setor} className="relatorio-row">
+                                        <span>{setor}</span>
+                                        <span>{dados.solicitadas}</span>
+                                        <span>{dados.andamento}</span>
+                                        <span>{dados.concluidas}</span>
+                                        <span>{dados.naoIniciadas}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </Card>
+                    </>
+                )}
             </div>
 
             {/* Modal ORIGINAL (para Criar/Editar Tarefa) */}
@@ -710,55 +767,58 @@ export default function App() {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group className="mb-2">
-                            <Form.Label>Tarefa *</Form.Label>
-                            <Form.Control
+                        <FormGroup className="mb-2">
+                            <label>Tarefa *</label>
+                            <Input
                                 name="tarefa"
                                 value={novaTarefa.tarefa}
                                 onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
                             />
-                        </Form.Group>
-                        <Form.Group className="mb-2">
-                            <Form.Label>Descrição</Form.Label>
-                            <Form.Control
+                        </FormGroup>
+                        <FormGroup className="mb-2">
+                            <label>Descrição</label>
+                            <Input
                                 name="descricao"
                                 value={novaTarefa.descricao}
                                 onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
                             />
-                        </Form.Group>
+                        </FormGroup>
                         <Row>
                             <Col>
-                                <Form.Group className="mb-2">
-                                    <Form.Label>Responsável *</Form.Label>
-                                    <Form.Select
+                                <FormGroup className="mb-2">
+                                    <label>Responsável *</label>
+                                    <Input
+                                        as="select"
                                         name="responsavel"
                                         value={novaTarefa.responsavel}
                                         onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
                                     >
                                         <option>JEAN</option>
                                         <option>IVANA</option>
-                                    </Form.Select>
-                                </Form.Group>
+                                    </Input>
+                                </FormGroup>
                             </Col>
                             <Col>
-                                <Form.Group className="mb-2">
-                                    <Form.Label>Repetir *</Form.Label>
-                                    <Form.Select
+                                <FormGroup className="mb-2">
+                                    <label>Repetir *</label>
+                                    <Input
+                                        as="select"
                                         name="repetir"
                                         value={novaTarefa.repetir}
                                         onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
                                     >
                                         <option>SIM</option>
                                         <option>NÃO</option>
-                                    </Form.Select>
-                                </Form.Group>
+                                    </Input>
+                                </FormGroup>
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                <Form.Group className="mb-2">
-                                    <Form.Label>Prioridade *</Form.Label>
-                                    <Form.Select
+                                <FormGroup className="mb-2">
+                                    <label>Prioridade *</label>
+                                    <Input
+                                        as="select"
                                         name="prioridade"
                                         value={novaTarefa.prioridade}
                                         onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
@@ -766,18 +826,18 @@ export default function App() {
                                         <option>BAIXA</option>
                                         <option>NORMAL</option>
                                         <option>ALTA</option>
-                                    </Form.Select>
-                                </Form.Group>
+                                    </Input>
+                                </FormGroup>
                             </Col>
                             <Col>
-                                <Form.Group className="mb-2">
-                                    <Form.Label>Setor *</Form.Label>
-                                    <Form.Control
+                                <FormGroup className="mb-2">
+                                    <label>Setor *</label>
+                                    <Input
                                         name="setor"
                                         value={novaTarefa.setor}
                                         onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
                                     />
-                                </Form.Group>
+                                </FormGroup>
                             </Col>
                         </Row>
                     </Form>
@@ -822,16 +882,16 @@ export default function App() {
                     <Modal.Title>Editar Observação da Tarefa #{editingObsId}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Observações</Form.Label>
-                        <Form.Control
+                    <FormGroup className="mb-3">
+                        <label>Observações</label>
+                        <Input
                             as="textarea"
                             rows={5}
                             value={editingObsText}
                             onChange={(e) => setEditingObsText(e.target.value)}
                             placeholder="Digite suas observações aqui..."
                         />
-                    </Form.Group>
+                    </FormGroup>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseEditObsModal}>
