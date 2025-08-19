@@ -117,32 +117,32 @@ h2.text-center.text-primary {
 }
 
 .meses-grid-container .btn {
-  font-size: 0.8rem;
-  font-weight: bold;
-  border: 1px solid var(--tab-inactive-bg);
-  background-color: var(--tab-inactive-bg);
-  color: var(--tab-inactive-text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 36px;
-  white-space: nowrap;
-  padding: 0 5px;
-  border-radius: 4px;
-}
-.meses-grid-container .btn:hover {
-  background-color: var(--tab-inactive-bg);
-  color: var(--tab-active-text);
-}
-.meses-grid-container .btn.active,
-.meses-grid-container .btn:focus,
-.meses-grid-container .btn:active {
-  background-color: var(--tab-active-bg);
-  color: var(--tab-active-text);
-  border-color: var(--tab-active-bg);
-  outline: none;
-  box-shadow: none;
-}
+    background-color: var(--tab-inactive-bg);
+    color: var(--tab-inactive-text);
+    border: 1px solid var(--tab-inactive-bg);
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    white-space: nowrap;
+    padding: 0 5px;
+    border-radius: 4px;
+  }
+  .meses-grid-container .btn:hover {
+    background-color: var(--tab-inactive-bg);
+    color: var(--tab-active-text);
+  }
+  .meses-grid-container .btn.active,
+  .meses-grid-container .btn:focus,
+  .meses-grid-container .btn:active {
+    background-color: var(--tab-active-bg);
+    color: var(--tab-active-text);
+    border-color: var(--tab-active-bg);
+    outline: none;
+    box-shadow: none;
+  }
 
 /* Botão "Criar Nova Tarefa" */
 .btn-criar-tarefa-container .btn {
