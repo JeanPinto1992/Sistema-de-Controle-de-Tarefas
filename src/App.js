@@ -771,7 +771,6 @@ export default function App() {
                         </div>
 
                         <Card>
-                            <Title level={4}>Resumo por Setor</Title>
                             <div className="relatorio-grid">
                                 <div className="relatorio-header">
                                     <span>Setor</span>
