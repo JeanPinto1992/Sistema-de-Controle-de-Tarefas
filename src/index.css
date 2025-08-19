@@ -745,7 +745,7 @@ h2.text-center.text-primary {
 
 .relatorio-header span,
 .relatorio-row span {
-  padding: var(--spacing-sm);
+  padding: calc(var(--spacing-sm) / 2);
   text-align: center;
 }
 
