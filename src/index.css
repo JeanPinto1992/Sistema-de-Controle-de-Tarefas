@@ -127,7 +127,7 @@ h2.text-center.text-primary {
   margin-bottom: var(--spacing-md);
 }
 
-.meses-grid-container .btn {
+.meses-grid-container button {
     background-color: var(--tab-inactive-bg);
     color: var(--tab-inactive-text);
     border: 1px solid var(--tab-inactive-bg);
@@ -141,13 +141,13 @@ h2.text-center.text-primary {
     padding: 0 5px;
     border-radius: 4px;
   }
-  .meses-grid-container .btn:hover {
+  .meses-grid-container button:hover {
     background-color: var(--tab-inactive-bg);
     color: var(--tab-active-text);
   }
-  .meses-grid-container .btn.active,
-  .meses-grid-container .btn:focus,
-  .meses-grid-container .btn:active {
+  .meses-grid-container button.active,
+  .meses-grid-container button:focus,
+  .meses-grid-container button:active {
     background-color: var(--tab-active-bg);
     color: var(--tab-active-text);
     border-color: var(--tab-active-bg);
