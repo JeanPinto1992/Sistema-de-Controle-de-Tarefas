@@ -126,13 +126,27 @@ h2.text-center.text-primary {
   position: relative;
 }
 
+
 .relatorio-totais {
-  display: flex;
-  gap: var(--spacing-md);
-  margin: 0 auto var(--spacing-md);
-  justify-content: center;
-  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr repeat(4, minmax(calc(var(--spacing-md) * 8), 1fr));
+  gap: var(--spacing-xs);
   max-width: 900px;
+  margin: 0 auto var(--spacing-md);
+}
+
+.totais-placeholder {
+  visibility: hidden;
+}
+
+.relatorio-totais .card {
+  background-color: var(--tab-inactive-bg);
+  color: var(--tab-inactive-text);
+  text-align: center;
+}
+
+.relatorio-totais .card span {
+  color: var(--tab-inactive-text);
 }
 
 .meses-grid-container button {
