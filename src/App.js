@@ -727,7 +727,7 @@ export default function App() {
 
                 {activeTab === 'relatorios' && (
                     <>
-                        <div className="meses-grid-container" style={{ gap: 'var(--spacing-sm)', marginBottom: 'var(--spacing-md)' }}>
+                        <div className="meses-grid-container relatorios-grid">
                             {MESES.map((nome, idx) => (
                                 <Button key={idx} size="sm" className={mesRelatorio === idx ? 'active' : ''} onClick={() => setMesRelatorio(idx)}>
                                     {nome.substring(0, 3).toUpperCase()}
