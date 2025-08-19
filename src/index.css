@@ -121,6 +121,12 @@ h2.text-center.text-primary {
   position: relative;
 }
 
+.relatorio-totais {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
 .meses-grid-container .btn {
     background-color: var(--tab-inactive-bg);
     color: var(--tab-inactive-text);

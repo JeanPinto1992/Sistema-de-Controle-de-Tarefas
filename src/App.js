@@ -66,6 +66,15 @@ export default function App() {
 
     const [mesRelatorio, setMesRelatorio] = useState(new Date().getMonth());
     const [relatorio, setRelatorio] = useState({});
+    const totaisRelatorio = useMemo(() => {
+        const dados = relatorio[mesRelatorio] || {};
+        return Object.values(dados).reduce((acc, setor) => ({
+            solicitadas: acc.solicitadas + (setor.solicitadas || 0),
+            andamento: acc.andamento + (setor.andamento || 0),
+            concluidas: acc.concluidas + (setor.concluidas || 0),
+            naoIniciadas: acc.naoIniciadas + (setor.naoIniciadas || 0)
+        }), { solicitadas: 0, andamento: 0, concluidas: 0, naoIniciadas: 0 });
+    }, [relatorio, mesRelatorio]);
 
     const isFormValid = useMemo(() => {
         const { tarefa, responsavel, repetir, prioridade, setor } = novaTarefa;
@@ -738,6 +747,25 @@ export default function App() {
                                     {nome.substring(0, 3).toUpperCase()}
                                 </Button>
                             ))}
+                        </div>
+
+                        <div className="relatorio-totais">
+                            <Card>
+                                <Title level={5}>Solicitadas</Title>
+                                <span>{totaisRelatorio.solicitadas}</span>
+                            </Card>
+                            <Card>
+                                <Title level={5}>Em Andamento</Title>
+                                <span>{totaisRelatorio.andamento}</span>
+                            </Card>
+                            <Card>
+                                <Title level={5}>Concluídas</Title>
+                                <span>{totaisRelatorio.concluidas}</span>
+                            </Card>
+                            <Card>
+                                <Title level={5}>Não Iniciadas</Title>
+                                <span>{totaisRelatorio.naoIniciadas}</span>
+                            </Card>
                         </div>
 
                         <Card>
