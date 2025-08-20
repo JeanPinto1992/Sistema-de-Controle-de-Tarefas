@@ -567,6 +567,17 @@ export default function App() {
         }
     };
 
+    const SetorTick = ({ x, y, payload }) => {
+        const words = payload.value.split(' ');
+        return (
+            <text x={x} y={y} fill="var(--text-primary)" textAnchor="middle">
+                {words.map((w, i) => (
+                    <tspan key={i} x={x} dy={i ? '1.1em' : 0}>{w}</tspan>
+                ))}
+            </text>
+        );
+    };
+
     return (
         <Container fluid className="mt-3 d-flex flex-column" style={{ minHeight: '100vh' }}>
             {mensagem && (
@@ -788,7 +799,11 @@ export default function App() {
                         <div className="relatorio-chart">
                             <ResponsiveContainer width="100%" height="100%">
                                 <BarChart data={dadosSolicitadas} margin={{ left: 0 }}>
-                                    <XAxis dataKey="setor" stroke="var(--text-primary)" />
+                                    <XAxis
+                                        dataKey="setor"
+                                        tick={<SetorTick />}
+                                        interval={0}
+                                    />
                                     <YAxis width={0} tick={false} axisLine={false} />
                                     <Tooltip />
                                     <Bar dataKey="solicitadas" fill="var(--tab-inactive-bg)" />
