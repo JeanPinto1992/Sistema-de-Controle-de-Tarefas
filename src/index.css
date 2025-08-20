@@ -782,3 +782,9 @@ h2.text-center.text-primary {
 .relatorios-grid {
   margin-bottom: var(--spacing-md);
 }
+
+.relatorio-chart {
+  width: 100%;
+  height: calc(var(--spacing-md) * 20);
+  margin-top: var(--spacing-md);
+}
