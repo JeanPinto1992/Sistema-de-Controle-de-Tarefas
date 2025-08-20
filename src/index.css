@@ -5,6 +5,8 @@
   --tab-active-text: #C00000;
 
   --page-bg: #c6e0b4;
+  --relatorio-row-bg: var(--page-bg);
+  --relatorio-row-bg-alt: color-mix(in srgb, var(--tab-inactive-bg) 20%, var(--page-bg));
 
   /* Spacing scale */
   --spacing-xs: 4px;
@@ -754,6 +756,13 @@ h2.text-center.text-primary {
 .relatorio-row span {
   padding: calc(var(--spacing-sm) / 2);
   text-align: center;
+}
+
+.relatorio-row:nth-of-type(odd) span {
+  background-color: var(--relatorio-row-bg);
+}
+.relatorio-row:nth-of-type(even) span {
+  background-color: var(--relatorio-row-bg-alt);
 }
 
 .relatorio-header span {
