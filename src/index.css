@@ -758,6 +758,11 @@ h2.text-center.text-primary {
   font-weight: bold;
 }
 
+.relatorio-total-row span {
+  font-weight: bold;
+  font-size: calc(var(--spacing-md) * 1.25);
+}
+
 @media (max-width: 900px) {
   .relatorio-grid {
     grid-template-columns: repeat(3, 1fr);

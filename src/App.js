@@ -751,28 +751,15 @@ export default function App() {
 
                     {activeTab === 'relatorios' && (
                     <div className="relatorios-container">
-                        <div className="relatorio-totais">
-                            <div className="totais-placeholder" />
-                            <Card>
-                                <Title level={5}>Solicitadas</Title>
-                                <span>{totaisRelatorio.solicitadas}</span>
-                            </Card>
-                            <Card>
-                                <Title level={5}>Em Andamento</Title>
-                                <span>{totaisRelatorio.andamento}</span>
-                            </Card>
-                            <Card>
-                                <Title level={5}>Concluídas</Title>
-                                <span>{totaisRelatorio.concluidas}</span>
-                            </Card>
-                            <Card>
-                                <Title level={5}>Não Iniciadas</Title>
-                                <span>{totaisRelatorio.naoIniciadas}</span>
-                            </Card>
-                        </div>
-
                         <Card>
                             <div className="relatorio-grid">
+                                <div className="relatorio-header">
+                                    <span>Setor</span>
+                                    <span>Solicitadas</span>
+                                    <span>Em Andamento</span>
+                                    <span>Concluídas</span>
+                                    <span>Não Iniciadas</span>
+                                </div>
                                 {Object.entries(relatorio[mesRelatorio] || {}).sort(([a],[b]) => a.localeCompare(b)).map(([setor, dados]) => (
                                     <div key={setor} className="relatorio-row">
                                         <span>{setor}</span>
@@ -782,6 +769,13 @@ export default function App() {
                                         <span>{dados.naoIniciadas}</span>
                                     </div>
                                 ))}
+                                <div className="relatorio-row relatorio-total-row">
+                                    <span>Total</span>
+                                    <span>{totaisRelatorio.solicitadas}</span>
+                                    <span>{totaisRelatorio.andamento}</span>
+                                    <span>{totaisRelatorio.concluidas}</span>
+                                    <span>{totaisRelatorio.naoIniciadas}</span>
+                                </div>
                             </div>
                         </Card>
                     </div>
