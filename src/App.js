@@ -787,9 +787,9 @@ export default function App() {
                         </Card>
                         <div className="relatorio-chart">
                             <ResponsiveContainer width="100%" height="100%">
-                                <BarChart data={dadosSolicitadas}>
+                                <BarChart data={dadosSolicitadas} margin={{ left: 0 }}>
                                     <XAxis dataKey="setor" stroke="var(--text-primary)" />
-                                    <YAxis tick={false} axisLine={false} />
+                                    <YAxis width={0} tick={false} axisLine={false} />
                                     <Tooltip />
                                     <Bar dataKey="solicitadas" fill="var(--tab-inactive-bg)" />
                                 </BarChart>
