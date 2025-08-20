@@ -752,6 +752,7 @@ export default function App() {
                 {activeTab === 'relatorios' && (
                     <div className="relatorios-container">
                         <div className="relatorio-totais">
+                            <div className="totais-placeholder" />
                             <Card>
                                 <Title level={5}>Solicitadas</Title>
                                 <span>{totaisRelatorio.solicitadas}</span>
