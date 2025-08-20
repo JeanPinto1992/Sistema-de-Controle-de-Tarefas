@@ -789,7 +789,7 @@ export default function App() {
                             <ResponsiveContainer width="100%" height="100%">
                                 <BarChart data={dadosSolicitadas}>
                                     <XAxis dataKey="setor" stroke="var(--text-primary)" />
-                                    <YAxis stroke="var(--text-primary)" />
+                                    <YAxis tick={false} axisLine={false} />
                                     <Tooltip />
                                     <Bar dataKey="solicitadas" fill="var(--tab-inactive-bg)" />
                                 </BarChart>
