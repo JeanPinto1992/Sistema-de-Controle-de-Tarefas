@@ -12,6 +12,8 @@
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
+
+  --relatorio-row-height: calc(var(--spacing-md) * 2);
 }
 
 html, body, #root {
@@ -743,7 +745,7 @@ h2.text-center.text-primary {
 .relatorio-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs) var(--spacing-sm);
   color: var(--text-primary);
 }
 
@@ -754,8 +756,11 @@ h2.text-center.text-primary {
 
 .relatorio-header span,
 .relatorio-row span {
-  padding: calc(var(--spacing-sm) / 2);
-  text-align: center;
+  padding: var(--spacing-xs);
+  height: var(--relatorio-row-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .relatorio-row:nth-of-type(odd) span {
