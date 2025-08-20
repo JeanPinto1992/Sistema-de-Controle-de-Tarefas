@@ -6,6 +6,9 @@
 
   --page-bg: #c6e0b4;
 
+  --relatorio-row-bg: var(--page-bg);
+  --relatorio-row-bg-alt: var(--tab-active-bg);
+
   /* Spacing scale */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
@@ -763,6 +766,14 @@ h2.text-center.text-primary {
 .relatorio-total-row span {
   font-weight: bold;
   font-size: calc(var(--spacing-md) * 1.25);
+}
+
+.relatorio-row:nth-of-type(odd) span {
+  background-color: var(--relatorio-row-bg);
+}
+
+.relatorio-row:nth-of-type(even) span {
+  background-color: var(--relatorio-row-bg-alt);
 }
 
 @media (max-width: 900px) {
