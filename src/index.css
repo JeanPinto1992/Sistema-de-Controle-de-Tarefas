@@ -787,4 +787,5 @@ h2.text-center.text-primary {
   width: 100%;
   height: calc(var(--spacing-md) * 20);
   margin-top: var(--spacing-md);
+  background-color: var(--tab-inactive-text);
 }
