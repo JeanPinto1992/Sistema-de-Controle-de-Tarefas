@@ -5,6 +5,7 @@
   --tab-active-text: #C00000;
 
   /* Spacing scale */
+  --spacing-xxs: 2px;
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
@@ -734,23 +735,23 @@ h2.text-center.text-primary {
   }
 }
 
-.relatorio-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: var(--spacing-sm);
-  color: var(--text-primary);
-}
+  .relatorio-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--spacing-xxs);
+    color: var(--text-primary);
+  }
 
 .relatorio-header,
 .relatorio-row {
   display: contents;
 }
 
-.relatorio-header span,
-.relatorio-row span {
-  padding: calc(var(--spacing-sm) / 2);
-  text-align: center;
-}
+  .relatorio-header span,
+  .relatorio-row span {
+    padding: var(--spacing-xxs);
+    text-align: center;
+  }
 
 .relatorio-header span {
   font-weight: bold;
