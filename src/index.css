@@ -127,12 +127,14 @@ h2.text-center.text-primary {
 }
 
 .relatorio-totais {
-  display: flex;
-  gap: var(--spacing-md);
-  margin: 0 auto var(--spacing-md);
+  display: grid;
+  grid-template-columns: 1fr repeat(4, 1fr);
+  gap: var(--spacing-sm);
   justify-content: center;
-  width: 100%;
-  max-width: 900px;
+  margin: 0 auto var(--spacing-md);
+}
+.totais-placeholder {
+  visibility: hidden;
 }
 
 .meses-grid-container button {
