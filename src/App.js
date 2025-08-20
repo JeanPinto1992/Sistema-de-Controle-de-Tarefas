@@ -772,13 +772,6 @@ export default function App() {
 
                         <Card>
                             <div className="relatorio-grid">
-                                <div className="relatorio-header">
-                                    <span>Setor</span>
-                                    <span>Solicitadas</span>
-                                    <span>Em Andamento</span>
-                                    <span>Concluídas</span>
-                                    <span>Não Iniciadas</span>
-                                </div>
                                 {Object.entries(relatorio[mesRelatorio] || {}).sort(([a],[b]) => a.localeCompare(b)).map(([setor, dados]) => (
                                     <div key={setor} className="relatorio-row">
                                         <span>{setor}</span>
