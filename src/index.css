@@ -8,6 +8,7 @@
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
+  --relatorio-col-width: calc(var(--spacing-md) * 5);
 }
 
 html, body, #root {
@@ -128,13 +129,22 @@ h2.text-center.text-primary {
 
 .relatorio-totais {
   display: grid;
-  grid-template-columns: 1fr repeat(4, 1fr);
-  gap: var(--spacing-sm);
+  grid-template-columns: 1fr repeat(4, var(--relatorio-col-width));
   justify-content: center;
+  gap: var(--spacing-xs);
   margin: 0 auto var(--spacing-md);
 }
 .totais-placeholder {
   visibility: hidden;
+}
+
+.relatorio-totais .card {
+  width: var(--relatorio-col-width);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .meses-grid-container button {
