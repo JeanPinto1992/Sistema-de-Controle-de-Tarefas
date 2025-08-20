@@ -791,3 +791,7 @@ h2.text-center.text-primary {
   margin-top: var(--spacing-md);
   background-color: var(--page-bg);
 }
+
+.relatorio-chart .recharts-cartesian-axis-tick text {
+  font-size: var(--font-size-sm);
+}
