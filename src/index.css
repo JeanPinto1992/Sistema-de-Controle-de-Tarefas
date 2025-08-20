@@ -14,6 +14,7 @@
   --spacing-md: 16px;
 
   --relatorio-row-height: calc(var(--spacing-md) * 2);
+  --relatorio-chart-height: calc(var(--spacing-md) * 12);
 }
 
 html, body, #root {
@@ -801,7 +802,7 @@ h2.text-center.text-primary {
 
 .relatorio-chart {
   width: 100%;
-  height: calc(var(--spacing-md) * 20);
+  height: var(--relatorio-chart-height);
   margin-top: var(--spacing-md);
   background-color: var(--page-bg);
 }
