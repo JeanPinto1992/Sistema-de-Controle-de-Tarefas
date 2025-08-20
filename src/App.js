@@ -578,6 +578,13 @@ export default function App() {
         );
     };
 
+    const getSpacing = name =>
+      parseInt(
+        getComputedStyle(document.documentElement)
+          .getPropertyValue(`--spacing-${name}`),
+        10
+      );
+
     return (
         <Container fluid className="mt-3 d-flex flex-column" style={{ minHeight: '100vh' }}>
             {mensagem && (
@@ -798,10 +805,12 @@ export default function App() {
                         </Card>
                         <div className="relatorio-chart">
                             <ResponsiveContainer width="100%" height="100%">
-                                <BarChart data={dadosSolicitadas} margin={{ left: 0 }}>
+                                <BarChart data={dadosSolicitadas} margin={{ left: 0, bottom: getSpacing('sm') }}>
                                     <XAxis
                                         dataKey="setor"
                                         tick={<SetorTick />}
+                                        height={getSpacing('md')}
+                                        tickMargin={getSpacing('xs')}
                                         interval={0}
                                     />
                                     <YAxis width={0} tick={false} axisLine={false} />
