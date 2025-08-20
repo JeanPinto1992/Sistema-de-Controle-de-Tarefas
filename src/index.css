@@ -739,7 +739,7 @@ h2.text-center.text-primary {
 .relatorio-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
   color: var(--text-primary);
 }
 
@@ -750,7 +750,7 @@ h2.text-center.text-primary {
 
 .relatorio-header span,
 .relatorio-row span {
-  padding: calc(var(--spacing-sm) / 2);
+  padding: var(--spacing-xs);
   text-align: center;
 }
 
