@@ -5,6 +5,7 @@ import { Container, Tabs, Tab, Modal, Row, Col, Alert } from 'react-bootstrap';
 import { Button, Card, Input, Title, Form, FormGroup } from './styles';
 import { TabbedOverlay, useTabbedOverlay } from './styles/components/overlays';
 import TarefaGrid from './components/TarefaGrid';
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 // Certifique-se de que seu arquivo CSS principal está importado aqui, ex:
 // import './App.css'; // Ou index.css, dependendo da sua estrutura
 
@@ -75,6 +76,12 @@ export default function App() {
             naoIniciadas: acc.naoIniciadas + (setor.naoIniciadas || 0)
         }), { solicitadas: 0, andamento: 0, concluidas: 0, naoIniciadas: 0 });
     }, [relatorio, mesRelatorio]);
+
+    const dadosSolicitadas = useMemo(() =>
+      Object.entries(relatorio[mesRelatorio] || {})
+        .sort(([a],[b]) => a.localeCompare(b))
+        .map(([setor, valores]) => ({ setor, solicitadas: valores.solicitadas }))
+    , [relatorio, mesRelatorio]);
 
     const isFormValid = useMemo(() => {
         const { tarefa, responsavel, repetir, prioridade, setor } = novaTarefa;
@@ -778,6 +785,16 @@ export default function App() {
                                 </div>
                             </div>
                         </Card>
+                        <div className="relatorio-chart">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <BarChart data={dadosSolicitadas}>
+                                    <XAxis dataKey="setor" stroke="var(--text-primary)" />
+                                    <YAxis stroke="var(--text-primary)" />
+                                    <Tooltip />
+                                    <Bar dataKey="solicitadas" fill="var(--tab-inactive-bg)" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
                 )}
             </div>
