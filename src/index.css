@@ -12,6 +12,7 @@
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
 
   --relatorio-row-height: calc(var(--spacing-md) * 2);
 }
@@ -33,6 +34,13 @@ html, body, #root {
   padding: 0;
   margin: 0;
   position: relative;
+}
+
+.card {
+  background-color: var(--page-bg);
+  padding: var(--spacing-md);
+  border-radius: var(--spacing-sm);
+  box-shadow: var(--shadow-md);
 }
 
 .header-content-container {
