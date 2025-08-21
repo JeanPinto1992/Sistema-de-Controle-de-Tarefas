@@ -567,16 +567,11 @@ export default function App() {
         }
     };
 
-    const SetorTick = ({ x, y, payload }) => {
-        const words = payload.value.split(' ');
-        return (
-            <text x={x} y={y} fill="var(--text-primary)" textAnchor="middle">
-                {words.map((w, i) => (
-                    <tspan key={i} x={x} dy={i ? '1.1em' : 0}>{w}</tspan>
-                ))}
-            </text>
-        );
-    };
+    const SetorTick = ({ x, y, payload }) => (
+        <text x={x} y={y} fill="var(--text-primary)" textAnchor="middle">
+            {payload.value}
+        </text>
+    );
 
     return (
         <Container fluid className="mt-3 d-flex flex-column" style={{ minHeight: '100vh' }}>
