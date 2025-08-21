@@ -815,81 +815,83 @@ export default function App() {
                     <Modal.Title>{editId ? 'Editar' : 'Nova'} Tarefa</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
-                        <FormGroup className="mb-2">
-                            <label>Tarefa *</label>
-                            <Input
-                                name="tarefa"
-                                value={novaTarefa.tarefa}
-                                onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
-                            />
-                        </FormGroup>
-                        <FormGroup className="mb-2">
-                            <label>Descrição</label>
-                            <Input
-                                name="descricao"
-                                value={novaTarefa.descricao}
-                                onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
-                            />
-                        </FormGroup>
-                        <Row>
-                            <Col>
-                                <FormGroup className="mb-2">
-                                    <label>Responsável *</label>
-                                    <Input
-                                        as="select"
-                                        name="responsavel"
-                                        value={novaTarefa.responsavel}
-                                        onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
-                                    >
-                                        <option>JEAN</option>
-                                        <option>IVANA</option>
-                                    </Input>
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup className="mb-2">
-                                    <label>Repetir *</label>
-                                    <Input
-                                        as="select"
-                                        name="repetir"
-                                        value={novaTarefa.repetir}
-                                        onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
-                                    >
-                                        <option>SIM</option>
-                                        <option>NÃO</option>
-                                    </Input>
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <FormGroup className="mb-2">
-                                    <label>Prioridade *</label>
-                                    <Input
-                                        as="select"
-                                        name="prioridade"
-                                        value={novaTarefa.prioridade}
-                                        onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
-                                    >
-                                        <option>BAIXA</option>
-                                        <option>NORMAL</option>
-                                        <option>ALTA</option>
-                                    </Input>
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup className="mb-2">
-                                    <label>Setor *</label>
-                                    <Input
-                                        name="setor"
-                                        value={novaTarefa.setor}
-                                        onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
-                                    />
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                    </Form>
+                    <Card>
+                        <Form>
+                            <FormGroup className="mb-2">
+                                <label>Tarefa *</label>
+                                <Input
+                                    name="tarefa"
+                                    value={novaTarefa.tarefa}
+                                    onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
+                                />
+                            </FormGroup>
+                            <FormGroup className="mb-2">
+                                <label>Descrição</label>
+                                <Input
+                                    name="descricao"
+                                    value={novaTarefa.descricao}
+                                    onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
+                                />
+                            </FormGroup>
+                            <Row>
+                                <Col>
+                                    <FormGroup className="mb-2">
+                                        <label>Responsável *</label>
+                                        <Input
+                                            as="select"
+                                            name="responsavel"
+                                            value={novaTarefa.responsavel}
+                                            onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
+                                        >
+                                            <option>JEAN</option>
+                                            <option>IVANA</option>
+                                        </Input>
+                                    </FormGroup>
+                                </Col>
+                                <Col>
+                                    <FormGroup className="mb-2">
+                                        <label>Repetir *</label>
+                                        <Input
+                                            as="select"
+                                            name="repetir"
+                                            value={novaTarefa.repetir}
+                                            onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
+                                        >
+                                            <option>SIM</option>
+                                            <option>NÃO</option>
+                                        </Input>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <FormGroup className="mb-2">
+                                        <label>Prioridade *</label>
+                                        <Input
+                                            as="select"
+                                            name="prioridade"
+                                            value={novaTarefa.prioridade}
+                                            onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
+                                        >
+                                            <option>BAIXA</option>
+                                            <option>NORMAL</option>
+                                            <option>ALTA</option>
+                                        </Input>
+                                    </FormGroup>
+                                </Col>
+                                <Col>
+                                    <FormGroup className="mb-2">
+                                        <label>Setor *</label>
+                                        <Input
+                                            name="setor"
+                                            value={novaTarefa.setor}
+                                            onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
+                                        />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                        </Form>
+                    </Card>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>Cancelar</Button>

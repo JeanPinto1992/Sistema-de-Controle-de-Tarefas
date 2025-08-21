@@ -16,6 +16,13 @@
   --relatorio-row-height: calc(var(--spacing-md) * 2);
 }
 
+.card {
+  background-color: var(--page-bg);
+  padding: var(--spacing-md);
+  border-radius: var(--spacing-sm);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
 html, body, #root {
   height: 100%;
   margin: 0;
