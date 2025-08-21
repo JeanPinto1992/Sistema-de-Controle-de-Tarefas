@@ -1,7 +1,7 @@
 // src/App.js
 import React, { useState, useEffect, useMemo } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import { Container, Tabs, Tab, Modal, Row, Col, Alert } from 'react-bootstrap';
+import { Container, Tabs, Tab, Row, Col, Alert } from 'react-bootstrap';
 import { Button, Card, Input, Title, Form, FormGroup } from './styles';
 import { TabbedOverlay, useTabbedOverlay } from './styles/components/overlays';
 import TarefaGrid from './components/TarefaGrid';
@@ -809,13 +809,11 @@ export default function App() {
                 )}
             </div>
 
-            {/* Modal ORIGINAL (para Criar/Editar Tarefa) */}
-            <Modal show={showModal} onHide={() => setShowModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{editId ? 'Editar' : 'Nova'} Tarefa</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
+            {/* Overlay para Criar/Editar Tarefa */}
+            <TabbedOverlay isOpen={showModal}>
+                <Card>
+                <Title level={3}>{editId ? 'Editar' : 'Nova'} Tarefa</Title>
+                <Form>
                         <FormGroup className="mb-2">
                             <label>Tarefa *</label>
                             <Input
@@ -890,12 +888,12 @@ export default function App() {
                             </Col>
                         </Row>
                     </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowModal(false)}>Cancelar</Button>
-                    <Button variant="primary" onClick={salvarTarefa} disabled={!isFormValid}>Salvar</Button>
-                </Modal.Footer>
-            </Modal>
+                <div className="overlay-actions">
+                    <Button onClick={() => setShowModal(false)}>Cancelar</Button>
+                    <Button onClick={salvarTarefa} disabled={!isFormValid}>Salvar</Button>
+                </div>
+                </Card>
+            </TabbedOverlay>
 
             {/* Modal de Descrição da Tarefa (apenas para exibição) */}
             {showDescriptionModal && (
@@ -925,12 +923,10 @@ export default function App() {
                 </div>
             )}
 
-            {/* NOVO MODAL PARA EDIÇÃO DE OBSERVAÇÕES */}
-            <Modal show={showEditObsModal} onHide={handleCloseEditObsModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Editar Observação da Tarefa #{editingObsId}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+            {/* Overlay para edição de observações */}
+            <TabbedOverlay isOpen={showEditObsModal}>
+                <Card>
+                <Title level={3}>Editar Observação da Tarefa #{editingObsId}</Title>
                     <FormGroup className="mb-3">
                         <label>Observações</label>
                         <Input
@@ -941,16 +937,16 @@ export default function App() {
                             placeholder="Digite suas observações aqui..."
                         />
                     </FormGroup>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseEditObsModal}>
+                <div className="overlay-actions">
+                    <Button onClick={handleCloseEditObsModal}>
                         Cancelar
                     </Button>
-                    <Button variant="primary" onClick={handleSaveObservation}>
+                    <Button onClick={handleSaveObservation}>
                         Salvar Observação
                     </Button>
-                </Modal.Footer>
-            </Modal>
+                </div>
+                </Card>
+            </TabbedOverlay>
         </Container>
     );
 }
