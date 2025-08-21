@@ -731,29 +731,33 @@ export default function App() {
                 )}
 
                 {activeTab === 'tarefas' && (
-                    <div style={{ height: '14.8cm', width: '100%' }} className="ag-theme-alpine">
-                        <TarefaGrid
-                            dados={tarefas}
-                            tipo="tarefas"
-                            onReabrir={reabrir}
-                            onMoverParaAndamento={moverParaAndamento}
-                            carregando={carregando}
-                        />
-                    </div>
+                    <Card>
+                        <div style={{ height: '14.8cm', width: '100%' }} className="ag-theme-alpine">
+                            <TarefaGrid
+                                dados={tarefas}
+                                tipo="tarefas"
+                                onReabrir={reabrir}
+                                onMoverParaAndamento={moverParaAndamento}
+                                carregando={carregando}
+                            />
+                        </div>
+                    </Card>
                 )}
 
                 {activeTab === 'em_andamento' && (
-                    <div style={{ height: '14.8cm', width: '100%' }} className="ag-theme-alpine">
-                        <TarefaGrid
-                            dados={emAndamento}
-                            tipo="em_andamento"
-                            onConcluir={concluir}
-                            onReabrir={reabrir}
-                            carregando={carregando}
-                            onEditObservationClick={handleEditObservationClick}
-                            forceUpdate={forceUpdate}
-                        />
-                    </div>
+                    <Card>
+                        <div style={{ height: '14.8cm', width: '100%' }} className="ag-theme-alpine">
+                            <TarefaGrid
+                                dados={emAndamento}
+                                tipo="em_andamento"
+                                onConcluir={concluir}
+                                onReabrir={reabrir}
+                                carregando={carregando}
+                                onEditObservationClick={handleEditObservationClick}
+                                forceUpdate={forceUpdate}
+                            />
+                        </div>
+                    </Card>
                 )}
 
                 {activeTab === 'concluidas' && (
@@ -815,7 +819,8 @@ export default function App() {
                     <Modal.Title>{editId ? 'Editar' : 'Nova'} Tarefa</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Card>
+                        <Form>
                         <FormGroup className="mb-2">
                             <label>Tarefa *</label>
                             <Input
@@ -889,7 +894,8 @@ export default function App() {
                                 </FormGroup>
                             </Col>
                         </Row>
-                    </Form>
+                        </Form>
+                    </Card>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>Cancelar</Button>
