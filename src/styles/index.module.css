@@ -1,0 +1,44 @@
+.button {
+  color: var(--text-primary);
+  padding: var(--spacing-sm);
+  border: var(--border-width) solid var(--primary);
+  font-family: var(--font-family);
+}
+.buttonPrimary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+.buttonSecondary {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+}
+.card {
+  color: var(--text-primary);
+  padding: var(--spacing-sm);
+  border: var(--border-width) solid var(--primary);
+  font-family: var(--font-family);
+}
+.input {
+  color: var(--text-primary);
+  padding: var(--spacing-sm);
+  border: var(--border-width) solid var(--primary);
+  font-family: var(--font-family);
+}
+.title {
+  color: var(--text-primary);
+  padding: var(--spacing-sm);
+  font-family: var(--font-family);
+  border-bottom: var(--border-width) solid var(--primary);
+}
+.form {
+  color: var(--text-primary);
+  padding: var(--spacing-sm);
+  border: var(--border-width) solid var(--primary);
+  font-family: var(--font-family);
+}
+.formGroup {
+  color: var(--text-primary);
+  padding: var(--spacing-sm);
+  border: var(--border-width) solid var(--primary);
+  font-family: var(--font-family);
+}
