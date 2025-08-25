@@ -1,16 +1,25 @@
 .button {
-  color: var(--text-primary);
+  color: var(--text-on-primary);
   padding: var(--spacing-sm);
   border: var(--border-width) solid var(--primary);
+  border-radius: var(--border-radius);
+  background-color: var(--primary);
+  border-color: var(--primary);
   font-family: var(--font-family);
 }
+
 .buttonPrimary {
   background-color: var(--primary);
   border-color: var(--primary);
+  color: var(--text-on-primary);
+  border-radius: var(--border-radius);
 }
+
 .buttonSecondary {
   background-color: var(--secondary);
   border-color: var(--secondary);
+  color: var(--text-on-primary);
+  border-radius: var(--border-radius);
 }
 .card {
   color: var(--text-primary);
