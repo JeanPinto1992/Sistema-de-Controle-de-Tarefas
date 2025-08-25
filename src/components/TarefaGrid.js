@@ -5,6 +5,8 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 import { FaEdit, FaCheck, FaSpinner } from 'react-icons/fa'; // Mantenha as importações
+import { Button } from '../styles';
+import styles from './TarefaGrid.module.css';
 
 export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMoverParaAndamento, carregando, onEditObservationClick, forceUpdate }) {
     const gridRef = useRef();
@@ -35,22 +37,10 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         const displayText = observacaoText.trim(); // Mostra vazio quando não há observação
         
         return (
-            <div style={{
-                cursor: 'pointer',
-                height: '100%',
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-start', // Alinhamento à esquerda para melhor leitura
-                padding: '0 8px', // Adicionar padding
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                fontSize: '14px',
-                color: '#000' // Cor preta sempre
-            }}
-            onClick={handleClick}
-            title={observacaoText.trim() === '' ? 'Clique para adicionar observação' : observacaoText}
+            <div
+                className={styles.observationCell}
+                onClick={handleClick}
+                title={observacaoText.trim() === '' ? 'Clique para adicionar observação' : observacaoText}
             >
                 {displayText}
             </div>
@@ -76,13 +66,9 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             width: 40,
             cellStyle: centerAndNowrap,
             cellRenderer: params => (
-                <button
-                    style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        color: '#0d6efd',
-                    }}
+                <Button
+                    variant="primary"
+                    className={`${styles.iconButton} ${styles.primaryAction}`}
                     onClick={e => {
                         e.preventDefault();
                         if (onReabrir) {
@@ -92,7 +78,7 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                     title="Editar tarefa"
                 >
                     <FaEdit />
-                </button>
+                </Button>
             )
         };
 
@@ -101,13 +87,9 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             width: 40,
             cellStyle: centerAndNowrap,
             cellRenderer: params => (
-                <button
-                    style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        color: '#ff9900',
-                    }}
+                <Button
+                    variant="secondary"
+                    className={`${styles.iconButton} ${styles.secondaryAction}`}
                     onClick={e => {
                         e.preventDefault();
                         if (onMoverParaAndamento) onMoverParaAndamento(params.data.id_tarefa);
@@ -115,7 +97,7 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                     title="Mover para Em Andamento"
                 >
                     <FaSpinner />
-                </button>
+                </Button>
             )
         };
 
@@ -124,13 +106,9 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             flex: 0.6,
             cellStyle: centerAndNowrap,
             cellRenderer: params => (
-                <button
-                    style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        color: '#198754',
-                    }}
+                <Button
+                    variant="primary"
+                    className={`${styles.iconButton} ${styles.primaryAction}`}
                     onClick={e => {
                         e.preventDefault();
                         // >>> ALTERAÇÃO CRUCIAL AQUI: PASSA params.data.repetir PARA onConcluir <<<
@@ -139,7 +117,7 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                     title="Concluir tarefa"
                 >
                     <FaCheck />
-                </button>
+                </Button>
             )
         };
 
@@ -211,24 +189,16 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
     const customLoadingOverlay = useMemo(() => {
         return (
             `<div style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%; background-color: rgba(255, 255, 255, 0.2);">
-                <div class="spinner-border text-primary" role="status" style="width: 2rem; height: 2rem;">
+                <div class="spinner-border" role="status" style="width: 2rem; height: 2rem; color: var(--primary);">
                     <span class="visually-hidden">Carregando...</span>
                 </div>
-                <div class="ms-2 text-primary">Atualizando...</div>
+                <div class="ms-2" style="color: var(--primary);">Atualizando...</div>
             </div>`
         );
     }, []);
 
     return (
-        <div
-            className="ag-theme-alpine"
-            style={{
-                width: '100%',
-                height: 'auto',
-                maxHeight: '14.8cm', // Mantenha a altura da sua tabela como estava
-                backgroundColor: '#c6e0b4',
-            }}
-        >
+        <div className={`ag-theme-alpine ${styles.gridContainer}`}>
             <AgGridReact
                 ref={gridRef}
                 rowData={dados}
@@ -239,8 +209,8 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                 getRowId={getRowId}
                 onGridReady={onGridReady}
                 overlayNoRowsTemplate={
-                    `<div style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%; background-color: #c6e0b4;">
-                        <span style="color: #4a673c; font-size: 1.1em;">Nenhum dado para mostrar</span>
+                    `<div style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%; background-color: var(--page-bg);">
+                        <span style="color: var(--text-primary); font-size: 1.1em;">Nenhum dado para mostrar</span>
                     </div>`
                 }
                 overlayLoadingTemplate={customLoadingOverlay}
