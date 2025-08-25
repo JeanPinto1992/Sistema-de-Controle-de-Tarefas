@@ -175,10 +175,10 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             
             // Coluna 13: Ícone de retornar para Em Andamento
             const retornarBtn = {
-                headerName: 'RETORNAR',
-                width: 120,
-                minWidth: 120,
-                maxWidth: 120,
+                headerName: '',
+                width: 50,
+                minWidth: 50,
+                maxWidth: 50,
                 cellStyle: centerAndNowrap,
                 cellRenderer: params => (
                     <button
@@ -198,13 +198,13 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                     </button>
                 )
             };
-
+            
             // Coluna 14: Ícone de excluir tarefa
             const excluirBtn = {
-                headerName: 'EXCLUIR',
-                width: 120,
-                minWidth: 120,
-                maxWidth: 120,
+                headerName: '',
+                width: 50,
+                minWidth: 50,
+                maxWidth: 50,
                 cellStyle: centerAndNowrap,
                 cellRenderer: params => (
                     <button
