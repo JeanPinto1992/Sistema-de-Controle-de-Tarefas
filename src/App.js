@@ -899,7 +899,8 @@ export default function App() {
                             tipo="concluidas" 
                             onRetornarParaAndamento={retornarParaAndamento}
                             onExcluirTarefa={excluirTarefa}
-                            carregando={carregando} 
+                            carregando={carregando}
+                            onFieldClick={handleFieldClick}
                         />
                     </div>
                 )}
