@@ -2,15 +2,18 @@
   color: var(--text-primary);
   padding: var(--spacing-sm);
   border: var(--border-width) solid var(--primary);
+  border-radius: var(--border-radius);
   font-family: var(--font-family);
 }
 .buttonPrimary {
   background-color: var(--primary);
   border-color: var(--primary);
+  color: var(--text-on-primary);
 }
 .buttonSecondary {
   background-color: var(--secondary);
   border-color: var(--secondary);
+  color: var(--text-on-primary);
 }
 .card {
   color: var(--text-primary);
