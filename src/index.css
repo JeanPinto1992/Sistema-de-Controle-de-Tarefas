@@ -864,3 +864,73 @@ h2.text-center.text-primary {
 .relatorio-chart .recharts-cartesian-axis-tick text {
   font-size: var(--font-size-sm);
 }
+
+/* Estilos para o Modal de Nova Tarefa */
+.modal-header {
+  background-color: #003300 !important;
+  color: white !important;
+  border-bottom: 1px solid #003300 !important;
+}
+
+.modal-header .modal-title {
+  color: white !important;
+  font-weight: bold;
+}
+
+.modal-header .btn-close {
+  filter: invert(1);
+}
+
+.modal-body .form-group {
+  margin-bottom: 1rem;
+}
+
+.modal-body .form-group label {
+  font-weight: bold;
+  color: #003300;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.modal-body .form-control,
+.modal-body .form-select {
+  border: 2px solid #003300 !important;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.modal-body .form-control:focus,
+.modal-body .form-select:focus {
+  border-color: #005500 !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 51, 0, 0.25) !important;
+}
+
+.modal-footer {
+  border-top: 1px solid #dee2e6;
+  padding: 1rem;
+}
+
+.modal-footer .btn-primary {
+  background-color: #007bff !important;
+  border-color: #007bff !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #0056b3 !important;
+  border-color: #0056b3 !important;
+}
+
+.modal-footer .btn-secondary {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.modal-footer .btn-secondary:hover {
+  background-color: #c82333 !important;
+  border-color: #c82333 !important;
+}
