@@ -322,25 +322,12 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             <AgGridReact
                 ref={gridRef}
                 rowData={dados}
-                columnDefs={colunas}
-                defaultColDef={{
-                    sortable: true,
-                    filter: true,
-                    resizable: true,
-                    cellStyle: { textAlign: 'center' }
-                }}
+                columnDefs={columnDefs}
+                defaultColDef={defaultColDef}
                 className="ag-theme-alpine"
                 domLayout="autoHeight"
                 suppressHorizontalScroll={false}
                 headerHeight={40}
-                rowHeight={35}
-                animateRows={true}
-                onGridReady={onGridReady}
-                onCellValueChanged={onCellValueChanged}
-                stopEditingWhenCellsLoseFocus={true}
-                singleClickEdit={false}
-                suppressClickEdit={true}
-            />
                 rowHeight={40}
                 animateRows={true}
                 getRowId={getRowId}
@@ -351,13 +338,14 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                     </div>`
                 }
                 overlayLoadingTemplate={customLoadingOverlay}
-                domLayout='autoHeight'
-                suppressHorizontalScroll={false}
                 enableRangeSelection={false}
                 suppressColumnVirtualisation={true}
                 maintainColumnOrder={true}
                 suppressAutoSize={false}
                 sizeColumnsToFit={false}
+                stopEditingWhenCellsLoseFocus={true}
+                singleClickEdit={false}
+                suppressClickEdit={true}
             />
         </div>
     );
