@@ -921,22 +921,24 @@ export default function App() {
 
             {/* Modal ORIGINAL (para Criar/Editar Tarefa) */}
             <Modal show={showModal} onHide={() => setShowModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{editId ? 'Editar' : 'Nova'} Tarefa</Modal.Title>
+                <Modal.Header closeButton className="modal-header">
+                    <Modal.Title className="modal-title">{editId ? 'Editar' : 'Nova'} Tarefa</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className="modal-body">
                     <Form>
-                        <FormGroup className="mb-2">
+                        <FormGroup className="mb-2 form-group">
                             <label>Tarefa *</label>
                             <Input
+                                className="form-control"
                                 name="tarefa"
                                 value={novaTarefa.tarefa}
                                 onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
                             />
                         </FormGroup>
-                        <FormGroup className="mb-2">
+                        <FormGroup className="mb-2 form-group">
                             <label>Descrição</label>
                             <Input
+                                className="form-control"
                                 name="descricao"
                                 value={novaTarefa.descricao}
                                 onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
@@ -944,10 +946,11 @@ export default function App() {
                         </FormGroup>
                         <Row>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup className="mb-2 form-group">
                                     <label>Responsável *</label>
                                     <Input
                                         as="select"
+                                        className="form-select"
                                         name="responsavel"
                                         value={novaTarefa.responsavel}
                                         onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
@@ -958,10 +961,11 @@ export default function App() {
                                 </FormGroup>
                             </Col>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup className="mb-2 form-group">
                                     <label>Repetir *</label>
                                     <Input
                                         as="select"
+                                        className="form-select"
                                         name="repetir"
                                         value={novaTarefa.repetir}
                                         onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
@@ -974,10 +978,11 @@ export default function App() {
                         </Row>
                         <Row>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup className="mb-2 form-group">
                                     <label>Prioridade *</label>
                                     <Input
                                         as="select"
+                                        className="form-select"
                                         name="prioridade"
                                         value={novaTarefa.prioridade}
                                         onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
@@ -989,9 +994,10 @@ export default function App() {
                                 </FormGroup>
                             </Col>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup className="mb-2 form-group">
                                     <label>Setor *</label>
                                     <Input
+                                        className="form-control"
                                         name="setor"
                                         value={novaTarefa.setor}
                                         onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
@@ -1001,9 +1007,9 @@ export default function App() {
                         </Row>
                     </Form>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowModal(false)}>Cancelar</Button>
-                    <Button variant="primary" onClick={salvarTarefa} disabled={!isFormValid}>Salvar</Button>
+                <Modal.Footer className="modal-footer">
+                    <Button variant="secondary" className="btn-secondary" onClick={() => setShowModal(false)}>Cancelar</Button>
+                    <Button variant="primary" className="btn-primary" onClick={salvarTarefa} disabled={!isFormValid}>Salvar</Button>
                 </Modal.Footer>
             </Modal>
 
