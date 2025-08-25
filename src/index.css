@@ -934,3 +934,16 @@ h2.text-center.text-primary {
   background-color: #c82333 !important;
   border-color: #c82333 !important;
 }
+
+/* Estilos específicos para o campo de observações */
+.modal-body textarea.form-control {
+  min-height: 200px !important;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.modal-body textarea.form-control:focus {
+  border-color: #005500 !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 51, 0, 0.25) !important;
+}
