@@ -806,6 +806,11 @@ h2.text-center.text-primary {
   background-color: var(--page-bg);
 }
 
+.relatorio-chart .recharts-bar-rectangle path {
+  filter: drop-shadow(var(--spacing-xs) 0 color-mix(in srgb,
+    var(--tab-inactive-bg) 40%, transparent));
+}
+
 .relatorio-chart .recharts-cartesian-axis-tick text {
   font-size: var(--font-size-sm);
 }
