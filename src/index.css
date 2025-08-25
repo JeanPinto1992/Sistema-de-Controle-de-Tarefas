@@ -539,21 +539,45 @@ filter: saturate(1.1);
   height: 100%;
 }
 
-/* Headers fixos dentro do próprio grid */
+/* Headers fixos no topo da janela quando scrollar */
 .ag-theme-alpine .ag-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  background-color: #003300 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+/* Garante que o header fique sempre visível */
+.ag-theme-alpine .ag-header-viewport {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
   background-color: #003300 !important;
 }
 
-/* Remove scroll interno do grid */
+/* Remove altura fixa dos containers para permitir scroll natural */
+.ag-theme-alpine {
+  --ag-background-color: #ffffff;
+  --ag-foreground-color: #000000;
+  --ag-row-border-color: #ccc;
+  font-size: 0.85rem;
+  height: auto !important;
+  min-height: 400px;
+}
+
+/* Permite que o grid se expanda naturalmente */
+.ag-theme-alpine .ag-root-wrapper {
+  height: auto !important;
+}
+
+/* Remove scroll interno do grid para usar scroll da página */
 .ag-theme-alpine .ag-body-viewport {
-  overflow: visible !important;
+  overflow-y: visible !important;
 }
 
 .ag-theme-alpine .ag-center-cols-viewport {
-  overflow: visible !important;
+  overflow-y: visible !important;
 }
 
 /* Garante que o grid se expanda naturalmente */
