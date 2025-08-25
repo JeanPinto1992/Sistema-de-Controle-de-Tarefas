@@ -1,0 +1,39 @@
+.iconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.primaryAction {
+  color: var(--primary);
+}
+
+.secondaryAction {
+  color: var(--secondary);
+}
+
+.observationCell {
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 var(--spacing-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+}
+
+.gridContainer {
+  width: 100%;
+  height: auto;
+  max-height: calc(var(--spacing-md) * 35);
+  background-color: var(--page-bg);
+}
