@@ -1,9 +1,10 @@
 // src/App.js
 import React, { useState, useEffect, useMemo } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import { Container, Tabs, Tab, Modal, Row, Col, Alert } from 'react-bootstrap';
+import { Container, Tabs, Tab, Row, Col, Alert } from 'react-bootstrap';
 import { Button, Card, Input, Title, Form, FormGroup } from './styles';
 import { TabbedOverlay, useTabbedOverlay } from './styles/components/overlays';
+import { FaTasks, FaEdit } from 'react-icons/fa';
 import TarefaGrid from './components/TarefaGrid';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 // Certifique-se de que seu arquivo CSS principal está importado aqui, ex:
@@ -47,21 +48,20 @@ export default function App() {
     const [carregando, setCarregando] = useState(true);
     const [mensagem, setMensagem] = useState(null);
     const [tipoMsg, setTipoMsg] = useState('success');
-    const [showModal, setShowModal] = useState(false);
+    const novaTarefaOverlay = useTabbedOverlay();
+    const editObsOverlay = useTabbedOverlay();
     const [novaTarefa, setNovaTarefa] = useState({
         tarefa: '', descricao: '', responsavel: 'JEAN',
         repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
     });
     const [editId, setEditId] = useState(null);
     const [forceUpdate, setForceUpdate] = useState(0); // Para forçar atualização da tabela
-
     // ESTADOS PARA O MODAL DE DESCRIÇÃO
     const [showDescriptionModal, setShowDescriptionModal] = useState(false);
     const [currentDescription, setCurrentDescription] = useState('');
     const [currentObservations, setCurrentObservations] = useState('');
 
-    // NOVOS ESTADOS PARA O MODAL DE EDIÇÃO DE OBSERVAÇÕES
-    const [showEditObsModal, setShowEditObsModal] = useState(false);
+    // ESTADOS PARA EDIÇÃO DE OBSERVAÇÕES
     const [editingObsId, setEditingObsId] = useState(null);
     const [editingObsText, setEditingObsText] = useState('');
 
@@ -221,7 +221,7 @@ export default function App() {
             }
 
             mostrarMsg(editId ? 'Tarefa atualizada!' : 'Tarefa criada!');
-            setShowModal(false);
+            novaTarefaOverlay.close();
             setEditId(null);
             carregarDados();
         } catch (e) {
@@ -434,11 +434,11 @@ export default function App() {
     const handleEditObservationClick = (id, currentObs) => {
         setEditingObsId(id);
         setEditingObsText(currentObs || '');
-        setShowEditObsModal(true);
+        editObsOverlay.open();
     };
 
     const handleCloseEditObsModal = () => {
-        setShowEditObsModal(false);
+        editObsOverlay.close();
         setEditingObsId(null);
         setEditingObsText('');
     };
@@ -468,7 +468,7 @@ export default function App() {
             setor: taskToEdit.setor,
             observacoes: taskToEdit.observacoes || ''
         });
-        setShowModal(true);
+        novaTarefaOverlay.open();
     }
 
     const mesAtualNomeCurto = MESES[mesSelecionado].substring(0, 3).toUpperCase();
@@ -654,7 +654,7 @@ export default function App() {
                     {activeTab === 'tarefas' && (
                         <Button
                             className="btn-criar-nova-tarefa-azul"
-                            style={{ 
+                            style={{
                                 position: 'absolute',
                                 right: '0px',
                                 top: '50%',
@@ -665,7 +665,7 @@ export default function App() {
                                 setNovaTarefa({
                                     tarefa: '', descricao: '', responsavel: 'JEAN', repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
                                 });
-                                setShowModal(true);
+                                novaTarefaOverlay.open();
                             }}
                         >
                             Criar Nova Tarefa
@@ -809,93 +809,93 @@ export default function App() {
                 )}
             </div>
 
-            {/* Modal ORIGINAL (para Criar/Editar Tarefa) */}
-            <Modal show={showModal} onHide={() => setShowModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{editId ? 'Editar' : 'Nova'} Tarefa</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                        <FormGroup className="mb-2">
-                            <label>Tarefa *</label>
-                            <Input
-                                name="tarefa"
-                                value={novaTarefa.tarefa}
-                                onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
-                            />
-                        </FormGroup>
-                        <FormGroup className="mb-2">
-                            <label>Descrição</label>
-                            <Input
-                                name="descricao"
-                                value={novaTarefa.descricao}
-                                onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
-                            />
-                        </FormGroup>
-                        <Row>
-                            <Col>
-                                <FormGroup className="mb-2">
-                                    <label>Responsável *</label>
-                                    <Input
-                                        as="select"
-                                        name="responsavel"
-                                        value={novaTarefa.responsavel}
-                                        onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
-                                    >
-                                        <option>JEAN</option>
-                                        <option>IVANA</option>
-                                    </Input>
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup className="mb-2">
-                                    <label>Repetir *</label>
-                                    <Input
-                                        as="select"
-                                        name="repetir"
-                                        value={novaTarefa.repetir}
-                                        onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
-                                    >
-                                        <option>SIM</option>
-                                        <option>NÃO</option>
-                                    </Input>
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <FormGroup className="mb-2">
-                                    <label>Prioridade *</label>
-                                    <Input
-                                        as="select"
-                                        name="prioridade"
-                                        value={novaTarefa.prioridade}
-                                        onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
-                                    >
-                                        <option>BAIXA</option>
-                                        <option>NORMAL</option>
-                                        <option>ALTA</option>
-                                    </Input>
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup className="mb-2">
-                                    <label>Setor *</label>
-                                    <Input
-                                        name="setor"
-                                        value={novaTarefa.setor}
-                                        onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
-                                    />
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowModal(false)}>Cancelar</Button>
-                    <Button variant="primary" onClick={salvarTarefa} disabled={!isFormValid}>Salvar</Button>
-                </Modal.Footer>
-            </Modal>
+            <TabbedOverlay
+                isOpen={novaTarefaOverlay.isOpen}
+                title={`${editId ? 'Editar' : 'Nova'} Tarefa`}
+                icon={<FaTasks />}
+                footer={
+                    <>
+                        <Button variant="secondary" onClick={novaTarefaOverlay.close}>Cancelar</Button>
+                        <Button variant="primary" onClick={salvarTarefa} disabled={!isFormValid}>Salvar</Button>
+                    </>
+                }
+            >
+                <Form>
+                    <FormGroup className="mb-2">
+                        <label>Tarefa *</label>
+                        <Input
+                            name="tarefa"
+                            value={novaTarefa.tarefa}
+                            onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
+                        />
+                    </FormGroup>
+                    <FormGroup className="mb-2">
+                        <label>Descrição</label>
+                        <Input
+                            name="descricao"
+                            value={novaTarefa.descricao}
+                            onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
+                        />
+                    </FormGroup>
+                    <Row>
+                        <Col>
+                            <FormGroup className="mb-2">
+                                <label>Responsável *</label>
+                                <Input
+                                    as="select"
+                                    name="responsavel"
+                                    value={novaTarefa.responsavel}
+                                    onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
+                                >
+                                    <option>JEAN</option>
+                                    <option>IVANA</option>
+                                </Input>
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup className="mb-2">
+                                <label>Repetir *</label>
+                                <Input
+                                    as="select"
+                                    name="repetir"
+                                    value={novaTarefa.repetir}
+                                    onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
+                                >
+                                    <option>SIM</option>
+                                    <option>NÃO</option>
+                                </Input>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <FormGroup className="mb-2">
+                                <label>Prioridade *</label>
+                                <Input
+                                    as="select"
+                                    name="prioridade"
+                                    value={novaTarefa.prioridade}
+                                    onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
+                                >
+                                    <option>BAIXA</option>
+                                    <option>NORMAL</option>
+                                    <option>ALTA</option>
+                                </Input>
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup className="mb-2">
+                                <label>Setor *</label>
+                                <Input
+                                    name="setor"
+                                    value={novaTarefa.setor}
+                                    onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
+                                />
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                </Form>
+            </TabbedOverlay>
 
             {/* Modal de Descrição da Tarefa (apenas para exibição) */}
             {showDescriptionModal && (
@@ -925,32 +925,32 @@ export default function App() {
                 </div>
             )}
 
-            {/* NOVO MODAL PARA EDIÇÃO DE OBSERVAÇÕES */}
-            <Modal show={showEditObsModal} onHide={handleCloseEditObsModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Editar Observação da Tarefa #{editingObsId}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <FormGroup className="mb-3">
-                        <label>Observações</label>
-                        <Input
-                            as="textarea"
-                            rows={5}
-                            value={editingObsText}
-                            onChange={(e) => setEditingObsText(e.target.value)}
-                            placeholder="Digite suas observações aqui..."
-                        />
-                    </FormGroup>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseEditObsModal}>
-                        Cancelar
-                    </Button>
-                    <Button variant="primary" onClick={handleSaveObservation}>
-                        Salvar Observação
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <TabbedOverlay
+                isOpen={editObsOverlay.isOpen}
+                title={`Editar Observação da Tarefa #${editingObsId}`}
+                icon={<FaEdit />}
+                footer={
+                    <>
+                        <Button variant="secondary" onClick={handleCloseEditObsModal}>
+                            Cancelar
+                        </Button>
+                        <Button variant="primary" onClick={handleSaveObservation}>
+                            Salvar Observação
+                        </Button>
+                    </>
+                }
+            >
+                <FormGroup className="mb-3">
+                    <label>Observações</label>
+                    <Input
+                        as="textarea"
+                        rows={5}
+                        value={editingObsText}
+                        onChange={(e) => setEditingObsText(e.target.value)}
+                        placeholder="Digite suas observações aqui..."
+                    />
+                </FormGroup>
+            </TabbedOverlay>
         </Container>
     );
 }

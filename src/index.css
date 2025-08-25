@@ -14,6 +14,11 @@
   --spacing-md: 16px;
 
   --relatorio-row-height: calc(var(--spacing-md) * 2);
+
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+  --overlay-z: 1000;
+  --overlay-max-width: 600px;
+  --card-bg: #ffffff;
 }
 
 html, body, #root {
