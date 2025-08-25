@@ -74,6 +74,8 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         const editarBtn = {
             headerName: '',
             width: 40,
+            minWidth: 40,
+            maxWidth: 40,
             cellStyle: centerAndNowrap,
             cellRenderer: params => (
                 <button
@@ -99,6 +101,8 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         const moverBtn = {
             headerName: '',
             width: 40,
+            minWidth: 40,
+            maxWidth: 40,
             cellStyle: centerAndNowrap,
             cellRenderer: params => (
                 <button
@@ -121,7 +125,9 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
 
         const concluirBtn = {
             headerName: '',
-            flex: 0.6,
+            width: 40,
+            minWidth: 40,
+            maxWidth: 40,
             cellStyle: centerAndNowrap,
             cellRenderer: params => (
                 <button
@@ -133,7 +139,6 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                     }}
                     onClick={e => {
                         e.preventDefault();
-                        // >>> ALTERAÇÃO CRUCIAL AQUI: PASSA params.data.repetir PARA onConcluir <<<
                         if (onConcluir) onConcluir(params.data.id_tarefa, params.data.observacoes, params.data.repetir);
                     }}
                     title="Concluir tarefa"
@@ -147,6 +152,8 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         const excluirBtn = {
             headerName: '',
             width: 40,
+            minWidth: 40,
+            maxWidth: 40,
             cellStyle: centerAndNowrap,
             cellRenderer: params => (
                 <button
