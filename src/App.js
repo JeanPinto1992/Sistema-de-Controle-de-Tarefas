@@ -4,6 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 import { Container, Tabs, Tab, Modal, Row, Col, Alert } from 'react-bootstrap';
 import { Button, Card, Input, Title, Form, FormGroup } from './styles';
 import { TabbedOverlay, useTabbedOverlay } from './styles/components/overlays';
+import appStyles from './App.module.css';
 import TarefaGrid from './components/TarefaGrid';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 // Certifique-se de que seu arquivo CSS principal está importado aqui, ex:
@@ -925,32 +926,41 @@ export default function App() {
                 </div>
             )}
 
-            {/* NOVO MODAL PARA EDIÇÃO DE OBSERVAÇÕES */}
-            <Modal show={showEditObsModal} onHide={handleCloseEditObsModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Editar Observação da Tarefa #{editingObsId}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <FormGroup className="mb-3">
-                        <label>Observações</label>
-                        <Input
-                            as="textarea"
-                            rows={5}
-                            value={editingObsText}
-                            onChange={(e) => setEditingObsText(e.target.value)}
-                            placeholder="Digite suas observações aqui..."
-                        />
-                    </FormGroup>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseEditObsModal}>
-                        Cancelar
-                    </Button>
-                    <Button variant="primary" onClick={handleSaveObservation}>
-                        Salvar Observação
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            {/* OVERLAY PARA EDIÇÃO DE OBSERVAÇÕES */}
+            <TabbedOverlay isOpen={showEditObsModal}>
+                <Card>
+                    <Title level={3}>Editar Observação da Tarefa #{editingObsId}</Title>
+                    <Form>
+                        <FormGroup className={appStyles.mbMd}>
+                            <label htmlFor="observacoes">Observações</label>
+                            <Input
+                                id="observacoes"
+                                as="textarea"
+                                rows={5}
+                                value={editingObsText}
+                                onChange={(e) => setEditingObsText(e.target.value)}
+                                placeholder="Digite suas observações aqui..."
+                            />
+                        </FormGroup>
+                        <div className={appStyles.actions}>
+                            <Button
+                                type="button"
+                                variant="secondary"
+                                onClick={handleCloseEditObsModal}
+                            >
+                                Cancelar
+                            </Button>
+                            <Button
+                                type="button"
+                                variant="primary"
+                                onClick={handleSaveObservation}
+                            >
+                                Salvar Observação
+                            </Button>
+                        </div>
+                    </Form>
+                </Card>
+            </TabbedOverlay>
         </Container>
     );
 }
