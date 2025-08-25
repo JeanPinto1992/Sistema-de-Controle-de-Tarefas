@@ -313,9 +313,7 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             style={{
                 width: '100%',
                 height: 'auto',
-                maxHeight: '14.8cm',
                 backgroundColor: '#c6e0b4',
-                overflowX: 'auto',
                 minWidth: '1400px'
             }}
         >
