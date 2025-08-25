@@ -122,7 +122,7 @@ export default function App() {
                 .from('tarefas')
                 .select(`
                     *,
-                    concluidas!left(data_conclusao, dias_para_conclusao)
+                    concluidas!left(data_conclusao, dias_para_conclusao, observacoes)
                 `)
                 .eq('status', 'CONCLUIDA')
                 .order('id_tarefa');
@@ -136,7 +136,7 @@ export default function App() {
                     data_criacao: formatDate(x.data_criacao),
                     data_criacao_para_ordenacao: x.data_criacao,
                     mes: MESES[new Date(x.data_criacao).getMonth()].substring(0, 3).toUpperCase(),
-                    observacoes: x.em_andamento?.observacoes || '',
+                    observacoes: x.concluidas?.observacoes || x.em_andamento?.observacoes || '',
                     data_conclusao: x.concluidas?.data_conclusao ? formatDate(x.concluidas?.data_conclusao) : '',
                     dias_para_conclusao: x.concluidas?.dias_para_conclusao || 0
                 }));
@@ -285,7 +285,8 @@ export default function App() {
                 .upsert({
                     id_tarefa: id,
                     data_conclusao: new Date().toISOString(),
-                    dias_para_conclusao: diasParaConclusao
+                    dias_para_conclusao: diasParaConclusao,
+                    observacoes: obs
                 }, { onConflict: 'id_tarefa' });
 
             if (insertError) throw insertError;
