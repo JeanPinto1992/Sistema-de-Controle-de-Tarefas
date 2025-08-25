@@ -122,7 +122,7 @@ export default function App() {
                 .from('tarefas')
                 .select(`
                     *,
-                    concluidas!left(data_conclusao, dias_para_conclusao)
+                    concluidas!left(data_conclusao, dias_para_conclusao, observacoes)
                 `)
                 .eq('status', 'CONCLUIDA')
                 .order('id_tarefa');
@@ -142,9 +142,22 @@ export default function App() {
                 }));
             };
 
+            const formatarConcluidas = arr => {
+                if (!arr) return [];
+                return arr.map(x => ({
+                    ...x,
+                    data_criacao: formatDate(x.data_criacao),
+                    data_criacao_para_ordenacao: x.data_criacao,
+                    mes: MESES[new Date(x.data_criacao).getMonth()].substring(0, 3).toUpperCase(),
+                    observacoes: x.concluidas?.observacoes || '',
+                    data_conclusao: x.concluidas?.data_conclusao ? formatDate(x.concluidas?.data_conclusao) : '',
+                    dias_para_conclusao: x.concluidas?.dias_para_conclusao || 0
+                }));
+            };
+
             setTarefas(formatar(tarefasData));
             setEmAndamento(formatar(andamentoData));
-            setConcluidas(formatar(concluidasData));
+            setConcluidas(formatarConcluidas(concluidasData));
 
             const { data: todasTarefas, error: relatorioError } = await supabase
                 .from('tarefas')
@@ -285,7 +298,8 @@ export default function App() {
                 .upsert({
                     id_tarefa: id,
                     data_conclusao: new Date().toISOString(),
-                    dias_para_conclusao: diasParaConclusao
+                    dias_para_conclusao: diasParaConclusao,
+                    observacoes: obs
                 }, { onConflict: 'id_tarefa' });
 
             if (insertError) throw insertError;
@@ -356,7 +370,7 @@ export default function App() {
             console.log(`Salvando observação para tarefa ${editingObsId} (Texto: ${editingObsText})`);
             
             const { error } = await supabase
-                .from('em_andamento')
+                .from('concluidas')
                 .upsert({
                     id_tarefa: parseInt(editingObsId),
                     observacoes: editingObsText
@@ -365,9 +379,9 @@ export default function App() {
             if (error) throw error;
 
             // Atualizar diretamente o estado em memória IMEDIATAMENTE
-            setEmAndamento(prevAndamento => 
-                prevAndamento.map(tarefa => 
-                    tarefa.id_tarefa === parseInt(editingObsId) 
+            setConcluidas(prevConcluidas =>
+                prevConcluidas.map(tarefa =>
+                    tarefa.id_tarefa === parseInt(editingObsId)
                         ? { ...tarefa, observacoes: editingObsText }
                         : tarefa
                 )
@@ -387,9 +401,9 @@ export default function App() {
                         .from('tarefas')
                         .select(`
                             *,
-                            em_andamento!left(observacoes)
+                            concluidas!left(data_conclusao, dias_para_conclusao, observacoes)
                         `)
-                        .eq('status', 'EM ANDAMENTO')
+                        .eq('status', 'CONCLUIDA')
                         .eq('id_tarefa', parseInt(editingObsId))
                         .single();
 
@@ -399,13 +413,15 @@ export default function App() {
                             data_criacao: formatDate(tarefaAtualizada.data_criacao),
                             data_criacao_para_ordenacao: tarefaAtualizada.data_criacao,
                             mes: MESES[new Date(tarefaAtualizada.data_criacao).getMonth()].substring(0, 3).toUpperCase(),
-                            observacoes: tarefaAtualizada.em_andamento?.observacoes || ''
+                            observacoes: tarefaAtualizada.concluidas?.observacoes || '',
+                            data_conclusao: tarefaAtualizada.concluidas?.data_conclusao ? formatDate(tarefaAtualizada.concluidas?.data_conclusao) : '',
+                            dias_para_conclusao: tarefaAtualizada.concluidas?.dias_para_conclusao || 0
                         };
 
                         // Atualizar apenas a tarefa específica no estado
-                        setEmAndamento(prevAndamento => 
-                            prevAndamento.map(tarefa => 
-                                tarefa.id_tarefa === parseInt(editingObsId) 
+                        setConcluidas(prevConcluidas =>
+                            prevConcluidas.map(tarefa =>
+                                tarefa.id_tarefa === parseInt(editingObsId)
                                     ? tarefaFormatada
                                     : tarefa
                             )
@@ -413,7 +429,7 @@ export default function App() {
 
                         // Forçar mais uma atualização
                         setForceUpdate(prev => prev + 1);
-                        
+
                         console.log('✅ Dados sincronizados com sucesso!');
                     }
                 } catch (syncError) {
@@ -758,7 +774,13 @@ export default function App() {
 
                 {activeTab === 'concluidas' && (
                     <div style={{ height: '14.8cm', width: '100%' }} className="ag-theme-alpine">
-                        <TarefaGrid dados={concluidas} tipo="concluidas" carregando={carregando} />
+                        <TarefaGrid
+                            dados={concluidas}
+                            tipo="concluidas"
+                            carregando={carregando}
+                            onEditObservationClick={handleEditObservationClick}
+                            forceUpdate={forceUpdate}
+                        />
                     </div>
                 )}
 

@@ -149,18 +149,13 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             currentColumns.push(editarBtn, moverBtn);
         } else if (tipo === 'em_andamento') {
             currentColumns.push(
-                {
-                    headerName: 'OBSERVAÇÕES',
-                    field: 'observacoes',
-                    flex: 1.2,
-                    cellRenderer: ObservationCellRenderer, // <<< Usando o novo cellRenderer sem cellStyle
-                },
                 editarBtn,
                 concluirBtn
             );
         } else if (tipo === 'concluidas') {
             currentColumns = currentColumns.filter(col => col.field !== 'status_tarefa');
             currentColumns.push(
+                { headerName: 'OBSERVAÇÕES', field: 'observacoes', flex: 1.2, cellRenderer: ObservationCellRenderer },
                 { headerName: 'CONCLUSÃO', field: 'data_conclusao', flex: 1, cellStyle: centerAndNowrap },
                 { headerName: 'DIAS', field: 'dias_para_conclusao', flex: 0.8, cellStyle: centerAndNowrap }
             );
