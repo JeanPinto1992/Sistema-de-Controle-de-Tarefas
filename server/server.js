@@ -365,6 +365,55 @@ app.put('/api/em-andamento/:id/observacoes', async (req, res) => {
   }
 });
 
+// 8) Excluir tarefa
+app.delete('/api/tarefas/:id', async (req, res) => {
+  const { id } = req.params;
+  
+  try {
+    const idTarefa = parseInt(id);
+    
+    // Excluir da tabela tarefas
+    const { error: errorTarefas } = await supabase
+      .from('tarefas')
+      .delete()
+      .eq('id_tarefa', idTarefa);
+    
+    if (errorTarefas) throw errorTarefas;
+    
+    // Excluir da tabela em_andamento (se existir)
+    const { error: errorEmAndamento } = await supabase
+      .from('em_andamento')
+      .delete()
+      .eq('id_tarefa', idTarefa);
+    
+    // Não lançar erro se não existir em em_andamento
+    if (errorEmAndamento && !errorEmAndamento.message.includes('No rows found')) {
+      throw errorEmAndamento;
+    }
+    
+    // Excluir da tabela concluidas (se existir)
+    const { error: errorConcluidas } = await supabase
+      .from('concluidas')
+      .delete()
+      .eq('id_tarefa', idTarefa);
+    
+    // Não lançar erro se não existir em concluidas
+    if (errorConcluidas && !errorConcluidas.message.includes('No rows found')) {
+      throw errorConcluidas;
+    }
+    
+    console.log(`✅ Tarefa ${idTarefa} excluída com sucesso de todas as tabelas`);
+    return res.json({ 
+      ok: true, 
+      message: `Tarefa ${idTarefa} excluída com sucesso` 
+    });
+    
+  } catch (err) {
+    console.error('Erro DELETE /api/tarefas/:id:', err);
+    return res.status(500).json({ error: err.message });
+  }
+});
+
 // ───────────────────────────────────────────────────────────────
 // Catch-all handler: envia de volta o React app
 // ───────────────────────────────────────────────────────────────
