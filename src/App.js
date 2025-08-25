@@ -501,6 +501,14 @@ export default function App() {
         }
 
         try {
+            // Remover da tabela em_andamento
+            const { error: deleteEmAndamento } = await supabase
+                .from('em_andamento')
+                .delete()
+                .eq('id_tarefa', id);
+
+            if (deleteEmAndamento) throw deleteEmAndamento;
+
             // Remover da tabela concluidas
             const { error: deleteConcluidas } = await supabase
                 .from('concluidas')
