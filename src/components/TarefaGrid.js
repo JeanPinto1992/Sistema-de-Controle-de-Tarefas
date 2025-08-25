@@ -6,7 +6,7 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 import { FaEdit, FaCheck, FaSpinner, FaUndo, FaTrash } from 'react-icons/fa'; // Mantenha as importações
 
-export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMoverParaAndamento, onRetornarParaAndamento, onExcluirTarefa, carregando, onEditObservationClick, forceUpdate }) {
+export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMoverParaAndamento, onRetornarParaAndamento, onExcluirTarefa, carregando, onEditObservationClick, forceUpdate, onFieldClick }) {
     const gridRef = useRef();
 
     // Estilo de célula centralizado e com quebra de linha
@@ -356,3 +356,43 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         </div>
     );
 }
+
+
+// Renderer de célula clicável para aba Concluídas
+const ClickableCellRenderer = useCallback((params) => {
+    const handleClick = (e) => {
+        e.stopPropagation();
+        if (onFieldClick && params.colDef.field) {
+            onFieldClick(params.colDef.field, params.value);
+        }
+    };
+
+    const cellStyle = {
+        cursor: 'pointer',
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: params.colDef.field === 'tarefa' || params.colDef.field === 'descricao' || params.colDef.field === 'observacoes' ? 'flex-start' : 'center',
+        padding: '0 8px',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        fontSize: '14px',
+        color: '#000',
+        backgroundColor: 'transparent',
+        transition: 'background-color 0.2s'
+    };
+
+    return (
+        <div 
+            style={cellStyle}
+            onClick={handleClick}
+            title={`Clique para ver: ${params.value || 'Sem informação'}`}
+            onMouseEnter={(e) => e.target.style.backgroundColor = '#e3f2fd'}
+            onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+        >
+            {params.value || ''}
+        </div>
+    );
+}, [onFieldClick]);
