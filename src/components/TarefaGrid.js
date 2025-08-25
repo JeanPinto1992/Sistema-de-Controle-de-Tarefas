@@ -143,10 +143,34 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             )
         };
 
+        // Botão de excluir para usar nas abas Tarefas e Em Andamento
+        const excluirBtn = {
+            headerName: '',
+            width: 40,
+            cellStyle: centerAndNowrap,
+            cellRenderer: params => (
+                <button
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        color: '#dc3545',
+                    }}
+                    onClick={e => {
+                        e.preventDefault();
+                        if (onExcluirTarefa) onExcluirTarefa(params.data.id_tarefa);
+                    }}
+                    title="Excluir tarefa"
+                >
+                    <FaTrash />
+                </button>
+            )
+        };
+
         let currentColumns = [...comuns];
 
         if (tipo === 'tarefas') {
-            currentColumns.push(editarBtn, moverBtn);
+            currentColumns.push(editarBtn, moverBtn, excluirBtn);
         } else if (tipo === 'em_andamento') {
             currentColumns.push(
                 {
@@ -156,7 +180,8 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                     cellRenderer: ObservationCellRenderer, // <<< Usando o novo cellRenderer sem cellStyle
                 },
                 editarBtn,
-                concluirBtn
+                concluirBtn,
+                excluirBtn
             );
         } else if (tipo === 'concluidas') {
             currentColumns = currentColumns.filter(col => col.field !== 'status_tarefa');
