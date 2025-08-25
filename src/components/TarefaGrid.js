@@ -326,7 +326,8 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                 defaultColDef={defaultColDef}
                 className="ag-theme-alpine"
                 domLayout="autoHeight"
-                suppressHorizontalScroll={false}
+                suppressHorizontalScroll={true}
+                suppressVerticalScroll={true}
                 headerHeight={40}
                 rowHeight={40}
                 animateRows={true}
