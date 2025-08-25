@@ -1,0 +1,33 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--overlay-bg);
+  z-index: var(--overlay-z);
+}
+
+.card {
+  width: 100%;
+  max-width: var(--overlay-max-width);
+  background-color: var(--card-bg);
+  padding: var(--spacing-md);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.content {
+  margin-bottom: var(--spacing-md);
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+}
