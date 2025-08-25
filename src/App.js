@@ -70,6 +70,33 @@ export default function App() {
     const [fieldModalContent, setFieldModalContent] = useState('');
     const [fieldModalTitle, setFieldModalTitle] = useState('');
 
+    const handleFieldClick = (fieldName, fieldValue) => {
+        const fieldTitles = {
+            'id_tarefa': 'ID da Tarefa',
+            'data_criacao': 'Data de Criação',
+            'tarefa': 'Tarefa',
+            'descricao': 'Descrição',
+            'responsavel': 'Responsável',
+            'repetir': 'Repetir',
+            'prioridade': 'Prioridade',
+            'mes': 'Mês',
+            'setor': 'Setor',
+            'observacoes': 'Observações',
+            'data_conclusao': 'Data de Conclusão',
+            'dias_para_conclusao': 'Dias para Conclusão'
+        };
+        
+        setFieldModalTitle(fieldTitles[fieldName] || fieldName.toUpperCase());
+        setFieldModalContent(fieldValue || 'Sem informação');
+        setShowFieldModal(true);
+    };
+
+    const handleCloseFieldModal = () => {
+        setShowFieldModal(false);
+        setFieldModalContent('');
+        setFieldModalTitle('');
+    };
+
     const [mesRelatorio, setMesRelatorio] = useState(new Date().getMonth());
     const [relatorio, setRelatorio] = useState({});
     const totaisRelatorio = useMemo(() => {
