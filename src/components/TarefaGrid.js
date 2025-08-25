@@ -322,8 +322,26 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             <AgGridReact
                 ref={gridRef}
                 rowData={dados}
-                columnDefs={columnDefs}
-                defaultColDef={defaultColDef}
+                columnDefs={colunas}
+                defaultColDef={{
+                    sortable: true,
+                    filter: true,
+                    resizable: true,
+                    cellStyle: { textAlign: 'center' }
+                }}
+                className="ag-theme-alpine"
+                domLayout="autoHeight" // Adicionar esta propriedade
+                suppressHorizontalScroll={false}
+                suppressVerticalScroll={true} // Remove scroll vertical
+                headerHeight={40}
+                rowHeight={35}
+                animateRows={true}
+                onGridReady={onGridReady}
+                onCellValueChanged={onCellValueChanged}
+                stopEditingWhenCellsLoseFocus={true}
+                singleClickEdit={false}
+                suppressClickEdit={true}
+            />
                 rowHeight={40}
                 animateRows={true}
                 getRowId={getRowId}
