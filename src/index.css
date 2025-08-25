@@ -529,7 +529,30 @@ filter: saturate(1.1);
   --ag-row-border-color: #ccc;
 
   font-size: 0.85rem;
-  height: 100%;
+  height: auto !important; /* Remove altura fixa */
+  overflow: visible !important; /* Remove scroll interno */
+}
+
+/* Headers fixos (sticky) */
+.ag-theme-alpine .ag-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+  background-color: #003300 !important;
+}
+
+/* Remove scroll interno do grid */
+.ag-theme-alpine .ag-body-viewport {
+  overflow: visible !important;
+}
+
+.ag-theme-alpine .ag-center-cols-viewport {
+  overflow: visible !important;
+}
+
+/* Garante que o grid se expanda naturalmente */
+.ag-theme-alpine .ag-root-wrapper {
+  overflow: visible !important;
 }
 
 .ag-theme-alpine .ag-header-cell {
