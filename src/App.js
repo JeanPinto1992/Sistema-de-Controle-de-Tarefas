@@ -833,7 +833,7 @@ export default function App() {
                 )}
 
                 {activeTab === 'tarefas' && (
-                    <div style={{ width: '100%', height: 'calc(100vh - 180px)' }} className="ag-theme-alpine">
+                    <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
                         <TarefaGrid
                             dados={tarefas}
                             tipo="tarefas"
@@ -846,7 +846,7 @@ export default function App() {
                 )}
 
                 {activeTab === 'em_andamento' && (
-                    <div style={{ width: '100%', height: 'calc(100vh - 180px)' }} className="ag-theme-alpine">
+                    <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
                         <TarefaGrid
                             dados={emAndamento}
                             tipo="em_andamento"
@@ -861,7 +861,7 @@ export default function App() {
                 )}
 
                 {activeTab === 'concluidas' && (
-                    <div style={{ width: '100%', height: 'calc(100vh - 180px)' }} className="ag-theme-alpine">
+                    <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
                         <TarefaGrid 
                             dados={concluidas} 
                             tipo="concluidas" 
