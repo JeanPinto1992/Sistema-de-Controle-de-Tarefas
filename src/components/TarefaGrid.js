@@ -330,9 +330,8 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                     cellStyle: { textAlign: 'center' }
                 }}
                 className="ag-theme-alpine"
-                domLayout="autoHeight" // Adicionar esta propriedade
+                domLayout="autoHeight"
                 suppressHorizontalScroll={false}
-                suppressVerticalScroll={true} // Remove scroll vertical
                 headerHeight={40}
                 rowHeight={35}
                 animateRows={true}
