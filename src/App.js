@@ -573,6 +573,12 @@ export default function App() {
         </text>
     );
 
+    const getSpacing = name =>
+        parseInt(
+            getComputedStyle(document.documentElement).getPropertyValue(`--spacing-${name}`),
+            10
+        );
+
     return (
         <Container fluid className="mt-3 d-flex flex-column" style={{ minHeight: '100vh' }}>
             {mensagem && (
@@ -801,7 +807,12 @@ export default function App() {
                                     />
                                     <YAxis width={0} tick={false} axisLine={false} />
                                     <Tooltip />
-                                    <Bar dataKey="solicitadas" fill="var(--tab-inactive-bg)" />
+                                    <Bar
+                                        dataKey="solicitadas"
+                                        fill="var(--tab-inactive-bg)"
+                                        barSize={getSpacing('xxs')}
+                                        radius={[getSpacing('xxs'), getSpacing('xxs'), 0, 0]}
+                                    />
                                 </BarChart>
                             </ResponsiveContainer>
                         </div>

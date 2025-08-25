@@ -9,6 +9,7 @@
   --relatorio-row-bg-alt: color-mix(in srgb, var(--tab-inactive-bg) 20%, var(--page-bg));
 
   /* Spacing scale */
+  --spacing-xxs: 2px;
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
