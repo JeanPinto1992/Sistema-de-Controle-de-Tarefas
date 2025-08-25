@@ -1102,6 +1102,34 @@ export default function App() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            {/* MODAL PARA VISUALIZAÇÃO DE CAMPO */}
+            <Modal show={showFieldModal} onHide={handleCloseFieldModal} size={fieldModalContent.length > 200 ? 'lg' : 'md'}>
+                <Modal.Header closeButton className="modal-header">
+                    <Modal.Title className="modal-title">{fieldModalTitle}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="modal-body">
+                    <div style={{
+                        padding: '15px',
+                        backgroundColor: '#f8f9fa',
+                        border: '2px solid #28a745',
+                        borderRadius: '8px',
+                        minHeight: '60px',
+                        maxHeight: '400px',
+                        overflowY: 'auto',
+                        fontSize: '14px',
+                        lineHeight: '1.5',
+                        whiteSpace: 'pre-wrap',
+                        wordWrap: 'break-word'
+                    }}>
+                        {fieldModalContent}
+                    </div>
+                </Modal.Body>
+                <Modal.Footer className="modal-footer">
+                    <Button variant="secondary" className="btn-secondary" onClick={handleCloseFieldModal}>
+                        Fechar
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 }
