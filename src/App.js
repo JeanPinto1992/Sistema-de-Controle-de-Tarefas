@@ -1043,27 +1043,29 @@ export default function App() {
 
             {/* NOVO MODAL PARA EDIÇÃO DE OBSERVAÇÕES */}
             <Modal show={showEditObsModal} onHide={handleCloseEditObsModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Editar Observação da Tarefa #{editingObsId}</Modal.Title>
+                <Modal.Header closeButton className="modal-header">
+                    <Modal.Title className="modal-title">Editar Observação da Tarefa #{editingObsId}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <FormGroup className="mb-3">
+                <Modal.Body className="modal-body">
+                    <FormGroup className="mb-3 form-group">
                         <label>Observações</label>
                         <Input
                             as="textarea"
-                            rows={5}
+                            className="form-control"
+                            rows={10}
                             value={editingObsText}
                             onChange={(e) => setEditingObsText(e.target.value)}
                             placeholder="Digite suas observações aqui..."
+                            style={{ minHeight: '200px', resize: 'vertical' }}
                         />
                     </FormGroup>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseEditObsModal}>
+                <Modal.Footer className="modal-footer">
+                    <Button variant="secondary" className="btn-secondary" onClick={handleCloseEditObsModal}>
                         Cancelar
                     </Button>
-                    <Button variant="primary" onClick={handleSaveObservation}>
-                        Salvar Observação
+                    <Button variant="primary" className="btn-primary" onClick={handleSaveObservation}>
+                        Salvar
                     </Button>
                 </Modal.Footer>
             </Modal>
