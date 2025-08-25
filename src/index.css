@@ -25,6 +25,10 @@ html, body, #root {
   overflow-y: auto;
 }
 
+.spacingMd {
+  margin-bottom: var(--spacing-md);
+}
+
 .container-fluid {
   display: flex;
   flex-direction: column;
@@ -61,17 +65,6 @@ html, body, #root {
 
 .logo-synnova:hover {
   transform: scale(1.05);
-}
-
-h2.text-center.text-primary {
-  color: #003300 !important; /* Cor do título */
-  margin: 0;
-  padding-right: 0px;
-  box-sizing: border-box;
-  flex: 1;
-  text-align: left;
-  font-size: 1.8rem;
-  font-weight: bold;
 }
 
 /* Estilos das abas (Mural, Tarefas) */

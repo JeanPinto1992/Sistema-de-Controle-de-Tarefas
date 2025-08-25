@@ -574,7 +574,15 @@ export default function App() {
     );
 
     return (
-        <Container fluid className="mt-3 d-flex flex-column" style={{ minHeight: '100vh' }}>
+        <Container
+          fluid
+          style={{
+            minHeight: '100vh',
+            marginTop: 'var(--spacing-md)',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
             {mensagem && (
                 <Alert
                     variant={tipoMsg}
@@ -604,7 +612,9 @@ export default function App() {
                         alt="SynNova Logo" 
                         className="logo-synnova"
                     />
-                    <h2 className="text-center text-primary">Sistema de Controle de Tarefas</h2>
+                    <Title level={2} style={{ textAlign: 'center', color: 'var(--primary)' }}>
+                      Sistema de Controle de Tarefas
+                    </Title>
                 </div>
 
                 {(activeTab === 'mural' || activeTab === 'relatorios') && (
@@ -642,8 +652,11 @@ export default function App() {
 
             </div>
 
-            <div className="flex-grow-1">
-                <div className="d-flex align-items-center mb-2 tabs-container" style={{ position: 'relative' }}>
+            <div style={{ flexGrow: 1 }}>
+                <div
+                    className="tabs-container spacingMd"
+                    style={{ display: 'flex', alignItems: 'center', position: 'relative' }}
+                >
                     <Tabs activeKey={activeTab} onSelect={setActiveTab}>
                         <Tab eventKey="mural" title="Mural"></Tab>
                         <Tab eventKey="tarefas" title="Tarefas"></Tab>
@@ -816,7 +829,7 @@ export default function App() {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <FormGroup className="mb-2">
+                        <FormGroup className="spacingMd">
                             <label>Tarefa *</label>
                             <Input
                                 name="tarefa"
@@ -824,7 +837,7 @@ export default function App() {
                                 onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
                             />
                         </FormGroup>
-                        <FormGroup className="mb-2">
+                        <FormGroup className="spacingMd">
                             <label>Descrição</label>
                             <Input
                                 name="descricao"
@@ -834,7 +847,7 @@ export default function App() {
                         </FormGroup>
                         <Row>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup className="spacingMd">
                                     <label>Responsável *</label>
                                     <Input
                                         as="select"
@@ -848,7 +861,7 @@ export default function App() {
                                 </FormGroup>
                             </Col>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup className="spacingMd">
                                     <label>Repetir *</label>
                                     <Input
                                         as="select"
@@ -864,7 +877,7 @@ export default function App() {
                         </Row>
                         <Row>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup className="spacingMd">
                                     <label>Prioridade *</label>
                                     <Input
                                         as="select"
@@ -879,7 +892,7 @@ export default function App() {
                                 </FormGroup>
                             </Col>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup className="spacingMd">
                                     <label>Setor *</label>
                                     <Input
                                         name="setor"
@@ -919,7 +932,7 @@ export default function App() {
                         )}
 
                         {!currentDescription && !currentObservations && (
-                            <p className="text-muted">Nenhuma descrição ou observação disponível para esta tarefa.</p>
+                            <p>Nenhuma descrição ou observação disponível para esta tarefa.</p>
                         )}
                     </div>
                 </div>
@@ -931,7 +944,7 @@ export default function App() {
                     <Modal.Title>Editar Observação da Tarefa #{editingObsId}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <FormGroup className="mb-3">
+                    <FormGroup className="spacingMd">
                         <label>Observações</label>
                         <Input
                             as="textarea"
