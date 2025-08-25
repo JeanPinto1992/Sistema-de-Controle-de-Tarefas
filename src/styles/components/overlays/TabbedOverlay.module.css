@@ -1,0 +1,6 @@
+.overlay {
+  border: var(--border-width) solid var(--primary);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  margin: var(--spacing-sm);
+}
