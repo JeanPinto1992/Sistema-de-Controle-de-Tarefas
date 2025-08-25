@@ -4,9 +4,9 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
-import { FaEdit, FaCheck, FaSpinner } from 'react-icons/fa'; // Mantenha as importações
+import { FaEdit, FaCheck, FaSpinner, FaUndo, FaTrash } from 'react-icons/fa'; // Mantenha as importações
 
-export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMoverParaAndamento, carregando, onEditObservationClick, forceUpdate }) {
+export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMoverParaAndamento, onRetornarParaAndamento, onExcluirTarefa, carregando, onEditObservationClick, forceUpdate }) {
     const gridRef = useRef();
 
     // Estilo de célula centralizado e com quebra de linha
@@ -160,14 +160,77 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             );
         } else if (tipo === 'concluidas') {
             currentColumns = currentColumns.filter(col => col.field !== 'status_tarefa');
+            
+            // Adicionar as 3 colunas específicas da aba Concluídas (colunas 10, 11, 12)
             currentColumns.push(
+                {
+                    headerName: 'OBSERVAÇÕES',
+                    field: 'observacoes',
+                    flex: 1.2,
+                    cellStyle: { textAlign: 'left' }
+                },
                 { headerName: 'CONCLUSÃO', field: 'data_conclusao', flex: 1, cellStyle: centerAndNowrap },
                 { headerName: 'DIAS', field: 'dias_para_conclusao', flex: 0.8, cellStyle: centerAndNowrap }
             );
+            
+            // Coluna 13: Ícone de retornar para Em Andamento
+            const retornarBtn = {
+                headerName: 'RETORNAR',
+                width: 120,
+                minWidth: 120,
+                maxWidth: 120,
+                cellStyle: centerAndNowrap,
+                cellRenderer: params => (
+                    <button
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            color: '#ff9900',
+                        }}
+                        onClick={e => {
+                            e.preventDefault();
+                            if (onRetornarParaAndamento) onRetornarParaAndamento(params.data.id_tarefa);
+                        }}
+                        title="Retornar para Em Andamento"
+                    >
+                        <FaUndo />
+                    </button>
+                )
+            };
+
+            // Coluna 14: Ícone de excluir tarefa
+            const excluirBtn = {
+                headerName: 'EXCLUIR',
+                width: 120,
+                minWidth: 120,
+                maxWidth: 120,
+                cellStyle: centerAndNowrap,
+                cellRenderer: params => (
+                    <button
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            color: '#dc3545',
+                        }}
+                        onClick={e => {
+                            e.preventDefault();
+                            if (onExcluirTarefa) onExcluirTarefa(params.data.id_tarefa);
+                        }}
+                        title="Excluir tarefa"
+                    >
+                        <FaTrash />
+                    </button>
+                )
+            };
+            
+            // Adicionar as colunas 13 e 14
+            currentColumns.push(retornarBtn, excluirBtn);
         }
 
         return currentColumns;
-    }, [tipo, comuns, onReabrir, onConcluir, onMoverParaAndamento, centerAndNowrap, ObservationCellRenderer]);
+    }, [tipo, comuns, onReabrir, onConcluir, onMoverParaAndamento, onRetornarParaAndamento, onExcluirTarefa, centerAndNowrap, ObservationCellRenderer]);
 
     const defaultColDef = useMemo(() => ({
         resizable: true,
@@ -225,8 +288,10 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             style={{
                 width: '100%',
                 height: 'auto',
-                maxHeight: '14.8cm', // Mantenha a altura da sua tabela como estava
+                maxHeight: '14.8cm',
                 backgroundColor: '#c6e0b4',
+                overflowX: 'auto',
+                minWidth: '1400px', // Garantir largura mínima para todas as colunas
             }}
         >
             <AgGridReact
@@ -245,6 +310,12 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                 }
                 overlayLoadingTemplate={customLoadingOverlay}
                 domLayout='autoHeight'
+                suppressHorizontalScroll={false}
+                enableRangeSelection={false}
+                suppressColumnVirtualisation={true}
+                maintainColumnOrder={true}
+                suppressAutoSize={false}
+                sizeColumnsToFit={false}
             />
         </div>
     );

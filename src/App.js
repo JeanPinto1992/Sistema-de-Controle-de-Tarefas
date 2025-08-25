@@ -122,7 +122,7 @@ export default function App() {
                 .from('tarefas')
                 .select(`
                     *,
-                    concluidas!left(data_conclusao, dias_para_conclusao)
+                    concluidas!left(observacoes, data_conclusao, dias_para_conclusao)
                 `)
                 .eq('status', 'CONCLUIDA')
                 .order('id_tarefa');
@@ -136,7 +136,7 @@ export default function App() {
                     data_criacao: formatDate(x.data_criacao),
                     data_criacao_para_ordenacao: x.data_criacao,
                     mes: MESES[new Date(x.data_criacao).getMonth()].substring(0, 3).toUpperCase(),
-                    observacoes: x.em_andamento?.observacoes || '',
+                    observacoes: x.concluidas?.observacoes || x.em_andamento?.observacoes || '',
                     data_conclusao: x.concluidas?.data_conclusao ? formatDate(x.concluidas?.data_conclusao) : '',
                     dias_para_conclusao: x.concluidas?.dias_para_conclusao || 0
                 }));
@@ -266,6 +266,20 @@ export default function App() {
 
             if (selectError) throw selectError;
 
+            // Buscar observações da tabela em_andamento
+            const { data: andamentoData, error: andamentoError } = await supabase
+                .from('em_andamento')
+                .select('observacoes')
+                .eq('id_tarefa', id)
+                .single();
+
+            console.log('🔍 Debug - andamentoData:', andamentoData);
+            console.log('🔍 Debug - andamentoError:', andamentoError);
+            console.log('🔍 Debug - obs parameter:', obs);
+
+            const observacoes = andamentoData?.observacoes || obs || '';
+            console.log('🔍 Debug - observacoes final:', observacoes);
+
             // Calcular dias para conclusão
             const dataCriacao = new Date(tarefaData.data_criacao);
             const dataAtual = new Date();
@@ -280,14 +294,19 @@ export default function App() {
             if (updateError) throw updateError;
 
             // Inserir na tabela concluidas
+            const dadosParaInserir = {
+                id_tarefa: id,
+                observacoes: observacoes,
+                data_conclusao: new Date().toISOString(),
+                dias_para_conclusao: diasParaConclusao
+            };
+            console.log('🔍 Debug - dadosParaInserir:', dadosParaInserir);
+
             const { error: insertError } = await supabase
                 .from('concluidas')
-                .upsert({
-                    id_tarefa: id,
-                    data_conclusao: new Date().toISOString(),
-                    dias_para_conclusao: diasParaConclusao
-                }, { onConflict: 'id_tarefa' });
+                .upsert(dadosParaInserir, { onConflict: 'id_tarefa' });
 
+            console.log('🔍 Debug - insertError:', insertError);
             if (insertError) throw insertError;
 
             // Remover da tabela em_andamento
@@ -430,6 +449,81 @@ export default function App() {
             setCarregando(false);
         }
     };
+
+    async function retornarParaAndamento(id) {
+        try {
+            // Buscar dados da tarefa concluída
+            const { data: tarefaConcluida, error: selectError } = await supabase
+                .from('concluidas')
+                .select('*')
+                .eq('id_tarefa', id)
+                .single();
+
+            if (selectError) throw selectError;
+
+            // Atualizar status da tarefa para EM ANDAMENTO
+            const { error: updateError } = await supabase
+                .from('tarefas')
+                .update({ status: 'EM ANDAMENTO' })
+                .eq('id_tarefa', id);
+
+            if (updateError) throw updateError;
+
+            // Inserir na tabela em_andamento com as observações
+            const { error: insertError } = await supabase
+                .from('em_andamento')
+                .upsert({
+                    id_tarefa: id,
+                    observacoes: tarefaConcluida.observacoes || ''
+                }, { onConflict: 'id_tarefa' });
+
+            if (insertError) throw insertError;
+
+            // Remover da tabela concluidas
+            const { error: deleteError } = await supabase
+                .from('concluidas')
+                .delete()
+                .eq('id_tarefa', id);
+
+            if (deleteError) throw deleteError;
+
+            mostrarMsg(`Tarefa ${id} retornada para Em Andamento!`);
+            carregarDados();
+        } catch (e) {
+            console.error('Erro ao retornar tarefa:', e);
+            mostrarMsg('Erro ao retornar tarefa: ' + e.message, 'danger');
+        }
+    }
+
+    async function excluirTarefa(id) {
+        if (!window.confirm('Tem certeza que deseja excluir esta tarefa permanentemente?')) {
+            return;
+        }
+
+        try {
+            // Remover da tabela concluidas
+            const { error: deleteConcluidas } = await supabase
+                .from('concluidas')
+                .delete()
+                .eq('id_tarefa', id);
+
+            if (deleteConcluidas) throw deleteConcluidas;
+
+            // Remover da tabela tarefas
+            const { error: deleteTarefas } = await supabase
+                .from('tarefas')
+                .delete()
+                .eq('id_tarefa', id);
+
+            if (deleteTarefas) throw deleteTarefas;
+
+            mostrarMsg(`Tarefa ${id} excluída permanentemente!`);
+            carregarDados();
+        } catch (e) {
+            console.error('Erro ao excluir tarefa:', e);
+            mostrarMsg('Erro ao excluir tarefa: ' + e.message, 'danger');
+        }
+    }
 
     const handleEditObservationClick = (id, currentObs) => {
         setEditingObsId(id);
@@ -758,7 +852,13 @@ export default function App() {
 
                 {activeTab === 'concluidas' && (
                     <div style={{ height: '14.8cm', width: '100%' }} className="ag-theme-alpine">
-                        <TarefaGrid dados={concluidas} tipo="concluidas" carregando={carregando} />
+                        <TarefaGrid 
+                            dados={concluidas} 
+                            tipo="concluidas" 
+                            onRetornarParaAndamento={retornarParaAndamento}
+                            onExcluirTarefa={excluirTarefa}
+                            carregando={carregando} 
+                        />
                     </div>
                 )}
 
