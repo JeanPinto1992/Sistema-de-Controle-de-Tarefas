@@ -744,7 +744,7 @@ h2.text-center.text-primary {
 
 .relatorio-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   gap: var(--spacing-xs) var(--spacing-sm);
   color: var(--text-primary);
 }
@@ -779,16 +779,7 @@ h2.text-center.text-primary {
   font-size: calc(var(--spacing-md) * 1.25);
 }
 
-@media (max-width: 900px) {
-  .relatorio-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 @media (max-width: 768px) {
-  .relatorio-grid {
-    grid-template-columns: 1fr;
-  }
   .relatorio-header span,
   .relatorio-row span {
     text-align: left;
@@ -800,10 +791,7 @@ h2.text-center.text-primary {
 }
 
 .relatorio-chart {
-  width: 100%;
-  height: calc(var(--spacing-md) * 20);
-  margin-top: var(--spacing-md);
-  background-color: var(--page-bg);
+  height: min(40vh, calc(var(--spacing-md)*20));
 }
 
 .relatorio-chart .recharts-cartesian-axis-tick text {
