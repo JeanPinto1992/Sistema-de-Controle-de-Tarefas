@@ -4,6 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 import { Container, Tabs, Tab, Modal, Row, Col, Alert } from 'react-bootstrap';
 import { Button, Card, Input, Title, Form, FormGroup } from './styles';
 import { TabbedOverlay, useTabbedOverlay } from './styles/components/overlays';
+import styles from './styles/index.module.css';
 import TarefaGrid from './components/TarefaGrid';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 // Certifique-se de que seu arquivo CSS principal está importado aqui, ex:
@@ -816,7 +817,7 @@ export default function App() {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <FormGroup className="mb-2">
+                        <FormGroup className={styles.spacingSm}>
                             <label>Tarefa *</label>
                             <Input
                                 name="tarefa"
@@ -824,7 +825,7 @@ export default function App() {
                                 onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
                             />
                         </FormGroup>
-                        <FormGroup className="mb-2">
+                        <FormGroup className={styles.spacingSm}>
                             <label>Descrição</label>
                             <Input
                                 name="descricao"
@@ -834,7 +835,7 @@ export default function App() {
                         </FormGroup>
                         <Row>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup className={styles.spacingSm}>
                                     <label>Responsável *</label>
                                     <Input
                                         as="select"
@@ -848,7 +849,7 @@ export default function App() {
                                 </FormGroup>
                             </Col>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup className={styles.spacingSm}>
                                     <label>Repetir *</label>
                                     <Input
                                         as="select"
@@ -864,7 +865,7 @@ export default function App() {
                         </Row>
                         <Row>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup className={styles.spacingSm}>
                                     <label>Prioridade *</label>
                                     <Input
                                         as="select"
@@ -879,7 +880,7 @@ export default function App() {
                                 </FormGroup>
                             </Col>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup className={styles.spacingSm}>
                                     <label>Setor *</label>
                                     <Input
                                         name="setor"
@@ -931,7 +932,7 @@ export default function App() {
                     <Modal.Title>Editar Observação da Tarefa #{editingObsId}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <FormGroup className="mb-3">
+                    <FormGroup className={styles.spacingMd}>
                         <label>Observações</label>
                         <Input
                             as="textarea"
