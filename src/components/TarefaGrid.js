@@ -58,17 +58,29 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
     }, [onEditObservationClick]);
 
 
-    const comuns = useMemo(() => [
-        { headerName: 'ID', field: 'id_tarefa', flex: 0.5, cellStyle: centerAndNowrap },
-        { headerName: 'CRIAÇÃO', field: 'data_criacao', flex: 1, cellStyle: centerAndNowrap },
-        { headerName: 'TAREFA', field: 'tarefa', flex: 1, cellStyle: { textAlign: 'left' } },
-        { headerName: 'DESCRIÇÃO', field: 'descricao', flex: 1.2, cellStyle: { textAlign: 'left' } },
-        { headerName: 'RESPONSÁVEL', field: 'responsavel', flex: 0.9, cellStyle: centerAndNowrap },
-        { headerName: 'REPETIR', field: 'repetir', flex: 0.7, cellStyle: centerAndNowrap },
-        { headerName: 'PRIORIDADE', field: 'prioridade', flex: 0.9, cellStyle: centerAndNowrap },
-        { headerName: 'MÊS', field: 'mes', flex: 0.8, cellStyle: centerAndNowrap },
-        { headerName: 'SETOR', field: 'setor', flex: 0.8, cellStyle: centerAndNowrap }
-    ], [centerAndNowrap]); 
+    const comuns = useMemo(() => {
+        const baseColumns = [
+            { headerName: 'ID', field: 'id_tarefa', flex: 0.5, cellStyle: centerAndNowrap },
+            { headerName: 'CRIAÇÃO', field: 'data_criacao', flex: 1, cellStyle: centerAndNowrap },
+            { headerName: 'TAREFA', field: 'tarefa', flex: 1, cellStyle: { textAlign: 'left' } },
+            { headerName: 'DESCRIÇÃO', field: 'descricao', flex: 1.2, cellStyle: { textAlign: 'left' } },
+            { headerName: 'RESPONSÁVEL', field: 'responsavel', flex: 0.9, cellStyle: centerAndNowrap },
+            { headerName: 'REPETIR', field: 'repetir', flex: 0.7, cellStyle: centerAndNowrap },
+            { headerName: 'PRIORIDADE', field: 'prioridade', flex: 0.9, cellStyle: centerAndNowrap },
+            { headerName: 'MÊS', field: 'mes', flex: 0.8, cellStyle: centerAndNowrap },
+            { headerName: 'SETOR', field: 'setor', flex: 0.8, cellStyle: centerAndNowrap }
+        ];
+
+        // Para aba Concluídas, adicionar cellRenderer clicável
+        if (tipo === 'concluidas' && onFieldClick) {
+            return baseColumns.map(col => ({
+                ...col,
+                cellRenderer: ClickableCellRenderer
+            }));
+        }
+
+        return baseColumns;
+    }, [centerAndNowrap, tipo, onFieldClick, ClickableCellRenderer]);
 
     const columnDefs = useMemo(() => {
         const editarBtn = {
@@ -193,17 +205,32 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         } else if (tipo === 'concluidas') {
             currentColumns = currentColumns.filter(col => col.field !== 'status_tarefa');
             
-            // Adicionar as 3 colunas específicas da aba Concluídas (colunas 10, 11, 12)
-            currentColumns.push(
-                {
-                    headerName: 'OBSERVAÇÕES',
-                    field: 'observacoes',
-                    flex: 1.2,
-                    cellStyle: { textAlign: 'left' }
-                },
-                { headerName: 'CONCLUSÃO', field: 'data_conclusao', flex: 1, cellStyle: centerAndNowrap },
-                { headerName: 'DIAS', field: 'dias_para_conclusao', flex: 0.8, cellStyle: centerAndNowrap }
-            );
+            // Adicionar as 3 colunas específicas da aba Concluídas com cellRenderer clicável
+            const observacoesColumn = {
+                headerName: 'OBSERVAÇÕES',
+                field: 'observacoes',
+                flex: 1.2,
+                cellStyle: { textAlign: 'left' },
+                cellRenderer: onFieldClick ? ClickableCellRenderer : undefined
+            };
+            
+            const conclusaoColumn = {
+                headerName: 'CONCLUSÃO',
+                field: 'data_conclusao',
+                flex: 1,
+                cellStyle: centerAndNowrap,
+                cellRenderer: onFieldClick ? ClickableCellRenderer : undefined
+            };
+            
+            const diasColumn = {
+                headerName: 'DIAS',
+                field: 'dias_para_conclusao',
+                flex: 0.8,
+                cellStyle: centerAndNowrap,
+                cellRenderer: onFieldClick ? ClickableCellRenderer : undefined
+            };
+            
+            currentColumns.push(observacoesColumn, conclusaoColumn, diasColumn);
             
             // Coluna 13: Ícone de retornar para Em Andamento
             const retornarBtn = {
@@ -262,7 +289,7 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         }
 
         return currentColumns;
-    }, [tipo, comuns, onReabrir, onConcluir, onMoverParaAndamento, onRetornarParaAndamento, onExcluirTarefa, centerAndNowrap, ObservationCellRenderer]);
+    }, [tipo, comuns, onReabrir, onConcluir, onMoverParaAndamento, onRetornarParaAndamento, onExcluirTarefa, centerAndNowrap, ObservationCellRenderer, onFieldClick, ClickableCellRenderer]);
 
     const defaultColDef = useMemo(() => ({
         resizable: true,
