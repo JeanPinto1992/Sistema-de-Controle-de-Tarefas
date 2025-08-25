@@ -529,15 +529,14 @@ filter: saturate(1.1);
   --ag-row-border-color: #ccc;
 
   font-size: 0.85rem;
-  height: auto !important; /* Remove altura fixa */
-  overflow: visible !important; /* Remove scroll interno */
+  height: 100%;
 }
 
-/* Headers fixos (sticky) */
+/* Headers fixos dentro do próprio grid */
 .ag-theme-alpine .ag-header {
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 100 !important;
+  position: sticky;
+  top: 0;
+  z-index: 10;
   background-color: #003300 !important;
 }
 
