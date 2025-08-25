@@ -42,3 +42,7 @@
   border: var(--border-width) solid var(--primary);
   font-family: var(--font-family);
 }
+
+.spacingMd {
+  margin-bottom: var(--spacing-md);
+}
