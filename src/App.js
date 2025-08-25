@@ -65,6 +65,11 @@ export default function App() {
     const [editingObsId, setEditingObsId] = useState(null);
     const [editingObsText, setEditingObsText] = useState('');
 
+    // NOVOS ESTADOS PARA O MODAL DE VISUALIZAÇÃO DE CAMPO
+    const [showFieldModal, setShowFieldModal] = useState(false);
+    const [fieldModalContent, setFieldModalContent] = useState('');
+    const [fieldModalTitle, setFieldModalTitle] = useState('');
+
     const [mesRelatorio, setMesRelatorio] = useState(new Date().getMonth());
     const [relatorio, setRelatorio] = useState({});
     const totaisRelatorio = useMemo(() => {
