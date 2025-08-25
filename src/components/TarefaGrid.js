@@ -312,11 +312,9 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             className="ag-theme-alpine"
             style={{
                 width: '100%',
-                height: 'auto',
-                maxHeight: '14.8cm',
+                height: '100%',
                 backgroundColor: '#c6e0b4',
-                overflowX: 'auto',
-                minWidth: '1400px', // Garantir largura mínima para todas as colunas
+                overflow: 'hidden'
             }}
         >
             <AgGridReact
@@ -325,7 +323,7 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                 columnDefs={columnDefs}
                 defaultColDef={defaultColDef}
                 className="ag-theme-alpine"
-                domLayout="autoHeight"
+                domLayout="normal"
                 suppressHorizontalScroll={false}
                 headerHeight={40}
                 rowHeight={40}
