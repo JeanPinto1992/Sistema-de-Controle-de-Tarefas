@@ -1,7 +1,7 @@
 // src/App.js
 import React, { useState, useEffect, useMemo } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import { Container, Tabs, Tab, Modal, Row, Col, Alert } from 'react-bootstrap';
+import { Container, Tabs, Tab, Row, Col, Alert } from 'react-bootstrap';
 import { Button, Card, Input, Title, Form, FormGroup } from './styles';
 import { TabbedOverlay, useTabbedOverlay } from './styles/components/overlays';
 import TarefaGrid from './components/TarefaGrid';
@@ -47,7 +47,7 @@ export default function App() {
     const [carregando, setCarregando] = useState(true);
     const [mensagem, setMensagem] = useState(null);
     const [tipoMsg, setTipoMsg] = useState('success');
-    const [showModal, setShowModal] = useState(false);
+    const tarefaOverlay = useTabbedOverlay();
     const [novaTarefa, setNovaTarefa] = useState({
         tarefa: '', descricao: '', responsavel: 'JEAN',
         repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
@@ -55,13 +55,13 @@ export default function App() {
     const [editId, setEditId] = useState(null);
     const [forceUpdate, setForceUpdate] = useState(0); // Para forçar atualização da tabela
 
-    // ESTADOS PARA O MODAL DE DESCRIÇÃO
-    const [showDescriptionModal, setShowDescriptionModal] = useState(false);
+    // Hook para overlay de descrição
+    const descriptionOverlay = useTabbedOverlay();
     const [currentDescription, setCurrentDescription] = useState('');
     const [currentObservations, setCurrentObservations] = useState('');
 
-    // NOVOS ESTADOS PARA O MODAL DE EDIÇÃO DE OBSERVAÇÕES
-    const [showEditObsModal, setShowEditObsModal] = useState(false);
+    // Hook para overlay de edição de observações
+    const editObsOverlay = useTabbedOverlay();
     const [editingObsId, setEditingObsId] = useState(null);
     const [editingObsText, setEditingObsText] = useState('');
 
@@ -221,7 +221,7 @@ export default function App() {
             }
 
             mostrarMsg(editId ? 'Tarefa atualizada!' : 'Tarefa criada!');
-            setShowModal(false);
+            tarefaOverlay.close();
             setEditId(null);
             carregarDados();
         } catch (e) {
@@ -377,7 +377,7 @@ export default function App() {
             setForceUpdate(prev => prev + 1);
 
             mostrarMsg('Observação salva com sucesso!', 'success');
-            handleCloseEditObsModal();
+            handleCloseEditObsOverlay();
             
             // CORREÇÃO: Carregar dados atualizados de forma mais robusta
             setTimeout(async () => {
@@ -434,11 +434,11 @@ export default function App() {
     const handleEditObservationClick = (id, currentObs) => {
         setEditingObsId(id);
         setEditingObsText(currentObs || '');
-        setShowEditObsModal(true);
+        editObsOverlay.open();
     };
 
-    const handleCloseEditObsModal = () => {
-        setShowEditObsModal(false);
+    const handleCloseEditObsOverlay = () => {
+        editObsOverlay.close();
         setEditingObsId(null);
         setEditingObsText('');
     };
@@ -468,7 +468,7 @@ export default function App() {
             setor: taskToEdit.setor,
             observacoes: taskToEdit.observacoes || ''
         });
-        setShowModal(true);
+        tarefaOverlay.open();
     }
 
     const mesAtualNomeCurto = MESES[mesSelecionado].substring(0, 3).toUpperCase();
@@ -550,21 +550,19 @@ export default function App() {
     const tarefasColunas = distribuirEmColunasPorResponsavel(tarefasARealizarDoMes);
     const andamentoColunas = distribuirEmColunasPorResponsavel(andamentoDoMes);
 
-    const handleOpenDescriptionModal = (event, tarefa) => {
+    const handleOpenDescriptionOverlay = (event, tarefa) => {
         event.stopPropagation();
 
         setCurrentDescription(tarefa.descricao || 'Sem descrição.');
         setCurrentObservations(tarefa.observacoes || '');
-        setShowDescriptionModal(true);
-        console.log("Modal de descrição SET para visível pelo clique no ícone.");
+        descriptionOverlay.open();
+        console.log("Overlay de descrição aberto pelo clique no ícone.");
     };
 
-    const handleDescriptionModalClose = (event) => {
-        if (event.target.id === 'task-description-modal-overlay') {
-            setShowDescriptionModal(false);
-            setCurrentDescription('');
-            setCurrentObservations('');
-        }
+    const handleDescriptionOverlayClose = () => {
+        descriptionOverlay.close();
+        setCurrentDescription('');
+        setCurrentObservations('');
     };
 
     const SetorTick = ({ x, y, payload }) => (
@@ -665,7 +663,7 @@ export default function App() {
                                 setNovaTarefa({
                                     tarefa: '', descricao: '', responsavel: 'JEAN', repetir: 'NÃO', prioridade: 'NORMAL', setor: ''
                                 });
-                                setShowModal(true);
+                                tarefaOverlay.open();
                             }}
                         >
                             Criar Nova Tarefa
@@ -689,7 +687,7 @@ export default function App() {
                                             >
                                                 <span
                                                     className="card-open-modal-icon"
-                                                    onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
+                                                    onClick={(e) => handleOpenDescriptionOverlay(e, tarefa)}
                                                     title="Ver detalhes"
                                                 >
                                                     +
@@ -715,7 +713,7 @@ export default function App() {
                                             >
                                                 <span
                                                     className="card-open-modal-icon"
-                                                    onClick={(e) => handleOpenDescriptionModal(e, tarefa)}
+                                                    onClick={(e) => handleOpenDescriptionOverlay(e, tarefa)}
                                                     title="Ver detalhes"
                                                 >
                                                     +
@@ -809,14 +807,12 @@ export default function App() {
                 )}
             </div>
 
-            {/* Modal ORIGINAL (para Criar/Editar Tarefa) */}
-            <Modal show={showModal} onHide={() => setShowModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{editId ? 'Editar' : 'Nova'} Tarefa</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+            {/* Overlay para Criar/Editar Tarefa */}
+            <TabbedOverlay isOpen={tarefaOverlay.isOpen}>
+                <Card>
+                    <Title>{editId ? 'Editar' : 'Nova'} Tarefa</Title>
                     <Form>
-                        <FormGroup className="mb-2">
+                        <FormGroup>
                             <label>Tarefa *</label>
                             <Input
                                 name="tarefa"
@@ -824,7 +820,7 @@ export default function App() {
                                 onChange={e => setNovaTarefa({ ...novaTarefa, [e.target.name]: e.target.value })}
                             />
                         </FormGroup>
-                        <FormGroup className="mb-2">
+                        <FormGroup>
                             <label>Descrição</label>
                             <Input
                                 name="descricao"
@@ -834,7 +830,7 @@ export default function App() {
                         </FormGroup>
                         <Row>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup>
                                     <label>Responsável *</label>
                                     <Input
                                         as="select"
@@ -848,7 +844,7 @@ export default function App() {
                                 </FormGroup>
                             </Col>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup>
                                     <label>Repetir *</label>
                                     <Input
                                         as="select"
@@ -864,7 +860,7 @@ export default function App() {
                         </Row>
                         <Row>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup>
                                     <label>Prioridade *</label>
                                     <Input
                                         as="select"
@@ -879,7 +875,7 @@ export default function App() {
                                 </FormGroup>
                             </Col>
                             <Col>
-                                <FormGroup className="mb-2">
+                                <FormGroup>
                                     <label>Setor *</label>
                                     <Input
                                         name="setor"
@@ -890,48 +886,40 @@ export default function App() {
                             </Col>
                         </Row>
                     </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowModal(false)}>Cancelar</Button>
-                    <Button variant="primary" onClick={salvarTarefa} disabled={!isFormValid}>Salvar</Button>
-                </Modal.Footer>
-            </Modal>
-
-            {/* Modal de Descrição da Tarefa (apenas para exibição) */}
-            {showDescriptionModal && (
-                <div id="task-description-modal-overlay" className="modal-overlay" onClick={handleDescriptionModalClose}>
-                    <div id="task-description-modal-content" className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <span className="close-button" onClick={() => setShowDescriptionModal(false)}>&times;</span>
-
-                        {currentDescription && (
-                            <>
-                                <h5>Descrição:</h5>
-                                <p id="modal-description-text" className="modal-text-content">{currentDescription}</p>
-                            </>
-                        )}
-
-                        {currentObservations && (
-                            <>
-                                <div className="modal-separator"></div>
-                                <h5>Observações:</h5>
-                                <p id="modal-observations-text" className="modal-text-content">{currentObservations}</p>
-                            </>
-                        )}
-
-                        {!currentDescription && !currentObservations && (
-                            <p className="text-muted">Nenhuma descrição ou observação disponível para esta tarefa.</p>
-                        )}
+                    <div>
+                        <Button variant="secondary" onClick={tarefaOverlay.close}>Cancelar</Button>
+                        <Button variant="primary" onClick={salvarTarefa} disabled={!isFormValid}>Salvar</Button>
                     </div>
-                </div>
-            )}
+                </Card>
+            </TabbedOverlay>
 
-            {/* NOVO MODAL PARA EDIÇÃO DE OBSERVAÇÕES */}
-            <Modal show={showEditObsModal} onHide={handleCloseEditObsModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Editar Observação da Tarefa #{editingObsId}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <FormGroup className="mb-3">
+            {/* Overlay de Descrição da Tarefa */}
+            <TabbedOverlay isOpen={descriptionOverlay.isOpen}>
+                <Card>
+                    {currentDescription && (
+                        <>
+                            <Title level={5}>Descrição:</Title>
+                            <p>{currentDescription}</p>
+                        </>
+                    )}
+                    {currentObservations && (
+                        <>
+                            <Title level={5}>Observações:</Title>
+                            <p>{currentObservations}</p>
+                        </>
+                    )}
+                    {!currentDescription && !currentObservations && (
+                        <p>Nenhuma descrição ou observação disponível para esta tarefa.</p>
+                    )}
+                    <Button variant="secondary" onClick={handleDescriptionOverlayClose}>Fechar</Button>
+                </Card>
+            </TabbedOverlay>
+
+            {/* Overlay para Edição de Observações */}
+            <TabbedOverlay isOpen={editObsOverlay.isOpen}>
+                <Card>
+                    <Title>Editar Observação da Tarefa #{editingObsId}</Title>
+                    <FormGroup>
                         <label>Observações</label>
                         <Input
                             as="textarea"
@@ -941,16 +929,16 @@ export default function App() {
                             placeholder="Digite suas observações aqui..."
                         />
                     </FormGroup>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseEditObsModal}>
-                        Cancelar
-                    </Button>
-                    <Button variant="primary" onClick={handleSaveObservation}>
-                        Salvar Observação
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                    <div>
+                        <Button variant="secondary" onClick={handleCloseEditObsOverlay}>
+                            Cancelar
+                        </Button>
+                        <Button variant="primary" onClick={handleSaveObservation}>
+                            Salvar Observação
+                        </Button>
+                    </div>
+                </Card>
+            </TabbedOverlay>
         </Container>
     );
 }
