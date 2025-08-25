@@ -1,13 +1,28 @@
+require('dotenv').config();
 const { createClient } = require('@supabase/supabase-js');
 
-// Configuração do Supabase
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL || 'https://your-project.supabase.co';
-const supabaseKey = process.env.REACT_APP_SUPABASE_ANON_KEY || 'your-anon-key';
+// Configuração do Supabase com as credenciais corretas
+const supabaseUrl = 'https://xdwypvfgaatcfxpjygub.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhkd3lwdmZnYWF0Y2Z4cGp5Z3ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg5ODA2ODUsImV4cCI6MjA2NDU1NjY4NX0.FN8h5tT77tOPyPtjs1hVysj3HXT9Q6P5qqnmM1aAPxM';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function recuperarObservacoesPerdidas() {
   try {
     console.log('🔍 RECUPERANDO OBSERVAÇÕES PERDIDAS...');
+    
+    // Testar conexão primeiro
+    console.log('🔗 Testando conexão com Supabase...');
+    const { data: testData, error: testError } = await supabase
+      .from('tarefas')
+      .select('count')
+      .limit(1);
+    
+    if (testError) {
+      console.error('❌ Erro de conexão:', testError);
+      return;
+    }
+    
+    console.log('✅ Conexão estabelecida com sucesso!');
     
     // 1. Buscar TODAS as tarefas concluídas (sem observações)
     const { data: tarefasConcluidas, error: errorConcluidas } = await supabase
