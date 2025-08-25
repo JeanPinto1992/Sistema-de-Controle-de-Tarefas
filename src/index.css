@@ -240,15 +240,16 @@ h2.text-center.text-primary {
   margin-top: 50px;
 }
 
-/* Containers dos murais */
+/* Containers dos murais - scroll da janela */
 .mural-container {
   display: flex;
-  gap: 20px; /* Aumentado o gap para dar mais espaço e permitir as sombras/rotações */
+  gap: 20px;
   flex-wrap: nowrap;
   width: 100%;
   padding: 0 0.5px;
   box-sizing: border-box;
   margin-top: 0px;
+  overflow: visible; /* Permite scroll da janela */
 }
 
 .mural-section {
@@ -261,10 +262,16 @@ h2.text-center.text-primary {
   --mural-background-color: #c6e0b4;
   height: fit-content;
   min-height: 81vh;
-  overflow-y: auto;
+  overflow: visible; /* Remove scroll interno, usa da janela */
 }
 
-/* Quadro "TAREFAS A REALIZAR" (Quadro Verde Escuro) */
+/* Container de relatórios - scroll da janela */
+.relatorios-container {
+  position: relative;
+  overflow: visible; /* Permite scroll da janela */
+  height: auto;
+}
+
 .mural-section:first-child {
   background-color: #375623;
   --mural-background-color: #375623;
