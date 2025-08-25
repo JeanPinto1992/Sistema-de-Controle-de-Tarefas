@@ -313,8 +313,7 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             style={{
                 width: '100%',
                 height: '100%',
-                backgroundColor: '#c6e0b4',
-                overflow: 'hidden'
+                backgroundColor: '#c6e0b4'
             }}
         >
             <AgGridReact
