@@ -839,6 +839,7 @@ export default function App() {
                             tipo="tarefas"
                             onReabrir={reabrir}
                             onMoverParaAndamento={moverParaAndamento}
+                            onExcluirTarefa={excluirTarefa}
                             carregando={carregando}
                         />
                     </div>
@@ -851,6 +852,7 @@ export default function App() {
                             tipo="em_andamento"
                             onConcluir={concluir}
                             onReabrir={reabrir}
+                            onExcluirTarefa={excluirTarefa}
                             carregando={carregando}
                             onEditObservationClick={handleEditObservationClick}
                             forceUpdate={forceUpdate}
