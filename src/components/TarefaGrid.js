@@ -1,13 +1,17 @@
 // frontend/src/components/TarefaGrid.js
-import React, { useMemo, useCallback, useRef, useEffect } from 'react';
+import React, { useMemo, useCallback, useRef, useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
-import { FaEdit, FaCheck, FaSpinner, FaUndo, FaTrash } from 'react-icons/fa'; // Mantenha as importações
+import { FaEdit, FaCheck, FaSpinner, FaUndo, FaTrash } from 'react-icons/fa';
 
 export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMoverParaAndamento, onRetornarParaAndamento, onExcluirTarefa, carregando, onEditObservationClick, forceUpdate, onFieldClick }) {
     const gridRef = useRef();
+    
+    // Estado para armazenar as larguras originais das colunas
+    const [originalWidths, setOriginalWidths] = useState({});
+    const [autoSizedColumns, setAutoSizedColumns] = useState(new Set());
 
     // Estilo de célula centralizado e com quebra de linha
     const centerAndNowrap = useCallback(() => ({
@@ -18,21 +22,19 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
-    }), []); // Sem dependências, pois não usa props/state
+    }), []);
 
     // Renderer de célula para Observações que permite clicar para editar
     const ObservationCellRenderer = useCallback((params) => {
         const handleClick = (e) => {
-            e.stopPropagation(); // É importante manter isso para que o clique não ative outras coisas no Ag-Grid.
+            e.stopPropagation();
             if (onEditObservationClick && params.data && params.data.id_tarefa) {
-                // Passa o ID da tarefa e o valor atual da observação
                 onEditObservationClick(params.data.id_tarefa, params.value);
             }
         };
 
-        // Renderiza o texto - vazio quando não há observações
         const observacaoText = params.value || '';
-        const displayText = observacaoText.trim(); // Mostra vazio quando não há observação
+        const displayText = observacaoText.trim();
         
         return (
             <div style={{
@@ -41,13 +43,13 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                 width: '100%',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'flex-start', // Alinhamento à esquerda para melhor leitura
-                padding: '0 8px', // Adicionar padding
+                justifyContent: 'flex-start',
+                padding: '0 8px',
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 fontSize: '14px',
-                color: '#000' // Cor preta sempre
+                color: '#000'
             }}
             onClick={handleClick}
             title={observacaoText.trim() === '' ? 'Clique para adicionar observação' : observacaoText}
@@ -57,12 +59,11 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         );
     }, [onEditObservationClick]);
 
-    // Renderer de célula clicável para aba Concluídas - MOVIDO PARA DENTRO DO COMPONENTE
+    // Renderer de célula clicável para aba Concluídas
     const ClickableCellRenderer = useCallback((params) => {
         const handleDoubleClick = (e) => {
             e.stopPropagation();
             if (onFieldClick && params.colDef.field) {
-                // Determinar o título do campo baseado no headerName
                 const fieldTitle = params.colDef.headerName || params.colDef.field;
                 onFieldClick(fieldTitle, params.value || 'Sem informação');
             }
@@ -97,6 +98,68 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             </div>
         );
     }, [onFieldClick]);
+
+    // Handler para duplo clique no separador das colunas
+    const onColumnResized = useCallback((params) => {
+        if (params.source === 'uiColumnResized' && params.finished) {
+            const columnId = params.column.getColId();
+            
+            // Armazenar largura original se ainda não foi armazenada
+            if (!originalWidths[columnId]) {
+                setOriginalWidths(prev => ({
+                    ...prev,
+                    [columnId]: params.column.getColDef().flex || params.column.getColDef().width || 100
+                }));
+            }
+        }
+    }, [originalWidths]);
+
+    // Handler para duplo clique no header (separador)
+    const onHeaderDoubleClick = useCallback((event) => {
+        const columnId = event.column.getColId();
+        const gridApi = gridRef.current?.api;
+        
+        if (!gridApi) return;
+
+        // Verificar se a coluna já foi auto-ajustada
+        if (autoSizedColumns.has(columnId)) {
+            // Voltar à largura original
+            const originalWidth = originalWidths[columnId];
+            if (originalWidth) {
+                if (typeof originalWidth === 'number' && originalWidth < 10) {
+                    // É um valor flex
+                    gridApi.setColumnWidths([{ key: columnId, newWidth: null }]);
+                    const colDef = event.column.getColDef();
+                    colDef.flex = originalWidth;
+                    delete colDef.width;
+                } else {
+                    // É uma largura fixa
+                    gridApi.setColumnWidths([{ key: columnId, newWidth: originalWidth }]);
+                }
+                
+                setAutoSizedColumns(prev => {
+                    const newSet = new Set(prev);
+                    newSet.delete(columnId);
+                    return newSet;
+                });
+            }
+        } else {
+            // Armazenar largura original se ainda não foi armazenada
+            if (!originalWidths[columnId]) {
+                const colDef = event.column.getColDef();
+                const originalWidth = colDef.flex || colDef.width || 100;
+                setOriginalWidths(prev => ({
+                    ...prev,
+                    [columnId]: originalWidth
+                }));
+            }
+            
+            // Auto-ajustar a coluna
+            gridApi.autoSizeColumn(columnId);
+            
+            setAutoSizedColumns(prev => new Set([...prev, columnId]));
+        }
+    }, [originalWidths, autoSizedColumns]);
 
     const comuns = useMemo(() => {
         const baseColumns = [
@@ -200,7 +263,6 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             )
         };
 
-        // Botão de excluir para usar nas abas Tarefas e Em Andamento
         const excluirBtn = {
             headerName: '',
             width: 40,
@@ -236,7 +298,7 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                     headerName: 'OBSERVAÇÕES',
                     field: 'observacoes',
                     flex: 1.2,
-                    cellRenderer: ObservationCellRenderer, // <<< Usando o novo cellRenderer sem cellStyle
+                    cellRenderer: ObservationCellRenderer,
                 },
                 editarBtn,
                 concluirBtn,
@@ -245,7 +307,6 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         } else if (tipo === 'concluidas') {
             currentColumns = currentColumns.filter(col => col.field !== 'status_tarefa');
             
-            // Adicionar as 3 colunas específicas da aba Concluídas com cellRenderer clicável
             const observacoesColumn = {
                 headerName: 'OBSERVAÇÕES',
                 field: 'observacoes',
@@ -272,7 +333,6 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             
             currentColumns.push(observacoesColumn, conclusaoColumn, diasColumn);
             
-            // Coluna 13: Ícone de retornar para Em Andamento
             const retornarBtn = {
                 headerName: '',
                 width: 50,
@@ -298,8 +358,7 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                 )
             };
             
-            // Coluna 14: Ícone de excluir tarefa
-            const excluirBtn = {
+            const excluirBtnConcluidas = {
                 headerName: '',
                 width: 50,
                 minWidth: 50,
@@ -324,8 +383,7 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                 )
             };
             
-            // Adicionar as colunas 13 e 14
-            currentColumns.push(retornarBtn, excluirBtn);
+            currentColumns.push(retornarBtn, excluirBtnConcluidas);
         }
 
         return currentColumns;
@@ -361,10 +419,8 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         }
     }, [carregando]);
 
-    // Forçar atualização da tabela quando os dados mudarem
     useEffect(() => {
         if (gridRef.current && gridRef.current.api && dados) {
-            // Força a atualização dos dados na tabela
             gridRef.current.api.setRowData(dados);
             gridRef.current.api.refreshCells();
         }
@@ -405,6 +461,8 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                 animateRows={true}
                 getRowId={getRowId}
                 onGridReady={onGridReady}
+                onColumnResized={onColumnResized}
+                onHeaderDoubleClick={onHeaderDoubleClick}
                 overlayNoRowsTemplate={
                     `<div style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%; background-color: #c6e0b4;">
                         <span style="color: #4a673c; font-size: 1.1em;">Nenhum dado para mostrar</span>
