@@ -70,6 +70,9 @@ export default function App() {
     const [fieldModalContent, setFieldModalContent] = useState('');
     const [fieldModalTitle, setFieldModalTitle] = useState('');
 
+    // NOVO ESTADO PARA CONTROLAR O TOGGLE DO GRÁFICO
+    const [showChartAbove, setShowChartAbove] = useState(false);
+
     const handleFieldClick = (fieldName, fieldValue) => {
         const fieldTitles = {
             'id_tarefa': 'ID da Tarefa',
