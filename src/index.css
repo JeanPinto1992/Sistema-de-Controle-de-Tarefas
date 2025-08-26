@@ -1025,12 +1025,12 @@ h2.text-center.text-primary {
 /* Container de relatórios */
 .relatorios-container {
   position: relative;
-  margin-top: -18px !important;
+  margin-top: -13px !important;
 }
 
 /* Grid de relatórios */
 .relatorio-grid {
-  margin-top: -18px !important;
+  margin-top: -13px !important;
   padding-top: 0px !important;
   position: relative;
 }
@@ -1038,7 +1038,7 @@ h2.text-center.text-primary {
 /* Estilo para o gráfico */
 .chart-above {
   margin-bottom: 5px !important;
-  margin-top: -8px !important;
+  margin-top: -3px !important;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
@@ -1050,5 +1050,5 @@ h2.text-center.text-primary {
 /* Ajustar o Card para ter posição relativa */
 .relatorios-container .card {
   position: relative;
-  margin-top: -18px !important;
+  margin-top: -13px !important;
 }
