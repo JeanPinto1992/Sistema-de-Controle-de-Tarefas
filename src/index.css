@@ -831,8 +831,6 @@ h2.text-center.text-primary {
   margin-top: -23px !important;
   padding-top: 0px !important;
   position: relative;
-  border: 2px solid #007bff;
-  border-radius: 4px;
 }
 
 .relatorio-header,
@@ -867,7 +865,13 @@ h2.text-center.text-primary {
 .relatorio-header span {
   font-weight: bold;
   background-color: #f8f9fa;
+  border-top: 1px solid #007bff;
   border-bottom: 2px solid #007bff;
+}
+
+.relatorio-header span:nth-child(1),
+.relatorio-row span:nth-child(1) {
+  border-left: 1px solid #007bff;
 }
 
 .relatorio-total-row span {
@@ -880,6 +884,10 @@ h2.text-center.text-primary {
 
 .relatorio-total-row span:nth-child(5) {
   border-right: none;
+}
+
+.relatorio-total-row span:nth-child(1) {
+  border-left: 1px solid #007bff;
 }
 
 @media (max-width: 900px) {
