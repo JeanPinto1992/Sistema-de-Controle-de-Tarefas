@@ -725,11 +725,11 @@ export default function App() {
 const CustomLabel = ({ x, y, width, value }) => (
     <text 
         x={x + width / 2} 
-        y={y - 5} 
+        y={y - 10}
         fill="var(--text-primary)" 
         textAnchor="middle" 
         dominantBaseline="middle"
-        fontSize="12"
+        fontSize="16"
         fontWeight="bold"
     >
         {value}
@@ -977,21 +977,20 @@ const CustomLabel = ({ x, y, width, value }) => (
                         ) : (
                             <div className="relatorio-chart chart-above">
                                 <ResponsiveContainer width="100%" height="100%">
-                                    <BarChart data={dadosSolicitadas} margin={{ left: 0 }}>
-                                        <XAxis
-                                            dataKey="setor"
-                                            tick={<SetorTick />}
-                                            interval={0}
-                                            axisLine={false}
-                                            tickLine={false}
-                                        />
-                                        <YAxis width={0} tick={false} axisLine={false} />
-                                        <Tooltip />
-                                        <Bar
-                                            dataKey="solicitadas"
-                                            fill="var(--tab-inactive-bg)"
-                                            label={<CustomLabel />}
-                                        />
+                                    <BarChart data={dadosSolicitadas} margin={{ left: 0, top: 30 }}>
+                                            <XAxis
+                                                dataKey="setor"
+                                                tick={<SetorTick />}
+                                                interval={0}
+                                                axisLine={false}
+                                                tickLine={false}
+                                            />
+                                            <YAxis width={0} tick={false} axisLine={false} />
+                                            <Bar
+                                                dataKey="solicitadas"
+                                                fill="var(--tab-inactive-bg)"
+                                                label={<CustomLabel />}
+                                            />
                                     </BarChart>
                                 </ResponsiveContainer>
                             </div>
