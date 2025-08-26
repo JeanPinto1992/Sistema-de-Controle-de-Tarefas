@@ -442,13 +442,14 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         return params.data.id_tarefa;
     }, []);
 
-    const onGridReady = useCallback((params) => {
-        if (carregando) {
-            params.api.showLoadingOverlay();
-        } else {
-            params.api.hideOverlay();
-        }
-    }, [carregando]);
+    // REMOVER ESTA FUNÇÃO DUPLICADA - ela já existe na linha 119
+    // const onGridReady = useCallback((params) => {
+    //     if (carregando) {
+    //         params.api.showLoadingOverlay();
+    //     } else {
+    //         params.api.hideOverlay();
+    //     }
+    // }, [carregando]);
 
     useEffect(() => {
         if (gridRef.current && gridRef.current.api) {
