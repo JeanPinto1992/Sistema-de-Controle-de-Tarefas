@@ -237,14 +237,14 @@ button.btn-criar-nova-tarefa-azul:focus {
 
 /* Container das abas com espaçamento adequado para o botão */
 .d-flex.align-items-center.mb-2.tabs-container {
-  margin-bottom: 30px !important; /* Aumenta o espaçamento inferior */
-  padding-bottom: 10px !important; /* Adiciona padding inferior */
+  margin-bottom: 8px !important; /* Reduzido drasticamente o espaçamento inferior */
+  padding-bottom: 0px !important; /* Removido o padding inferior */
   position: relative;
 }
 
 /* Espaçamento adicional entre as abas e o grid */
 .ag-theme-alpine {
-  margin-top: 25px !important;
+  margin-top: 5px !important; /* Reduzido de 25px para 5px */
 }
 
 /* REMOVER ESTAS LINHAS DUPLICADAS:
