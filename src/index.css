@@ -195,8 +195,8 @@ h2.text-center.text-primary {
   box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.6);
 }
 
-/* Botão "Criar Nova Tarefa" AZUL na linha das abas */
-.btn-criar-nova-tarefa-azul {
+/* Botão "Criar Nova Tarefa" AZUL na linha das abas - MAIOR ESPECIFICIDADE */
+button.btn-criar-nova-tarefa-azul {
   background: linear-gradient(135deg, #4472C4 0%, #365a96 100%) !important;
   border: 2px solid #4472C4 !important;
   color: white !important;
@@ -217,7 +217,7 @@ h2.text-center.text-primary {
   margin-bottom: 15px !important;
 }
 
-.btn-criar-nova-tarefa-azul:hover {
+button.btn-criar-nova-tarefa-azul:hover {
   background: linear-gradient(135deg, #5a82d4 0%, #4472C4 100%) !important;
   border-color: #5a82d4 !important;
   color: white !important;
@@ -225,18 +225,18 @@ h2.text-center.text-primary {
   transform: translateY(-1px) !important;
 }
 
-.btn-criar-nova-tarefa-azul:active {
+button.btn-criar-nova-tarefa-azul:active {
   transform: translateY(0px) scale(0.98) !important;
   box-shadow: 0 1px 2px rgba(68, 114, 196, 0.3) !important;
   transition: all 0.1s ease !important;
 }
 
-.btn-criar-nova-tarefa-azul:focus {
+button.btn-criar-nova-tarefa-azul:focus {
   outline: none !important;
   box-shadow: 0 0 0 3px rgba(68, 114, 196, 0.25) !important;
 }
 
-/* Container das abas com espaçamento para o botão */
+/* Container das abas com espaçamento para o botão - CORRIGIDO */
 .d-flex.justify-content-between.align-items-center.mb-2.tabs-container {
   width: calc(100% - 220px);
   margin-left: 0;
@@ -252,6 +252,7 @@ h2.text-center.text-primary {
   margin-top: 20px !important;
 }
 
+/* REMOVER ESTAS LINHAS DUPLICADAS:
 .btn-criar-tarefa-container {
   position: absolute;
   top: 90px;
@@ -270,6 +271,7 @@ h2.text-center.text-primary {
   margin-bottom: 0 !important;
   margin-top: 50px;
 }
+*/
 
 /* Containers dos murais - scroll da janela */
 .mural-container {
