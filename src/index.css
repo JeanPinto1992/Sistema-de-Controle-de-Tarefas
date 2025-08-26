@@ -1005,13 +1005,13 @@ h2.text-center.text-primary {
 /* Botão toggle para alternar entre grid e gráfico */
 .chart-toggle-container {
   position: relative;
-  top: 11px;
+  top: -7px;
   left: 0;
   z-index: 1500;
   margin: 0 !important;
   display: flex;
   justify-content: flex-start;
-  padding-left: 1px;
+  padding-left: 6px;
 }
 
 .chart-toggle-btn {
@@ -1111,10 +1111,10 @@ h2.text-center.text-primary {
 /* Ajustar o botão toggle dentro do quadro */
 .relatorios-quadro .chart-toggle-container {
   position: relative;
-  top: 0px;
+  top: -18px;
   left: 0;
   margin-bottom: 15px;
-  padding-left: 0px;
+  padding-left: 5px;
 }
 
 /* Ajustar o card dentro do quadro */
