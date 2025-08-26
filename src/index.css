@@ -831,12 +831,9 @@ h2.text-center.text-primary {
   margin-top: -23px !important;
   padding-top: 0px !important;
   position: relative;
-  border: 1px solid #007bff;
-  border-radius: 4px;
-  overflow: hidden;
 }
 
-/* Criar linhas verticais contínuas */
+/* Criar todas as 4 linhas verticais contínuas */
 .relatorio-grid::before {
   content: '';
   position: absolute;
@@ -858,8 +855,8 @@ h2.text-center.text-primary {
   background-color: #007bff;
   z-index: 1;
   box-shadow: 
-    20% 0 0 #007bff,
-    40% 0 0 #007bff;
+    20% 0 0 #007bff,  /* Linha entre Em Andamento e Concluídas */
+    40% 0 0 #007bff;  /* Linha entre Concluídas e Não Iniciadas */
 }
 
 .relatorio-header,
