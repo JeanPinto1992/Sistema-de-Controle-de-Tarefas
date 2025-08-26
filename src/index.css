@@ -826,8 +826,13 @@ h2.text-center.text-primary {
 .relatorio-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: var(--spacing-xs) var(--spacing-sm);
+  gap: 0;
   color: var(--text-primary);
+  margin-top: -23px !important;
+  padding-top: 0px !important;
+  position: relative;
+  border: 2px solid #007bff;
+  border-radius: 4px;
 }
 
 .relatorio-header,
@@ -842,6 +847,9 @@ h2.text-center.text-primary {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-right: 1px solid #007bff;
+  border-bottom: 1px solid #007bff;
+  background-color: var(--relatorio-row-bg);
 }
 
 .relatorio-row:nth-of-type(odd) span {
@@ -851,13 +859,27 @@ h2.text-center.text-primary {
   background-color: var(--relatorio-row-bg-alt);
 }
 
+.relatorio-header span:nth-child(5),
+.relatorio-row span:nth-child(5) {
+  border-right: none;
+}
+
 .relatorio-header span {
   font-weight: bold;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #007bff;
 }
 
 .relatorio-total-row span {
   font-weight: bold;
   font-size: calc(var(--spacing-md) * 1.25);
+  border-bottom: none;
+  border-right: 1px solid #007bff;
+  background-color: #e9ecef;
+}
+
+.relatorio-total-row span:nth-child(5) {
+  border-right: none;
 }
 
 @media (max-width: 900px) {
