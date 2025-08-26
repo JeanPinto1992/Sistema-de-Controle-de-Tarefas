@@ -57,6 +57,46 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         );
     }, [onEditObservationClick]);
 
+    // Renderer de célula clicável para aba Concluídas - MOVIDO PARA DENTRO DO COMPONENTE
+    const ClickableCellRenderer = useCallback((params) => {
+        const handleDoubleClick = (e) => {
+            e.stopPropagation();
+            if (onFieldClick && params.colDef.field) {
+                // Determinar o título do campo baseado no headerName
+                const fieldTitle = params.colDef.headerName || params.colDef.field;
+                onFieldClick(fieldTitle, params.value || 'Sem informação');
+            }
+        };
+
+        const cellStyle = {
+            cursor: 'pointer',
+            height: '100%',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: params.colDef.field === 'tarefa' || params.colDef.field === 'descricao' || params.colDef.field === 'observacoes' ? 'flex-start' : 'center',
+            padding: '0 8px',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            fontSize: '14px',
+            color: '#000',
+            backgroundColor: 'transparent',
+            transition: 'background-color 0.2s'
+        };
+
+        return (
+            <div 
+                style={cellStyle}
+                onDoubleClick={handleDoubleClick}
+                title={`Duplo clique para ver: ${params.value || 'Sem informação'}`}
+                onMouseEnter={(e) => e.target.style.backgroundColor = '#e3f2fd'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+            >
+                {params.value || ''}
+            </div>
+        );
+    }, [onFieldClick]);
 
     const comuns = useMemo(() => {
         const baseColumns = [
@@ -383,43 +423,3 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         </div>
     );
 }
-
-
-// Renderer de célula clicável para aba Concluídas
-const ClickableCellRenderer = useCallback((params) => {
-    const handleClick = (e) => {
-        e.stopPropagation();
-        if (onFieldClick && params.colDef.field) {
-            onFieldClick(params.colDef.field, params.value);
-        }
-    };
-
-    const cellStyle = {
-        cursor: 'pointer',
-        height: '100%',
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: params.colDef.field === 'tarefa' || params.colDef.field === 'descricao' || params.colDef.field === 'observacoes' ? 'flex-start' : 'center',
-        padding: '0 8px',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        fontSize: '14px',
-        color: '#000',
-        backgroundColor: 'transparent',
-        transition: 'background-color 0.2s'
-    };
-
-    return (
-        <div 
-            style={cellStyle}
-            onClick={handleClick}
-            title={`Clique para ver: ${params.value || 'Sem informação'}`}
-            onMouseEnter={(e) => e.target.style.backgroundColor = '#e3f2fd'}
-            onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
-        >
-            {params.value || ''}
-        </div>
-    );
-}, [onFieldClick]);
