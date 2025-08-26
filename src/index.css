@@ -977,50 +977,62 @@ h2.text-center.text-primary {
 /* Botão toggle para alternar posição do gráfico */
 .chart-toggle-container {
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 5px !important;
+  margin-top: -10px !important;
   display: flex;
   justify-content: flex-start;
 }
 
 .chart-toggle-btn {
-  background: linear-gradient(135deg, #4472C4 0%, #365a96 100%) !important;
-  border: 2px solid #4472C4 !important;
-  color: white !important;
+  background-color: #e9ecef !important;
+  border: 1px solid #ced4da !important;
+  color: #000000 !important;
   font-weight: bold !important;
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 50% !important;
+  width: 80px !important;
+  height: 30px !important;
+  border-radius: 4px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: 1.2rem !important;
-  box-shadow: 0 2px 4px rgba(68, 114, 196, 0.3) !important;
+  font-size: 1rem !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
   transition: all 0.2s ease !important;
   cursor: pointer !important;
   outline: none !important;
 }
 
 .chart-toggle-btn:hover {
-  background: linear-gradient(135deg, #5a82d4 0%, #4472C4 100%) !important;
-  border-color: #5a82d4 !important;
-  color: white !important;
-  box-shadow: 0 4px 8px rgba(68, 114, 196, 0.4) !important;
+  background-color: #dee2e6 !important;
+  border-color: #adb5bd !important;
+  color: #000000 !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15) !important;
   transform: translateY(-1px) !important;
 }
 
 .chart-toggle-btn:active {
-  transform: translateY(0px) scale(0.95) !important;
-  box-shadow: 0 1px 2px rgba(68, 114, 196, 0.3) !important;
+  transform: translateY(0px) scale(0.98) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
 .chart-toggle-btn:focus {
   outline: none !important;
-  box-shadow: 0 0 0 3px rgba(68, 114, 196, 0.25) !important;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25) !important;
+}
+
+/* Reduzir espaçamento do container de relatórios */
+.relatorios-container {
+  position: relative;
+  margin-top: -15px !important;
+}
+
+/* Reduzir espaçamento do grid de relatórios */
+.relatorio-grid {
+  margin-top: 5px !important;
 }
 
 /* Estilo para o gráfico quando está acima */
 .chart-above {
-  margin-bottom: 20px;
+  margin-bottom: 15px !important;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
