@@ -1022,13 +1022,13 @@ h2.text-center.text-primary {
 /* Reduzir espaçamento do container de relatórios */
 .relatorios-container {
   position: relative;
-  margin-top: -35px !important;
+  margin-top: -25px !important;
 }
 
-/* Reduzir espaçamento do grid de relatórios e adicionar padding para o botão */
+/* Grid de relatórios - removendo modificações que causaram problemas */
 .relatorio-grid {
-  margin-top: -10px !important;
-  padding-top: 50px !important;
+  margin-top: 0px !important;
+  padding-top: 40px !important;
   position: relative;
 }
 
