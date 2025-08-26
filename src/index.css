@@ -1055,20 +1055,15 @@ h2.text-center.text-primary {
   margin-top: -13px !important;
 }
 
-/* Quadro de Relatórios - Similar ao Mural */
+/* Quadro de Relatórios - Fundo Branco Limpo */
 .relatorios-quadro {
-  background-color: #ffffff; /* Fundo branco como lousa */
+  background-color: #ffffff; /* Fundo branco limpo */
   border: 12px solid #422100; /* Borda marrom escura mantida */
   border-radius: 8px;
   box-sizing: border-box;
   padding: 20px;
   margin-top: 0px;
-  background-image:
-    linear-gradient(#0066cc 2px, transparent 2px), /* Linhas horizontais azuis */
-    linear-gradient(90deg, #0066cc 2px, transparent 2px); /* Linhas verticais azuis */
-  background-size: 40px 40px; /* Tamanho da grade */
-  background-repeat: repeat;
-  background-position: 0 0;
+  /* Removidas todas as linhas de divisão */
   box-shadow:
     inset 0 0 20px rgba(0,0,0,0.1),
     8px 8px 25px rgba(0, 0, 0, 0.3);
@@ -1076,6 +1071,7 @@ h2.text-center.text-primary {
   overflow: visible;
 }
 
+/* Remover o título do quadro */
 .relatorios-quadro-titulo {
   display: none;
 }
@@ -1092,15 +1088,15 @@ h2.text-center.text-primary {
 /* Ajustar o card dentro do quadro */
 .relatorios-quadro .card {
   background-color: rgba(255, 255, 255, 0.95);
-  border: 2px solid #0066cc; /* Borda azul para combinar com as divisões */
+  border: 1px solid #ddd; /* Borda cinza suave */
   margin-top: 0px !important;
-  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Ajustar o gráfico dentro do quadro */
 .relatorios-quadro .chart-above {
   background-color: rgba(255, 255, 255, 0.95) !important;
-  border: 2px solid #0066cc; /* Borda azul para combinar com as divisões */
+  border: 1px solid #ddd; /* Borda cinza suave */
   margin-top: 0px !important;
-  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
