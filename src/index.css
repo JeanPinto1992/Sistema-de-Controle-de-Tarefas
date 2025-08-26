@@ -977,7 +977,7 @@ h2.text-center.text-primary {
 /* Botão toggle para alternar entre grid e gráfico */
 .chart-toggle-container {
   position: relative;
-  top: 20px;
+  top: 21px;
   left: 0;
   z-index: 1500;
   margin: 0 !important;
