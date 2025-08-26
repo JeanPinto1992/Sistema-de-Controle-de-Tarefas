@@ -100,6 +100,11 @@ export default function App() {
         setFieldModalTitle('');
     };
 
+    // FUNÇÃO PARA ALTERNAR POSIÇÃO DO GRÁFICO
+    const toggleChartPosition = () => {
+        setShowChartAbove(!showChartAbove);
+    };
+
     const [mesRelatorio, setMesRelatorio] = useState(new Date().getMonth());
     const [relatorio, setRelatorio] = useState({});
     const totaisRelatorio = useMemo(() => {
