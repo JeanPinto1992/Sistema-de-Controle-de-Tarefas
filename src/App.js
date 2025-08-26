@@ -937,65 +937,69 @@ const CustomLabel = ({ x, y, width, value }) => (
 
                     {activeTab === 'relatorios' && (
                     <div className="relatorios-container">
-                        <div className="chart-toggle-container">
-                            <Button
-                                className="chart-toggle-btn"
-                                onClick={toggleChartPosition}
-                                title={showChartAbove ? "Mostrar grid" : "Mostrar gráfico"}
-                            >
-                                {showChartAbove ? "▲" : "▼"}
-                            </Button>
-                        </div>
-
-                        {!showChartAbove ? (
-                            <Card>
-                                <div className="relatorio-grid">
-                                    <div className="relatorio-header">
-                                        <span>Setor</span>
-                                        <span>Solicitadas</span>
-                                        <span>Em Andamento</span>
-                                        <span>Concluídas</span>
-                                        <span>Não Iniciadas</span>
-                                    </div>
-                                    {Object.entries(relatorio[mesRelatorio] || {}).sort(([a],[b]) => a.localeCompare(b)).map(([setor, dados]) => (
-                                        <div key={setor} className="relatorio-row">
-                                            <span>{setor}</span>
-                                            <span>{dados.solicitadas}</span>
-                                            <span>{dados.andamento}</span>
-                                            <span>{dados.concluidas}</span>
-                                            <span>{dados.naoIniciadas}</span>
-                                        </div>
-                                    ))}
-                                    <div className="relatorio-row relatorio-total-row">
-                                        <span>Total</span>
-                                        <span>{totaisRelatorio.solicitadas}</span>
-                                        <span>{totaisRelatorio.andamento}</span>
-                                        <span>{totaisRelatorio.concluidas}</span>
-                                        <span>{totaisRelatorio.naoIniciadas}</span>
-                                    </div>
-                                </div>
-                            </Card>
-                        ) : (
-                            <div className="relatorio-chart chart-above">
-                                <ResponsiveContainer width="100%" height="100%">
-                                    <BarChart data={dadosSolicitadas} margin={{ left: 0, top: 30 }}>
-                                            <XAxis
-                                                dataKey="setor"
-                                                tick={<SetorTick />}
-                                                interval={0}
-                                                axisLine={false}
-                                                tickLine={false}
-                                            />
-                                            <YAxis width={0} tick={false} axisLine={false} />
-                                            <Bar
-                                                dataKey="solicitadas"
-                                                fill="var(--tab-inactive-bg)"
-                                                label={<CustomLabel />}
-                                            />
-                                    </BarChart>
-                                </ResponsiveContainer>
+                        <div className="relatorios-quadro">
+                            <h5 className="relatorios-quadro-titulo">RELATÓRIOS GERENCIAIS</h5>
+                            
+                            <div className="chart-toggle-container">
+                                <Button
+                                    className="chart-toggle-btn"
+                                    onClick={toggleChartPosition}
+                                    title={showChartAbove ? "Mostrar grid" : "Mostrar gráfico"}
+                                >
+                                    {showChartAbove ? "▲" : "▼"}
+                                </Button>
                             </div>
-                        )}
+
+                            {!showChartAbove ? (
+                                <Card>
+                                    <div className="relatorio-grid">
+                                        <div className="relatorio-header">
+                                            <span>Setor</span>
+                                            <span>Solicitadas</span>
+                                            <span>Em Andamento</span>
+                                            <span>Concluídas</span>
+                                            <span>Não Iniciadas</span>
+                                        </div>
+                                        {Object.entries(relatorio[mesRelatorio] || {}).sort(([a],[b]) => a.localeCompare(b)).map(([setor, dados]) => (
+                                            <div key={setor} className="relatorio-row">
+                                                <span>{setor}</span>
+                                                <span>{dados.solicitadas}</span>
+                                                <span>{dados.andamento}</span>
+                                                <span>{dados.concluidas}</span>
+                                                <span>{dados.naoIniciadas}</span>
+                                            </div>
+                                        ))}
+                                        <div className="relatorio-row relatorio-total-row">
+                                            <span>Total</span>
+                                            <span>{totaisRelatorio.solicitadas}</span>
+                                            <span>{totaisRelatorio.andamento}</span>
+                                            <span>{totaisRelatorio.concluidas}</span>
+                                            <span>{totaisRelatorio.naoIniciadas}</span>
+                                        </div>
+                                    </div>
+                                </Card>
+                            ) : (
+                                <div className="relatorio-chart chart-above">
+                                    <ResponsiveContainer width="100%" height="100%">
+                                        <BarChart data={dadosSolicitadas} margin={{ left: 0, top: 30 }}>
+                                                <XAxis
+                                                    dataKey="setor"
+                                                    tick={<SetorTick />}
+                                                    interval={0}
+                                                    axisLine={false}
+                                                    tickLine={false}
+                                                />
+                                                <YAxis width={0} tick={false} axisLine={false} />
+                                                <Bar
+                                                    dataKey="solicitadas"
+                                                    fill="var(--tab-inactive-bg)"
+                                                    label={<CustomLabel />}
+                                                />
+                                        </BarChart>
+                                    </ResponsiveContainer>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 )}
             </div>
