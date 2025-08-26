@@ -833,30 +833,10 @@ h2.text-center.text-primary {
   position: relative;
 }
 
-/* Criar todas as 4 linhas verticais contínuas nas posições corretas */
-.relatorio-grid::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 20%;
-  width: 1px;
-  height: 100%;
-  background-color: #007bff;
-  z-index: 1;
-}
-
+/* Remover os pseudo-elementos que não estão funcionando */
+.relatorio-grid::before,
 .relatorio-grid::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 40%;
-  width: 1px;
-  height: 100%;
-  background-color: #007bff;
-  z-index: 1;
-  box-shadow: 
-    20% 0 0 #007bff,  /* 60% - linha entre Em Andamento e Concluídas */
-    40% 0 0 #007bff;  /* 80% - linha entre Concluídas e Não Iniciadas */
+  display: none;
 }
 
 .relatorio-header,
@@ -873,8 +853,14 @@ h2.text-center.text-primary {
   justify-content: center;
   background-color: var(--relatorio-row-bg);
   position: relative;
-  z-index: 2;
   border-bottom: 1px solid #007bff;
+  border-right: 1px solid #007bff;
+}
+
+/* Remover borda direita da última coluna */
+.relatorio-header span:nth-child(5),
+.relatorio-row span:nth-child(5) {
+  border-right: none;
 }
 
 .relatorio-row:nth-of-type(odd) span {
@@ -894,7 +880,12 @@ h2.text-center.text-primary {
   font-weight: bold;
   font-size: calc(var(--spacing-md) * 1.25);
   border-bottom: none;
+  border-right: 1px solid #007bff;
   background-color: #e9ecef;
+}
+
+.relatorio-total-row span:nth-child(5) {
+  border-right: none;
 }
 
 @media (max-width: 900px) {
