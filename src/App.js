@@ -710,7 +710,13 @@ export default function App() {
     };
 
     const SetorTick = ({ x, y, payload }) => (
-        <text x={x} y={y} fill="var(--text-primary)" textAnchor="middle" dominantBaseline="middle">
+        <text 
+            x={x} 
+            y={y + 10} /* Adicionado +10 para criar mais espaço entre o texto e as colunas */
+            fill="var(--text-primary)" 
+            textAnchor="middle" 
+            dominantBaseline="middle"
+        >
             {payload.value}
         </text>
     );
