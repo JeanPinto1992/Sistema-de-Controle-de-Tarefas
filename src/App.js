@@ -710,16 +710,31 @@ export default function App() {
     };
 
     const SetorTick = ({ x, y, payload }) => (
-        <text 
-            x={x} 
-            y={y + 10} /* Adicionado +10 para criar mais espaço entre o texto e as colunas */
-            fill="var(--text-primary)" 
-            textAnchor="middle" 
-            dominantBaseline="middle"
-        >
-            {payload.value}
-        </text>
-    );
+    <text 
+        x={x} 
+        y={y + 10}
+        fill="var(--text-primary)" 
+        textAnchor="middle" 
+        dominantBaseline="middle"
+        fontWeight="bold"
+    >
+        {payload.value}
+    </text>
+);
+
+const CustomLabel = ({ x, y, width, value }) => (
+    <text 
+        x={x + width / 2} 
+        y={y - 5} 
+        fill="var(--text-primary)" 
+        textAnchor="middle" 
+        dominantBaseline="middle"
+        fontSize="12"
+        fontWeight="bold"
+    >
+        {value}
+    </text>
+);
 
     return (
         <Container fluid className="mt-3 d-flex flex-column" style={{ minHeight: '100vh' }}>
@@ -967,10 +982,16 @@ export default function App() {
                                             dataKey="setor"
                                             tick={<SetorTick />}
                                             interval={0}
+                                            axisLine={false}
+                                            tickLine={false}
                                         />
                                         <YAxis width={0} tick={false} axisLine={false} />
                                         <Tooltip />
-                                        <Bar dataKey="solicitadas" fill="var(--tab-inactive-bg)" />
+                                        <Bar
+                                            dataKey="solicitadas"
+                                            fill="var(--tab-inactive-bg)"
+                                            label={<CustomLabel />}
+                                        />
                                     </BarChart>
                                 </ResponsiveContainer>
                             </div>

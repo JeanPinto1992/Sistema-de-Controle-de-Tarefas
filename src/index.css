@@ -1042,7 +1042,7 @@ h2.text-center.text-primary {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
-  background-color: #f8f9fa;
+  background-color: transparent !important;
   position: relative;
   height: calc(100vh - 250px) !important;
   min-height: 500px !important;
