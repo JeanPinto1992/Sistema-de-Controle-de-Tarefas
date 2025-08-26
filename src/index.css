@@ -978,7 +978,7 @@ h2.text-center.text-primary {
 .chart-toggle-container {
   position: absolute;
   top: 10px;
-  right: 20px;
+  left: 20px;
   z-index: 1000;
   margin: 0 !important;
 }
@@ -1022,12 +1022,12 @@ h2.text-center.text-primary {
 /* Reduzir espaçamento do container de relatórios */
 .relatorios-container {
   position: relative;
-  margin-top: -25px !important;
+  margin-top: -35px !important;
 }
 
 /* Reduzir espaçamento do grid de relatórios e adicionar padding para o botão */
 .relatorio-grid {
-  margin-top: 0px !important;
+  margin-top: -10px !important;
   padding-top: 50px !important;
   position: relative;
 }
@@ -1035,7 +1035,7 @@ h2.text-center.text-primary {
 /* Estilo para o gráfico quando está acima */
 .chart-above {
   margin-bottom: 5px !important;
-  margin-top: 50px !important;
+  margin-top: 40px !important;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
