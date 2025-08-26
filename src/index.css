@@ -240,7 +240,7 @@ button.btn-criar-nova-tarefa-azul:focus {
   margin-bottom: 8px !important;
   padding-bottom: 0px !important;
   position: relative;
-  margin-top: -20px !important; /* Subir as abas 20px */
+  margin-top: -35px !important; /* Subir as abas mais 15px (total 35px) */
 }
 
 /* Espaçamento adicional entre as abas e o grid */
