@@ -207,27 +207,26 @@ button.btn-criar-nova-tarefa-azul {
   align-items: center !important;
   justify-content: center !important;
   font-size: 0.95rem !important;
-  border-radius: 8px !important;
-  box-shadow: 0 2px 4px rgba(68, 114, 196, 0.3) !important;
+  border-radius: 12px !important; /* Bordas mais arredondadas */
+  box-shadow: 0 4px 8px rgba(68, 114, 196, 0.3) !important; /* Sombra mais pronunciada */
   transition: all 0.2s ease !important;
   cursor: pointer !important;
   text-decoration: none !important;
   outline: none !important;
-  margin-top: 10px !important;
-  margin-bottom: 15px !important;
+  margin-right: 10px !important; /* Espaçamento da borda direita */
 }
 
 button.btn-criar-nova-tarefa-azul:hover {
   background: linear-gradient(135deg, #5a82d4 0%, #4472C4 100%) !important;
   border-color: #5a82d4 !important;
   color: white !important;
-  box-shadow: 0 4px 8px rgba(68, 114, 196, 0.4) !important;
-  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 12px rgba(68, 114, 196, 0.4) !important;
+  transform: translateY(-2px) !important; /* Efeito de elevação mais pronunciado */
 }
 
 button.btn-criar-nova-tarefa-azul:active {
   transform: translateY(0px) scale(0.98) !important;
-  box-shadow: 0 1px 2px rgba(68, 114, 196, 0.3) !important;
+  box-shadow: 0 2px 4px rgba(68, 114, 196, 0.3) !important;
   transition: all 0.1s ease !important;
 }
 
@@ -236,20 +235,16 @@ button.btn-criar-nova-tarefa-azul:focus {
   box-shadow: 0 0 0 3px rgba(68, 114, 196, 0.25) !important;
 }
 
-/* Container das abas com espaçamento para o botão - CORRIGIDO */
-.d-flex.justify-content-between.align-items-center.mb-2.tabs-container {
-  width: calc(100% - 220px);
-  margin-left: 0;
-  margin-right: auto;
-  padding-right: 10px;
-  margin-bottom: 20px !important;
-  margin-top: 50px;
+/* Container das abas com espaçamento adequado para o botão */
+.d-flex.align-items-center.mb-2.tabs-container {
+  margin-bottom: 30px !important; /* Aumenta o espaçamento inferior */
+  padding-bottom: 10px !important; /* Adiciona padding inferior */
   position: relative;
 }
 
 /* Espaçamento adicional entre as abas e o grid */
 .ag-theme-alpine {
-  margin-top: 20px !important;
+  margin-top: 25px !important;
 }
 
 /* REMOVER ESTAS LINHAS DUPLICADAS:
