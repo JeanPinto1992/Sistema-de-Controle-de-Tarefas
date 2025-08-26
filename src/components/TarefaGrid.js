@@ -12,7 +12,7 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
     // Estado para armazenar as larguras originais das colunas
     const [originalWidths, setOriginalWidths] = useState({});
     const [autoSizedColumns, setAutoSizedColumns] = useState(new Set());
-    const [gridReady, setGridReady] = useState(false);
+    const [gridInitialized, setGridInitialized] = useState(false);
 
     // Estilo de célula centralizado e com quebra de linha
     const centerAndNowrap = useCallback(() => ({
@@ -123,30 +123,31 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
             params.api.hideOverlay();
         }
         
-        // Capturar larguras originais de todas as colunas
+        // Aguardar um pouco para o grid estar totalmente renderizado
         setTimeout(() => {
-            const columnApi = params.columnApi;
-            const allColumns = columnApi.getAllColumns();
+            const allColumns = params.columnApi.getAllColumns();
             const widths = {};
             
             allColumns.forEach(column => {
                 const colDef = column.getColDef();
                 const columnId = column.getColId();
+                
+                // Armazenar tanto flex quanto width original
                 widths[columnId] = {
-                    flex: colDef.flex,
-                    width: colDef.width,
-                    actualWidth: column.getActualWidth()
+                    originalFlex: colDef.flex,
+                    originalWidth: colDef.width,
+                    currentWidth: column.getActualWidth()
                 };
             });
             
             setOriginalWidths(widths);
-            setGridReady(true);
-        }, 100);
+            setGridInitialized(true);
+        }, 200);
     }, [carregando]);
 
     // Handler para duplo clique no header (separador)
     const onHeaderDoubleClick = useCallback((event) => {
-        if (!gridReady) return;
+        if (!gridInitialized) return;
         
         const columnId = event.column.getColId();
         const gridApi = gridRef.current?.api;
@@ -154,49 +155,52 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         
         if (!gridApi || !columnApi) return;
 
+        const column = columnApi.getColumn(columnId);
+        const colDef = column.getColDef();
+        const originalData = originalWidths[columnId];
+        
+        if (!originalData) return;
+
         // Verificar se a coluna já foi auto-ajustada
         if (autoSizedColumns.has(columnId)) {
-            // Voltar à largura original
-            const originalData = originalWidths[columnId];
-            if (originalData) {
-                const column = columnApi.getColumn(columnId);
-                const colDef = column.getColDef();
-                
-                if (originalData.flex) {
-                    // Restaurar flex
-                    colDef.flex = originalData.flex;
-                    delete colDef.width;
-                    columnApi.setColumnWidths([{ key: columnId, newWidth: null }]);
-                } else if (originalData.width) {
-                    // Restaurar largura fixa
-                    delete colDef.flex;
-                    colDef.width = originalData.width;
-                    columnApi.setColumnWidths([{ key: columnId, newWidth: originalData.width }]);
-                } else {
-                    // Usar largura atual como fallback
-                    delete colDef.flex;
-                    colDef.width = originalData.actualWidth;
-                    columnApi.setColumnWidths([{ key: columnId, newWidth: originalData.actualWidth }]);
-                }
-                
-                // Forçar refresh das colunas
-                gridApi.refreshHeader();
-                
-                setAutoSizedColumns(prev => {
-                    const newSet = new Set(prev);
-                    newSet.delete(columnId);
-                    return newSet;
-                });
+            // Voltar à configuração original
+            if (originalData.originalFlex !== undefined) {
+                // Restaurar flex original
+                colDef.flex = originalData.originalFlex;
+                delete colDef.width;
+            } else if (originalData.originalWidth !== undefined) {
+                // Restaurar width original
+                colDef.width = originalData.originalWidth;
+                delete colDef.flex;
+            } else {
+                // Usar largura atual como fallback
+                colDef.width = originalData.currentWidth;
+                delete colDef.flex;
             }
+            
+            // Aplicar as mudanças
+            columnApi.applyColumnState({
+                state: [{
+                    colId: columnId,
+                    flex: colDef.flex,
+                    width: colDef.width
+                }]
+            });
+            
+            setAutoSizedColumns(prev => {
+                const newSet = new Set(prev);
+                newSet.delete(columnId);
+                return newSet;
+            });
         } else {
             // Auto-ajustar a coluna
             gridApi.autoSizeColumn(columnId);
             
             setAutoSizedColumns(prev => new Set([...prev, columnId]));
         }
-    }, [gridReady, originalWidths, autoSizedColumns]);
+    }, [gridInitialized, originalWidths, autoSizedColumns]);
 
-    // Remover o onColumnResized antigo pois não é mais necessário
+    // Remover o onColumnResized antigo
 
     const comuns = useMemo(() => {
         const baseColumns = [
@@ -498,7 +502,6 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                 animateRows={true}
                 getRowId={getRowId}
                 onGridReady={onGridReady}
-                onColumnResized={onColumnResized}
                 onHeaderDoubleClick={onHeaderDoubleClick}
                 overlayNoRowsTemplate={
                     `<div style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%; background-color: #c6e0b4;">
