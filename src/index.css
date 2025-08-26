@@ -976,11 +976,11 @@ h2.text-center.text-primary {
 
 /* Botão toggle para alternar posição do gráfico */
 .chart-toggle-container {
-  position: relative;
-  margin-bottom: 2px !important;
-  margin-top: -5px !important;
-  display: flex;
-  justify-content: flex-start;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 1000;
+  margin: 0 !important;
 }
 
 .chart-toggle-btn {
@@ -995,7 +995,7 @@ h2.text-center.text-primary {
   align-items: center !important;
   justify-content: center !important;
   font-size: 1rem !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
   transition: all 0.2s ease !important;
   cursor: pointer !important;
   outline: none !important;
@@ -1005,13 +1005,13 @@ h2.text-center.text-primary {
   background-color: #dee2e6 !important;
   border-color: #adb5bd !important;
   color: #000000 !important;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2) !important;
   transform: translateY(-1px) !important;
 }
 
 .chart-toggle-btn:active {
   transform: translateY(0px) scale(0.98) !important;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
 }
 
 .chart-toggle-btn:focus {
@@ -1022,19 +1022,28 @@ h2.text-center.text-primary {
 /* Reduzir espaçamento do container de relatórios */
 .relatorios-container {
   position: relative;
-  margin-top: -20px !important;
+  margin-top: -25px !important;
 }
 
-/* Reduzir espaçamento do grid de relatórios */
+/* Reduzir espaçamento do grid de relatórios e adicionar padding para o botão */
 .relatorio-grid {
   margin-top: 0px !important;
+  padding-top: 50px !important;
+  position: relative;
 }
 
 /* Estilo para o gráfico quando está acima */
 .chart-above {
-  margin-bottom: 8px !important;
+  margin-bottom: 5px !important;
+  margin-top: 50px !important;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
   background-color: #f8f9fa;
+  position: relative;
+}
+
+/* Ajustar o Card para ter posição relativa */
+.relatorios-container .card {
+  position: relative;
 }
