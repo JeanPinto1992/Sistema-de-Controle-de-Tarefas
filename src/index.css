@@ -5,8 +5,8 @@
   --tab-active-text: #C00000;
 
   --page-bg: #c6e0b4;
-  --relatorio-row-bg: var(--page-bg);
-  --relatorio-row-bg-alt: color-mix(in srgb, var(--tab-inactive-bg) 20%, var(--page-bg));
+  --relatorio-row-bg: transparent;
+  --relatorio-row-bg-alt: transparent;
 
   /* Spacing scale */
   --spacing-xs: 4px;
