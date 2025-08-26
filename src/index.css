@@ -237,9 +237,10 @@ button.btn-criar-nova-tarefa-azul:focus {
 
 /* Container das abas com espaçamento adequado para o botão */
 .d-flex.align-items-center.mb-2.tabs-container {
-  margin-bottom: 8px !important; /* Reduzido drasticamente o espaçamento inferior */
-  padding-bottom: 0px !important; /* Removido o padding inferior */
+  margin-bottom: 8px !important;
+  padding-bottom: 0px !important;
   position: relative;
+  margin-top: -20px !important; /* Subir as abas 20px */
 }
 
 /* Espaçamento adicional entre as abas e o grid */
