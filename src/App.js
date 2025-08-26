@@ -717,6 +717,7 @@ export default function App() {
         textAnchor="middle" 
         dominantBaseline="middle"
         fontWeight="bold"
+        fontSize="16"
     >
         {payload.value}
     </text>
