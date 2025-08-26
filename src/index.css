@@ -1025,12 +1025,16 @@ h2.text-center.text-primary {
 /* Container de relatórios */
 .relatorios-container {
   position: relative;
-  margin-top: -13px !important;
+  margin-top: -23px !important;
 }
 
 /* Grid de relatórios */
 .relatorio-grid {
-  margin-top: -13px !important;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--spacing-xs) var(--spacing-sm);
+  color: var(--text-primary);
+  margin-top: -23px !important;
   padding-top: 0px !important;
   position: relative;
 }
@@ -1052,7 +1056,7 @@ h2.text-center.text-primary {
 /* Ajustar o Card para ter posição relativa */
 .relatorios-container .card {
   position: relative;
-  margin-top: -13px !important;
+  margin-top: -23px !important;
 }
 
 /* Quadro de Relatórios - Fundo Branco Limpo */
@@ -1088,8 +1092,8 @@ h2.text-center.text-primary {
 /* Ajustar o card dentro do quadro */
 .relatorios-quadro .card {
   background-color: rgba(255, 255, 255, 0.95);
-  border: 1px solid #ddd; /* Borda cinza suave */
-  margin-top: 0px !important;
+  border: 1px solid #ddd;
+  margin-top: -10px !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
