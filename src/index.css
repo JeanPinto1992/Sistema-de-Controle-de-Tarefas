@@ -974,7 +974,7 @@ h2.text-center.text-primary {
   box-shadow: 0 0 0 0.2rem rgba(0, 51, 0, 0.25) !important;
 }
 
-/* Botão toggle para alternar posição do gráfico */
+/* Botão toggle para alternar entre grid e gráfico */
 .chart-toggle-container {
   position: absolute;
   top: 10px;
@@ -1019,20 +1019,20 @@ h2.text-center.text-primary {
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25) !important;
 }
 
-/* Reduzir espaçamento do container de relatórios */
+/* Container de relatórios */
 .relatorios-container {
   position: relative;
   margin-top: -25px !important;
 }
 
-/* Grid de relatórios - removendo modificações que causaram problemas */
+/* Grid de relatórios */
 .relatorio-grid {
   margin-top: 0px !important;
   padding-top: 40px !important;
   position: relative;
 }
 
-/* Estilo para o gráfico quando está acima */
+/* Estilo para o gráfico */
 .chart-above {
   margin-bottom: 5px !important;
   margin-top: 40px !important;
@@ -1041,6 +1041,7 @@ h2.text-center.text-primary {
   padding: 15px;
   background-color: #f8f9fa;
   position: relative;
+  height: 400px;
 }
 
 /* Ajustar o Card para ter posição relativa */
