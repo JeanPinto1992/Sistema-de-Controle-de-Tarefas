@@ -277,8 +277,8 @@ button.btn-criar-nova-tarefa-azul:focus {
   width: 100%;
   padding: 0 0.5px;
   box-sizing: border-box;
-  margin-top: 0px;
-  overflow: visible; /* Permite scroll da janela */
+  margin-top: -35px;
+  overflow: visible;
 }
 
 .mural-section {
@@ -1054,7 +1054,7 @@ h2.text-center.text-primary {
 /* Container de relatórios */
 .relatorios-container {
   position: relative;
-  margin-top: -23px !important;
+  margin-top: -58px !important;
 }
 
 /* Grid de relatórios */
@@ -1063,7 +1063,7 @@ h2.text-center.text-primary {
   grid-template-columns: repeat(5, 1fr);
   gap: var(--spacing-xs) var(--spacing-sm);
   color: var(--text-primary);
-  margin-top: -23px !important;
+  margin-top: -58px !important;
   padding-top: 0px !important;
   position: relative;
 }
@@ -1085,18 +1085,17 @@ h2.text-center.text-primary {
 /* Ajustar o Card para ter posição relativa */
 .relatorios-container .card {
   position: relative;
-  margin-top: -23px !important;
+  margin-top: -58px !important;
 }
 
 /* Quadro de Relatórios - Fundo Branco Limpo */
 .relatorios-quadro {
-  background-color: #ffffff; /* Fundo branco limpo */
-  border: 12px solid #422100; /* Borda marrom escura mantida */
+  background-color: #ffffff;
+  border: 12px solid #422100;
   border-radius: 8px;
   box-sizing: border-box;
   padding: 20px;
-  margin-top: 32px; /* Subido 5px (era 37px) */
-  /* Removidas todas as linhas de divisão */
+  margin-top: -3px;
   box-shadow:
     inset 0 0 20px rgba(0,0,0,0.1),
     8px 8px 25px rgba(0, 0, 0, 0.3);
