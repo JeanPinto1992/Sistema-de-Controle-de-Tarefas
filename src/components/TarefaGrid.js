@@ -12,6 +12,7 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
     // Estado para armazenar as larguras originais das colunas
     const [originalWidths, setOriginalWidths] = useState({});
     const [autoSizedColumns, setAutoSizedColumns] = useState(new Set());
+    const [gridReady, setGridReady] = useState(false);
 
     // Estilo de célula centralizado e com quebra de linha
     const centerAndNowrap = useCallback(() => ({
@@ -114,28 +115,72 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
         }
     }, [originalWidths]);
 
+    // Handler para capturar larguras originais quando o grid estiver pronto
+    const onGridReady = useCallback((params) => {
+        if (carregando) {
+            params.api.showLoadingOverlay();
+        } else {
+            params.api.hideOverlay();
+        }
+        
+        // Capturar larguras originais de todas as colunas
+        setTimeout(() => {
+            const columnApi = params.columnApi;
+            const allColumns = columnApi.getAllColumns();
+            const widths = {};
+            
+            allColumns.forEach(column => {
+                const colDef = column.getColDef();
+                const columnId = column.getColId();
+                widths[columnId] = {
+                    flex: colDef.flex,
+                    width: colDef.width,
+                    actualWidth: column.getActualWidth()
+                };
+            });
+            
+            setOriginalWidths(widths);
+            setGridReady(true);
+        }, 100);
+    }, [carregando]);
+
     // Handler para duplo clique no header (separador)
     const onHeaderDoubleClick = useCallback((event) => {
+        if (!gridReady) return;
+        
         const columnId = event.column.getColId();
         const gridApi = gridRef.current?.api;
+        const columnApi = gridRef.current?.columnApi;
         
-        if (!gridApi) return;
+        if (!gridApi || !columnApi) return;
 
         // Verificar se a coluna já foi auto-ajustada
         if (autoSizedColumns.has(columnId)) {
             // Voltar à largura original
-            const originalWidth = originalWidths[columnId];
-            if (originalWidth) {
-                if (typeof originalWidth === 'number' && originalWidth < 10) {
-                    // É um valor flex
-                    gridApi.setColumnWidths([{ key: columnId, newWidth: null }]);
-                    const colDef = event.column.getColDef();
-                    colDef.flex = originalWidth;
+            const originalData = originalWidths[columnId];
+            if (originalData) {
+                const column = columnApi.getColumn(columnId);
+                const colDef = column.getColDef();
+                
+                if (originalData.flex) {
+                    // Restaurar flex
+                    colDef.flex = originalData.flex;
                     delete colDef.width;
+                    columnApi.setColumnWidths([{ key: columnId, newWidth: null }]);
+                } else if (originalData.width) {
+                    // Restaurar largura fixa
+                    delete colDef.flex;
+                    colDef.width = originalData.width;
+                    columnApi.setColumnWidths([{ key: columnId, newWidth: originalData.width }]);
                 } else {
-                    // É uma largura fixa
-                    gridApi.setColumnWidths([{ key: columnId, newWidth: originalWidth }]);
+                    // Usar largura atual como fallback
+                    delete colDef.flex;
+                    colDef.width = originalData.actualWidth;
+                    columnApi.setColumnWidths([{ key: columnId, newWidth: originalData.actualWidth }]);
                 }
+                
+                // Forçar refresh das colunas
+                gridApi.refreshHeader();
                 
                 setAutoSizedColumns(prev => {
                     const newSet = new Set(prev);
@@ -144,22 +189,14 @@ export default function TarefaGrid({ dados, tipo, onReabrir, onConcluir, onMover
                 });
             }
         } else {
-            // Armazenar largura original se ainda não foi armazenada
-            if (!originalWidths[columnId]) {
-                const colDef = event.column.getColDef();
-                const originalWidth = colDef.flex || colDef.width || 100;
-                setOriginalWidths(prev => ({
-                    ...prev,
-                    [columnId]: originalWidth
-                }));
-            }
-            
             // Auto-ajustar a coluna
             gridApi.autoSizeColumn(columnId);
             
             setAutoSizedColumns(prev => new Set([...prev, columnId]));
         }
-    }, [originalWidths, autoSizedColumns]);
+    }, [gridReady, originalWidths, autoSizedColumns]);
+
+    // Remover o onColumnResized antigo pois não é mais necessário
 
     const comuns = useMemo(() => {
         const baseColumns = [
