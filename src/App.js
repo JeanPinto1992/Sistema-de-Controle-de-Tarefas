@@ -915,6 +915,33 @@ export default function App() {
 
                     {activeTab === 'relatorios' && (
                     <div className="relatorios-container">
+                        <div className="chart-toggle-container">
+                            <Button
+                                className="chart-toggle-btn"
+                                onClick={toggleChartPosition}
+                                title={showChartAbove ? "Ocultar gráfico" : "Mostrar gráfico acima"}
+                            >
+                                {showChartAbove ? "▲" : "▼"}
+                            </Button>
+                        </div>
+
+                        {showChartAbove && (
+                            <div className="relatorio-chart chart-above">
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <BarChart data={dadosSolicitadas} margin={{ left: 0 }}>
+                                        <XAxis
+                                            dataKey="setor"
+                                            tick={<SetorTick />}
+                                            interval={0}
+                                        />
+                                        <YAxis width={0} tick={false} axisLine={false} />
+                                        <Tooltip />
+                                        <Bar dataKey="solicitadas" fill="var(--tab-inactive-bg)" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </div>
+                        )}
+
                         <Card>
                             <div className="relatorio-grid">
                                 <div className="relatorio-header">
@@ -942,20 +969,23 @@ export default function App() {
                                 </div>
                             </div>
                         </Card>
-                        <div className="relatorio-chart">
-                            <ResponsiveContainer width="100%" height="100%">
-                                <BarChart data={dadosSolicitadas} margin={{ left: 0 }}>
-                                    <XAxis
-                                        dataKey="setor"
-                                        tick={<SetorTick />}
-                                        interval={0}
-                                    />
-                                    <YAxis width={0} tick={false} axisLine={false} />
-                                    <Tooltip />
-                                    <Bar dataKey="solicitadas" fill="var(--tab-inactive-bg)" />
-                                </BarChart>
-                            </ResponsiveContainer>
-                        </div>
+
+                        {!showChartAbove && (
+                            <div className="relatorio-chart">
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <BarChart data={dadosSolicitadas} margin={{ left: 0 }}>
+                                        <XAxis
+                                            dataKey="setor"
+                                            tick={<SetorTick />}
+                                            interval={0}
+                                        />
+                                        <YAxis width={0} tick={false} axisLine={false} />
+                                        <Tooltip />
+                                        <Bar dataKey="solicitadas" fill="var(--tab-inactive-bg)" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
