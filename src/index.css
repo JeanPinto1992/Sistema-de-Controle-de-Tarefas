@@ -1108,12 +1108,13 @@ h2.text-center.text-primary {
   border-radius: 8px;
   box-sizing: border-box;
   padding: 20px 20px 10px 20px;
-  margin-top: 27px; /* Alterado de 28px para 27px (subiu 1px) */
+  margin-top: 27px;
   box-shadow:
     inset 0 0 20px rgba(0,0,0,0.1),
     8px 8px 25px rgba(0, 0, 0, 0.3);
-  min-height: 55vh; /* Alterado de 60vh para 55vh (diminui altura mínima) */
-  overflow: visible;
+  height: 55vh !important; /* Alterado de min-height para height fixo */
+  max-height: 55vh !important; /* Adicionado para garantir altura máxima */
+  overflow: hidden !important; /* Alterado de visible para hidden */
 }
 
 /* Remover o título do quadro */
@@ -1144,4 +1145,7 @@ h2.text-center.text-primary {
   border: none;
   margin-top: 0px !important;
   box-shadow: none;
+  height: calc(55vh - 80px) !important; /* Altura fixa baseada no container */
+  max-height: calc(55vh - 80px) !important; /* Altura máxima fixa */
+  overflow: hidden !important; /* Evita que o gráfico exceda o container */
 }
