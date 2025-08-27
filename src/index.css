@@ -1078,7 +1078,7 @@ h2.text-center.text-primary {
 /* Container de relatórios */
 .relatorios-container {
   position: relative;
-  margin-top: -28px !important; /* Alterado de -27px para -28px (subiu 1px) */
+  margin-top: -30px !important; /* Alterado de -28px para -30px (subiu mais 2px) */
   transform: translateY(3px); /* Adiciona 3px para baixo */
 }
 
