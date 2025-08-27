@@ -896,43 +896,49 @@ const CustomLabel = ({ x, y, width, value }) => (
                 )}
 
                 {activeTab === 'tarefas' && (
-                    <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
-                        <TarefaGrid
-                            dados={tarefas}
-                            tipo="tarefas"
-                            onReabrir={reabrir}
-                            onMoverParaAndamento={moverParaAndamento}
-                            onExcluirTarefa={excluirTarefa}
-                            carregando={carregando}
-                        />
+                    <div className="tarefas-quadro">
+                        <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
+                            <TarefaGrid
+                                dados={tarefas}
+                                tipo="tarefas"
+                                onReabrir={reabrir}
+                                onMoverParaAndamento={moverParaAndamento}
+                                onExcluirTarefa={excluirTarefa}
+                                carregando={carregando}
+                            />
+                        </div>
                     </div>
                 )}
 
                 {activeTab === 'em_andamento' && (
-                    <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
-                        <TarefaGrid
-                            dados={emAndamento}
-                            tipo="em_andamento"
-                            onConcluir={concluir}
-                            onReabrir={reabrir}
-                            onExcluirTarefa={excluirTarefa}
-                            carregando={carregando}
-                            onEditObservationClick={handleEditObservationClick}
-                            forceUpdate={forceUpdate}
-                        />
+                    <div className="andamento-quadro">
+                        <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
+                            <TarefaGrid
+                                dados={emAndamento}
+                                tipo="em_andamento"
+                                onConcluir={concluir}
+                                onReabrir={reabrir}
+                                onExcluirTarefa={excluirTarefa}
+                                carregando={carregando}
+                                onEditObservationClick={handleEditObservationClick}
+                                forceUpdate={forceUpdate}
+                            />
+                        </div>
                     </div>
                 )}
 
                 {activeTab === 'concluidas' && (
-                    <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
-                        <TarefaGrid 
-                            dados={concluidas} 
-                            tipo="concluidas" 
-                            onRetornarParaAndamento={retornarParaAndamento}
-                            onExcluirTarefa={excluirTarefa}
-                            carregando={carregando}
-                            onFieldClick={handleFieldClick}
-                        />
+                    <div className="concluidas-quadro">
+                        <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
+                            <TarefaGrid 
+                                dados={concluidas} 
+                                tipo="concluidas" 
+                                onRetornarParaAndamento={retornarParaAndamento}
+                                onExcluirTarefa={excluirTarefa}
+                                carregando={carregando}
+                                onFieldClick={handleFieldClick}
+                            />
+                        </div>
                     </div>
                 )}
 
