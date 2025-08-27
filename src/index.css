@@ -257,7 +257,7 @@ button.btn-criar-nova-tarefa-azul:focus {
 
 /* Espaçamento adicional entre as abas e o grid */
 .ag-theme-alpine {
-  margin-top: 5px !important; /* Reduzido de 25px para 5px */
+  margin-top: 3px !important; /* Alterado de 5px para 3px (subiu 2px) */
 }
 
 /* REMOVER ESTAS LINHAS DUPLICADAS:
@@ -289,7 +289,7 @@ button.btn-criar-nova-tarefa-azul:focus {
   width: 100%;
   padding: 0 0.5px;
   box-sizing: border-box;
-  margin-top: -7px; /* Alterado de -10px para -7px (baixou mais 3px) */
+  margin-top: -9px; /* Alterado de -7px para -9px (subiu 2px) */
   overflow: visible;
 }
 
@@ -1066,7 +1066,7 @@ h2.text-center.text-primary {
 /* Container de relatórios */
 .relatorios-container {
   position: relative;
-  margin-top: -27px !important; /* Alterado de -32px para -27px (baixou mais 5px) */
+  margin-top: -28px !important; /* Alterado de -27px para -28px (subiu 1px) */
   transform: translateY(3px); /* Adiciona 3px para baixo */
 }
 
@@ -1076,7 +1076,7 @@ h2.text-center.text-primary {
   grid-template-columns: repeat(5, 1fr);
   gap: var(--spacing-xs) var(--spacing-sm);
   color: var(--text-primary);
-  margin-top: -27px !important; /* Alterado de -32px para -27px (baixou mais 5px) */
+  margin-top: -28px !important; /* Alterado de -27px para -28px (subiu 1px) */
   padding-top: 0px !important;
   position: relative;
 }
@@ -1098,7 +1098,7 @@ h2.text-center.text-primary {
 /* Ajustar o Card para ter posição relativa */
 .relatorios-container .card {
   position: relative;
-  margin-top: -27px !important; /* Alterado de -32px para -27px (baixou mais 5px) */
+  margin-top: -28px !important; /* Alterado de -27px para -28px (subiu 1px) */
 }
 
 /* Quadro de Relatórios - Fundo Branco Limpo */
@@ -1107,8 +1107,8 @@ h2.text-center.text-primary {
   border: 12px solid #422100;
   border-radius: 8px;
   box-sizing: border-box;
-  padding: 20px 20px 10px 20px; /* Alterado padding-bottom de 15px para 10px (diminui espaço final) */
-  margin-top: 28px; /* Alterado de 23px para 28px (baixou mais 5px) */
+  padding: 20px 20px 10px 20px;
+  margin-top: 27px; /* Alterado de 28px para 27px (subiu 1px) */
   box-shadow:
     inset 0 0 20px rgba(0,0,0,0.1),
     8px 8px 25px rgba(0, 0, 0, 0.3);
