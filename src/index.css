@@ -274,11 +274,10 @@ button.btn-criar-nova-tarefa-quadrado:hover {
   border-color: #5a82d4 !important;
   color: white !important;
   box-shadow: 0 6px 12px rgba(68, 114, 196, 0.4) !important;
-  transform: translateY(-2px) !important;
 }
 
 button.btn-criar-nova-tarefa-quadrado:active {
-  transform: translateY(0px) scale(0.98) !important;
+  transform: scale(0.95) !important;
   box-shadow: 0 2px 4px rgba(68, 114, 196, 0.3) !important;
   transition: all 0.1s ease !important;
 }
