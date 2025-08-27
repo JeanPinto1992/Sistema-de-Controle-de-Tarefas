@@ -247,6 +247,47 @@ button.btn-criar-nova-tarefa-azul:focus {
   box-shadow: 0 0 0 3px rgba(68, 114, 196, 0.25) !important;
 }
 
+/* Botão quadrado "Criar Nova Tarefa" com sinal de + */
+button.btn-criar-nova-tarefa-quadrado {
+  background: linear-gradient(135deg, #4472C4 0%, #365a96 100%) !important;
+  border: 2px solid #4472C4 !important;
+  color: white !important;
+  font-weight: bold !important;
+  width: 45px !important;
+  height: 45px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.5rem !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 8px rgba(68, 114, 196, 0.3) !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  outline: none !important;
+  margin-right: 10px !important;
+}
+
+button.btn-criar-nova-tarefa-quadrado:hover {
+  background: linear-gradient(135deg, #5a82d4 0%, #4472C4 100%) !important;
+  border-color: #5a82d4 !important;
+  color: white !important;
+  box-shadow: 0 6px 12px rgba(68, 114, 196, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+button.btn-criar-nova-tarefa-quadrado:active {
+  transform: translateY(0px) scale(0.98) !important;
+  box-shadow: 0 2px 4px rgba(68, 114, 196, 0.3) !important;
+  transition: all 0.1s ease !important;
+}
+
+button.btn-criar-nova-tarefa-quadrado:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(68, 114, 196, 0.25) !important;
+}
+
 /* Container das abas com espaçamento adequado para o botão */
 .d-flex.align-items-center.mb-2.tabs-container {
   margin-bottom: 8px !important;
