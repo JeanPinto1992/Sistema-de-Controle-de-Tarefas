@@ -257,7 +257,7 @@ button.btn-criar-nova-tarefa-azul:focus {
 
 /* Espaçamento adicional entre as abas e o grid */
 .ag-theme-alpine {
-  margin-top: -3px !important; /* Alterado de 0px para -3px (diminuiu espaço) */
+  margin-top: -4px !important; /* Alterado de -3px para -4px (subiu 1px) */
 }
 
 /* REMOVER ESTAS LINHAS DUPLICADAS:
