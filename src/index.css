@@ -107,6 +107,16 @@ h2.text-center.text-primary {
   overflow: visible;
 }
 
+/* Ajuste específico para a aba de relatórios */
+.tab-pane[aria-labelledby="relatorios-tab"] {
+  padding-top: 3px;
+}
+
+/* Ou usando o ID da aba */
+#relatorios {
+  padding-top: 3px;
+}
+
 /* ========================================================= */
 /* --- Botão Primário PADRÃO - Mantém a cor original --- */
 /* ========================================================= */
