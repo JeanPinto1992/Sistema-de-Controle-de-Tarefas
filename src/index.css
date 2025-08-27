@@ -289,13 +289,13 @@ button.btn-criar-nova-tarefa-azul:focus {
   width: 100%;
   padding: 0 0.5px;
   box-sizing: border-box;
-  margin-top: -5px; /* Alterado de -6px para -5px (baixou 1px) */
+  margin-top: -4px; /* Alterado de -5px para -4px (baixou mais 1px) */
   overflow: visible;
 }
 
 .mural-section {
   flex: 1;
-  padding: 16px;
+  padding: 16px 16px 13px 16px; /* Alterado padding-bottom de 16px para 13px (diminuiu 3px) */
   border-radius: 8px;
   display: flex;
   flex-direction: column;
