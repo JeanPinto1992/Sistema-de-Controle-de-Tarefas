@@ -1125,8 +1125,8 @@ h2.text-center.text-primary {
 .relatorios-quadro .chart-toggle-container {
   position: relative;
   top: -18px;
-  left: 0;
-  margin-bottom: 15px;
+  left: -20px;
+  margin-bottom: 0px;
   padding-left: 0px;
 }
 
