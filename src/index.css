@@ -313,7 +313,7 @@ button.btn-criar-nova-tarefa-azul:focus {
 /* Container de relatórios - scroll da/* Container de relatórios */
 .relatorios-container {
   position: relative;
-  margin-top: -30px !important; /* Alterado de -28px para -30px (subiu mais 2px) */
+  margin-top: -35px !important; /* Alterado de -30px para -35px (subiu mais 5px) */
   transform: translateY(3px); /* Adiciona 3px para baixo */
 }
 
@@ -1088,7 +1088,7 @@ h2.text-center.text-primary {
   grid-template-columns: repeat(5, 1fr);
   gap: var(--spacing-xs) var(--spacing-sm);
   color: var(--text-primary);
-  margin-top: -28px !important; /* Alterado de -27px para -28px (subiu 1px) */
+  margin-top: -33px !important; /* Alterado de -28px para -33px (subiu mais 5px) */
   padding-top: 0px !important;
   position: relative;
 }
@@ -1110,7 +1110,7 @@ h2.text-center.text-primary {
 /* Ajustar o Card para ter posição relativa */
 .relatorios-container .card {
   position: relative;
-  margin-top: -28px !important; /* Alterado de -27px para -28px (subiu 1px) */
+  margin-top: -33px !important; /* Alterado de -28px para -33px (subiu mais 5px) */
 }
 
 /* Quadro de Relatórios - Fundo Branco Limpo */
