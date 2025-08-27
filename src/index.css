@@ -50,14 +50,14 @@ html, body, #root {
   align-items: center;
   justify-content: flex-start;
   padding-left: 0px;
-  margin-left: 15px;
+  margin-left: 0px; /* Alterado de 15px para 0px (alinha bem à esquerda) */
   gap: 0px;
   margin-bottom: -20px;
-  margin-top: 3px; /* Alterado de 0px para 3px (baixou mais 3px) */
+  margin-top: 3px;
 }
 
 .logo-synnova {
-  height: 45px;
+  height: 35px; /* Alterado de 45px para 35px (diminuiu o tamanho) */
   width: auto;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
   transition: transform 0.2s ease;
