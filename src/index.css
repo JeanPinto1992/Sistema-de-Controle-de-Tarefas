@@ -630,7 +630,8 @@ filter: saturate(1.1);
   --ag-foreground-color: #000000;
   --ag-row-border-color: #ccc;
   font-size: 0.85rem;
-  height: 100%;
+  height: auto !important;
+  min-height: 400px;
   margin-left: 7px !important;
   margin-right: 8px !important;
 }
@@ -650,16 +651,6 @@ filter: saturate(1.1);
   top: 0 !important;
   z-index: 1000 !important;
   background-color: #003300 !important;
-}
-
-/* Remove altura fixa dos containers para permitir scroll natural */
-.ag-theme-alpine {
-  --ag-background-color: #ffffff;
-  --ag-foreground-color: #000000;
-  --ag-row-border-color: #ccc;
-  font-size: 0.85rem;
-  height: auto !important;
-  min-height: 400px;
 }
 
 /* Permite que o grid se expanda naturalmente */
