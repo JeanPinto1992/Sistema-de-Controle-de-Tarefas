@@ -1161,7 +1161,7 @@ h2.text-center.text-primary {
 
 /* Quadro de Relatórios - Fundo Vermelho */
 .relatorios-quadro {
-  background-color: #dc3545;
+  background-color: white; /* Alterado de #dc3545 (vermelho) para branco */
   border: 12px solid #422100;
   border-radius: 8px;
   box-sizing: border-box;
@@ -1170,7 +1170,7 @@ h2.text-center.text-primary {
   box-shadow:
     inset 0 0 20px rgba(0,0,0,0.1),
     8px 8px 25px rgba(0, 0, 0, 0.3);
-  min-height: calc(55vh + 22px); /* Alterado de calc(55vh - 3px) para calc(55vh + 22px) - aumentou 25px */
+  min-height: calc(55vh + 22px);
   overflow: visible;
 }
 
