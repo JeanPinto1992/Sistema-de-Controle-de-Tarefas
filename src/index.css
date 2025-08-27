@@ -303,7 +303,11 @@ button.btn-criar-nova-tarefa-azul:focus {
   --mural-background-color: #c6e0b4;
   height: fit-content;
   min-height: 81vh;
-  overflow: visible; /* Remove scroll interno, usa da janela */
+  overflow: visible;
+  /* Garante largura fixa independente da scrollbar */
+  width: calc(50% - 10px); /* 50% menos metade do gap */
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 /* Container de relatórios - scroll da janela */
@@ -404,10 +408,10 @@ filter: saturate(1.1);
 
 /* Estilo base para todos os Post-its */
 .card-postit {
-  width: 100%; /* Largura responsiva para se adaptar à coluna */
-  max-width: 180px; /* Largura máxima reduzida */
-  height: 100px; /* Altura reduzida para economizar espaço */
-  margin: 0 auto 8px auto; /* Centralizado horizontalmente, sem margem superior, com margem inferior */
+  width: 100%;
+  max-width: 180px;
+  height: 100px;
+  margin: 0 auto 8px auto;
   position: relative;
   border: none;
   font-weight: bold;
@@ -415,17 +419,19 @@ filter: saturate(1.1);
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 8px; /* Reduzido de 10px para 8px */
-  font-size: 0.8rem; /* Reduzido de 0.9rem para 0.8rem */
+  padding: 8px;
+  font-size: 0.8rem;
   border-radius: 3px;
   overflow: visible;
   background-color: var(--card-base-color);
-  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.4); /* Sombra mais compacta */
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.4);
   transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
   cursor: default;
-  word-wrap: break-word; /* Quebra palavras muito longas */
-  hyphens: auto; /* Hifenização automática */
-  line-height: 1.2; /* Altura da linha mais compacta */
+  word-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.2;
+  /* Força largura consistente */
+  flex-shrink: 0;
 }
 
 .card-postit:hover {
@@ -755,7 +761,7 @@ filter: saturate(1.1);
 /* Grid de 4 colunas para mural */
 .cards-grid-4col-container {
   display: grid;
-  grid-template-columns: repeat(4, minmax(200px, 1fr)); /* Largura mínima fixa de 200px por coluna */
+  grid-template-columns: repeat(4, 1fr); /* 4 colunas iguais */
   gap: 8px;
   width: 100%;
   height: fit-content;
@@ -765,8 +771,8 @@ filter: saturate(1.1);
   box-sizing: border-box;
   min-height: 0;
   margin: 0;
-  /* Reserva espaço para scrollbar */
-  padding-right: 8px;
+  /* Correção para scrollbar: força largura fixa do container */
+  scrollbar-gutter: stable;
 }
 
 .mural-4col-column {
@@ -778,9 +784,10 @@ filter: saturate(1.1);
   position: relative;
   padding: 0;
   margin: 0;
-  /* Largura fixa para garantir uniformidade */
+  /* Largura fixa baseada no container pai */
   width: 100%;
-  max-width: 220px;
+  flex: 1;
+  min-width: 0;
 }
 
 /* Indicadores visuais removidos para eliminar espaço extra acima dos cards */
@@ -794,16 +801,12 @@ filter: saturate(1.1);
   }
   .cards-grid-4col-container {
     gap: 12px;
-    grid-template-columns: repeat(4, minmax(220px, 1fr)); /* Largura mínima maior em telas grandes */
-  }
-  .mural-4col-column {
-    max-width: 240px;
   }
 }
 
 @media (max-width: 1000px) {
   .cards-grid-4col-container {
-    grid-template-columns: repeat(2, minmax(250px, 1fr)); /* 2 colunas com largura mínima */
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
   .card-postit {
@@ -811,14 +814,11 @@ filter: saturate(1.1);
     height: 110px;
     font-size: 0.85rem;
   }
-  .mural-4col-column {
-    max-width: 270px;
-  }
 }
 
 @media (max-width: 600px) {
   .cards-grid-4col-container {
-    grid-template-columns: minmax(280px, 1fr); /* 1 coluna com largura mínima */
+    grid-template-columns: 1fr;
     gap: 12px;
   }
   .card-postit {
@@ -826,9 +826,6 @@ filter: saturate(1.1);
     height: 120px;
     font-size: 0.9rem;
     padding: 10px;
-  }
-  .mural-4col-column {
-    max-width: 300px;
   }
   
   /* Ajustes responsivos para o cabeçalho com logo */
