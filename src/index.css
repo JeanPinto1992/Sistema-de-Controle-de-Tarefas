@@ -240,7 +240,7 @@ button.btn-criar-nova-tarefa-azul:focus {
   margin-bottom: 8px !important;
   padding-bottom: 0px !important;
   position: relative;
-  margin-top: -36px !important; /* Subir as abas 1px (era -35px) */
+  margin-top: -50px !important; /* Subir de -36px para -50px */
 }
 
 /* Espaçamento adicional entre as abas e o grid */
@@ -277,7 +277,7 @@ button.btn-criar-nova-tarefa-azul:focus {
   width: 100%;
   padding: 0 0.5px;
   box-sizing: border-box;
-  margin-top: -5px;
+  margin-top: -20px;
   overflow: visible;
 }
 
@@ -1054,7 +1054,7 @@ h2.text-center.text-primary {
 /* Container de relatórios */
 .relatorios-container {
   position: relative;
-  margin-top: -28px !important;
+  margin-top: -45px !important;
 }
 
 /* Grid de relatórios */
@@ -1063,7 +1063,7 @@ h2.text-center.text-primary {
   grid-template-columns: repeat(5, 1fr);
   gap: var(--spacing-xs) var(--spacing-sm);
   color: var(--text-primary);
-  margin-top: -28px !important;
+  margin-top: -45px !important;
   padding-top: 0px !important;
   position: relative;
 }
@@ -1085,7 +1085,7 @@ h2.text-center.text-primary {
 /* Ajustar o Card para ter posição relativa */
 .relatorios-container .card {
   position: relative;
-  margin-top: -28px !important;
+  margin-top: -45px !important;
 }
 
 /* Quadro de Relatórios - Fundo Branco Limpo */
@@ -1095,7 +1095,7 @@ h2.text-center.text-primary {
   border-radius: 8px;
   box-sizing: border-box;
   padding: 20px 20px 15px 20px;
-  margin-top: 30px;
+  margin-top: 10px;
   box-shadow:
     inset 0 0 20px rgba(0,0,0,0.1),
     8px 8px 25px rgba(0, 0, 0, 0.3);
