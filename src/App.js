@@ -738,7 +738,7 @@ const CustomLabel = ({ x, y, width, value }) => (
 );
 
     return (
-        <Container fluid className="mt-3 d-flex flex-column" style={{ minHeight: '100vh' }}>
+        <Container fluid className="d-flex flex-column" style={{ minHeight: '100vh' }}>
             {mensagem && (
                 <Alert
                     variant={tipoMsg}
