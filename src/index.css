@@ -1096,8 +1096,8 @@ h2.text-center.text-primary {
   border: 12px solid #422100;
   border-radius: 8px;
   box-sizing: border-box;
-  padding: 20px 20px 15px 20px;
-  margin-top: 23px; /* Alterado de 20px para 23px (baixou mais 3px) */
+  padding: 23px 20px 15px 20px; /* Alterado padding-top de 20px para 23px (baixou mais 3px) */
+  margin-top: 23px; /* Mantém o valor atual */
   box-shadow:
     inset 0 0 20px rgba(0,0,0,0.1),
     8px 8px 25px rgba(0, 0, 0, 0.3);
