@@ -262,7 +262,7 @@ button.btn-criar-nova-tarefa-quadrado {
   font-size: 1.5rem !important;
   border-radius: 8px !important;
   box-shadow: 0 4px 8px rgba(68, 114, 196, 0.3) !important;
-  transition: all 0.15s ease !important;
+  transition: background 0.2s ease, border-color 0.2s ease !important;
   cursor: pointer !important;
   text-decoration: none !important;
   outline: none !important;
@@ -273,20 +273,17 @@ button.btn-criar-nova-tarefa-quadrado:hover {
   background: linear-gradient(135deg, #5a82d4 0%, #4472C4 100%) !important;
   border-color: #5a82d4 !important;
   color: white !important;
-  box-shadow: 0 6px 12px rgba(68, 114, 196, 0.4) !important;
 }
 
 button.btn-criar-nova-tarefa-quadrado:active {
   background: linear-gradient(135deg, #365a96 0%, #2d4a7a 100%) !important;
   border-color: #365a96 !important;
-  box-shadow: 0 2px 4px rgba(68, 114, 196, 0.5) !important;
-  transform: scale(0.92) !important;
-  transition: all 0.08s ease !important;
+  transition: background 0.1s ease, border-color 0.1s ease !important;
 }
 
 button.btn-criar-nova-tarefa-quadrado:focus {
   outline: none !important;
-  box-shadow: 0 0 0 3px rgba(68, 114, 196, 0.25) !important;
+  box-shadow: 0 4px 8px rgba(68, 114, 196, 0.3), 0 0 0 3px rgba(68, 114, 196, 0.25) !important;
 }
 
 /* Container das abas com espaçamento adequado para o botão */
