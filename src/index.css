@@ -264,8 +264,8 @@ button.btn-criar-nova-tarefa-quadrado {
   cursor: pointer !important;
   text-decoration: none !important;
   outline: none !important;
-  margin-right: 10px !important;
-  transition: none !important; /* Remove a transição para permitir mudança instantânea */
+  margin-right: 9px !important;
+  transition: none !important;
 }
 
 button.btn-criar-nova-tarefa-quadrado:hover {
@@ -274,11 +274,12 @@ button.btn-criar-nova-tarefa-quadrado:hover {
   border-color: #003300 !important;
 }
 
-button.btn-criar-nova-tarefa-quadrado:active {
-  background-color: #FFFF99 !important; /* Amarelo quando clicado */
-  color: #C00000 !important; /* Texto vermelho quando clicado */
+button.btn-criar-nova-tarefa-quadrado:active,
+button.btn-criar-nova-tarefa-quadrado:active:hover {
+  background-color: #FFFF99 !important;
+  color: #C00000 !important;
   border-color: #FFFF99 !important;
-  transition: none !important; /* Garante mudança instantânea */
+  transition: none !important;
 }
 
 button.btn-criar-nova-tarefa-quadrado:focus {
