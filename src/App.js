@@ -905,6 +905,7 @@ const CustomLabel = ({ x, y, width, value }) => (
                                 onMoverParaAndamento={moverParaAndamento}
                                 onExcluirTarefa={excluirTarefa}
                                 carregando={carregando}
+                                onFieldClick={handleFieldClick}
                             />
                         </div>
                     </div>
@@ -922,6 +923,7 @@ const CustomLabel = ({ x, y, width, value }) => (
                                 carregando={carregando}
                                 onEditObservationClick={handleEditObservationClick}
                                 forceUpdate={forceUpdate}
+                                onFieldClick={handleFieldClick}
                             />
                         </div>
                     </div>
