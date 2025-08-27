@@ -332,7 +332,7 @@ button.btn-criar-nova-tarefa-quadrado:focus {
   gap: 20px;
   flex-wrap: nowrap;
   width: 100%;
-  padding: 0 8.5px 0 5px; /* Diminuído: esquerda de 10px para 5px, direita de 13.5px para 8.5px */
+  padding: 0 10.5px 0 3px; /* Ajustado: esquerda de 5px para 3px (-2px), direita de 8.5px para 10.5px (+2px) */
   box-sizing: border-box;
   margin-top: -5px;
   overflow: visible;
