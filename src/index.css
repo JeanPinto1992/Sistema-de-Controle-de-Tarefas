@@ -1056,7 +1056,8 @@ h2.text-center.text-primary {
 /* Container de relatórios */
 .relatorios-container {
   position: relative;
-  margin-top: -32px !important; /* Alterado de -35px para -32px (baixou mais 3px) */
+  margin-top: -32px !important;
+  transform: translateY(3px); /* Adiciona 3px para baixo */
 }
 
 /* Grid de relatórios */
