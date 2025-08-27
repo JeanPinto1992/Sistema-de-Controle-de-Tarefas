@@ -305,7 +305,7 @@ button.btn-criar-nova-tarefa-quadrado:focus {
 
 /* Espaçamento adicional entre as abas e o grid */
 .ag-theme-alpine {
-  margin-top: 0px !important; /* Alterado de -8px para 0px */
+  margin-top: -20px !important; /* Alterado de 0px para -20px para eliminar espaço */
 }
 
 /* REMOVER ESTAS LINHAS DUPLICADAS:
