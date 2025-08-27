@@ -41,6 +41,7 @@ html, body, #root {
   position: relative;
   padding-top: 10px;
   min-height: 120px;
+  margin-top: -15px; /* Subir o cabeçalho para alinhar com os demais elementos */
 }
 
 /* Estilos para cabeçalho com logo */
@@ -52,6 +53,7 @@ html, body, #root {
   margin-left: 15px;
   gap: 0px;
   margin-bottom: -20px;
+  margin-top: -10px; /* Subir logo e título */
 }
 
 .logo-synnova {
@@ -118,7 +120,7 @@ h2.text-center.text-primary {
 .meses-grid-container {
   position: absolute;
   right: var(--spacing-sm);
-  top: var(--spacing-sm);
+  top: calc(var(--spacing-sm) - 15px); /* Subir o calendário */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
