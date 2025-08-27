@@ -310,7 +310,7 @@ button.btn-criar-nova-tarefa-azul:focus {
   box-sizing: border-box;
 }
 
-/* Container de relatórios - scroll da/* Container de relatórios */
+/* Container de relatórios */
 .relatorios-container {
   position: relative;
   margin-top: -35px !important; /* Alterado de -30px para -35px (subiu mais 5px) */
