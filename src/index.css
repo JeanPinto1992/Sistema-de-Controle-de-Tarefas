@@ -110,11 +110,15 @@ h2.text-center.text-primary {
 /* Ajuste específico para a aba de relatórios */
 .tab-pane[aria-labelledby="relatorios-tab"] {
   padding-top: 3px;
+  background-color: white !important; /* Fundo branco para a aba Relatórios */
+  padding-bottom: 38px !important; /* Baixou 30px (de 8px para 38px) */
 }
 
 /* Ou usando o ID da aba */
 #relatorios {
   padding-top: 3px;
+  background-color: white !important; /* Fundo branco para a aba Relatórios */
+  padding-bottom: 38px !important; /* Baixou 30px (de 8px para 38px) */
 }
 
 /* ========================================================= */
