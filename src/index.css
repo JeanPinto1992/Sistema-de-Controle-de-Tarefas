@@ -1170,8 +1170,8 @@ h2.text-center.text-primary {
   box-shadow:
     inset 0 0 20px rgba(0,0,0,0.1),
     8px 8px 25px rgba(0, 0, 0, 0.3);
-  height: calc(55vh + 82px); /* Alterado de calc(55vh + 52px) para calc(55vh + 82px) - aumentou mais 30px */
-  overflow: auto; /* Alterado de visible para auto para permitir scroll se necessário */
+  height: calc(55vh + 282px); /* Alterado de calc(55vh + 82px) para calc(55vh + 282px) - expandiu mais 200px */
+  overflow: auto;
 }
 
 /* Remover o título do quadro */
