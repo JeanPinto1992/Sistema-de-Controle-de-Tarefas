@@ -1066,7 +1066,7 @@ h2.text-center.text-primary {
 /* Container de relatórios */
 .relatorios-container {
   position: relative;
-  margin-top: -32px !important;
+  margin-top: -27px !important; /* Alterado de -32px para -27px (baixou mais 5px) */
   transform: translateY(3px); /* Adiciona 3px para baixo */
 }
 
@@ -1076,7 +1076,7 @@ h2.text-center.text-primary {
   grid-template-columns: repeat(5, 1fr);
   gap: var(--spacing-xs) var(--spacing-sm);
   color: var(--text-primary);
-  margin-top: -32px !important; /* Alterado de -35px para -32px (baixou mais 3px) */
+  margin-top: -27px !important; /* Alterado de -32px para -27px (baixou mais 5px) */
   padding-top: 0px !important;
   position: relative;
 }
@@ -1098,7 +1098,7 @@ h2.text-center.text-primary {
 /* Ajustar o Card para ter posição relativa */
 .relatorios-container .card {
   position: relative;
-  margin-top: -32px !important; /* Alterado de -35px para -32px (baixou mais 3px) */
+  margin-top: -27px !important; /* Alterado de -32px para -27px (baixou mais 5px) */
 }
 
 /* Quadro de Relatórios - Fundo Branco Limpo */
@@ -1107,12 +1107,12 @@ h2.text-center.text-primary {
   border: 12px solid #422100;
   border-radius: 8px;
   box-sizing: border-box;
-  padding: 23px 20px 15px 20px; /* Alterado padding-top de 20px para 23px (baixou mais 3px) */
-  margin-top: 23px; /* Mantém o valor atual */
+  padding: 20px 20px 10px 20px; /* Alterado padding-bottom de 15px para 10px (diminui espaço final) */
+  margin-top: 28px; /* Alterado de 23px para 28px (baixou mais 5px) */
   box-shadow:
     inset 0 0 20px rgba(0,0,0,0.1),
     8px 8px 25px rgba(0, 0, 0, 0.3);
-  min-height: 60vh;
+  min-height: 55vh; /* Alterado de 60vh para 55vh (diminui altura mínima) */
   overflow: visible;
 }
 
