@@ -310,11 +310,11 @@ button.btn-criar-nova-tarefa-azul:focus {
   box-sizing: border-box;
 }
 
-/* Container de relatórios - scroll da janela */
+/* Container de relatórios - scroll da/* Container de relatórios */
 .relatorios-container {
   position: relative;
-  overflow: visible; /* Permite scroll da janela */
-  height: auto;
+  margin-top: -30px !important; /* Alterado de -28px para -30px (subiu mais 2px) */
+  transform: translateY(3px); /* Adiciona 3px para baixo */
 }
 
 .mural-section:first-child {
