@@ -130,7 +130,7 @@ h2.text-center.text-primary {
 .meses-grid-container {
   position: absolute;
   right: var(--spacing-sm);
-  top: calc(var(--spacing-sm) - 12px); /* Alterado de -22px para -12px (baixou 10px) */
+  top: calc(var(--spacing-sm) - 9px); /* Alterado de -12px para -9px (baixou mais 3px) */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
