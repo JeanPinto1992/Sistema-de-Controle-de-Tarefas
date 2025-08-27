@@ -103,7 +103,7 @@ h2.text-center.text-primary {
   display: flex;
   flex-direction: column;
   background-color: #c6e0b4 !important; /* Fundo do Mural */
-  padding: 8px 0;
+  padding: 0;
   overflow: visible;
 }
 
