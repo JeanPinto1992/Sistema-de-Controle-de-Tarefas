@@ -755,27 +755,32 @@ filter: saturate(1.1);
 /* Grid de 4 colunas para mural */
 .cards-grid-4col-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 colunas iguais sem largura mínima fixa */
-  gap: 8px; /* Reduzido de 15px para 8px para economizar espaço */
+  grid-template-columns: repeat(4, minmax(200px, 1fr)); /* Largura mínima fixa de 200px por coluna */
+  gap: 8px;
   width: 100%;
   height: fit-content;
   overflow-y: auto;
-  overflow-x: hidden; /* Remove scroll horizontal */
-  padding: 4px 4px 4px 4px; /* Padding uniforme, sem padding extra no topo */
+  overflow-x: hidden;
+  padding: 4px 4px 4px 4px;
   box-sizing: border-box;
-  min-height: 0; /* Remove altura mínima desnecessária */
-  margin: 0; /* Remove qualquer margem externa */
+  min-height: 0;
+  margin: 0;
+  /* Reserva espaço para scrollbar */
+  padding-right: 8px;
 }
 
 .mural-4col-column {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px; /* Reduzido de 15px para 8px para economizar espaço */
-  min-height: 0; /* Reduzido de 100px para 0 para eliminar altura mínima desnecessária */
+  gap: 8px;
+  min-height: 0;
   position: relative;
-  padding: 0; /* Garantir que não há padding extra */
-  margin: 0; /* Garantir que não há margin extra */
+  padding: 0;
+  margin: 0;
+  /* Largura fixa para garantir uniformidade */
+  width: 100%;
+  max-width: 220px;
 }
 
 /* Indicadores visuais removidos para eliminar espaço extra acima dos cards */
@@ -783,37 +788,47 @@ filter: saturate(1.1);
 /* Responsividade para telas grandes */
 @media (min-width: 1400px) {
   .card-postit {
-    max-width: 200px; /* Largura ligeiramente maior em telas grandes */
-    height: 110px; /* Altura ligeiramente maior */
-    font-size: 0.85rem; /* Fonte ligeiramente maior */
+    max-width: 200px;
+    height: 110px;
+    font-size: 0.85rem;
   }
   .cards-grid-4col-container {
-    gap: 12px; /* Mais espaço em telas grandes */
+    gap: 12px;
+    grid-template-columns: repeat(4, minmax(220px, 1fr)); /* Largura mínima maior em telas grandes */
+  }
+  .mural-4col-column {
+    max-width: 240px;
   }
 }
 
 @media (max-width: 1000px) {
   .cards-grid-4col-container {
-    grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas médias */
+    grid-template-columns: repeat(2, minmax(250px, 1fr)); /* 2 colunas com largura mínima */
     gap: 10px;
   }
   .card-postit {
-    max-width: 220px; /* Largura maior com 2 colunas */
+    max-width: 220px;
     height: 110px;
     font-size: 0.85rem;
+  }
+  .mural-4col-column {
+    max-width: 270px;
   }
 }
 
 @media (max-width: 600px) {
   .cards-grid-4col-container {
-    grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
+    grid-template-columns: minmax(280px, 1fr); /* 1 coluna com largura mínima */
     gap: 12px;
   }
   .card-postit {
-    max-width: 280px; /* Largura máxima em tela pequena */
+    max-width: 280px;
     height: 120px;
     font-size: 0.9rem;
     padding: 10px;
+  }
+  .mural-4col-column {
+    max-width: 300px;
   }
   
   /* Ajustes responsivos para o cabeçalho com logo */
