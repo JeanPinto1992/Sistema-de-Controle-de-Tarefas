@@ -817,7 +817,7 @@ const CustomLabel = ({ x, y, width, value }) => (
                     </Tabs>
                     {activeTab === 'tarefas' && (
                         <Button
-                            className="btn-criar-nova-tarefa-azul"
+                            className="btn-criar-nova-tarefa-quadrado"
                             style={{ 
                                 position: 'absolute',
                                 right: '0px',
@@ -831,8 +831,9 @@ const CustomLabel = ({ x, y, width, value }) => (
                                 });
                                 setShowModal(true);
                             }}
+                            title="Criar Nova Tarefa"
                         >
-                            Criar Nova Tarefa
+                            +
                         </Button>
                     )}
                 </div>
