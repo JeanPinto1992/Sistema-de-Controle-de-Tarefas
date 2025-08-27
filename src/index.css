@@ -851,9 +851,9 @@ h2.text-center.text-primary {
 .relatorio-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 0;
+  gap: var(--spacing-xs) var(--spacing-sm);
   color: var(--text-primary);
-  margin-top: -25px !important;
+  margin-top: -33px !important; /* Alterado de -28px para -33px (subiu mais 5px) */
   padding-top: 0px !important;
   position: relative;
 }
