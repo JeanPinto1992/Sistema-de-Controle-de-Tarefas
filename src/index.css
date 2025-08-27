@@ -310,11 +310,11 @@ button.btn-criar-nova-tarefa-azul:focus {
   box-sizing: border-box;
 }
 
-/* Container de relatórios */
+/* Container de relatórios - REVERTIDO para posição original */
 .relatorios-container {
   position: relative;
-  margin-top: -35px !important; /* Alterado de -30px para -35px (subiu mais 5px) */
-  transform: translateY(3px); /* Adiciona 3px para baixo */
+  margin-top: -28px !important; /* Voltou para -28px (posição original) */
+  transform: translateY(3px); /* Mantém o translateY */
 }
 
 .mural-section:first-child {
@@ -1082,13 +1082,13 @@ h2.text-center.text-primary {
   transform: translateY(3px); /* Adiciona 3px para baixo */
 }
 
-/* Grid de relatórios */
+/* Grid de relatórios - AJUSTADO para subir mais e eliminar espaço */
 .relatorio-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: var(--spacing-xs) var(--spacing-sm);
   color: var(--text-primary);
-  margin-top: -33px !important; /* Alterado de -28px para -33px (subiu mais 5px) */
+  margin-top: -40px !important; /* Alterado de -28px para -40px (subiu 12px) */
   padding-top: 0px !important;
   position: relative;
 }
@@ -1107,11 +1107,11 @@ h2.text-center.text-primary {
   max-height: calc(100vh - 250px) !important;
 }
 
-/* Ajustar o Card para ter posição relativa */
+/* Card dentro do container - AJUSTADO para acompanhar o grid */
 .relatorios-container .card {
   position: relative;
-  margin-top: -33px !important; /* Alterado de -28px para -33px (subiu mais 5px) */
-}/* Alterado de -28px para -33px (subiu mais 5px) */
+  margin-top: -40px !important; /* Alterado de -28px para -40px (subiu 12px) */
+}
 
 
 /* Quadro de Relatórios - Fundo Branco Limpo */
