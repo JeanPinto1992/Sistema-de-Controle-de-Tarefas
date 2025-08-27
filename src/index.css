@@ -903,7 +903,7 @@ h2.text-center.text-primary {
 
 .relatorio-total-row span {
   font-weight: bold;
-  font-size: calc(var(--spacing-md) * 1.25);
+  font-size: 22px !important;
   border-bottom: none;
   border-right: 1px solid #007bff;
   background-color: #e9ecef;
@@ -911,6 +911,40 @@ h2.text-center.text-primary {
 
 .relatorio-total-row span:nth-child(5) {
   border-right: none;
+}
+
+/* Estilos específicos para as colunas de valores com cores personalizadas */
+/* Coluna Em Andamento (3ª coluna) - Laranja */
+.relatorio-row span:nth-child(3),
+.relatorio-total-row span:nth-child(3) {
+  color: #ff8c00 !important;
+  font-weight: bold !important;
+  font-size: 22px !important;
+}
+
+/* Coluna Concluídas (4ª coluna) - Azul */
+.relatorio-row span:nth-child(4),
+.relatorio-total-row span:nth-child(4) {
+  color: #007bff !important;
+  font-weight: bold !important;
+  font-size: 22px !important;
+}
+
+/* Coluna Não Iniciadas (5ª coluna) - Vermelho escuro */
+.relatorio-row span:nth-child(5),
+.relatorio-total-row span:nth-child(5) {
+  color: #8b0000 !important;
+  font-weight: bold !important;
+  font-size: 22px !important;
+}
+
+/* Manter as outras colunas com formatação padrão mas com fonte 22px */
+.relatorio-row span:nth-child(1),
+.relatorio-row span:nth-child(2),
+.relatorio-total-row span:nth-child(1),
+.relatorio-total-row span:nth-child(2) {
+  font-weight: bold !important;
+  font-size: 22px !important;
 }
 
 @media (max-width: 900px) {
