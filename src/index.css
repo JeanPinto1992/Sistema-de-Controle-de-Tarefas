@@ -903,7 +903,7 @@ h2.text-center.text-primary {
 
 .relatorio-total-row span {
   font-weight: bold;
-  font-size: 22px !important;
+  font-size: 16px !important;
   border-bottom: none;
   border-right: 1px solid #007bff;
   background-color: #e9ecef;
@@ -913,38 +913,41 @@ h2.text-center.text-primary {
   border-right: none;
 }
 
-/* Estilos específicos para as colunas de valores com cores personalizadas */
-/* Coluna Em Andamento (3ª coluna) - Laranja */
+/* Estilos específicos para as colunas de valores com fundos coloridos */
+/* Coluna Em Andamento (3ª coluna) - Fundo Laranja */
 .relatorio-row span:nth-child(3),
 .relatorio-total-row span:nth-child(3) {
-  color: #ff8c00 !important;
+  background-color: #ff8c00 !important;
+  color: white !important;
   font-weight: bold !important;
-  font-size: 22px !important;
+  font-size: 16px !important;
 }
 
-/* Coluna Concluídas (4ª coluna) - Azul */
+/* Coluna Concluídas (4ª coluna) - Fundo Azul */
 .relatorio-row span:nth-child(4),
 .relatorio-total-row span:nth-child(4) {
-  color: #007bff !important;
+  background-color: #007bff !important;
+  color: white !important;
   font-weight: bold !important;
-  font-size: 22px !important;
+  font-size: 16px !important;
 }
 
-/* Coluna Não Iniciadas (5ª coluna) - Vermelho escuro */
+/* Coluna Não Iniciadas (5ª coluna) - Fundo Vermelho escuro */
 .relatorio-row span:nth-child(5),
 .relatorio-total-row span:nth-child(5) {
-  color: #8b0000 !important;
+  background-color: #8b0000 !important;
+  color: white !important;
   font-weight: bold !important;
-  font-size: 22px !important;
+  font-size: 16px !important;
 }
 
-/* Manter as outras colunas com formatação padrão mas com fonte 22px */
+/* Manter as outras colunas com formatação padrão mas com fonte 16px */
 .relatorio-row span:nth-child(1),
 .relatorio-row span:nth-child(2),
 .relatorio-total-row span:nth-child(1),
 .relatorio-total-row span:nth-child(2) {
   font-weight: bold !important;
-  font-size: 22px !important;
+  font-size: 16px !important;
 }
 
 @media (max-width: 900px) {
