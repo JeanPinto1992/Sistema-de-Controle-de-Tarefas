@@ -39,7 +39,7 @@ html, body, #root {
 
 .header-content-container {
   position: relative;
-  padding-top: 10px;
+  padding-top: 0px;
   min-height: 120px;
   margin-top: -2px; /* Alterado de -5px para -2px (baixou mais 3px) */
 }
