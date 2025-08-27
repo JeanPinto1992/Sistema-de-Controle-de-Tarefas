@@ -1,0 +1,22 @@
+/* Botão toggle para alternar entre grid e gráfico */
+.chart-toggle-container {
+  position: relative;
+  top: -7px;
+  left: 0;
+  z-index: 1500;
+  margin: 0px !important; /* Mantido em 0px */
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 0px;
+}
+
+/* ... existing code ... */
+
+/* Ajustar o botão toggle dentro do quadro */
+.relatorios-quadro .chart-toggle-container {
+  position: relative;
+  top: -18px;
+  left: 0;
+  margin-bottom: 0px; /* Alterado de 15px para 0px */
+  padding-left: 0px;
+}
