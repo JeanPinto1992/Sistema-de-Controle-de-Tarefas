@@ -262,7 +262,7 @@ button.btn-criar-nova-tarefa-quadrado {
   font-size: 1.5rem !important;
   border-radius: 8px !important;
   box-shadow: 0 4px 8px rgba(68, 114, 196, 0.3) !important;
-  transition: all 0.2s ease !important;
+  transition: all 0.15s ease !important;
   cursor: pointer !important;
   text-decoration: none !important;
   outline: none !important;
@@ -277,9 +277,11 @@ button.btn-criar-nova-tarefa-quadrado:hover {
 }
 
 button.btn-criar-nova-tarefa-quadrado:active {
-  transform: scale(0.95) !important;
-  box-shadow: 0 2px 4px rgba(68, 114, 196, 0.3) !important;
-  transition: all 0.1s ease !important;
+  background: linear-gradient(135deg, #365a96 0%, #2d4a7a 100%) !important;
+  border-color: #365a96 !important;
+  box-shadow: 0 2px 4px rgba(68, 114, 196, 0.5) !important;
+  transform: scale(0.92) !important;
+  transition: all 0.08s ease !important;
 }
 
 button.btn-criar-nova-tarefa-quadrado:focus {
