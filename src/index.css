@@ -289,7 +289,7 @@ button.btn-criar-nova-tarefa-azul:focus {
   width: 100%;
   padding: 0 0.5px;
   box-sizing: border-box;
-  margin-top: -4px; /* Alterado de -5px para -4px (baixou mais 1px) */
+  margin-top: -3px; /* Alterado de -4px para -3px (baixou mais 1px) */
   overflow: visible;
 }
 
