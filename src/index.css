@@ -1111,7 +1111,8 @@ h2.text-center.text-primary {
 .relatorios-container .card {
   position: relative;
   margin-top: -33px !important; /* Alterado de -28px para -33px (subiu mais 5px) */
-}
+}/* Alterado de -28px para -33px (subiu mais 5px) */
+
 
 /* Quadro de Relatórios - Fundo Branco Limpo */
 .relatorios-quadro {
