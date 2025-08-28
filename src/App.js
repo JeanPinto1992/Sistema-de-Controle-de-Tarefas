@@ -896,7 +896,7 @@ const CustomLabel = ({ x, y, width, value }) => (
                 )}
 
                 {activeTab === 'tarefas' && (
-                    <div style={{ width: '100%', height: 'calc(100vh - 150px)' }} className="ag-theme-alpine">
+                    <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
                         <TarefaGrid
                             dados={tarefas}
                             tipo="tarefas"
@@ -910,7 +910,7 @@ const CustomLabel = ({ x, y, width, value }) => (
                 )}
 
                 {activeTab === 'em_andamento' && (
-                    <div style={{ width: '100%', height: 'calc(100vh - 150px)' }} className="ag-theme-alpine">
+                    <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
                         <TarefaGrid
                             dados={emAndamento}
                             tipo="em_andamento"
@@ -926,7 +926,7 @@ const CustomLabel = ({ x, y, width, value }) => (
                 )}
 
                 {activeTab === 'concluidas' && (
-                    <div style={{ width: '100%', height: 'calc(100vh - 150px)' }} className="ag-theme-alpine">
+                    <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
                         <TarefaGrid 
                             dados={concluidas} 
                             tipo="concluidas" 
