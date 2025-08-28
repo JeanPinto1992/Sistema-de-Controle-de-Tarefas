@@ -20,7 +20,7 @@ console.log('🔧 Ambiente:', process.env.NODE_ENV || 'development');
 console.log('🔧 Diretório atual:', __dirname);
 
 const app  = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3003;
 
 app.use(cors());
 app.use(express.json());
