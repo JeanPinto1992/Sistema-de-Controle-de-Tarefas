@@ -896,51 +896,45 @@ const CustomLabel = ({ x, y, width, value }) => (
                 )}
 
                 {activeTab === 'tarefas' && (
-                    <div className="tarefas-quadro">
-                        <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
-                            <TarefaGrid
-                                dados={tarefas}
-                                tipo="tarefas"
-                                onReabrir={reabrir}
-                                onMoverParaAndamento={moverParaAndamento}
-                                onExcluirTarefa={excluirTarefa}
-                                carregando={carregando}
-                                onFieldClick={handleFieldClick}
-                            />
-                        </div>
+                    <div style={{ width: '100%', height: 'calc(100vh - 150px)' }} className="ag-theme-alpine">
+                        <TarefaGrid
+                            dados={tarefas}
+                            tipo="tarefas"
+                            onReabrir={reabrir}
+                            onMoverParaAndamento={moverParaAndamento}
+                            onExcluirTarefa={excluirTarefa}
+                            carregando={carregando}
+                            onFieldClick={handleFieldClick}
+                        />
                     </div>
                 )}
 
                 {activeTab === 'em_andamento' && (
-                    <div className="andamento-quadro">
-                        <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
-                            <TarefaGrid
-                                dados={emAndamento}
-                                tipo="em_andamento"
-                                onConcluir={concluir}
-                                onReabrir={reabrir}
-                                onExcluirTarefa={excluirTarefa}
-                                carregando={carregando}
-                                onEditObservationClick={handleEditObservationClick}
-                                forceUpdate={forceUpdate}
-                                onFieldClick={handleFieldClick}
-                            />
-                        </div>
+                    <div style={{ width: '100%', height: 'calc(100vh - 150px)' }} className="ag-theme-alpine">
+                        <TarefaGrid
+                            dados={emAndamento}
+                            tipo="em_andamento"
+                            onConcluir={concluir}
+                            onReabrir={reabrir}
+                            onExcluirTarefa={excluirTarefa}
+                            carregando={carregando}
+                            onEditObservationClick={handleEditObservationClick}
+                            forceUpdate={forceUpdate}
+                            onFieldClick={handleFieldClick}
+                        />
                     </div>
                 )}
 
                 {activeTab === 'concluidas' && (
-                    <div className="concluidas-quadro">
-                        <div style={{ width: '100%', minHeight: '400px' }} className="ag-theme-alpine">
-                            <TarefaGrid 
-                                dados={concluidas} 
-                                tipo="concluidas" 
-                                onRetornarParaAndamento={retornarParaAndamento}
-                                onExcluirTarefa={excluirTarefa}
-                                carregando={carregando}
-                                onFieldClick={handleFieldClick}
-                            />
-                        </div>
+                    <div style={{ width: '100%', height: 'calc(100vh - 150px)' }} className="ag-theme-alpine">
+                        <TarefaGrid 
+                            dados={concluidas} 
+                            tipo="concluidas" 
+                            onRetornarParaAndamento={retornarParaAndamento}
+                            onExcluirTarefa={excluirTarefa}
+                            carregando={carregando}
+                            onFieldClick={handleFieldClick}
+                        />
                     </div>
                 )}
 
