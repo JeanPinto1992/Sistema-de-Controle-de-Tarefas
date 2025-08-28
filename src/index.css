@@ -14,7 +14,7 @@
   border: 12px solid #422100;
   border-radius: 8px;
   box-sizing: border-box;
-  padding: 0; /* Removido o padding de 20px */
+  padding: 20px;
   margin-top: 29px;
   margin-left: 8px !important;
   margin-right: 8px !important;
@@ -23,18 +23,6 @@
     8px 8px 25px rgba(0, 0, 0, 0.3);
   height: calc(100vh - 200px);
   overflow: auto;
-}
-
-/* Ajustar o grid AG dentro dos quadros */
-.tarefas-quadro .ag-theme-alpine,
-.andamento-quadro .ag-theme-alpine,
-.concluidas-quadro .ag-theme-alpine {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  border: none; /* Removida a borda do grid */
-  margin: 0 !important; /* Removidas todas as margens */
-  box-shadow: none; /* Removida a sombra */
-  width: 100% !important;
-  height: 100% !important;
 }
 
 /* Ajustar o grid AG dentro dos quadros */
