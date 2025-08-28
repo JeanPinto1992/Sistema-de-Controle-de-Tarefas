@@ -68,7 +68,7 @@ code {
   padding: 0;
 }
 
-/* Estilos para AG Grid - SEM MARGENS */
+/* AG Grid - SEM MARGENS E SEM BORDAS */
 .ag-theme-alpine {
   --ag-background-color: #ffffff;
   --ag-header-background-color: #f8f9fa;
@@ -79,36 +79,29 @@ code {
   padding: 0 !important;
   width: 100% !important;
   border: none !important;
+  height: 100% !important;
 }
 
-/* Container do grid sem margens */
-.ag-theme-alpine .ag-root-wrapper {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Header do grid sem margens */
-.ag-theme-alpine .ag-header {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Body do grid sem margens */
+/* Remover todas as margens e padding do AG Grid */
+.ag-theme-alpine .ag-root-wrapper,
+.ag-theme-alpine .ag-header,
 .ag-theme-alpine .ag-body-viewport {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-/* Remover margens de todas as divs que contêm o grid */
-div[style*="ag-theme-alpine"] {
+/* Garantir que divs com AG Grid não tenham margens */
+div[style*="ag-theme-alpine"],
+div.ag-theme-alpine {
   margin: 0 !important;
   padding: 0 !important;
+  border: none !important;
 }
 
 /* Estilos para abas */
 .nav-tabs {
   border-bottom: 2px solid #dee2e6;
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .nav-tabs .nav-link {
@@ -252,6 +245,29 @@ div[style*="ag-theme-alpine"] {
   font-weight: 600;
   margin-bottom: 15px;
   text-align: center;
+}
+
+/* Botão criar nova tarefa */
+.btn-criar-nova-tarefa-quadrado {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-criar-nova-tarefa-quadrado:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 /* Utilitários */
