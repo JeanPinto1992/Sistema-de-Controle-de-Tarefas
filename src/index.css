@@ -269,19 +269,72 @@ code {
   margin-top: 1rem;
 }
 
-/* Forçar remoção de margens em containers do grid */
-.ag-theme-alpine,
-.ag-theme-alpine * {
-  margin: 0 !important;
+/* Estilos para relatórios */
+.relatorios-container {
+  padding: 0 20px;
 }
 
-/* Container específico para as abas de grid */
-.tab-content {
-  margin: 0 !important;
-  padding: 0 !important;
+.relatorios-quadro {
+  background-color: white;
+  border: 12px solid #422100;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 29px;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.1), 8px 8px 25px rgba(0, 0, 0, 0.3);
+  height: calc(100vh - 200px);
+  overflow: auto;
 }
 
-.tab-pane {
-  margin: 0 !important;
-  padding: 0 !important;
+.relatorios-quadro-titulo {
+  text-align: center;
+  color: #422100;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.relatorio-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.relatorio-header {
+  display: contents;
+  font-weight: bold;
+  background-color: #f8f9fa;
+}
+
+.relatorio-header span {
+  padding: 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  text-align: center;
+}
+
+.relatorio-row {
+  display: contents;
+}
+
+.relatorio-row span {
+  padding: 8px;
+  border: 1px solid #dee2e6;
+  text-align: center;
+}
+
+.relatorio-total-row span {
+  background-color: #e9ecef;
+  font-weight: bold;
+}
+
+.relatorio-chart {
+  height: 400px;
+  margin-top: 20px;
+}
+
+.chart-above {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border: none;
+  margin-top: 0px !important;
+  box-shadow: none;
 }
