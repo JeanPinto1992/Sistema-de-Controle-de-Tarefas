@@ -63,18 +63,46 @@ code {
 
 /* Container principal */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-/* Estilos para AG Grid */
+/* Estilos para AG Grid - SEM MARGENS */
 .ag-theme-alpine {
   --ag-background-color: #ffffff;
   --ag-header-background-color: #f8f9fa;
   --ag-odd-row-background-color: #f8f9fa;
   --ag-border-color: #dee2e6;
   font-family: inherit;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  border: none !important;
+}
+
+/* Container do grid sem margens */
+.ag-theme-alpine .ag-root-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Header do grid sem margens */
+.ag-theme-alpine .ag-header {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Body do grid sem margens */
+.ag-theme-alpine .ag-body-viewport {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Remover margens de todas as divs que contêm o grid */
+div[style*="ag-theme-alpine"] {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* Estilos para abas */
@@ -162,7 +190,7 @@ code {
 /* Estilos responsivos */
 @media (max-width: 768px) {
   .container {
-    padding: 10px;
+    padding: 0;
   }
   
   .nav-tabs .nav-link {
@@ -174,6 +202,7 @@ code {
 /* Estilos para o header */
 .header-content-container {
   margin-bottom: 20px;
+  padding: 0 20px;
 }
 
 .header-logo-title {
@@ -193,6 +222,7 @@ code {
   margin-bottom: 15px;
   display: flex;
   justify-content: flex-start;
+  padding: 0 20px;
 }
 
 .chart-toggle-btn {
@@ -214,6 +244,7 @@ code {
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 0 20px;
 }
 
 .mural-title {
@@ -238,4 +269,21 @@ code {
 
 .mt-3 {
   margin-top: 1rem;
+}
+
+/* Forçar remoção de margens em containers do grid */
+.ag-theme-alpine,
+.ag-theme-alpine * {
+  margin: 0 !important;
+}
+
+/* Container específico para as abas de grid */
+.tab-content {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.tab-pane {
+  margin: 0 !important;
+  padding: 0 !important;
 }
