@@ -59,13 +59,11 @@
 
 body {
   margin: 0;
-  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f8f9fa;
 }
 
 code {
@@ -73,47 +71,19 @@ code {
     monospace;
 }
 
-/* Container principal */
-.container {
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-/* AG Grid - SEM MARGENS E SEM BORDAS */
+/* Estilos básicos para AG Grid */
 .ag-theme-alpine {
   --ag-background-color: #ffffff;
   --ag-header-background-color: #f8f9fa;
   --ag-odd-row-background-color: #f8f9fa;
   --ag-border-color: #dee2e6;
   font-family: inherit;
-  margin: 0 !important;
-  padding: 0 !important;
-  width: 100% !important;
-  border: none !important;
-  height: 100% !important;
-}
-
-/* Remover todas as margens e padding do AG Grid */
-.ag-theme-alpine .ag-root-wrapper,
-.ag-theme-alpine .ag-header,
-.ag-theme-alpine .ag-body-viewport {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Garantir que divs com AG Grid não tenham margens */
-div[style*="ag-theme-alpine"],
-div.ag-theme-alpine {
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
 }
 
 /* Estilos para abas */
 .nav-tabs {
   border-bottom: 2px solid #dee2e6;
-  margin-bottom: 0;
+  margin-bottom: 20px;
 }
 
 .nav-tabs .nav-link {
