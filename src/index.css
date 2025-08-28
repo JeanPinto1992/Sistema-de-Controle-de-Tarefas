@@ -326,3 +326,21 @@ code {
   margin-top: 0px !important;
   box-shadow: none;
 }
+
+/* Remover espaçamento lateral do Container Bootstrap */
+.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Remover espaçamento lateral do header */
+.header-content-container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Remover espaçamento lateral do mural */
+.mural-container {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
